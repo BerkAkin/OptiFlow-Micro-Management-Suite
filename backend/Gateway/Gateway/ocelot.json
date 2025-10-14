@@ -1,0 +1,52 @@
+{
+  "Routes": [
+
+    {
+      "DownstreamPathTemplate": "/Auth/Register",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/ProjectMicro/Register",
+      "UpstreamHttpMethod": [ "POST" ],
+    },
+    {
+      "DownstreamPathTemplate": "/Auth/Login",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/ProjectMicro/Login",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+
+
+
+
+    {
+      "DownstreamPathTemplate": "/MicroFinanceModule/GetTemp",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5001
+        }
+      ],
+      "UpstreamPathTemplate": "/ProjectMicro/MicroFinanceModuleController",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": { "AuthenticationProviderKey": "Bearer" },
+      "RouteClaimsRequirement": { "permissions": "A_Module" }
+    }
+
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:7000"
+  }
+}
