@@ -1,12 +1,9 @@
-import React from 'react'
-
 export default function PageTopBtn() {
 
     const scrollTop = () => {
-        const container = document.getElementById('main-container')
-        if (container) {
-            container.scrollTo({ top: 0, behavior: 'smooth' })
-        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+
     }
 
 
