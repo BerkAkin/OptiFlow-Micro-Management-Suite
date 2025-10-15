@@ -32,8 +32,8 @@ function Navbar() {
 
   return (
 
-    <nav className="bg-white h-[120px]">
-      <div className="grid h-[100%] grid-cols-3 gap-0 ">
+    <nav className="bg-white h-[120px] border">
+      <div className="grid h-[100%] grid-cols-3 gap-0">
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
           <span className="text-3xl font-semibold ">CASTRA-MICRO Management Suite</span>
         </div>
