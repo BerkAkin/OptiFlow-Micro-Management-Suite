@@ -1,5 +1,4 @@
 import OpenStreetMapView from "../../utils/Mapview"
-import bg2 from '../../assets/bg2.jpg'
 
 function Footer() {
   return (
@@ -8,7 +7,7 @@ function Footer() {
 
         <OpenStreetMapView />
 
-        <div className="h-[100%] w-[100%] grid relative ">
+        <div className="h-[100%] w-[100%] grid relative " style={{ backgroundColor: "#1f1f1f" }}>
           <div className="border grid grid-cols-3 h-[250px] w-[50%] absolute transform left-1/2 -translate-x-1/2 -translate-y-1/3 bg-white shadow-lg">
             <div className='flex items-center justify-center '>
               <h1 className="ps-6 text-2xl text-gray-600">1</h1>
