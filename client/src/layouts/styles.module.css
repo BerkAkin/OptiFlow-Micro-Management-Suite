@@ -1,9 +1,0 @@
-@font-face {
-    font-family: Roobert;
-   src: local('Roobert'), url(../fonts/Roobert.ttf) format('truetype');
-}
-
-.LandingFont{
-    font-family: "Roobert";
-    font-weight: 100;
-}
