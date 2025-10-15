@@ -10,9 +10,9 @@
 
 html,
 body {
-    overflow-x: hidden;
      width:100%; 
   height:100%;
+  
 }
 
 
@@ -20,6 +20,11 @@ body {
 @font-face {
     font-family: 'cadmium';
      src: local('cadmium'), url(./fonts/Cadmium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family:'roobert';
+   src: local('roobert'), url(./fonts/Roobert.ttf) format('truetype');
 }
 ::-webkit-scrollbar {
     width: 5px;
