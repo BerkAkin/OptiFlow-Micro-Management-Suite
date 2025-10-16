@@ -1,4 +1,5 @@
-import { BasicPlan, FullPlan, GeneralPlan } from '../../../constants/PacksConstants';
+import { MicroPlan, MidiPlan, MacroPlan } from "../../../constants/PacksConstants"
+
 import PackCard from '../../PackCard/PackCard';
 
 function StepThree({ handleChange, previousStep, nextStep, setIsModal }: any) {
@@ -13,11 +14,11 @@ function StepThree({ handleChange, previousStep, nextStep, setIsModal }: any) {
             </div>
             <div className="flex items-center justify-center">
 
-                <PackCard Text="TempText1" ButtonText="Select" Price={700} Header="Basic Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={BasicPlan} />
+                <PackCard Text="TempText1" ButtonText="Select" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={MicroPlan} />
 
-                <PackCard Text="TempText2" ButtonText="Select" Price={1000} Header="Full Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={false} SingleItems={FullPlan} />
+                <PackCard Text="TempText2" ButtonText="Select" Price={1000} Header="Macro Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={false} SingleItems={MacroPlan} />
 
-                <PackCard Text="TempText3" ButtonText="Select" Price={900} Header="General Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={GeneralPlan} />
+                <PackCard Text="TempText3" ButtonText="Select" Price={900} Header="Midi Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={MidiPlan} />
 
 
             </div>
