@@ -3,7 +3,7 @@ import CarouselConstant from "../constants/CarouselConstant"
 import dotBg from "../assets/dotBg.jpg"
 import InfoBox from "../components/InfoBox/InfoBox"
 import { infoBoxOne } from "../constants/InfoBoxLandingConstants"
-import { BasicPlan, FullPlan, GeneralPlan } from "../constants/PacksConstants"
+import { MicroPlan, MidiPlan, MacroPlan } from "../constants/PacksConstants"
 import PackCard from "../components/PackCard/PackCard"
 import PageTopBtn from "../components/PageTopBtn/PageTopBtn"
 import UsageCard from "../components/UsageCard/UsageCard"
@@ -61,12 +61,12 @@ function LandingLayout() {
           <div className="flex items-center justify-center">
             <div>
               <div className="text-center mb-10 " >
-                <h1 style={{ fontFamily: "Roobert" }} className="text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is CASTRA-MICRO Management Suite?</h1>
+                <h1 style={{ fontFamily: "Roobert" }} className="text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is OptiFlow Management Suite?</h1>
               </div>
               <p className={`ps-2 text-center leading-9 text-gray-600 text-xl`} >
-                Castra is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
+                OptiFlow is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
                 One of the biggest challenges for companies today is managing many different processes, such as finance, human resources, communication, innovation, and employee satisfaction, through disjointed systems.
-                Castra eliminates this complexity and centralizes all these areas.
+                OptiFlow eliminates this complexity and centralizes all these areas.
               </p>
             </div>
           </div>
@@ -98,13 +98,13 @@ function LandingLayout() {
               </div>
 
               <div className="my-6">
-                <p style={{ fontFamily: "Roobert" }} className="text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose Castra Micromanagement Suite?</p>
+                <p style={{ fontFamily: "Roobert" }} className="text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose OptiFlow Management Suite?</p>
               </div>
 
               <div >
                 <p className="text-white my-10">
                   In today’s fast-paced business environment, organizations need more than just isolated tools — they need a unified ecosystem that connects every department, streamlines communication, and empowers employees.
-                  Castra Micromanagement Suite was built precisely for that purpose. It brings together all the critical aspects of internal operations — from finance and HR to innovation and employee engagement — under one intelligent, interconnected platform.
+                  OptiFlow Management Suite was built precisely for that purpose. It brings together all the critical aspects of internal operations — from finance and HR to innovation and employee engagement — under one intelligent, interconnected platform.
                 </p>
               </div>
               <div>
@@ -127,9 +127,9 @@ function LandingLayout() {
             <h1 className='text-5xl mb-2'><span style={{ fontFamily: "Roobert" }} className="border-b">Available Plans</span></h1>
           </div>
           <div data-aos="fade-top" className="flex items-center my-5  justify-center " >
-            <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Basic Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={BasicPlan} />
-            <PackCard Text="Temp Text2" ButtonText="Details" Price={1000} Header="Full Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={true} SingleItems={FullPlan} />
-            <PackCard Text="Temp Text3" ButtonText="Details" Price={900} Header="General Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={GeneralPlan} />
+            <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MicroPlan} />
+            <PackCard Text="Temp Text2" ButtonText="Details" Price={1000} Header="Macro Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={true} SingleItems={MacroPlan} />
+            <PackCard Text="Temp Text3" ButtonText="Details" Price={900} Header="Midi Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MidiPlan} />
           </div>
 
           <div className="text-center mt-8 container mx-auto flex justify-center">
@@ -137,7 +137,7 @@ function LandingLayout() {
           </div>
           <div className="text-center  pt-4 container mx-auto flex justify-center text-gray-500">
             <p className="w-[60%]">
-              Castra Micromanagement Suite is designed to adapt to your organization’s unique needs.
+              OptiFlow Management Suite is designed to adapt to your organization’s unique needs.
               If you’re interested in a tailored plan or want to explore specific module configurations, our team is ready to help.
               Get in touch with us today to discuss your requirements and create a solution that fits your business perfectly.</p>
           </div>
