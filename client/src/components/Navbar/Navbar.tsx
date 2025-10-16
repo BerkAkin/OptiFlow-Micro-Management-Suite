@@ -5,6 +5,9 @@ import { ModalContext } from "../../context/ModalContext";
 
 function Navbar() {
 
+
+  /* LOGIN ARTIK BAŞKA SEKMEDE OLACAK O YÜZDEN LOGİN MODALI KALDIRABİLİRİM */
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { setIsModal, setModalType } = useContext(ModalContext);
 
@@ -35,7 +38,7 @@ function Navbar() {
     <nav className="bg-white h-[120px] border">
       <div className="grid h-[100%] grid-cols-3 gap-0">
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
-          <span className="text-3xl font-semibold ">CASTRA-MICRO Management Suite</span>
+          <span className="text-3xl font-semibold ">OptiFlow Management Suite</span>
         </div>
 
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
@@ -74,7 +77,7 @@ function Navbar() {
               <li>
                 {
                   isLoggedIn ? <button onClick={logout} className="block text-gray-600 py-2 px-3 md:p-0 md:dark:hover:text-indigo-500">Logout</button>
-                    : <button onClick={openLogin} className="block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</button>
+                    : <a href="http://localhost:3000" target="_blank" className="text-center block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</a>
                 }
               </li>
               <li>
