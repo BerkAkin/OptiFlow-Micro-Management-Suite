@@ -1,4 +1,4 @@
-export const BasicPlan = [
+export const MicroPlan = [
     { isAvailable: true, text: "Financial Tracking and Invoicing " },
     { isAvailable: true, text: "Corporate Survey and Insight" },
     { isAvailable: false, text: "Corporate Suggestion and Innovation" },
@@ -6,7 +6,7 @@ export const BasicPlan = [
     { isAvailable: false, text: "Employee Support" },
     { isAvailable: false, text: "Appreciation System" },
 ]
-export const GeneralPlan = [
+export const MidiPlan = [
     { isAvailable: true, text: "Financial Tracking and Invoicing " },
     { isAvailable: true, text: "Corporate Survey and Insight" },
     { isAvailable: true, text: "Corporate Suggestion and Innovation" },
@@ -14,7 +14,7 @@ export const GeneralPlan = [
     { isAvailable: false, text: "Employee Support" },
     { isAvailable: false, text: "Appreciation System" },
 ]
-export const FullPlan = [
+export const MacroPlan = [
     { isAvailable: true, text: "Financial Tracking and Invoicing " },
     { isAvailable: true, text: "Corporate Survey and Insight" },
     { isAvailable: true, text: "Corporate Suggestion and Innovation" },
