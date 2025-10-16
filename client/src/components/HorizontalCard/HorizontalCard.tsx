@@ -5,8 +5,8 @@ interface HorizontalCardProps {
 
 function HorizontalCard({ item }: HorizontalCardProps) {
     return (
-        <div className='grid grid-cols-[40%_60%] w-[100%] container mx-auto my-5 hover:scale-105 rounded-sm cursor-pointer hover:ease-in transition duration-150'>
-            <div className="h-44 flex justify-end">
+        <div className='grid grid-cols-[40%_60%] w-[100%] container mx-auto my-5 hover:scale-105 rounded-sm cursor-pointer hover:ease-in transition duration-150 '>
+            <div className="h-44 flex justify-end ">
                 <img className="w-full h-full object-cover" src={item.image}></img>
             </div>
             <div className="h-44 text-gray-700" >
