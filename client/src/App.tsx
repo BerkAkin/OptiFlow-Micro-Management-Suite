@@ -2,7 +2,7 @@ import { useContext } from "react";
 import Footer from "./components/Footer.tsx/Footer";
 import ModalContainer from "./components/ModalContainer/ModalContainer";
 import Navbar from "./components/Navbar/Navbar";
-import LandingLayout from "./layouts/LandingPage";
+import LandingPage from "./pages/LandingPage";
 import { ModalContext } from "./context/ModalContext";
 
 
@@ -15,7 +15,7 @@ function App() {
     <div className="bg-white">
       {isModal ? <ModalContainer /> : ""}
       <Navbar />
-      <LandingLayout />
+      <LandingPage />
       <Footer />
     </div>
   );
