@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { motion, AnimatePresence, scale, easeIn, animate } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface CarouselProps {
     items: { id: number, image: string, title: string, text: string }[]
@@ -29,7 +29,7 @@ function Carousel({ items }: CarouselProps) {
             <div className='relative flex items-center justify-center text-gray-700'>
                 {carouselItems.map((item, index) => (
                     <motion.div
-                        whileHover={{ y: index === 0 ? 20 : 0, transition: { duration: 0.1 } }}
+                        whileHover={{ y: index === 0 ? 20 : 0, transition: { duration: 0.3 } }}
                         animate={{ y: index === 5 ? [-20, -10, 0] : 0, transition: { duration: 0.5 } }}
                         key={item.id} onClick={rotateCarousel}
                         className={`grid grid-cols-2 absolute shadow-md cursor-pointer rounded-sm w-[700px] h-[400px] border`}
