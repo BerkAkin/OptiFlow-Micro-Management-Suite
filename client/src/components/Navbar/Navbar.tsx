@@ -51,22 +51,14 @@ function Navbar() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="text-xl flex flex-col rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <li >
-                {isLoggedIn ? <a href="Modules" className="block text-gray-600 hover:text-gray-500 ">Panel</a> :
-                  <a href="Modules" className="block text-gray-600 hover:text-indigo-500 ">Modules</a>
-                }
-
+                <a href="Modules" className="block text-gray-600 hover:text-indigo-500 ">Modules</a>
               </li>
               <li className="mx-10">
-                {isLoggedIn ? <a href="" className="block text-gray-400 md:dark:hover:text-indigo-500 ">Modules</a> :
-                  <a href="" className="block  text-gray-600 md:dark:hover:text-indigo-500">Packages</a>
-                }
-
+                <a href="" className="block  text-gray-600 md:dark:hover:text-indigo-500">Packages</a>
               </li>
               <li>
-                {isLoggedIn ? "" : <a href="" className="block text-gray-600 md:dark:hover:text-indigo-500">About Us</a>}
-
+                <a href="" className="block text-gray-600 md:dark:hover:text-indigo-500">About Us</a>
               </li>
-
             </ul>
           </div>
         </div>
@@ -75,14 +67,10 @@ function Navbar() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <li>
-                {
-                  isLoggedIn ? <button onClick={logout} className="block text-gray-600 py-2 px-3 md:p-0 md:dark:hover:text-indigo-500">Logout</button>
-                    : <a href="http://localhost:3000" target="_blank" className="text-center block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</a>
-                }
+                <a href="http://localhost:3000" target="_blank" className="text-center block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</a>
               </li>
               <li>
-                {isLoggedIn ? <button className="block py-2 text-gray-600 px-3 md:p-0md:dark:hover:text-indigo-500">Profile</button> :
-                  <button onClick={openRegister} className="border border-gray-400 w-24 block py-2 px-3 md:p-0 text-gray-600 md:dark:hover:text-indigo-500">Purchase</button>}
+                <button onClick={openRegister} className="border border-gray-400 w-24 block py-2 px-3 md:p-0 text-gray-600 md:dark:hover:text-indigo-500">Purchase</button>
               </li>
             </ul>
           </div>
