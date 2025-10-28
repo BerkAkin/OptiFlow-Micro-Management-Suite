@@ -40,7 +40,7 @@ function MainPage() {
                                     <div className='border-e h-[100%]'>
                                         <Sidebar />
                                     </div>
-                                    <div className='h-[100%] overflow-scroll'>
+                                    <div className='h-[100%] overflow-scroll bg-gray-100'>
                                         <Outlet />
                                     </div>
 
