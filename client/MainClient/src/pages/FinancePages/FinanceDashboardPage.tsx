@@ -15,7 +15,7 @@ toplam harcama ve gelirler
 harcama bütçesi, gelir beklentisi,
 gelir türlerine göre o ayki miktarlar pastada göstermek üzere
 aylara göre harcama ve gelir miktarları
-
+veritabanından sadece label ve data kısmı gelcek
 */
 const DoughThree = {
     labels: ['Yiyecek', 'Ulaşım', 'Tekstil', 'Ofis ve Kırtasiye', 'Temizlik', 'Eğlence Hizmetleri'],
@@ -157,11 +157,11 @@ function FinanceDashboardPage() {
     return (
         <div className='p-1 container mx-auto'>
 
-            <DashboardCharts DoughnutData={DoughOne} BarData={ChartOne} VerticalBarData={verticalFirstData} ColorScheme='green' />
+            <DashboardCharts DoughnutData={DoughOne} BarData={ChartOne} VerticalBarData={verticalFirstData} ColorScheme='green' TypeOfData='Incomes' />
 
-            <DashboardCharts DoughnutData={DoughTwo} BarData={ChartTwo} VerticalBarData={verticalSecondData} ColorScheme='red' />
+            <DashboardCharts DoughnutData={DoughTwo} BarData={ChartTwo} VerticalBarData={verticalSecondData} ColorScheme='red' TypeOfData='Expenses' />
 
-            <DashboardCharts DoughnutData={DoughThree} BarData={ChartThree} ColorScheme='sky' isAverages={true} AverageCounts={["230", "245"]} />
+            <DashboardCharts DoughnutData={DoughThree} BarData={ChartThree} ColorScheme='sky' isAverages={true} AverageCounts={["230", "245"]} TypeOfData='Net Profit' />
 
         </div>
     )

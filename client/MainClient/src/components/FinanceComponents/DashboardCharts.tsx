@@ -13,10 +13,11 @@ interface DashBoardCharsProps {
     ColorScheme: string,
     isAverages?: boolean,
     AverageCounts?: string[],
+    TypeOfData: string,
 }
 
 
-function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, isAverages, AverageCounts }: DashBoardCharsProps) {
+function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, isAverages, AverageCounts, TypeOfData }: DashBoardCharsProps) {
     return (
         <div className='mt-5 bg-white shadow-lg bg-white rounded-sm'>
 
@@ -25,7 +26,7 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
                     <p className={`text-2xl text-center w-64 text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`} style={{ fontFamily: "roobert" }}>Monthly</p>
                 </div>
                 <div className={`h-14 flex items-center justify-center  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`}>
-                    <p className='text-4xl' style={{ fontFamily: "roobert" }}>Incomes</p>
+                    <p className='text-4xl' style={{ fontFamily: "roobert" }}>{TypeOfData}</p>
                 </div>
                 <div className='h-8 flex justify-center'>
                     <p className={`text-2xl text-center w-64  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`} style={{ fontFamily: "roobert" }}>Most</p>
@@ -50,7 +51,7 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
                         <>
                             <div className='border w-[100%]  bg-white rounded-sm shadow-lg'>
                                 <div className='flex items-center justify-center bg-orange-400'>
-                                    <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Outgoings</p>
+                                    <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Expense Transactions</p>
                                 </div>
                                 <div className=' h-[70%] flex items-center justify-center '>
                                     <p className='text-5xl text-gray-600'>{AverageCounts![0]}</p>
@@ -58,7 +59,7 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
                             </div>
                             <div className='border w-[100%] my-5 bg-white rounded-sm shadow-lg'>
                                 <div className='flex items-center justify-center bg-orange-400'>
-                                    <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Incomes</p>
+                                    <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Income Transactions</p>
                                 </div>
                                 <div className=' h-[70%]  flex items-center justify-center '>
                                     <p className='text-5xl text-gray-600'>{AverageCounts![1]}</p>

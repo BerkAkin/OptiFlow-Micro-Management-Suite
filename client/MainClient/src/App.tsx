@@ -3,7 +3,7 @@ import './App.css';
 import MainPage from './pages/MainPage';
 import FinanceDashboardPage from './pages/FinancePages/FinanceDashboardPage';
 import FinancePaymentsPage from './pages/FinancePages/FinancePaymentsPage';
-import FinanceIncomeOutgoingPage from './pages/FinancePages/FinanceIncomeOutcomePage';
+import FinanceIncomeExpensePage from './pages/FinancePages/FinanceIncomeExpensePage';
 import FinanceBillsPage from './pages/FinancePages/FinanceBillsPage';
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
           <Route path='/' element={<MainPage />} >
             <Route path='finance/financeDashboard' element={<FinanceDashboardPage />} />
             <Route path='finance/financeBills' element={<FinanceBillsPage />} />
-            <Route path='finance/financeIncomeOutgoing' element={<FinanceIncomeOutgoingPage />} />
+            <Route path='finance/financeIncomeExpensePage' element={<FinanceIncomeExpensePage />} />
             <Route path='finance/financePayments' element={<FinancePaymentsPage />} />
           </Route>
         </Routes>
