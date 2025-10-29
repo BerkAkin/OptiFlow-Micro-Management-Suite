@@ -23,13 +23,13 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
 
             <div className='h-16 grid grid-cols-3'>
                 <div className='h-8 flex justify-center'>
-                    <p className={`text-2xl text-center w-64 text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`} style={{ fontFamily: "roobert" }}>Monthly</p>
+                    <p className={`text-2xl text-center w-64 text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md `} style={{ fontFamily: "roobert" }}>Monthly</p>
                 </div>
-                <div className={`h-14 flex items-center justify-center  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`}>
+                <div className={`h-14 flex items-center justify-center  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md font-semibold`}>
                     <p className='text-4xl' style={{ fontFamily: "roobert" }}>{TypeOfData}</p>
                 </div>
                 <div className='h-8 flex justify-center'>
-                    <p className={`text-2xl text-center w-64  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md`} style={{ fontFamily: "roobert" }}>Most</p>
+                    <p className={`text-2xl text-center w-64  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md `} style={{ fontFamily: "roobert" }}>Most</p>
 
                 </div>
 
@@ -84,8 +84,8 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
 
             <div className='grid grid-cols-[33%_33%_33%] gap-2'>
                 <div className='grid grid-cols-2 my-2 ms-2'>
-                    <DashboardInfoBox Color={ColorScheme} Header='Previous Month: ' Text='6800' />
-                    <DashboardInfoBox Color={ColorScheme} Header='Current Month: ' Text='6800' />
+                    <DashboardInfoBox Color={ColorScheme} Header='Previous Month' Text='6800' />
+                    <DashboardInfoBox Color={ColorScheme} Header='Current Month' Text='6800' />
 
                 </div>
                 <div className='grid grid-cols-3 my-2 ms-2 gap-1'>
@@ -95,9 +95,9 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
                         </>)
                         :
                         (<>
-                            <DashboardInfoBox Color={ColorScheme} Header='Expection: ' Text='6800' />
-                            <DashboardInfoBox Color={ColorScheme} Header='Actual: ' Text='6800' />
-                            <DashboardInfoBox Color={ColorScheme} Header='Difference: ' Text='6800' />
+                            <DashboardInfoBox Color={ColorScheme} Header={TypeOfData == "Expenses" ? "Budget" : "Expection"} Text='6800' />
+                            <DashboardInfoBox Color={ColorScheme} Header='Actual' Text='6800' />
+                            <DashboardInfoBox Color={ColorScheme} Header='Difference' Text='6800' />
                         </>)}
 
                 </div>
