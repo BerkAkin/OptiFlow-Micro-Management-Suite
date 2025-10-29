@@ -156,6 +156,7 @@ const verticalSecondData = {
 function FinanceDashboardPage() {
     return (
         <div className='p-1 container mx-auto'>
+            <div className='h-[100px] container mx-auto mt-10 bg-white shadow-md'>Bildirim olacak burada Zil ile birlikte en yakın ödeme tarihi ve tarihi geçen ödemelerle alakalı</div>
 
             <DashboardCharts DoughnutData={DoughOne} BarData={ChartOne} VerticalBarData={verticalFirstData} ColorScheme='green' TypeOfData='Incomes' />
 
