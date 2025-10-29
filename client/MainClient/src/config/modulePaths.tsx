@@ -4,7 +4,8 @@ export const modulePaths = {
         parts: [
             { url: "/finance/financeDashboard", module: "Dashboard" },
             { url: "/finance/financeBills", module: "Bill Management" },
-            { url: "/finance/financeIncomeExpensePage", module: "Income/Expense" },
+            { url: "/finance/financeIncomePage", module: "Incomes" },
+            { url: "/finance/financeExpensePage", module: "Expenses" },
             { url: "/finance/financePayments", module: "Payments" }
         ]
     },
