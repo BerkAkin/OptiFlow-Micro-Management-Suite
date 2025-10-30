@@ -99,13 +99,15 @@ function FinanceIncomePage() {
                                 From
                             </th>
                             <th scope="col" className="px-6 ">
+                                Receipt
+                            </th>
+                            <th scope="col" className="px-6 ">
                                 Date
                             </th>
-
                         </tr>
                     </thead>
                     <tbody className='border-s border-b'>
-                        {Array.from({ length: 10 }).map((_, i) => (
+                        {Array.from({ length: 8 }).map((_, i) => (
                             <tr className="bg-white border-b hover:bg-gray-100">
                                 <th scope="row" className="px-6 font-medium text-gray-700">
                                     Vergi İadesi
@@ -130,9 +132,14 @@ function FinanceIncomePage() {
                                 <td className="px-6 text-center text-sm">
                                     Devlet
                                 </td>
+                                <td className="px-6 text-center text-2xl">
+                                    <button>🧾</button>
+                                </td>
                                 <td className="px-6 text-center">
                                     29.10.2025
                                 </td>
+
+
                             </tr>
                         ))}
                     </tbody>
