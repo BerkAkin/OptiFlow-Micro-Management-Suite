@@ -6,9 +6,9 @@ module.exports = {
   },
 },
    safelist: [
-    { pattern: /bg-(red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
-     { pattern: /border-(red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
-     { pattern: /text-(red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
+    { pattern: /bg-(sky|green|red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
+     { pattern: /border-(sky|green|red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
+     { pattern: /text-(sky|green|red|cyan|indigo|violet|purple|fuchsia|emerald|lime|teal|amber|rose)-(100|200|300|400|500|600|700|800|900)/ },
   ],
   plugins: [],
 }
