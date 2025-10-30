@@ -1,0 +1,9 @@
+.fc-button {
+  background-color: #818cf8 !important;
+  color: white !important;
+  border:none !important;
+}
+
+.fc-button:hover {
+  background-color: #6366f1 !important;
+}
