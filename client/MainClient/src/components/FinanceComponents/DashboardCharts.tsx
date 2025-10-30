@@ -19,17 +19,17 @@ interface DashBoardCharsProps {
 
 function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, isAverages, AverageCounts, TypeOfData }: DashBoardCharsProps) {
     return (
-        <div className='mt-5 bg-white shadow-lg bg-white rounded-sm'>
+        <div className='mt-5 bg-white shadow-md bg-white rounded-sm'>
 
             <div className='h-16 grid grid-cols-3'>
                 <div className='h-8 flex justify-center'>
-                    <p className={`text-2xl text-center w-64 text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md `} style={{ fontFamily: "roobert" }}>Monthly</p>
+                    <p className={`text-2xl text-center w-64 text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Monthly</p>
                 </div>
-                <div className={`h-14 flex items-center justify-center  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md font-semibold`}>
+                <div className={`h-14 flex items-center justify-center  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md  font-semibold`}>
                     <p className='text-4xl' style={{ fontFamily: "roobert" }}>{TypeOfData}</p>
                 </div>
                 <div className='h-8 flex justify-center'>
-                    <p className={`text-2xl text-center w-64  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md shadow-md `} style={{ fontFamily: "roobert" }}>Most</p>
+                    <p className={`text-2xl text-center w-64  text-${ColorScheme}-600 border-${ColorScheme}-600 border-b border-s border-e bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Most</p>
 
                 </div>
 
@@ -38,18 +38,18 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
             <div className='grid grid-cols-[33%_33%_33%] gap-2'>
 
 
-                <div className='rounded-sm bg-white h-96 ms-2 border shadow-xl'>
+                <div className='rounded-sm bg-white h-96 ms-2 border shadow-sm'>
                     <Chart type='bar' data={BarData} options={{ maintainAspectRatio: false, responsive: true, plugins: { legend: { display: false } } }} className='m-5' />
                 </div>
 
-                <div className='flex items-center justify-center h-96 p-5 bg-white border shadow-xl'>
+                <div className='flex items-center justify-center h-96 p-5 bg-white border shadow-sm'>
                     <Doughnut data={DoughnutData} options={{ plugins: { legend: { display: true, position: "bottom" } } }} />
                 </div>
 
-                <div className='rounded-sm bg-white h-96 me-2   justify-center  border shadow-xl'>
+                <div className='rounded-sm bg-white h-96 me-2   justify-center  border shadow-sm'>
                     {isAverages &&
                         <>
-                            <div className='border w-[100%]  bg-white rounded-sm shadow-lg'>
+                            <div className='border w-[100%]  bg-white rounded-sm shadow-sm'>
                                 <div className='flex items-center justify-center bg-orange-400'>
                                     <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Expense Transactions</p>
                                 </div>
@@ -57,7 +57,7 @@ function DashboardCharts({ BarData, DoughnutData, VerticalBarData, ColorScheme, 
                                     <p className='text-5xl text-gray-600'>{AverageCounts![0]}</p>
                                 </div>
                             </div>
-                            <div className='border w-[100%] my-5 bg-white rounded-sm shadow-lg'>
+                            <div className='border w-[100%] my-5 bg-white rounded-sm shadow-sm'>
                                 <div className='flex items-center justify-center bg-orange-400'>
                                     <p className='text-2xl text-white' style={{ fontFamily: "roobert" }}>Income Transactions</p>
                                 </div>
