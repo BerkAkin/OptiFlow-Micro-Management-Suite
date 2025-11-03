@@ -59,68 +59,68 @@ function FinancePaymentsPage() {
         <div>
             <div className='container mx-auto mt-10 grid grid-cols-2 gap-5'>
                 <div className='w-full bg-white p-5 border shadow-md'>
-                    <div className='w-full bg-white border shadow-sm h-full'>
-                        <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
-                            <Form>
-                                <div className='h-[400px] grid grid-cols-2'>
 
-                                    <div className='justify-center flex items-center h-[400px]'>
-                                        <p className='text-4xl text-gray-600' style={{ fontFamily: "roobert" }}>ADD NEW PAYMENT</p>
-                                    </div>
-                                    <div className='border-s'>
-                                        <div className='grid grid-cols-2'>
-                                            <div>
-                                                <div className=' h-[20%] p-2'>
-                                                    <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Description" name="description" ></Field>
+                    <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
+                        <Form>
+                            <div className='h-[400px] grid grid-cols-2'>
 
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                    <Field type="date" className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Date" name="date" ></Field>
-
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                    <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="To Who" name="to" ></Field>
-
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                    <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Quantity" name="quantity" ></Field>
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className=' h-[20%] p-2'>
-                                                    <div className="flex items-center gap-2 p-4">
-                                                        <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className="w-5 h-5 text-blue-600 border-gray-300 rounded-sm" />
-                                                        <label htmlFor="terms" className="text-gray-600 text-lg">Is Partly?</label>
-                                                    </div>
-                                                </div>
-
-                                                <div className=' h-[20%] p-2'>
-                                                    {IsPartly && <Field onChange={(e: any) => setPartCountHandler(e)} value={partCount} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Part Count" name="partCount" ></Field>}
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                    {IsPartly && <Field onChange={(e: any) => setPartPriceHandler(e)} value={partPrice} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Price of One Part" name="partPrice" ></Field>}
-                                                </div>
-                                                <div className=' h-[20%] p-2'>
-                                                    {IsPartly && <p className="text-gray-700 bg-gray-200 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" >{totalPrice}</p>}
-                                                </div>
+                                <div className='justify-center flex items-center h-[400px]'>
+                                    <p className='text-4xl text-gray-600' style={{ fontFamily: "roobert" }}>ADD NEW PAYMENT</p>
+                                </div>
+                                <div className='border-s'>
+                                    <div className='grid grid-cols-2'>
+                                        <div>
+                                            <div className=' h-[20%] p-2'>
+                                                <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Description" name="description" ></Field>
 
                                             </div>
+                                            <div className=' h-[20%] p-2'>
+                                                <Field type="date" className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Date" name="date" ></Field>
+
+                                            </div>
+                                            <div className=' h-[20%] p-2'>
+                                                <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="To Who" name="to" ></Field>
+
+                                            </div>
+                                            <div className=' h-[20%] p-2'>
+                                                <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Quantity" name="quantity" ></Field>
+                                            </div>
+                                            <div className=' h-[20%] p-2'>
+                                            </div>
                                         </div>
-                                        <div className='p-2'>
-                                            <button type='submit' className='border p-2 bg-green-600 hover:bg-green-700 text-white rounded-sm w-full text-xl'>ADD</button>
+                                        <div>
+                                            <div className=' h-[20%] p-2'>
+                                                <div className="flex items-center gap-2 p-4">
+                                                    <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className="w-5 h-5 text-blue-600 border-gray-300 rounded-sm" />
+                                                    <label htmlFor="terms" className="text-gray-600 text-lg">Is Partly?</label>
+                                                </div>
+                                            </div>
+
+                                            <div className=' h-[20%] p-2'>
+                                                {IsPartly && <Field onChange={(e: any) => setPartCountHandler(e)} value={partCount} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Part Count" name="partCount" ></Field>}
+                                            </div>
+                                            <div className=' h-[20%] p-2'>
+                                                {IsPartly && <Field onChange={(e: any) => setPartPriceHandler(e)} value={partPrice} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Price of One Part" name="partPrice" ></Field>}
+                                            </div>
+                                            <div className=' h-[20%] p-2'>
+                                                {IsPartly && <p className="text-gray-700 bg-gray-200 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" >{totalPrice}</p>}
+                                            </div>
+
                                         </div>
                                     </div>
-
-
-                                    <div>
-
+                                    <div className='p-2'>
+                                        <button type='submit' className='border p-2 bg-green-600 hover:bg-green-700 text-white rounded-sm w-full text-xl'>ADD</button>
                                     </div>
                                 </div>
-                            </Form>
-                        </Formik>
-                    </div>
+
+
+                                <div>
+
+                                </div>
+                            </div>
+                        </Form>
+                    </Formik>
+
 
                 </div>
 
