@@ -230,7 +230,7 @@ function FinanceBillsPage() {
                             </div>
                         </div>
                         <div className='flex justify-end'>
-                            <button onClick={() => setIsAdd(!isAdd)} className='border bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
+                            <button onClick={() => onSubmitHandler} className='border bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
                         </div>
 
 

@@ -12,10 +12,9 @@ export const modulePaths = {
     "Corporate Survey and Insight": {
         color: "bg-amber-500 hover:bg-amber-600",
         parts: [
-            { url: "/survey/surveyBuilder", module: "Builder" },
-            { url: "/survey/surveyResults", module: "Results" },
-            { url: "/survey/surveyInsights", module: "Insights" },
-            { url: "/survey/surveyStats", module: "Stats" }
+            { url: "/survey/surveyBuilder", module: "Survey Builder" },
+            { url: "/survey/surveyResults", module: "Survey Results" },
+            { url: "/survey/surveyStats", module: "Survey Stats" }
         ]
     },
     "Corporate Suggestion and Innovation": {
