@@ -14,6 +14,7 @@ export const modulePaths = {
         parts: [
             { url: "/survey/surveys", module: "Surveys" },
             { url: "/survey/surveyBuilder", module: "Survey Builder" },
+            { url: "/survey/surveyResults", module: "Survey Results" },
         ]
     },
     "Corporate Suggestion and Innovation": {
