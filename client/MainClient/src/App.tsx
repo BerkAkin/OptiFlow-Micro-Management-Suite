@@ -8,6 +8,8 @@ import FinanceExpensePage from './pages/FinancePages/FinanceExpensePage';
 import FinanceBillsPage from './pages/FinancePages/FinanceBillsPage';
 import SurveyBuilder from './pages/SurveyAndInsightsPages/SurveyBuilder';
 import Surveys from './pages/SurveyAndInsightsPages/Surveys';
+import SurveyDetails from './pages/SurveyAndInsightsPages/SurveyDetails';
+import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
             <Route path='finance/financePayments' element={<FinancePaymentsPage />} />
 
             <Route path='survey/surveyBuilder' element={<SurveyBuilder />} />
-            <Route path='survey/surveys' element={<Surveys />} />
+            <Route path='survey/surveys' element={<Surveys />} ></Route>
+            <Route path='survey/surveyResults' element={<SurveyResults />} />
+            <Route path='survey/surveys/:slug' element={<SurveyDetails />} />
 
           </Route>
         </Routes>
