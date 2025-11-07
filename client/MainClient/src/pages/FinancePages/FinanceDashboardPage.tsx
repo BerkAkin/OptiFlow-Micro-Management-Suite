@@ -1,7 +1,5 @@
 import React from 'react'
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, plugins, PointElement, LineElement } from 'chart.js';
-import { Doughnut, Bar, Chart } from "react-chartjs-2";
-import DashboardInfoBox from '../../components/FinanceComponents/DashboardInfoBox';
 import DashboardCharts from '../../components/FinanceComponents/DashboardCharts';
 
 ChartJS.register(ArcElement, CategoryScale, Tooltip, Legend, LinearScale, BarElement, PointElement, LineElement)
