@@ -1,21 +1,20 @@
-import { Field, Form, Formik } from 'formik';
-import React, { useState } from 'react'
-import { produce } from 'immer';
+import { Form, Formik } from 'formik';
+import { useState } from 'react'
 import { useParams } from 'react-router-dom';
 
 
 type Answer = {
-    id: string
-    text: string
+    id: string,
+    text: string,
 }
 type Question = {
     id: string,
     text: string,
-    answers: Answer[]
+    answers: Answer[],
 }
 type Survey = {
     id: string,
-    questions: Question[]
+    questions: Question[],
 }
 
 
