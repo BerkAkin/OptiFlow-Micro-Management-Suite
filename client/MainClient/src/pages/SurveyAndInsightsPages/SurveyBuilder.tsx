@@ -6,27 +6,32 @@ import { produce } from 'immer';
 type Answer = {
     id: string
     text: string
+    voteCount: number,
+
 }
 type Question = {
     id: string,
     text: string,
+
     answers: Answer[]
 }
 type Survey = {
     id: string,
+    participateCount: number,
     questions: Question[]
 }
 
 
 const initialSurvey: Survey = {
     id: "1",
+    participateCount: 0,
     questions: [
         {
             id: "1",
             text: "Aşağıdaki sistemlerden hangisinin kullanımı sizin için daha yararlı olabilir? Hangisini şirket bünyesinde görmek istersiniz?",
             answers: [
-                { id: "1-1", text: "Sistem Analizi" },
-                { id: "1-2", text: "Çalışan Güvenlik Sistemi" },
+                { id: "1-1", text: "Sistem Analizi", voteCount: 0 },
+                { id: "1-2", text: "Çalışan Güvenlik Sistemi", voteCount: 0 },
             ]
         },
     ]
@@ -55,7 +60,8 @@ function SurveyBuilder() {
             if (question) {
                 question.answers.push({
                     id: `${question.id}-${question.answers.length + 1}`,
-                    text: text
+                    text: text,
+                    voteCount: 0,
                 })
             }
         }))
