@@ -4,9 +4,6 @@ export const modulePaths = {
         parts: [
             { url: "/finance/financeDashboard", module: "Dashboard" },
             { url: "/finance/financeBills", module: "Bill Management" },
-            { url: "/finance/financeIncomePage", module: "Incomes" },
-            { url: "/finance/financeExpensePage", module: "Expenses" },
-            { url: "/finance/financePayments", module: "Payments" }
         ]
     },
     "Corporate Survey and Insight": {
@@ -21,9 +18,7 @@ export const modulePaths = {
         color: "bg-sky-600 hover:bg-sky-700",
         parts: [
             { url: "/suggest/suggestIdeas", module: "Ideas" },
-            { url: "/suggest/suggestVoting", module: "Voting" },
             { url: "/suggest/suggestRewards", module: "Rewards" },
-            { url: "/suggest/suggestContributors", module: "Top Contributors" }
         ]
     },
     "Permission Tracking and Approval System": {
