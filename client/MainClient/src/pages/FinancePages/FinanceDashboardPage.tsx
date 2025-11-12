@@ -41,7 +41,7 @@ function FinanceDashboardPage() {
 
                     <VerticalChart />
                 </div>
-                <div className='bg-white shadow-md border p-2 h-[420px]'>
+                <div className='bg-white shadow-md border'>
                     <Calendar />
                 </div>
             </div>
@@ -63,7 +63,7 @@ function FinanceDashboardPage() {
             <div className='grid grid-cols-[40%_40%_20%] gap-2'>
                 <div className='bg-white shadow-md border'>
                     <InstallmentPaymentsCard /></div>
-                <div className='bg-white shadow-sm h-full max-h-[500px] border'>
+                <div className='bg-white shadow-sm border'>
                     <RemainingPaymentsCard />
                 </div>
                 <div className='bg-white shadow-md border'>
