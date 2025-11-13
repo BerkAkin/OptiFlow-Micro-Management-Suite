@@ -36,10 +36,11 @@ function MainPage() {
                             :
 
                             (
-                                <div className=" grid grid-cols-[15%_85%] h-[90dvh]">
-                                    <div className='border-e h-[100%]'>
-                                        <Sidebar />
-                                    </div>
+
+                                <div className=" h-[90dvh]">
+                                    {/* <div className='border-e h-[100%]'>
+                                        <Sidebar />   grid grid-cols-[15%_85%]
+                                    </div> */}
                                     <div className='h-[100%] overflow-scroll bg-gray-100'>
                                         <Outlet />
                                     </div>
@@ -50,7 +51,7 @@ function MainPage() {
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
