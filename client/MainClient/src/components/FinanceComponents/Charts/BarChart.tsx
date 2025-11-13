@@ -6,7 +6,7 @@ import { Chart } from "react-chartjs-2";
 function BarChart() {
 
     const ChartExample = [[65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40], [36, 12, 85, 56, 24, 76, 61, 17, 49, 90, 24, 76]]
-    const Colors = ['#16a34a', '#ef4444']
+    const Colors = ['#22c55e', '#f87171']
 
     const [chartData, setChartData] = useState<number[][]>(ChartExample);
     const [color, setColor] = useState<string[]>(Colors)
@@ -38,10 +38,15 @@ function BarChart() {
 
     return (
         <div className="h-[420px]">
-            <div className='flex justify-center h-[10%] '>
-                <p className={`text-2xl text-center w-64 border-b border-x text-indigo-400 border-indigo-400 bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Monthly</p>
+            <div className='flex justify-center h-[8%]'>
+                <p className={`text-xl text-center w-64 rounded-b-sm text-white`} style={{ backgroundColor: `${color[0]}`, fontFamily: "roobert" }}>
+                    Monthly
+                    <span>
+                        <button className={`h-[20px] text-white text-2xl ps-1`} onClick={handleNext}> ⇄</button>
+                    </span>
+                </p>
             </div>
-            <div className='h-[60%]'>
+            <div className='h-[70%] pt-5'>
                 <Chart
                     type="bar"
                     data={ChartData}
@@ -52,7 +57,7 @@ function BarChart() {
                     }}
                 />
             </div>
-            <div className=' h-[10%]'>
+            <div className=' h-[20%] pt-5 flex items-center justify-center'>
                 <div className={`bg-white rounded-sm  grid grid-cols-3`}>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${color[0]}`, fontFamily: "roobert" }}>
                         <p className='text-sm'>Bütçe:</p>
@@ -70,9 +75,7 @@ function BarChart() {
                 </div>
 
             </div>
-            <div className='h-[20%] flex justify-center items-center '>
-                <button className={`h-[50px] bg-indigo-400 text-white text-4xl text-md  w-[80%] rounded-sm hover:bg-indigo-500`} onClick={handleNext}>⇄</button>
-            </div>
+
         </div>
     )
 }
