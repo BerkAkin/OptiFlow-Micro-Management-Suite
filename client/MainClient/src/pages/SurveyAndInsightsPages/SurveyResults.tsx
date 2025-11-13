@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom"
 
 
 type Surveys = {
@@ -74,42 +75,43 @@ const initialSurvey: Survey = {
 
 
 function SurveyResults() {
+    const { slug } = useParams();
+
     const initialTempSurvey: Surveys = {
         surveys: [initialSurvey,]
     }
 
     return (
-        <div className='m-10 bg-white shadow-md'>
-            <div className='w-[95%] mx-auto grid grid-cols-2 gap-4' >
-                {initialTempSurvey.surveys.map((item, index) => (
-                    <div key={index} className={`my-3 shadow-sm border h-[200px] grid grid-cols-[20%_80%]`}>
-                        <div>
-                            <div className={`w-full h-full flex items-center justify-center border-e`}>
-                                <p style={{ fontFamily: "roobert" }} className='text-center text-xl text-gray-600 mx-4'>{item.header}</p>
-                            </div>
-                        </div>
-                        <div className="p-2 overflow-auto">
-                            {item.questions.map((questions, index) => (
-                                <div key={index} className="mb-4">
-                                    <p className="text-sm mb-2 text-gray-800">{index + 1}) {questions.text}</p>
-                                    {questions.answers.map((answer) => (
-                                        <div>
-                                            <p className="ps-5 text-sm text-gray-600 inline">-{answer.text} </p>
-                                            <p className="inline bg-indigo-500 text-white px-2 text-sm rounded-sm">{answer.voteCount} % </p>
+        <div className='container mx-auto border my-10 bg-white rounded-lg shadow-md' >
 
-                                        </div>
-                                    ))}
-                                </div>
-                            ))}
-
+            {initialTempSurvey.surveys.map((item, index) => (
+                <div key={index} className={`h-[800px] grid grid-cols-[20%_80%]`}>
+                    <div>
+                        <div className={`w-full h-full flex items-center justify-center border-e`}>
+                            <p style={{ fontFamily: "roobert" }} className='text-center text-3xl text-gray-600 mx-4'>{slug} Results</p>
                         </div>
                     </div>
+                    <div className="p-2 overflow-auto">
+                        {item.questions.map((questions, index) => (
+                            <div key={index} className="mb-4">
+                                <p className="text-lg mb-2 text-gray-800">{index + 1}) {questions.text}</p>
+                                {questions.answers.map((answer) => (
+                                    <div>
+                                        <p className="ps-5 text-gray-600 inline">-{answer.text} </p>
+                                        <p className="inline bg-indigo-500 text-white px-2  rounded-sm">{answer.voteCount} % </p>
 
-                ))}
-            </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
 
+                    </div>
+                </div>
 
+            ))}
         </div>
+
+
     )
 }
 
