@@ -8,7 +8,7 @@ const InstallCardProps = {
     Description: "Deneme",
     Price: 12,
     DetailUrl: "DenemeDetayları",
-    RemainingPart: "24"
+    RemainingPart: "2/4"
 }
 
 function InstallmentPaymentsCard() {
@@ -16,20 +16,20 @@ function InstallmentPaymentsCard() {
 
         <div className='w-full h-96 '>
             <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 border-b border-x text-sky-600 border--600 bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Installment Payments</p>
+                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm `} style={{ fontFamily: "roobert" }}>Installments</p>
             </div>
-            <div className='border-b h-5 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center uppercase'>
+            <div className='text-orange-400 border-b h-5 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center'>
                 <div>
-                    <p className={`text-sm font-bold text-start ps-2 w-full text-gray-700 `} style={{ fontFamily: "roobert" }}>Description</p>
+                    <p className={`text-sm font-bold text-start ps-2 w-full `} style={{ fontFamily: "roobert" }}>Description</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full text-gray-700 `} style={{ fontFamily: "roobert" }}>Total</p>
+                    <p className={`text-sm font-bold text-center w-full `} style={{ fontFamily: "roobert" }}>Total</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full text-gray-700 `} style={{ fontFamily: "roobert" }}>Parts</p>
+                    <p className={`text-sm font-bold text-center w-full  `} style={{ fontFamily: "roobert" }}>Part</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full text-gray-700 `} style={{ fontFamily: "roobert" }}></p>
+                    <p className={`text-sm font-bold text-center w-full  `} style={{ fontFamily: "roobert" }}></p>
                 </div>
             </div>
             <div className='h-17 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center hover:bg-gray-100'>
@@ -43,7 +43,7 @@ function InstallmentPaymentsCard() {
                     <p>{InstallCardProps.RemainingPart}</p>
                 </div>
                 <div className='text-gray-600 flex items-center justify-center'>
-                    <Link className='bg-indigo-400 text-white p-1 me-1 cursor-pointer hover:bg-indigo-500 rounded-sm' to={`/${InstallCardProps.DetailUrl}`}>Detail</Link>
+                    <Link className='bg-gray-400 text-white p-1 px-2 me-1 cursor-pointer hover:bg-gray-500 rounded-sm' to={`/${InstallCardProps.DetailUrl}`}>↗</Link>
                 </div>
             </div>
 
