@@ -9,10 +9,10 @@ import { Doughnut } from "react-chartjs-2";
 function DoughChart() {
 
     const ChartExample = [[65, 81, 56, 55, 40], [36, 12, 85, 56, 24]];
-    const color = [['#16a34a', '#4ade80', '#22c55e', '#166534', '#65a30d', '#bbf7d0',], ['#ef4444', '#f87171', '#fca5a5', '#dc2626', '#fb7185', '#991b1b']]
+    const Colors = [['#22c55e', '#4ade80', '#16a34a', '#166534', '#65a30d', '#bbf7d0',], ['#f87171', '#ef4444', '#fca5a5', '#dc2626', '#fb7185', '#991b1b']]
 
     const [chartData, setChartData] = useState<number[][]>(ChartExample);
-    const [colors, setColors] = useState<string[][]>(color);
+    const [color, setColors] = useState<string[][]>(Colors);
 
 
     const ChartData = {
@@ -21,7 +21,7 @@ function DoughChart() {
             {
                 label: "İşlem Sayısı",
                 data: chartData[0],
-                backgroundColor: colors[0],
+                backgroundColor: color[0],
             },
         ],
     };
@@ -30,17 +30,23 @@ function DoughChart() {
     const handleNext = () => {
         const rotated = [...chartData!.slice(1), chartData![0]];
         setChartData(rotated);
-        const colorRotate = [...colors!.slice(1), colors![0]]
+        const colorRotate = [...color!.slice(1), color![0]]
         setColors(colorRotate);
     };
 
 
     return (
         <div className="h-[420px]">
-            <div className='flex justify-center h-[10%]'>
-                <p className={`text-2xl text-center w-64 border-b border-x text-indigo-400 border-indigo-400 bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Categorical</p>
+            <div className='flex justify-center h-[8%]'>
+                <p className={`text-xl text-center w-64 rounded-b-sm text-white`} style={{ backgroundColor: `${color[0][0]}`, fontFamily: "roobert" }}>
+                    Categorical
+                    <span>
+                        <button className={`h-[20px] text-white text-2xl ps-1`} onClick={handleNext}> ⇄</button>
+                    </span>
+
+                </p>
             </div>
-            <div className=' h-[60%] pt-2'>
+            <div className='h-[70%] pt-5'>
                 <Doughnut
                     data={ChartData}
                     options={{
@@ -50,17 +56,17 @@ function DoughChart() {
                     }}
                 />
             </div>
-            <div className=' h-[10%]'>
-                <div className={` bg-white rounded-sm  grid grid-cols-3`}>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${colors[0][0]}`, fontFamily: "roobert" }}>
+            <div className=' h-[20%] pt-5 flex items-center justify-center'>
+                <div className={` bg-white rounded-sm grid grid-cols-3`}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${color[0][0]}`, fontFamily: "roobert" }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
                     </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${colors[0][0]}`, fontFamily: "roobert" }}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${color[0][0]}`, fontFamily: "roobert" }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
                     </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${colors[0][0]}`, fontFamily: "roobert" }}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1`} style={{ backgroundColor: `${color[0][0]}`, fontFamily: "roobert" }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
 
@@ -68,9 +74,7 @@ function DoughChart() {
                 </div>
 
             </div>
-            <div className='h-[20%] flex justify-center items-center '>
-                <button className={`h-[50px] bg-indigo-400 text-white text-4xl text-md  w-[80%] rounded-sm hover:bg-indigo-500`} onClick={handleNext}>⇄</button>
-            </div>
+
         </div>
     )
 }
