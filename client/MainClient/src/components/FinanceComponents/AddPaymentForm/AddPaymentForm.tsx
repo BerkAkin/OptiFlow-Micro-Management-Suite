@@ -51,65 +51,59 @@ function AddPaymentForm() {
         alert("eklendi")
     }
     return (
-        <div>
+        <div className='h-[450px]'>
             <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 border-b border-x text-indigo-400 border-indigo-400 bg-white rounded-b-md `} style={{ fontFamily: "roobert" }}>Add Payment</p>
+                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm `} style={{ fontFamily: "roobert" }}>Add Payment</p>
             </div>
             <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
                 <Form>
-                    <div className='h-[400px] '>
 
-                        <div className='border-s'>
-                            <div className='grid grid-cols-2'>
-                                <div>
-                                    <div className=' h-[20%] p-2'>
-                                        <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Description" name="description" ></Field>
-
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                        <Field type="date" className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Date" name="date" ></Field>
-
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                        <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="To Who" name="to" ></Field>
-
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                        <Field className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Quantity" name="quantity" ></Field>
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className=' h-[20%] p-2'>
-                                        <div className="flex items-center gap-2 p-4">
-                                            <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className="w-5 h-5 text-blue-600 border-gray-300 rounded-sm" />
-                                            <label htmlFor="terms" className="text-gray-600 text-lg">Is Partly?</label>
-                                        </div>
-                                    </div>
-
-                                    <div className=' h-[20%] p-2'>
-                                        {IsPartly && <Field onChange={(e: any) => setPartCountHandler(e)} value={partCount} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Part Count" name="partCount" ></Field>}
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                        {IsPartly && <Field onChange={(e: any) => setPartPriceHandler(e)} value={partPrice} className="text-gray-700 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" placeholder="Price of Part" name="partPrice" ></Field>}
-                                    </div>
-                                    <div className=' h-[20%] p-2'>
-                                        {IsPartly && <p className="text-gray-700 bg-gray-200 focus:outline-none p-5 w-full h-full bg-transparent focus:bg-transparent border-b" >{totalPrice}</p>}
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div className='p-2 flex justify-center'>
-                                <button type='submit' className='text-center rounded-sm bg-indigo-400 hover:bg-indigo-500  text-white h-[40px] w-[50%]'>Add</button>
-                            </div>
-                        </div>
-
-
+                    <div className='grid grid-cols-[40%_60%]'>
                         <div>
+                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
+                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='to'>To:</label></div >
+                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='date'>Date:</label></div>
+                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='quantity'>Description:</label></div>
+                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='terms'>Partly? </label></div>
+                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partCount'>Part Count:</label></div>
+                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partPrice'>Part Price:</label></div>
+                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} >Total:</label></div>
 
+                        </div >
+                        <div>
+                            <div className='h-[10%] flex items-center'>
+                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Temp Desc" name="description" ></Field>
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Berk" name="to" ></Field>
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                <Field type="date" className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Date" name="date" ></Field>
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="1" name="quantity" ></Field>
+                            </div>
+                            <div className='h-[10%] flex items-center ps-2'>
+                                <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className=" border-gray-300 rounded-sm" />
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                {IsPartly && <Field onChange={(e: any) => setPartCountHandler(e)} value={partCount} className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Part Count" name="partCount" ></Field>}
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                {IsPartly && <Field onChange={(e: any) => setPartPriceHandler(e)} value={partPrice} className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Price of Part" name="partPrice" ></Field>}
+                            </div>
+                            <div className='h-[10%] flex items-center'>
+                                {IsPartly && <p className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" >{totalPrice}</p>}
+                            </div>
+                            <div className='h-[20%] flex items-start'>
+                                <button type='submit' className='text-center mt-4 rounded-sm bg-orange-400 hover:bg-orange-500 text-4xl text-white h-[40px] w-[50%]'>+</button>
+                            </div>
                         </div>
                     </div>
+
+
+
+
                 </Form>
             </Formik>
         </div>
