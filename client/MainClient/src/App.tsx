@@ -20,8 +20,8 @@ function App() {
 
             <Route path='survey/surveyBuilder' element={<SurveyBuilder />} />
             <Route path='survey/surveys' element={<Surveys />} ></Route>
-            <Route path='survey/surveyResults' element={<SurveyResults />} />
             <Route path='survey/surveys/:slug' element={<SurveyDetails />} />
+            <Route path='survey/surveys/:slug/result' element={<SurveyResults />} />
 
             <Route path='/suggest/suggestIdeas' element={<SuggestIdeas />} />
 
