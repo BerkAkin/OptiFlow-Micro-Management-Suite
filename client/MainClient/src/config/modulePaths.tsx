@@ -2,16 +2,13 @@ export const modulePaths = {
     "Financial Tracking and Invoicing": {
         color: "bg-indigo-400 hover:bg-indigo-500",
         parts: [
-            { url: "/finance/financeDashboard", module: "Dashboard" },
-            { url: "/finance/financeBills", module: "Bill Management" },
+
         ]
     },
     "Corporate Survey and Insight": {
         color: "bg-amber-500 hover:bg-amber-600",
         parts: [
-            { url: "/survey/surveys", module: "Surveys" },
-            { url: "/survey/surveyBuilder", module: "Survey Builder" },
-            { url: "/survey/surveyResults", module: "Survey Results" },
+
         ]
     },
     "Corporate Suggestion and Innovation": {
