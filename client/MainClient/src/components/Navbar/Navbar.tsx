@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { useSelectedModuleContext } from "../../context/SelectedModuleContext";
 import { Link } from "react-router-dom";
@@ -9,6 +9,21 @@ function Navbar() {
 
   const { isAuth, setIsAuth } = useAuthContext();
   const { setSelectedModule } = useSelectedModuleContext();
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLLIElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
 
@@ -34,7 +49,15 @@ function Navbar() {
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/survey/surveys`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
+              <li className="relative" ref={dropdownRef}>
+                <button className="mt-2" onClick={() => setIsOpen(!isOpen)}>Survey ▼</button>
+                {isOpen && (
+                  <div className="absolute border-x  right-0 translate-x-[25%] text-center mt-2 w-40 bg-white text-black rounded-sm shadow-lg z-10">
+                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/surveys`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
+                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/surveyBuilder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
+                  </div>
+                )}
+              </li>
             </ul>
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
@@ -54,7 +77,7 @@ function Navbar() {
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
           <div className="hidden w-full md:block md:w-auto mx-1">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">🧾</Link>
+              <Link to={`/finance/financeBills`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">🧾</Link>
             </ul>
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
