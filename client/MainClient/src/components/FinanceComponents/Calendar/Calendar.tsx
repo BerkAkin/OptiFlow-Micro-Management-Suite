@@ -34,7 +34,7 @@ function Calendar() {
     }
 
     return (
-        <div className="fc-toolbar fc-header-toolbar  p-2 h-[420px] overflow-scroll">
+        <div className="fc-toolbar fc-header-toolbar  p-2 h-[420px]">
             <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
