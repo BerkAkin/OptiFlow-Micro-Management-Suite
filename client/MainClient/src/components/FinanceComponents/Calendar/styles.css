@@ -1,12 +1,12 @@
 .fc-button {
-  background-color: #818cf8 !important;
+  background-color: #9ca3af !important;
   color: white !important;
   border:none !important;
   border-radius: 2px !important;
 }
 
 .fc-button:hover {
-  background-color: #6366f1 !important;
+  background-color: #6b7280 !important;
 }
 
 .fc-header-toolbar{
