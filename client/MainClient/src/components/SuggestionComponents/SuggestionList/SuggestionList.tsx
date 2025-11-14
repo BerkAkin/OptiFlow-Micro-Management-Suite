@@ -26,10 +26,10 @@ function SuggestionList() {
 
         <div className='h-[680px] bg-white rounded-lg shadow-lg border'>
             <div className='w-full h-[10%] text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-sky-400 rounded-b-sm font-roobert`}>All Suggestions</p>
+                <p className={`text-2xl text-center w-64 text-white bg-indigo-400 rounded-b-sm font-roobert`}>All Suggestions</p>
             </div>
 
-            <div className={`h-[5%] p-2 text-sky-400 font-bold border-b text-md grid grid-cols-[10%_60%_10%_10%_10%]`}>
+            <div className={`h-[5%] p-2 text-indigo-400 font-bold border-b text-md grid grid-cols-[10%_60%_10%_10%_10%]`}>
                 <div className="text-start">
                     Header
                 </div>
