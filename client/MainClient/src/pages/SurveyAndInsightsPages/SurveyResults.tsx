@@ -88,7 +88,7 @@ function SurveyResults() {
                 <div key={index} className={`h-[800px] grid grid-cols-[20%_80%]`}>
                     <div>
                         <div className={`w-full h-full flex items-center justify-center border-e`}>
-                            <p style={{ fontFamily: "roobert" }} className='text-center text-3xl text-gray-600 mx-4'>{slug} Results</p>
+                            <p className='font-roobert text-center text-3xl text-gray-600 mx-4'>{slug} Results</p>
                         </div>
                     </div>
                     <div className="p-2 overflow-auto">

@@ -16,20 +16,20 @@ function InstallmentPaymentsCard() {
 
         <div className='w-full h-96 '>
             <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm `} style={{ fontFamily: "roobert" }}>Installments</p>
+                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm font-roobert`}>Installments</p>
             </div>
             <div className='text-orange-400 border-b h-5 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center'>
                 <div>
-                    <p className={`text-sm font-bold text-start ps-2 w-full `} style={{ fontFamily: "roobert" }}>Description</p>
+                    <p className={`text-sm font-bold text-start ps-2 w-full font-roobert`}>Description</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full `} style={{ fontFamily: "roobert" }}>Total</p>
+                    <p className={`text-sm font-bold text-center w-full font-roobert`}>Total</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full  `} style={{ fontFamily: "roobert" }}>Part</p>
+                    <p className={`text-sm font-bold text-center w-full  font-roobert`}>Part</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full  `} style={{ fontFamily: "roobert" }}></p>
+                    <p className={`text-sm font-bold text-center w-full  font-roobert`}></p>
                 </div>
             </div>
             <div className='h-17 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center hover:bg-gray-100'>

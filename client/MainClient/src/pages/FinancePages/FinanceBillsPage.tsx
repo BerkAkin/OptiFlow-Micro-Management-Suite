@@ -77,7 +77,7 @@ function FinanceBillsPage() {
                     <div className='w-50 bg-white rounded-sm shadow-lg border'>
                         <Formik onSubmit={onAddApproveHandler} initialValues={initalProductValues}>
                             <Form>
-                                <div><p className='text-gray-700 text-xl text-center p-5' style={{ fontFamily: "roobert" }}>Add New Product</p></div>
+                                <div><p className='text-gray-700 text-xl text-center p-5 font-roobert'>Add New Product</p></div>
                                 <div>
                                     <Field className="text-gray-700 text-center p-3 border-b focus:outline-none  bg-transparent focus:bg-transparent" name="type" placeholder="Type" />
                                 </div>
@@ -109,7 +109,7 @@ function FinanceBillsPage() {
                         <div className='grid grid-cols-[70%_30%] mt-10'>
                             <div className='flex border-b justify-start'><p>*LOGO GELECEK*</p></div>
                             <div className='border-b'>
-                                <p className='text-6xl text-gray-600 py-5' style={{ fontFamily: "roobert" }}>INVOICE</p>
+                                <p className='text-6xl text-gray-600 py-5 font-roobert' >INVOICE</p>
                             </div>
                         </div>
 
@@ -165,7 +165,7 @@ function FinanceBillsPage() {
                         <div className='mt-20'>
 
                             <table className="w-full border">
-                                <thead className="bg-gray-300" style={{ fontFamily: "roobert" }}>
+                                <thead className="bg-gray-300 font-roobert">
                                     <tr>
                                         <th scope="col" className="px-6 ">
                                             Cinsi

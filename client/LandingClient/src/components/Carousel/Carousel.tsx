@@ -41,7 +41,7 @@ function Carousel({ items }: CarouselProps) {
                         </div>
                         <div>
                             <div className='bg-white h-[280px] rounded-b-xs border'>
-                                <h2 className=" font-bold text-center p-5 text-xl" style={{ fontFamily: "roobert" }}>{item.title}</h2>
+                                <h2 className="font-roobert font-bold text-center p-5 text-xl">{item.title}</h2>
                                 <p className="text-sm p-5 text-center" >{item.text}</p>
                             </div>
 

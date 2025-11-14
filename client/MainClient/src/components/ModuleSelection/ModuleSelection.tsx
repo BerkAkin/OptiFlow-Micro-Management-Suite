@@ -13,7 +13,7 @@ function ModuleSelection() {
                             setSelectedModule(moduleName);
                             setModuleParts(info.parts);
                         }}
-                        className={`text-white text-3xl p-5 h-full w-full transition duration-400 hover:scale-105 ${info.color}`} style={{ fontFamily: "roobert" }}>
+                        className={`text-white text-3xl p-5 h-full w-full transition duration-400 hover:scale-105 font-roobert ${info.color}`}>
                         {moduleName}
                     </button>
                 </div>

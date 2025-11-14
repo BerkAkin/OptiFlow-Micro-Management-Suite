@@ -41,7 +41,7 @@ function MainPage() {
                                     {/* <div className='border-e h-[100%]'>
                                         <Sidebar />   grid grid-cols-[15%_85%]
                                     </div> */}
-                                    <div className='h-[100%] overflow-scroll bg-gray-100'>
+                                    <div className='h-[100%] overflow-y-auto bg-gray-100'>
                                         <Outlet />
                                     </div>
 

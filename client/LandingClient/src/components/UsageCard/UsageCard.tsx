@@ -23,7 +23,7 @@ function UsageCard({ item }: UsageCardProps) {
                 </div>
 
                 <div className='pt-4 text-center justify-center flex items-end'>
-                    <h1 style={{ fontFamily: "Roobert" }} className='font-bold ps-3 pt-2 text-xl text-indigo-400'>
+                    <h1 className='font-roobert font-bold ps-3 pt-2 text-xl text-indigo-400'>
                         {item.header}
                     </h1>
                 </div>

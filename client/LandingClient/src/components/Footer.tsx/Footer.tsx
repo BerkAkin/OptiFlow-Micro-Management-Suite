@@ -26,10 +26,10 @@ function Footer() {
             <div className="absolute top-60 w-[100%]">
               <div className="container border-indigo-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
                 <div className="flex items-center text-start">
-                  <h1 className="text-white text-4xl" style={{ fontFamily: "roobert" }}>OptiFlow Management Suite</h1>
+                  <h1 className="text-white text-4xl font-roobert">OptiFlow Management Suite</h1>
                 </div>
                 <div className="flex items-center justify-end text-end">
-                  <h1 className="text-white text-2xl w-[70%] pe-5" style={{ fontFamily: "roobert" }}>Manage Your Corporation As It Deserves <br />Review - Subscribe - Manage !</h1>
+                  <h1 className="text-white text-2xl w-[70%] pe-5 font-roobert" >Manage Your Corporation As It Deserves <br />Review - Subscribe - Manage !</h1>
                 </div>
               </div>
 
@@ -39,10 +39,10 @@ function Footer() {
 
                 <div className="bg-[#141414]">
                   <div className="h-[25%]">
-                    <h1 className="p-5 text-white font-bold text-xl" style={{ fontFamily: "roobert" }}>OptiFlow</h1>
+                    <h1 className="p-5 text-white font-bold text-xl font-roobert">OptiFlow</h1>
                   </div>
                   <div className="h-[50%]">
-                    <h1 className="p-5 text-[gray] text-white text-sm" style={{ fontFamily: "roobert" }}>OptiFlow Suite is the all-in-one process management platform that helps organizations streamline operations across every department.</h1>
+                    <h1 className="p-5 text-[gray] text-white text-sm font-roobert" >OptiFlow Suite is the all-in-one process management platform that helps organizations streamline operations across every department.</h1>
 
                   </div>
                   <div className="flex justify-start ps-5 pb-10 items-center h-[25%]">
@@ -61,7 +61,7 @@ function Footer() {
                 <div className="grid grid-cols-3">
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5" style={{ fontFamily: "roobert" }}><span className="border-b-2 border-indigo-500" style={{ fontFamily: "roobert" }}>Plat</span>form</h1>
+                      <h1 className="text-white text-xl ps-5 font-roobert"><span className="border-b-2 border-indigo-500" >Plat</span>form</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Features </h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Privacy</h1></div>
@@ -73,7 +73,7 @@ function Footer() {
                   </div>
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5" style={{ fontFamily: "roobert" }}><span className="border-b-2 border-indigo-500" style={{ fontFamily: "roobert" }}>Mod</span>ules</h1>
+                      <h1 className="text-white text-xl ps-5 font-roobert"><span className="border-b-2 border-indigo-500 font-roobert">Mod</span>ules</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Finance </h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Survey & Insights</h1></div>
@@ -86,7 +86,7 @@ function Footer() {
 
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5" style={{ fontFamily: "roobert" }}><span className="border-b-2 border-indigo-500" style={{ fontFamily: "roobert" }}>Indus</span>tries</h1>
+                      <h1 className="text-white text-xl ps-5 font-roobert"><span className="border-b-2 border-indigo-500 font-roobert">Indus</span>tries</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Corporate</h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Enterprise</h1></div>
@@ -101,7 +101,7 @@ function Footer() {
 
               </div>
               <div className="text-white flex items-center justify-center pt-8" >
-                <h1 className="text-sm" style={{ fontFamily: "roobert" }}><span className="text-indigo-500" style={{ fontFamily: "roobert" }}>© Copyright 2025 All Rights Reserved to</span> B.A.</h1>
+                <h1 className="text-sm font-roobert"><span className="text-indigo-500 font-roobert">© Copyright 2025 All Rights Reserved to</span> B.A.</h1>
               </div>
             </div>
           </div>

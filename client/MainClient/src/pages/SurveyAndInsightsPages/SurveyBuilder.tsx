@@ -91,7 +91,7 @@ function SurveyBuilder() {
     return (
         <div className='m-10 bg-white container mx-auto border shadow-md rounded-lg'>
             <div className='text-center'>
-                <p className='text-5xl text-gray-600 p-5' style={{ fontFamily: "roobert" }}>Build New Survey</p>
+                <p className='text-5xl text-gray-600 p-5 font-roobert'>Build New Survey</p>
             </div>
             <div className='flex justify-end my-5 mx-5'>
                 <input value={newQuestionHeader} onChange={(e) => setNewQuestionHeader(e.target.value)} className='ps-2 mx-2 border-b-2 outline-none focus:outline-none' placeholder='New Question'></input>

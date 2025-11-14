@@ -43,7 +43,7 @@ function LoginModal() {
     return (
         <>
 
-            <div className='size-96 h-[500px] flex justify-center items-center pe-2 bg-white border-white/15 border rounded-sm ' style={{ border: "1px solid gray" }}>
+            <div className='size-96 h-[500px] flex justify-center items-center pe-2 bg-white border rounded-lg shadow-md '>
                 <Formik initialValues={{ email: "", password: "" }} onSubmit={(values) => loginMutation.mutate(values)}>
                     {({ isSubmitting }) => (
                         <Form>

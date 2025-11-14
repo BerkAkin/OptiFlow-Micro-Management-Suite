@@ -36,7 +36,7 @@ function SurveyResults() {
                             <Link to={`${item.status === "Active" ? `/survey/surveys/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
                                 <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-e`}>
                                     <div className='h-[50%] flex items-center justify-center'>
-                                        <p style={{ fontFamily: "roobert" }} className='text-center text-3xl text-gray-600 mx-4'>
+                                        <p className='font-roobert text-center text-3xl text-gray-600 mx-4'>
                                             {item.text}
                                             <span className='text-sm'>
                                                 {item.status === "Timeout" ?
@@ -51,10 +51,10 @@ function SurveyResults() {
 
                                     </div>
                                     <div className='h-[25%] flex items-end justify-center'>
-                                        <p style={{ fontFamily: "roobert" }} className={item.status === "Active" ? "text-green-700 p-2 text-xl" : "text-red-600 text-xl"}>{item.status}</p>
+                                        <p className={item.status === "Active" ? "font-roobert text-green-700 p-2 text-xl" : "font-roobert text-red-600 text-xl"}>{item.status}</p>
                                     </div>
                                     <div className='h-[25%] flex items-center justify-center'>
-                                        <p style={{ fontFamily: "roobert" }} className='text-gray-600 '>{item.date}</p>
+                                        <p className='text-gray-600 font-roobert '>{item.date}</p>
                                     </div>
                                 </div>
                             </Link>

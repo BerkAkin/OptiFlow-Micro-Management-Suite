@@ -10,20 +10,20 @@ function TodaysPaymentsCard() {
     return (
         <div>
             <div className='w-full h-[50px] text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm `} style={{ fontFamily: "roobert" }}>Remainings</p>
+                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm font-roobert`}>Remainings</p>
             </div>
             <div className='border-b h-5 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 text-orange-400 flex justify-center'>
                 <div>
-                    <p className={`text-sm font-bold text-start ps-5 w-full `} style={{ fontFamily: "roobert" }}>Description</p>
+                    <p className={`text-sm font-bold text-start ps-5 w-full font-roobert`}>Description</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full `} style={{ fontFamily: "roobert" }}>To</p>
+                    <p className={`text-sm font-bold text-center w-full font-roobert`}>To</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full `} style={{ fontFamily: "roobert" }}>Price</p>
+                    <p className={`text-sm font-bold text-center w-full font-roobert`}>Price</p>
                 </div>
                 <div>
-                    <p className={`text-sm font-bold text-center w-full `} style={{ fontFamily: "roobert" }}></p>
+                    <p className={`text-sm font-bold text-center w-full font-roobert`}></p>
                 </div>
             </div>
 

@@ -53,7 +53,7 @@ function AddPaymentForm() {
     return (
         <div className='h-[450px]'>
             <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm `} style={{ fontFamily: "roobert" }}>Add Payment</p>
+                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm font-roobert`}>Add Payment</p>
             </div>
             <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
                 <Form>

@@ -8,7 +8,7 @@ function Sidebar() {
         <div>
             <div className="flex flex-col w-full bg-white">
                 <div className=" px-8 py-4 flex flex-row items-center justify-between">
-                    <a className="text-xl text-indigo-500 font-semibold text-gray-800 " style={{ fontFamily: "roobert" }}>{selectedModule}</a>
+                    <a className="text-xl text-indigo-500 font-semibold text-gray-800 font-roobert">{selectedModule}</a>
 
                 </div>
                 <nav className="px-4 ">

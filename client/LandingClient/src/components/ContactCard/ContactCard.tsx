@@ -17,7 +17,7 @@ function ContactCard({ item }: ContactCardProps) {
             </div>
             <div className="ps-8 py-4">
                 <div className="font-bold text-xl text-gray-800">
-                    <h1 style={{ fontFamily: "roobert" }}>{item.header}</h1>
+                    <h1 className="font-roobert">{item.header}</h1>
                 </div>
             </div>
             <div className="ps-8">

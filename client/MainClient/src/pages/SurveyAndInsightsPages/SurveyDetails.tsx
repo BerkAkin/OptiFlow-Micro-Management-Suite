@@ -60,7 +60,7 @@ function SurveyDetails() {
     return (
         <div className='m-10 bg-white container mx-auto shadow-md '>
             <div className='text-center'>
-                <p className='text-3xl text-gray-700 p-5' style={{ fontFamily: "roobert" }}>{surveyName}</p>
+                <p className='text-3xl text-gray-700 p-5 font-roobert' >{surveyName}</p>
             </div>
             <Formik initialValues={{}} onSubmit={(values) => { console.log("Gönderilen cevaplar:", values) }}>
                 {({ values, handleChange }) => (
