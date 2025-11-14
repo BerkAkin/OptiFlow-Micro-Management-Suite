@@ -62,7 +62,7 @@ function Navbar() {
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">Suggestions</Link>
+              <Link to={`/suggest/suggestions`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">Suggestions</Link>
             </ul>
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
@@ -87,7 +87,7 @@ function Navbar() {
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">👱🏻</Link>
+              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">•-•</Link>
             </ul>
           </div>
 
