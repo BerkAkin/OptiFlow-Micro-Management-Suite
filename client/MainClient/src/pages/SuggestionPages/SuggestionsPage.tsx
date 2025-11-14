@@ -53,7 +53,7 @@ function SuggestIdeas() {
 
             <div className='bg-white h-[800px] rounded-lg shadow-md border'>
                 <div className='h-[5%] w-full text-center flex justify-center items-start'>
-                    <p className={`text-2xl text-center w-64 text-white bg-sky-400 rounded-b-sm font-roobert`}>Current Suggestions</p>
+                    <p className={`text-2xl text-center w-64 text-white bg-indigo-400 rounded-b-sm font-roobert`}>Current Suggestions</p>
                 </div>
                 <div className='h-[95%] overflow-y-auto'>
                     {Data.map((item, index) => (
