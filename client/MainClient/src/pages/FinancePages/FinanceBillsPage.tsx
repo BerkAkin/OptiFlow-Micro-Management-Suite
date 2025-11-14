@@ -73,29 +73,45 @@ function FinanceBillsPage() {
             {
 
                 isAdd &&
-                <div className=' w-[80%] h-[50%] absolute flex justify-center items-center'>
-                    <div className='w-50 bg-white rounded-sm shadow-lg border'>
+                <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
+                    <div className='w-82 bg-white rounded-lg shadow-lg border'>
                         <Formik onSubmit={onAddApproveHandler} initialValues={initalProductValues}>
                             <Form>
-                                <div><p className='text-gray-700 text-xl text-center p-5 font-roobert'>Add New Product</p></div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-3 border-b focus:outline-none  bg-transparent focus:bg-transparent" name="type" placeholder="Type" />
+                                <div className='w-full h-[50px] flex justify-center items-start'>
+                                    <p className={`text-2xl text-center w-56 text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Product</p>
                                 </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-3 border-b focus:outline-none  bg-transparent focus:bg-transparent" name="description" placeholder="Description" />
-                                </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-3 border-b focus:outline-none  bg-transparent focus:bg-transparent" type="number" name="quantity" placeholder="Quantity" />
+                                <div className='grid grid-cols-[40%_60%] '>
+                                    <div>
+                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='type'>Type:</label></div>
+                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
+                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='quantity'>Quantity:</label></div >
+                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='Price'>Price:</label></div>
+                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='total'>Total:</label></div>
 
+                                    </div >
+                                    <div>
+                                        <div className='h-[20%] flex items-center '>
+                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="type" placeholder="Temp Type" />
+                                        </div>
+                                        <div className='h-[20%] flex items-center'>
+                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none " name="description" placeholder="Temp Description" />
+                                        </div>
+                                        <div className='h-[20%] flex items-center'>
+                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none " type="number" name="quantity" placeholder="Temp Quantity" />
+                                        </div>
+                                        <div className='h-[20%] flex items-center'>
+                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="price" placeholder="Temp Price" />
+                                        </div>
+                                        <div className='h-[20%] flex items-center'>
+                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="total" placeholder="Temp Total" />
+                                        </div >
+                                    </div>
+                                </div >
+                                <div className='flex justify-evenly my-5 items-center'>
+                                    <button onClick={() => setIsAdd(!isAdd)} className='border bg-red-400 text-white p-2 ms-4 hover:bg-red-500 w-[40%] '>Cancel</button>
+                                    <button className='border bg-green-500 text-white p-2 hover:bg-green-600 w-[60%] mx-4' type='submit'>Add</button>
                                 </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-3 border-b focus:outline-none bg-transparent focus:bg-transparent" name="Price" placeholder="Price" />
-                                </div >
-                                <div>
-                                    <Field className="text-gray-700 text-center p-3 border-b focus:outline-none  bg-transparent focus:bg-transparent" name="total" placeholder="Total" />
-                                </div >
-                                <button className='border bg-indigo-300 text-white p-2 hover:bg-indigo-400 w-full mt-5' type='submit'>Add</button>
-                                <button onClick={() => setIsAdd(!isAdd)} className='border bg-red-300 text-white p-2 hover:bg-red-400 w-full mt-1'>Cancel</button>
+
                             </Form>
                         </Formik>
                     </div>
@@ -212,7 +228,7 @@ function FinanceBillsPage() {
                             </table>
 
                             <div className='flex justify-end my-5'>
-                                <button onClick={() => setIsAdd(!isAdd)} className='border bg-indigo-300 text-white p-2 hover:bg-indigo-400'>Add New Product</button>
+                                <button onClick={() => setIsAdd(!isAdd)} className='border bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
                             </div>
                         </div>
                         <div className='mt-5 grid grid-cols-[80%_20%]'>
