@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar/Sidebar'
 import { useSelectedModuleContext } from '../context/SelectedModuleContext'
 import { useAuthContext } from '../context/AuthContext'
 import { Outlet } from 'react-router-dom'
+import Modal from '../components/Modal/Modal'
 
 function MainPage() {
     const { selectedModule } = useSelectedModuleContext();
@@ -14,7 +15,7 @@ function MainPage() {
 
     return (
         <div>
-
+            {/*  <Modal /> */}
             <Navbar />
 
 
