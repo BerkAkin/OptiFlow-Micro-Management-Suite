@@ -7,7 +7,7 @@ import SurveyBuilder from './pages/SurveyAndInsightsPages/SurveyBuilder';
 import Surveys from './pages/SurveyAndInsightsPages/Surveys';
 import SurveyDetails from './pages/SurveyAndInsightsPages/SurveyDetails';
 import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
-import SuggestIdeas from './pages/SuggestionPages/SuggestIdeas';
+import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
             <Route path='survey/surveys/:slug' element={<SurveyDetails />} />
             <Route path='survey/surveys/:slug/result' element={<SurveyResults />} />
 
-            <Route path='/suggest/suggestIdeas' element={<SuggestIdeas />} />
+            <Route path='/suggest/suggestions' element={<SuggestionsPage />} />
 
           </Route>
         </Routes>
