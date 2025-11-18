@@ -8,41 +8,47 @@ const TodaysPayments = {
 
 function TodaysPaymentsCard() {
     return (
-        <div>
-            <div className='w-full h-[50px] text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm font-roobert`}>Remainings</p>
+        <div className='w-full h-full border'>
+
+            <div className='h-[10%] w-full h-[50px] flex justify-center items-start'>
+                <p className={`text-2xl text-center  px-2  text-white bg-orange-400 rounded-b-sm font-roobert`}>Installments</p>
             </div>
-            <div className='border-b h-5 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 text-orange-400 flex justify-center'>
-                <div>
-                    <p className={`text-sm font-bold text-start ps-5 w-full font-roobert`}>Description</p>
+            <div className='h-[10%] flex items-center text-orange-400 text-center font-bold border-b  grid grid-cols-12 gap-2 flex justify-center'>
+                <div className='col-span-8'>
+                    <p className={`text-sm text-start ps-5 font-roobert`}>Description</p>
                 </div>
-                <div>
-                    <p className={`text-sm font-bold text-center w-full font-roobert`}>To</p>
+                <div className='col-span-2'>
+                    <p className={`text-sm  w-full font-roobert`}>To</p>
                 </div>
-                <div>
-                    <p className={`text-sm font-bold text-center w-full font-roobert`}>Price</p>
+                <div className='col-span-1'>
+                    <p className={`text-sm w-full font-roobert`}>Price</p>
                 </div>
-                <div>
-                    <p className={`text-sm font-bold text-center w-full font-roobert`}></p>
+                <div className='col-span-1'>
+                    <p></p>
                 </div>
+            </div>
+            <div className='overflow-y-auto h-[75%]'>
+
+                <div className='grid grid-cols-12 gap-2 hover:bg-gray-100'>
+                    <div className='col-span-8'>
+                        <p className='ps-5 text-sm text-gray-600 p-3 text-wrap'>{TodaysPayments.Description}</p>
+                    </div>
+                    <div className='col-span-2 text-gray-600 flex items-center justify-center'>
+                        <p>{TodaysPayments.ToWho}</p>
+                    </div>
+                    <div className='col-span-1 text-gray-600 flex items-center justify-center'>
+                        <p>{TodaysPayments.Price}</p>
+                    </div>
+                    <div className='col-span-1 text-gray-600 flex items-center justify-center'>
+                        <button className='bg-gray-400 text-white p-1 px-2 me-1 cursor-pointer hover:bg-gray-500 rounded-sm'>$</button>
+                    </div>
+                </div>
+
             </div>
 
-            <div className='h-17 w-full grid grid-cols-[65%_10%_10%_10%] gap-2 flex justify-center hover:bg-gray-100'>
-                <div>
-                    <p className='ps-5 text-sm text-gray-600 p-3'>{TodaysPayments.Description}</p>
-                </div>
-                <div className='text-gray-600 flex items-center justify-center'>
-                    <p>{TodaysPayments.ToWho}</p>
-                </div>
-                <div className='text-gray-600 flex items-center justify-center'>
-                    <p>{TodaysPayments.Price}</p>
-                </div>
-                <div className='text-gray-600 flex items-center justify-center'>
-                    <button className='bg-gray-400 hover:bg-gray-500 rounded-sm text-white p-1 me-1 w-full '>$</button>
-                </div>
-            </div>
+
+
         </div>
-
 
     )
 }
