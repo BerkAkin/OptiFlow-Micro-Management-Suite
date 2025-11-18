@@ -78,10 +78,10 @@ function FinanceBillsPage() {
                         <Formik onSubmit={onAddApproveHandler} initialValues={initalProductValues}>
                             <Form>
                                 <div className='w-full h-[50px] flex justify-center items-start'>
-                                    <p className={`text-2xl text-center w-56 text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Product</p>
+                                    <p className={`text-2xl text-center px-2 text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Product</p>
                                 </div>
-                                <div className='grid grid-cols-[40%_60%] '>
-                                    <div>
+                                <div className='grid grid-cols-10 mt-2'>
+                                    <div className='col-span-4'>
                                         <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='type'>Type:</label></div>
                                         <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
                                         <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='quantity'>Quantity:</label></div >
@@ -89,7 +89,7 @@ function FinanceBillsPage() {
                                         <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='total'>Total:</label></div>
 
                                     </div >
-                                    <div>
+                                    <div className='col-span-6'>
                                         <div className='h-[20%] flex items-center '>
                                             <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="type" placeholder="Temp Type" />
                                         </div>
@@ -108,8 +108,8 @@ function FinanceBillsPage() {
                                     </div>
                                 </div >
                                 <div className='flex justify-evenly my-5 items-center'>
-                                    <button onClick={() => setIsAdd(!isAdd)} className='border bg-red-400 text-white p-2 ms-4 hover:bg-red-500 w-[40%] '>Cancel</button>
-                                    <button className='border bg-green-500 text-white p-2 hover:bg-green-600 w-[60%] mx-4' type='submit'>Add</button>
+                                    <button onClick={() => setIsAdd(!isAdd)} className='bg-red-400 text-white p-2 ms-4 hover:bg-red-500 w-[40%] '>Cancel</button>
+                                    <button className='bg-green-500 text-white p-2 hover:bg-green-600 w-[60%] mx-4' type='submit'>Add</button>
                                 </div>
 
                             </Form>
@@ -122,16 +122,16 @@ function FinanceBillsPage() {
             <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
                 <Form>
                     <div className=' container w-[900px] mx-auto my-10 bg-white shadow-md p-10'>
-                        <div className='grid grid-cols-[70%_30%] mt-10'>
-                            <div className='flex border-b justify-start'><p>*LOGO GELECEK*</p></div>
-                            <div className='border-b'>
+                        <div className='grid grid-cols-10 mt-10'>
+                            <div className='col-span-7 flex border-b justify-start'><p>*LOGO GELECEK*</p></div>
+                            <div className='col-span-3 border-b'>
                                 <p className='text-6xl text-gray-600 py-5 font-roobert' >INVOICE</p>
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-[70%_30%] mt-5'>
-                            <div className=''><p></p></div>
-                            <div className='text-end'>
+                        <div className='grid grid-cols-10 mt-5'>
+                            <div className='col-span-7'><p></p></div>
+                            <div className='col-span-3 text-end'>
                                 <p className='text-gray-500'><span className='text-black'>(OTO)Fatura Tarihi ve Saati: </span>25.10.2025</p>
                                 <p className='text-gray-500'><span className='text-black'>(OTO)Sipariş Tarihi ve Saati: </span>25.10.2025</p>
                                 <p className='text-gray-500'><span className='text-black'>(OTO)Seri Sıra No: </span>12345251255</p>
@@ -228,12 +228,12 @@ function FinanceBillsPage() {
                             </table>
 
                             <div className='flex justify-end my-5'>
-                                <button onClick={() => setIsAdd(!isAdd)} className='border bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
+                                <button onClick={() => setIsAdd(!isAdd)} className=' bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
                             </div>
                         </div>
-                        <div className='mt-5 grid grid-cols-[80%_20%]'>
-                            <div className='my-20 mx-10'>KAŞE İMZA</div>
-                            <div>
+                        <div className='mt-5 grid grid-cols-10'>
+                            <div className='col-span-8 my-20 mx-10'>KAŞE İMZA</div>
+                            <div className='col-span-2'>
                                 <div className='my-5'>
                                     <p className='text-gray-500'><span className='text-black'>Toplam: </span></p>
                                 </div>
@@ -246,7 +246,7 @@ function FinanceBillsPage() {
                             </div>
                         </div>
                         <div className='flex justify-end'>
-                            <button onClick={() => onSubmitHandler} className='border bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
+                            <button onClick={() => onSubmitHandler} className=' bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
                         </div>
 
 
