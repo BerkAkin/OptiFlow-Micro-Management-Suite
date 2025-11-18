@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SelectedModuleContextProvider } from './context/SelectedModuleContext';
 import { AuthContextProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(
@@ -14,11 +13,9 @@ const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <SelectedModuleContextProvider>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </SelectedModuleContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );
