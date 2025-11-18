@@ -1,59 +1,30 @@
-import { useState } from 'react'
-import ModuleSelection from '../components/ModuleSelection/ModuleSelection'
 import Navbar from '../components/Navbar/Navbar'
 import LoginModal from '../components/LoginContainer/LoginContainer'
-import Sidebar from '../components/Sidebar/Sidebar'
-import { useSelectedModuleContext } from '../context/SelectedModuleContext'
 import { useAuthContext } from '../context/AuthContext'
 import { Outlet } from 'react-router-dom'
-import Modal from '../components/Modal/Modal'
 
 function MainPage() {
-    const { selectedModule } = useSelectedModuleContext();
     const { isAuth, setIsAuth } = useAuthContext();
 
 
-    return (
-        <div>
-            {/*  <Modal /> */}
-            <Navbar />
-
-
-            <div>
-                {
-                    !isAuth ?
-                        (
-                            <div className='flex items-center justify-center h-[90dvh]'>
-                                <LoginModal />
-                            </div>
-                        )
-                        : selectedModule === null ?
-
-                            (
-                                <div className='flex items-center justify-center h-[90dvh]'>
-                                    <ModuleSelection />
-                                </div>
-                            )
-                            :
-
-                            (
-
-                                <div className=" h-[90dvh]">
-                                    {/* <div className='border-e h-[100%]'>
-                                        <Sidebar />   grid grid-cols-[15%_85%]
-                                    </div> */}
-                                    <div className='h-[100%] overflow-y-auto bg-gray-100'>
-                                        <Outlet />
-                                    </div>
-
-                                </div>
-                            )
-                }
+    if (!isAuth) {
+        return (
+            <div className="flex items-center justify-center h-screen bg-gray-100">
+                <LoginModal />
             </div>
+        );
+    }
 
-
-        </div >
-    )
+    return (
+        <div className="h-screen flex flex-col bg-gray-100">
+            <div className="z-40">
+                <Navbar />
+            </div>
+            <div className="overflow-y-auto">
+                <Outlet />
+            </div>
+        </div>
+    );
 }
 
 export default MainPage
