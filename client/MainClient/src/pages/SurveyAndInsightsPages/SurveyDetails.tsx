@@ -68,7 +68,7 @@ function SurveyDetails() {
                         <div>
                             {survey.questions.map((question) => (
                                 <div key={question.id} className='rounded-sm p-5 m-5'>
-                                    <div className='grid grid-cols-[90%_10%]'>
+                                    <div>
                                         <div><p className='text-lg text-gray-800'>{question.id}{`) `}{question.text}</p></div>
                                     </div>
 
