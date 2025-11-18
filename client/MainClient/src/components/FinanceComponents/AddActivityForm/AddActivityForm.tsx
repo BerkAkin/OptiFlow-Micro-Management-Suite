@@ -22,14 +22,14 @@ function AddActivityForm() {
     return (
         <div>
             <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Activity</p>
+                <p className={`text-2xl text-center  px-2  text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Activity</p>
             </div>
             <div>
                 <Formik onSubmit={handleSubmit} initialValues={initialValues}>
                     {({ isSubmitting }) => (
                         <Form>
-                            <div className='grid grid-cols-[40%_60%]'>
-                                <div>
+                            <div className='grid grid-cols-10 mt-4'>
+                                <div className='col-span-4'>
                                     <div className='h-[10%] flex items-center justify-end'><label className='my-2 text-lg text-gray-700' htmlFor='quantity'>Quantity:</label></div>
                                     <div className='h-[10%] flex items-center justify-end'><label className='my-2 text-lg text-gray-700' htmlFor='name'>Name:</label></div>
                                     <div className='h-[10%] flex items-center justify-end'><label className='my-2 text-lg text-gray-700' htmlFor='byWho'>By Who:</label></div >
@@ -40,7 +40,7 @@ function AddActivityForm() {
                                     <div className='h-[10%] flex items-center justify-end'><label className='my-2 text-lg text-gray-700 cursor-pointer' htmlFor="isExpense" >Expense?</label></div>
                                     <div className='h-[10%] flex items-center justify-end'><label className='my-2 text-lg text-gray-700 cursor-pointer' htmlFor="file-upload">📁 PDF: </label></div>
                                 </div >
-                                <div>
+                                <div className='col-span-6'>
                                     <div className='h-[10%] flex items-center'>
                                         <Field className="border-b mx-2  text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" type="number" name="quantity" placeholder="5" />
                                     </div>
