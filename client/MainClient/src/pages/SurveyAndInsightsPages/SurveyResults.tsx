@@ -85,13 +85,13 @@ function SurveyResults() {
         <div className='container mx-auto border my-10 bg-white rounded-lg shadow-md' >
 
             {initialTempSurvey.surveys.map((item, index) => (
-                <div key={index} className={`h-[800px] grid grid-cols-[20%_80%]`}>
-                    <div>
+                <div key={index} className={`h-[800px] grid grid-cols-10`}>
+                    <div className="col-span-2">
                         <div className={`w-full h-full flex items-center justify-center border-e`}>
                             <p className='font-roobert text-center text-3xl text-gray-600 mx-4'>{slug} Results</p>
                         </div>
                     </div>
-                    <div className="p-2 overflow-auto">
+                    <div className="p-2 col-span-8 overflow-auto">
                         {item.questions.map((questions, index) => (
                             <div key={index} className="mb-4">
                                 <p className="text-lg mb-2 text-gray-800">{index + 1}) {questions.text}</p>
