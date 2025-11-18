@@ -33,8 +33,8 @@ function VerticalChart() {
 
     return (
         <div className="h-[420px]">
-            <div className='flex justify-center h-[8%]'>
-                <p className={`text-xl text-center w-64 rounded-b-sm text-white`} style={{ backgroundColor: `${color[0]}`, fontFamily: "roobert" }}>
+            <div className='flex justify-center'>
+                <p className={`text-xl text-center  px-2  rounded-b-sm text-white font-roobert`} style={{ backgroundColor: `${color[0]}` }}>
                     Most
                     <span>
                         <button className={`h-[20px] text-white text-2xl ps-1`} onClick={handleNext}> ⇄</button>
