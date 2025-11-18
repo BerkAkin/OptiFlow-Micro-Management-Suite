@@ -52,14 +52,14 @@ function AddPaymentForm() {
     }
     return (
         <div className='h-[450px]'>
-            <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-2xl text-center w-64 text-white bg-orange-400 rounded-b-sm font-roobert`}>Add Payment</p>
+            <div className='w-full h flex justify-center items-start'>
+                <p className={`text-2xl text-center px-2  text-white bg-orange-400 rounded-b-sm font-roobert`}>Add Payment</p>
             </div>
             <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
                 <Form>
 
-                    <div className='grid grid-cols-[40%_60%]'>
-                        <div>
+                    <div className='grid grid-cols-10 mt-2'>
+                        <div className='col-span-4'>
                             <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
                             <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='to'>To:</label></div >
                             <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='date'>Date:</label></div>
@@ -70,7 +70,7 @@ function AddPaymentForm() {
                             <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} >Total:</label></div>
 
                         </div >
-                        <div>
+                        <div className='col-span-6'>
                             <div className='h-[10%] flex items-center'>
                                 <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Temp Desc" name="description" ></Field>
                             </div>
