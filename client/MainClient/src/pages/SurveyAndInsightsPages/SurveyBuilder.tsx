@@ -101,9 +101,9 @@ function SurveyBuilder() {
             <div>
                 {survey.questions.map((question) => (
                     <div key={question.id} className='rounded-lg p-5 m-5 border shadow-sm'>
-                        <div className='grid grid-cols-[90%_10%]'>
-                            <div><p className='text-lg text-gray-800'>{question.id}{`) `}{question.text}</p></div>
-                            <div><button onClick={() => deleteQuestion(question.id)} className=' bg-red-400 hover:bg-red-500 rounded-sm text-white p text-lg p-1'>- Delete Question</button></div>
+                        <div className='grid grid-cols-10'>
+                            <div className='col-span-9'><p className='text-lg text-gray-800'>{question.id}{`) `}{question.text}</p></div>
+                            <div className='col-span-1'><button onClick={() => deleteQuestion(question.id)} className=' bg-red-400 hover:bg-red-500 rounded-sm text-white p text-lg p-1'>- Delete Question</button></div>
                         </div>
 
                         <div className='mt-4'>
