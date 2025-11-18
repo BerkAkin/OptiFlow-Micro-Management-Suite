@@ -30,38 +30,38 @@ veritabanından sadece label ve data kısmı gelcek
 function FinanceDashboardPage() {
     return (
         <div className='container mx-auto mt-10'>
-            <div className='grid flex justify-center grid-cols-[20%_20%_20%_30%] gap-10'>
-                <div className='bg-white shadow-lg rounded-lg border '>
+            <div className='grid flex justify-center grid-cols-10 gap-5'>
+                <div className='col-span-2 bg-white shadow-lg rounded-lg border '>
                     <BarChart />
                 </div>
-                <div className='bg-white shadow-lg rounded-lg border'>
+                <div className='col-span-2 bg-white shadow-lg rounded-lg border'>
                     <DoughChart />
                 </div>
-                <div className='bg-white shadow-lg rounded-lg border'>
+                <div className='col-span-2 bg-white shadow-lg rounded-lg border'>
 
                     <VerticalChart />
                 </div>
-                <div className='bg-white shadow-lg rounded-lg border'>
+                <div className='col-span-4 bg-white shadow-lg rounded-lg border overflow-y-auto'>
                     <Calendar />
                 </div>
             </div>
 
-            <div className='flex justify-center mx-auto grid grid-cols-[71%_25%] gap-5 my-10'>
-                <div className='bg-white shadow-lg border rounded-lg'>
+            <div className='flex justify-center mx-auto grid grid-cols-10 gap-5 my-5'>
+                <div className='col-span-8 bg-white shadow-lg border rounded-lg'>
                     <ActivityTable />
                 </div>
-                <div className='bg-white shadow-lg border rounded-lg'>
+                <div className='col-span-2 bg-white shadow-lg border rounded-lg'>
                     <AddActivityForm />
                 </div>
             </div>
 
-            <div className='flex justify-center grid grid-cols-[35%_35%_25%] gap-5 my-10'>
-                <div className='bg-white shadow-lg border rounded-lg'>
+            <div className='flex justify-center grid grid-cols-10 gap-5 mb-10'>
+                <div className='col-span-4 bg-white shadow-lg border rounded-lg'>
                     <InstallmentPaymentsCard /></div>
-                <div className='bg-white shadow-lg border rounded-lg'>
+                <div className='col-span-4 bg-white shadow-lg border rounded-lg'>
                     <RemainingPaymentsCard />
                 </div>
-                <div className='bg-white shadow-lg border rounded-lg'>
+                <div className='col-span-2 bg-white shadow-lg border rounded-lg'>
                     <AddPaymentForm />
                 </div>
 
