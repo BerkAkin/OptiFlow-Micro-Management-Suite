@@ -24,19 +24,20 @@ function SurveyResults() {
         surveys: [
             { text: "Management Survey Chapter One", slug: "Management-Survey-Chapter-One", date: "05.11.2025 07.11.2025", status: "Active", participationCount: 87, satisfactionCount: 56, totalEmployee: 100 },
             { text: "Management Survey Chapter Two", slug: "Management-Survey-Chapter-Two", date: "02.11.2025 04.11.2025", status: "Timeout", participationCount: 94, satisfactionCount: 82, totalEmployee: 100 },
+            { text: "Management Survey Chapter Two", slug: "Management-Survey-Chapter-Two", date: "02.11.2025 04.11.2025", status: "Timeout", participationCount: 94, satisfactionCount: 82, totalEmployee: 100 },
         ]
     }
 
     return (
-        <div className='m-10'>
-            <div className='w-[95%] mt-10 mx-auto grid grid-cols-2 gap-4' >
+        <div className='my-10 container mx-auto'>
+            <div className='mx-auto grid grid-cols-2 gap-5' >
                 {initialTempSurvey.surveys.map((item, index) => (
-                    <div key={index} className={`my-4 bg-white shadow-md h-[200px] grid grid-cols-[40%_60%] border rounded-lg`}>
-                        <div>
+                    <div key={index} className={`bg-white shadow-md h-[200px] grid grid-cols-10 border rounded-lg`}>
+                        <div className='col-span-4'>
                             <Link to={`${item.status === "Active" ? `/survey/surveys/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
                                 <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-e`}>
                                     <div className='h-[50%] flex items-center justify-center'>
-                                        <p className='font-roobert text-center text-3xl text-gray-600 mx-4'>
+                                        <p className='font-roobert text-center text-2xl text-gray-600 mx-4'>
                                             {item.text}
                                             <span className='text-sm'>
                                                 {item.status === "Timeout" ?
@@ -59,34 +60,29 @@ function SurveyResults() {
                                 </div>
                             </Link>
                         </div>
-                        <div>
+                        <div className='col-span-6 grid  h-full grid-cols-3'>
+                            <div className='my-auto'>
+                                <Doughnut
+                                    data={{
+                                        labels: ['Participators', 'Nonparticipators'],
+                                        datasets: [{
+                                            data: [item.participationCount, item.totalEmployee - item.participationCount],
+                                            backgroundColor: ['#34d399', '#22c55e',],
+                                        }]
+                                    }}
+                                    options={{ plugins: { legend: { display: true, position: "bottom" } } }} />
+                            </div>
 
-                            <div className='grid  h-full grid-cols-3'>
-                                <div className='my-auto'>
-                                    <Doughnut
-                                        data={{
-                                            labels: ['Participators', 'Nonparticipators'],
-                                            datasets: [{
-                                                data: [item.participationCount, item.totalEmployee - item.participationCount],
-                                                backgroundColor: ['#34d399', '#22c55e',],
-                                            }]
-                                        }}
-                                        options={{ plugins: { legend: { display: true, position: "bottom" } } }} />
-                                </div>
-
-                                <div className='bg-orange-400 text-white rounded-sm '>
-                                    <div className='h-[50%] flex items-center justify-center'> <p className=' text-8xl'>☺</p></div>
-                                    <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.satisfactionCount} </p></div>
-                                </div>
-                                <div className='bg-sky-400 text-white rounded-sm '>
-                                    <div className='h-[50%] flex items-center justify-center'> <p className=' text-6xl pt-5'>☹</p></div>
-                                    <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
-                                </div>
-
+                            <div className='bg-orange-400 text-white rounded-sm '>
+                                <div className='h-[50%] flex items-center justify-center'> <p className=' text-8xl'>☺</p></div>
+                                <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.satisfactionCount} </p></div>
+                            </div>
+                            <div className='bg-sky-400 text-white rounded-sm '>
+                                <div className='h-[50%] flex items-center justify-center'> <p className=' text-6xl pt-5'>☹</p></div>
+                                <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
                             </div>
 
                         </div>
-
                     </div>
 
                 ))}
