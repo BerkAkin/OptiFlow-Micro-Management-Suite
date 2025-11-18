@@ -49,11 +49,11 @@ const Data = [
 
 function SuggestIdeas() {
     return (
-        <div className='container mx-auto my-10 grid grid-cols-[20%_75%] flex justify-center gap-10'>
+        <div className='container mx-auto my-10 grid grid-cols-10 flex justify-center gap-5'>
 
-            <div className='bg-white h-[800px] rounded-lg shadow-md border'>
-                <div className='h-[5%] w-full text-center flex justify-center items-start'>
-                    <p className={`text-2xl text-center w-64 text-white bg-indigo-400 rounded-b-sm font-roobert`}>Current Suggestions</p>
+            <div className='col-span-2 bg-white h-[800px] rounded-lg shadow-md border'>
+                <div className=' w-full text-center flex justify-center items-start'>
+                    <p className={`text-2xl text-center px-2 text-white bg-indigo-400 rounded-b-sm font-roobert`}>Current Suggestions</p>
                 </div>
                 <div className='h-[95%] overflow-y-auto'>
                     {Data.map((item, index) => (
@@ -63,12 +63,12 @@ function SuggestIdeas() {
                     ))}
                 </div>
             </div>
-            <div>
-                <div className='grid grid-cols-2 gap-10 mb-5'>
-                    <div>
+            <div className='col-span-8'>
+                <div className='grid grid-cols-10 gap-5 mb-5'>
+                    <div className='col-span-5 '>
                         <SuggestionShowcaseCard isStar={true} Description='Bence soğuk havada hayvanları ofiste ayrılmış bölümün içerisine almalıyız' VoteCount={753} />
                     </div>
-                    <div>
+                    <div className='col-span-5 '>
                         <SuggestionShowcaseCard isStar={false} Description='Ofis camları günde 5 saat kadar açılmalı ve öyle kalmalı' VoteCount={242} />
                     </div>
                 </div>
