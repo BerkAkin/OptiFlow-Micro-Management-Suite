@@ -34,9 +34,6 @@ const handleMoodRecord = (values: any) => {
 
 function MoodRecorder() {
 
-    const [selectedMood, setSelectedMood] = useState<null | string>(null);
-
-
     return (
         <div className='grid'>
             <div className='bg-white rounded-lg border shadow-lg h-24 flex items-center'>
@@ -46,7 +43,7 @@ function MoodRecorder() {
                         <Form className='grid grid-cols-10 '>
                             <div className='col-span-3 flex items-center border-e'>
                                 {(moods).map((item) => (
-                                    <label key={item.name} htmlFor={`mood${item.name}`} onClick={() => setSelectedMood(item.name)} className={`${values.moodSelect === item.name ? `bg-${item.color}-400` : ""} mx-2 cursor-pointer hover:bg-${item.color}-400 rounded-full p-1`} >
+                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${values.moodSelect === item.name ? `bg-${item.color}-400` : ""} mx-2 cursor-pointer hover:bg-${item.color}-400 rounded-full p-1`} >
                                         <img width={60} src={item.img}></img>
                                         <Field hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodSelect" />
                                     </label>
