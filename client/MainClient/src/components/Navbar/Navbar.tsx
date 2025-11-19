@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import MakeSuggestionCard from "../SuggestionComponents/MakeSuggestionCard/MakeSuggestionCard";
+import happy from '../../assets/happy.svg'
 
 
 
@@ -89,7 +90,7 @@ function Navbar() {
           </div>
           <div className="hidden w-full md:block md:w-auto mx-1">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">•-•</Link>
+              <Link to={`moodRecords`} className="block px-4 py-2 mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={happy} alt="" /></Link>
             </ul>
           </div>
 
@@ -106,9 +107,7 @@ function Navbar() {
                       <div className="flex justify-center my-4">
                         <Link to={'profile'} className="text-xl text-gray-500 hover:text-gray-700">My Profile</Link>
                       </div>
-                      <div className="flex justify-center my-4">
-                        <Link to={'moodRecords'} className="text-xl text-gray-500 hover:text-gray-700">Mood Records</Link>
-                      </div>
+
                       <div className="flex justify-center">
                         <button className="text-xl text-red-500 hover:text-red-700" onClick={() => setIsAuth(0)}> Logout</button>
                       </div>
