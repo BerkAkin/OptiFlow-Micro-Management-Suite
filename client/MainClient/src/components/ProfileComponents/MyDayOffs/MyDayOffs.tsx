@@ -79,7 +79,10 @@ function MyDayOffs() {
             </div>
             <div className='col-span-2 border bg-white rounded-lg shadow-lg border h-[350px] '>
                 <div>
-                    <p className={`text-lg rounded-t-lg text-center rounded-b-sm px-2 text-white bg-sky-400 font-roobert`}>Take a Day Off</p>
+                    <div className='h-[10%] w-full text-center flex justify-center items-start'>
+                        <p className={`text-lg text-center rounded-b-sm px-2 text-white bg-sky-400 font-roobert`}>Take a Day Off</p>
+                    </div>
+
                     <div className='mt-4'>
                         <Formik onSubmit={handleSubmit} initialValues={initialValues}>
                             {({ isSubmitting }) => (
