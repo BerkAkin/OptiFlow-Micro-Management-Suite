@@ -9,6 +9,7 @@ import SurveyDetails from './pages/SurveyAndInsightsPages/SurveyDetails';
 import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
 import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
+import MoodPage from './pages/MoodPages/MoodPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path='suggest/suggestions' element={<SuggestionsPage />} />
 
             <Route path='profile' element={<ProfilePage />} />
+            <Route path='moodRecords' Component={MoodPage} />
 
           </Route>
         </Routes>
