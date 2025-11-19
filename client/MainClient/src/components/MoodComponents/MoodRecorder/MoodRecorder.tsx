@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import happy from '../../../../src/assets/happy.svg'
 import sad from '../../../../src/assets/sad.svg'
 import verySad from '../../../../src/assets/verySad.svg'
@@ -12,20 +11,20 @@ const MoodReasons = [
 ]
 
 const moods = [
-    { name: "verySad", img: verySad, color: "red" },
-    { name: "unhappy", img: sad, color: "orange" },
-    { name: "neutral", img: neutral, color: "yellow" },
-    { name: "smile", img: happy, color: "emerald" },
-    { name: "happy", img: veryHappy, color: "green" },
+    { name: 1, img: verySad, color: "bg-red-400", hover: "hover:bg-red-400" },
+    { name: 2, img: sad, color: "bg-orange-400", hover: "hover:bg-orange-400" },
+    { name: 3, img: neutral, color: "bg-yellow-400", hover: "hover:bg-yellow-400" },
+    { name: 4, img: happy, color: "bg-emerald-400", hover: "hover:bg-emerald-400" },
+    { name: 5, img: veryHappy, color: "bg-green-400", hover: "hover:bg-green-400" },
 ];
 
 interface initialValueTypes {
     selectedReasons: string[];
-    moodSelect: string
+    moodSelect: number
 }
 const initialValues: initialValueTypes = {
     selectedReasons: [],
-    moodSelect: ""
+    moodSelect: 0
 }
 
 const handleMoodRecord = (values: any) => {
@@ -43,7 +42,7 @@ function MoodRecorder() {
                         <Form className='grid grid-cols-10 '>
                             <div className='col-span-3 flex items-center border-e'>
                                 {(moods).map((item) => (
-                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${values.moodSelect === item.name ? `bg-${item.color}-400` : ""} mx-2 cursor-pointer hover:bg-${item.color}-400 rounded-full p-1`} >
+                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodSelect) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer ${item.hover} rounded-full p-1`} >
                                         <img width={60} src={item.img}></img>
                                         <Field hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodSelect" />
                                     </label>
@@ -76,7 +75,7 @@ function MoodRecorder() {
                                 )} />
                             </div>
                             <div className='col-span-2 flex items-center justify-center'>
-                                <button type='submit' className='m-2 hover:bg-sky-500 rounded-sm bg-sky-400 text-white text-lg p-2'>Save Mood</button>
+                                <button type='submit' className='m-2 hover:bg-sky-500 rounded-sm bg-sky-400 text-white text-lg p-2 w-24'>+</button>
                             </div>
                         </Form>
                     )}
