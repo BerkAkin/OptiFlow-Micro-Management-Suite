@@ -99,12 +99,15 @@ function Navbar() {
                 <div ref={(el) => { elementsRef.current[2] = el }} className="relative ">
                   <button className="border rounded-full size-10" onClick={() => setIsProfile(!isProfile)}></button>
                   {isProfile &&
-                    <div className='absolute border h-64 w-72 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-16'>
+                    <div className='absolute border h-80 w-72 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-16'>
                       <div className="flex justify-center mt-4">
                         <p className="border rounded-full size-32"></p>
                       </div>
                       <div className="flex justify-center my-4">
                         <Link to={'profile'} className="text-xl text-gray-500 hover:text-gray-700">My Profile</Link>
+                      </div>
+                      <div className="flex justify-center my-4">
+                        <Link to={'moodRecords'} className="text-xl text-gray-500 hover:text-gray-700">Mood Records</Link>
                       </div>
                       <div className="flex justify-center">
                         <button className="text-xl text-red-500 hover:text-red-700" onClick={() => setIsAuth(0)}> Logout</button>
