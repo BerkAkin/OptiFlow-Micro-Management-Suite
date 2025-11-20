@@ -1,17 +1,26 @@
 import { Field, Form, Formik } from 'formik'
 import React from 'react'
+import DynamicForm from '../../DynamicForm/DynamicForm'
 
 function MyDayOffs() {
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (values: any) => {
+        console.log(values)
     }
+
     const initialValues = {
         topic: "",
         description: "",
         days: 10,
-        datesBetween: new Date()
+        datesBetween: new Date().toISOString().split("T")[0]
     }
+
+    const fields = [
+        { name: "datesBetween", id: "datesBetween", type: "date" as const, label: "Date", placeholder: "" },
+        { name: "days", id: "days", type: "number" as const, label: "Days", placeholder: "" },
+        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Temp Description" },
+        { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Temp Topic" },
+    ]
 
     return (
         <div className='grid grid-cols-9 gap-2 w-full h-[500px]'>
@@ -77,52 +86,12 @@ function MyDayOffs() {
 
                 </div>
             </div>
-            <div className='col-span-2 border bg-white rounded-lg shadow-lg border h-[350px] '>
-                <div>
-                    <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                        <p className={`text-lg text-center rounded-b-sm px-2 text-white bg-sky-400 font-roobert`}>Take a Day Off</p>
-                    </div>
-
-                    <div className='mt-4'>
-                        <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-                            {({ isSubmitting }) => (
-                                <Form>
-                                    <div className='grid grid-cols-10 '>
-                                        <div className='col-span-4'>
-                                            <div className='justify-end flex mt-5'><label className='text-lg mx-1 text-gray-700' htmlFor='topic'>Topic:</label></div>
-                                            <div className='justify-end flex mt-5'><label className='text-lg mx-1 text-gray-700' htmlFor='description'>Description:</label></div>
-                                            <div className='justify-end flex mt-12'><label className='text-lg mx-1 text-gray-700' htmlFor='description'>Days:</label></div>
-                                            <div className='justify-end flex mt-5'><label className='pt-2 text-md mx-1  text-gray-700' htmlFor='description'>Dates Between:</label></div>
-                                        </div>
-                                        <div className='col-span-6'>
-                                            <div className='mt-5'>
-                                                <Field className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="topic" placeholder="Temp Topic" />
-                                            </div>
-                                            <div className='mt-5'>
-                                                <Field rows={2} as="textarea" className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="description" placeholder="Temp Description" />
-                                            </div>
-                                            <div className='mt-3'>
-                                                <Field className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="days" placeholder="Temp Day Count" />
-                                            </div>
-                                            <div className='mt-5'>
-                                                <Field type="date" className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="datesBetween" placeholder="Temp Between" />
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                    <div className='flex justify-center items-center '>
-                                        <button type='submit' className='my-5 rounded-sm bg-green-500 hover:bg-green-600 text-white h-[40px] text-4xl w-[75%]'>+</button>
-                                    </div>
-                                </Form >
-                            )}
-                        </Formik >
-                    </div>
-
-                </div>
+            <div className='col-span-2 border bg-white rounded-lg shadow-lg border h-[400px] '>
+                <DynamicForm btnText='Take a day' colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-400' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
             </div>
 
-        </div>
+
+        </div >
     )
 }
 
