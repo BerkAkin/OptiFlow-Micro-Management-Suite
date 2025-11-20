@@ -1,47 +1,24 @@
 import { Field, Formik, Form } from 'formik';
+import DynamicForm from '../../DynamicForm/DynamicForm';
 
 
 
 function MakeSuggestionCard() {
 
-    const handleSubmit = (values: any) => { alert("OK") }
+    const handleSubmit = (values: any) => { console.log(values) }
     const initialValues = {
         topic: "",
         description: ""
     }
 
+    const fields = [
+        { name: "topic", label: "Topic", id: "topic", placeholder: "Temp Topic", type: "text" as const },
+        { name: "description", label: "Description", id: "description", placeholder: "Temp Description", type: "text" as const, as: "textarea" as const }
+    ]
+
     return (
-        <div className='absolute h-48 w-64 bg-white rounded-lg border shadow-lg z-20 left-1/2 transform -translate-x-1/2 top-16'>
-            <div className='w-full h-[50px] flex justify-center items-start'>
-                <p className={`text-center px-2 text-white bg-indigo-400 rounded-b-sm font-roobert`} >Make Suggestion</p>
-            </div>
-            <div>
-                <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-                    {({ isSubmitting }) => (
-                        <Form>
-                            <div className='grid grid-cols-10 '>
-                                <div className='col-span-4'>
-                                    <div className='justify-end flex '><label className=' text-lg mx-1 text-gray-700' htmlFor='topic'>Topic:</label></div>
-                                    <div className='justify-end flex '><label className=' text-lg mx-1 text-gray-700' htmlFor='description'>Description:</label></div>
-                                </div>
-                                <div className='col-span-6'>
-                                    <div>
-                                        <Field className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="topic" placeholder="Temp Topic" />
-                                    </div>
-                                    <div>
-                                        <Field className="border-b text-lg focus:outline-none w-[90%] bg-transparent focus:bg-transparent" name="description" placeholder="Temp Description" />
-                                    </div>
-                                </div>
-
-
-                            </div>
-                            <div className='flex justify-center items-center '>
-                                <button type='submit' className='my-5 rounded-sm bg-green-500 hover:bg-green-600 text-white h-[40px] text-4xl w-[75%]'>+</button>
-                            </div>
-                        </Form >
-                    )}
-                </Formik >
-            </div>
+        <div className='absolute h-72 w-64 bg-white rounded-lg border shadow-lg z-20 left-1/2 transform -translate-x-1/2 top-16'>
+            <DynamicForm btnText='+' colorScheme='bg-indigo-400' hoverScheme='hover:bg-indigo-500' initialValues={initialValues} onSubmit={handleSubmit} title='Make Suggestion' fields={fields} />
         </div>
     )
 }
