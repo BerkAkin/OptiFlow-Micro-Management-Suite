@@ -1,18 +1,27 @@
 import { Field, Form, Formik } from 'formik'
+import { useState } from 'react'
 
 
 interface FormValueTypes {
-    description: string
+    employee: string,
+    stars: number
 }
 const initialValues: FormValueTypes = {
-    description: ""
+    employee: "",
+    stars: 0,
 }
 
 const handleSubmit = (values: FormValueTypes) => {
-
+    console.log(values)
 }
 
+
+
 function RateOthers() {
+
+    const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
     return (
         <div className='h-[200px] grid grid-cols-10 gap-5'>
             <div className='col-span-5  shadow-lg border rounded-lg bg-white'>
@@ -21,26 +30,37 @@ function RateOthers() {
                 </div>
                 <div className='h-[90%]'>
                     <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-                        {({ isSubmitting, values }) => (
+                        {({ isSubmitting, values, setFieldValue }) => (
                             <Form className='h-full'>
                                 <div className='h-[75%] flex items-center grid grid-cols-10 '>
                                     <div className='h-[50%] col-span-4'>
                                         <div className='justify-end flex items-center'>
-                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='description'>Employee: </label>
+                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='employee'>Employee: </label>
                                         </div>
                                         <div className='justify-end flex items-center'>
-                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='description'>Rate: </label>
+                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='stars'>Rate: </label>
                                         </div>
                                     </div>
                                     <div className='h-[50%] col-span-6'>
                                         <div className='flex justify-start items-center'>
-                                            <select className='border-none focus:border-none focus:outline-none border-b w-[90%] text-lg text-gray-700' name="selectEmployee" id="selectEmployee">
-                                                <option value="select">select employee</option>
+                                            <Field as="select" className='border-none focus:border-none focus:outline-none border-b w-[90%] text-lg text-gray-700' name="employee" id="employee">
+                                                <option value="">select employee</option>
                                                 <option value="berkAkin">Berk Akın</option>
-                                            </select>
+                                            </Field>
                                         </div>
                                         <div className='flex justify-start items-center mt-1'>
-                                            give Star kısmı
+                                            {
+                                                Array.from({ length: 5 }).map((item, index) => {
+                                                    const isActive = hoverIndex !== null ? index <= hoverIndex : index <= (selectedIndex ?? +1)
+                                                    return (
+                                                        <>
+                                                            <p className={`${isActive ? "text-orange-400" : ""} cursor-pointer text-lg text-gray-700`}
+                                                                onClick={() => { setSelectedIndex(index); setFieldValue("stars", index + 1) }} onMouseEnter={() => setHoverIndex(index)} onMouseLeave={() => setHoverIndex(null)}>★</p>
+                                                        </>
+                                                    )
+
+                                                })}
+
                                         </div>
 
                                     </div>
