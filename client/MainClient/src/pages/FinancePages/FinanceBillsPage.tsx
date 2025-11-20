@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from 'formik'
 import React, { useState } from 'react'
+import DynamicForm from '../../components/DynamicForm/DynamicForm';
 
 interface productShape {
     type: string,
@@ -39,14 +40,6 @@ function FinanceBillsPage() {
 
     }
 
-    const initalProductValues = {
-        type: "",
-        description: "",
-        quantity: 1,
-        price: "",
-        total: "",
-    }
-
     const onSubmitHandler = (values: invoiceFinal) => {
         const newJsonObject = {
             firstname: values.firstname,
@@ -62,61 +55,38 @@ function FinanceBillsPage() {
         console.log(newJsonObject);
     }
 
+    const initalProductValues = {
+        type: "",
+        description: "",
+        quantity: 1,
+        price: "",
+        total: "",
+    }
     const onAddApproveHandler = (values: productShape) => {
         setProducts([...products, values])
         setIsAdd(!isAdd);
     }
 
+    const fields = [
+        { name: "type", id: "type", type: "text" as const, label: "Type", placeholder: "Temp Type" },
+        { name: "description", id: "description", type: "text" as const, label: "Description", placeholder: "Temp Description" },
+        { name: "quantity", id: "quantity", type: "number" as const, label: "Quantity", placeholder: "" },
+        { name: "price", id: "price", type: "number" as const, label: "Price", placeholder: "" },
+        { name: "total", id: "total", type: "text" as const, label: "Total", placeholder: "" },
+    ]
 
     return (
         <div>
             {
-
                 isAdd &&
                 <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
-                    <div className='w-82 bg-white rounded-lg shadow-lg border'>
-                        <Formik onSubmit={onAddApproveHandler} initialValues={initalProductValues}>
-                            <Form>
-                                <div className='w-full h-[50px] flex justify-center items-start'>
-                                    <p className={`text-2xl text-center px-2 text-white bg-sky-400 rounded-b-sm font-roobert`} >Add Product</p>
-                                </div>
-                                <div className='grid grid-cols-10 mt-2'>
-                                    <div className='col-span-4'>
-                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='type'>Type:</label></div>
-                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
-                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='quantity'>Quantity:</label></div >
-                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='Price'>Price:</label></div>
-                                        <div className='h-[20%] flex items-center justify-center'><label className='my-2 text-lg text-gray-700' htmlFor='total'>Total:</label></div>
-
-                                    </div >
-                                    <div className='col-span-6'>
-                                        <div className='h-[20%] flex items-center '>
-                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="type" placeholder="Temp Type" />
-                                        </div>
-                                        <div className='h-[20%] flex items-center'>
-                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none " name="description" placeholder="Temp Description" />
-                                        </div>
-                                        <div className='h-[20%] flex items-center'>
-                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none " type="number" name="quantity" placeholder="Temp Quantity" />
-                                        </div>
-                                        <div className='h-[20%] flex items-center'>
-                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="price" placeholder="Temp Price" />
-                                        </div>
-                                        <div className='h-[20%] flex items-center'>
-                                            <Field className="text-gray-700 text-center mx-4 w-full px-2 border-b focus:outline-none" name="total" placeholder="Temp Total" />
-                                        </div >
-                                    </div>
-                                </div >
-                                <div className='flex justify-evenly my-5 items-center'>
-                                    <button onClick={() => setIsAdd(!isAdd)} className='bg-red-400 text-white p-2 ms-4 hover:bg-red-500 w-[40%] '>Cancel</button>
-                                    <button className='bg-green-500 text-white p-2 hover:bg-green-600 w-[60%] mx-4' type='submit'>Add</button>
-                                </div>
-
-                            </Form>
-                        </Formik>
+                    <div className='bg-white rounded-lg shadow-lg border h-[510px] w-72'>
+                        <DynamicForm colorScheme='bg-sky-600' hoverScheme='hover:bg-sky-700' btnText='Add' fields={fields} initialValues={initalProductValues} onSubmit={onAddApproveHandler} title='Add Product' />
+                        <div className='border'>
+                            <button onClick={() => setIsAdd(!isAdd)} className='w-full bg-red-400 text-white p-2 rounded-sm hover:bg-red-500  '>Cancel</button>
+                        </div>
                     </div>
                 </div>
-
             }
 
             <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
@@ -154,22 +124,22 @@ function FinanceBillsPage() {
                             </div>
                             <div className='text-gray-600 border-y py-2 border-gray-700  text-sm'>
                                 <p className='font-bold text-gray-700'>SAYIN</p>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="First Name" name="firstname"></Field>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Last Name" name="lastname"></Field>
+                                <div className='space-x-5 space-y-2'>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="First Name" name="firstname"></Field>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Last Name" name="lastname"></Field>
                                 </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Addres" name="address"></Field>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Tax Office" name="taxoffice"></Field>
+                                <div className='space-x-5 space-y-2'>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Addres" name="address"></Field>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Tax Office" name="taxoffice"></Field>
 
                                 </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Phone Number" name="phoneNum"></Field>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Fax Number" name="fax"></Field>
+                                <div className='space-x-5 space-y-2'>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Phone Number" name="phoneNum"></Field>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Fax Number" name="fax"></Field>
                                 </div>
-                                <div>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="E-Mail" name="email"></Field>
-                                    <Field className="text-gray-700 text-center p-2 mx-2 border-b focus:outline-none  bg-transparent focus:bg-transparent" placeholder="Serial Number (Person)" name="personserialnum"></Field>
+                                <div className='space-x-5 space-y-2'>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="E-Mail" name="email"></Field>
+                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Serial Number (Person)" name="personserialnum"></Field>
                                 </div>
 
 
@@ -254,7 +224,7 @@ function FinanceBillsPage() {
                 </Form>
             </Formik>
 
-        </div>
+        </div >
     )
 }
 
