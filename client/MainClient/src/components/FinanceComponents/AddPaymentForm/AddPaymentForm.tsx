@@ -1,45 +1,24 @@
 import { Field, Form, Formik } from 'formik'
 import { useEffect, useState } from 'react';
+import DynamicForm from '../../DynamicForm/DynamicForm';
 
-interface addPaymentSubmitDAta {
-    description: string,
-    date: Date,
-    to: string,
-    quantity: number,
-    isPartly: boolean,
-    partCount?: number,
-    partPrice?: number,
-}
 
 
 function AddPaymentForm() {
 
     const [IsPartly, setIsPartly] = useState<boolean>(false);
-    const [totalPrice, setTotalPrice] = useState<number>(0);
-
-    const [partCount, setPartCount] = useState<number>(0);
-    const [partPrice, setPartPrice] = useState<number>(0);
-
-    useEffect(() => {
-        setTotalPrice(Number(partCount) * Number(partPrice));
-    }, [partCount, partPrice]);
-
-    const setPartCountHandler = (e: any) => {
-        setPartCount(e.target.value)
-        setTotalPrice(partCount * partPrice);
-    }
-    const setPartPriceHandler = (e: any) => {
-        setPartPrice(e.target.value)
-        setTotalPrice(partCount * partPrice);
-    }
 
     const setIsPartlyHandler = () => {
         setIsPartly(!IsPartly);
     }
 
-    const AddPaymentInitialS = {
+    const handleSubmit = (data: any) => {
+        console.log(data)
+    }
+
+    const initialValues = {
         description: "",
-        date: new Date(),
+        date: new Date().toISOString().split("T")[0],
         to: "",
         quantity: 0,
         isPartly: false,
@@ -47,65 +26,45 @@ function AddPaymentForm() {
         partPrice: 0,
     }
 
-    const addPaymentSubmitHandler = (data: addPaymentSubmitDAta) => {
-        alert("eklendi")
-    }
+    const fields = [
+        { name: "description", label: "Description", id: "description", type: "text" as const, placeholder: "Temp Description" },
+        { name: "to", label: "To", id: "to", type: "text" as const, placeholder: "Temp To" },
+        { name: "date", label: "Date", id: "date", type: "date" as const, placeholder: "" },
+        { name: "quantity", label: "quantity", id: "quantity", type: "number" as const, placeholder: "1" },
+
+
+    ]
     return (
-        <div className='h-[450px]'>
-            <div className='w-full h flex justify-center items-start'>
-                <p className={`text-2xl text-center px-2  text-white bg-orange-400 rounded-b-sm font-roobert`}>Add Payment</p>
-            </div>
-            <Formik onSubmit={addPaymentSubmitHandler} initialValues={AddPaymentInitialS}>
-                <Form>
+        <div>
+            <DynamicForm btnText='Add Payment' colorScheme='bg-orange-400' hoverScheme='hover:bg-orange-500' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Add Payment' >
+                <div>
+                    <div>
 
-                    <div className='grid grid-cols-10 mt-2'>
-                        <div className='col-span-4'>
-                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='description'>Description:</label></div>
-                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='to'>To:</label></div >
-                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='date'>Date:</label></div>
-                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='quantity'>Description:</label></div>
-                            <div className='h-[10%] flex items-center justify-end'><label className='my-3 text-lg text-gray-700' htmlFor='terms'>Partly? </label></div>
-                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partCount'>Part Count:</label></div>
-                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partPrice'>Part Price:</label></div>
-                            <div className='h-[10%] flex items-center justify-end'> <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} >Total:</label></div>
+                        <label className='my-3 text-lg text-gray-700' htmlFor='terms'>Partly? </label>
+                        <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className=" border-gray-300 rounded-sm" />
+                    </div>
+                    <div className='h-[75px]'>
+                        {IsPartly &&
+                            <div>
+                                <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partCount'>Part Count</label>
+                                <Field type="number" className="border w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Part Count" name="partCount" />
+                            </div>
+                        }
+                    </div>
+                    <div className='h-[75px]'>
+                        {IsPartly &&
+                            <div>
+                                <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partPrice'>Part Price</label>
+                                <Field type="number" className="border w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Price of Part" name="partPrice" />
+                            </div>
+                        }
 
-                        </div >
-                        <div className='col-span-6'>
-                            <div className='h-[10%] flex items-center'>
-                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Temp Desc" name="description" ></Field>
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Berk" name="to" ></Field>
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                <Field type="date" className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Date" name="date" ></Field>
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                <Field className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="1" name="quantity" ></Field>
-                            </div>
-                            <div className='h-[10%] flex items-center ps-2'>
-                                <input id="terms" type="checkbox" onChange={setIsPartlyHandler} className=" border-gray-300 rounded-sm" />
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                {IsPartly && <Field onChange={(e: any) => setPartCountHandler(e)} value={partCount} className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Part Count" name="partCount" ></Field>}
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                {IsPartly && <Field onChange={(e: any) => setPartPriceHandler(e)} value={partPrice} className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" placeholder="Price of Part" name="partPrice" ></Field>}
-                            </div>
-                            <div className='h-[10%] flex items-center'>
-                                {IsPartly && <p className="border-b mx-2 my-3 text-md focus:outline-none w-[80%] bg-transparent focus:bg-transparent" >{totalPrice}</p>}
-                            </div>
-                            <div className='h-[20%] flex items-start'>
-                                <button type='submit' className='text-center mt-4 rounded-sm bg-orange-400 hover:bg-orange-500 text-4xl text-white h-[40px] w-[50%]'>+</button>
-                            </div>
-                        </div>
                     </div>
 
+                </div>
 
+            </DynamicForm>
 
-
-                </Form>
-            </Formik>
         </div>
     )
 }
