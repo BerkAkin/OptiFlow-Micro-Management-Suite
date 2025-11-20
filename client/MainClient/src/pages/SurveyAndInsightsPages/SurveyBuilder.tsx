@@ -37,6 +37,25 @@ const initialSurvey: Survey = {
     ]
 }
 
+const handleFinishSurvey = async () => {
+    try {
+        const response = await fetch("/api/surveys", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(initialSurvey)
+        });
+
+        if (!response.ok) throw new Error("Survey gönderilemedi!");
+
+        const data = await response.json();
+        console.log("Survey gönderildi:", data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 function SurveyBuilder() {
 
     const [survey, setSurvey] = useState<Survey>(initialSurvey);
@@ -125,7 +144,9 @@ function SurveyBuilder() {
 
                 ))}
             </div>
-
+            <div className='flex justify-end'>
+                <button onClick={handleFinishSurvey} className='m-5 bg-green-600 hover:bg-green-700 rounded-sm text-white p-1 text-lg'>Finish Survey</button>
+            </div>
 
         </div>
     )
