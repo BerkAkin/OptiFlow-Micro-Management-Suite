@@ -9,7 +9,7 @@ function MainPage() {
 
     const { isAuth } = useAuthContext();
 
-    const [isSecretMenuOpen, setIsSecretMenuOpen] = useState(true);
+    const [isSecretMenuOpen, setIsSecretMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
