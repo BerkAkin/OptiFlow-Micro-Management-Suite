@@ -23,55 +23,47 @@ function RateOthers() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     return (
-        <div className='h-[200px] grid grid-cols-10 gap-5'>
-            <div className='col-span-5  shadow-lg border rounded-lg bg-white'>
-                <div className='w-full h-[10%] flex justify-center items-start'>
-                    <p className={`text-center px-4 text-lg text-white bg-sky-400 rounded-b-sm font-roobert`}>Rate Others</p>
+        <div className='grid grid-cols-10 gap-5'>
+            <div className='col-span-5 shadow-lg border rounded-lg bg-white'>
+                <div className='w-full'>
+                    <p className={`text-center px-4 text-lg text-white bg-sky-400 font-roobert rounded-t-lg`}>Rate Others</p>
                 </div>
-                <div className='h-[90%]'>
-                    <Formik onSubmit={handleSubmit} initialValues={initialValues}>
-                        {({ isSubmitting, values, setFieldValue }) => (
-                            <Form className='h-full'>
-                                <div className='h-[75%] flex items-center grid grid-cols-10 '>
-                                    <div className='h-[50%] col-span-4'>
-                                        <div className='justify-end flex items-center'>
-                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='employee'>Employee: </label>
-                                        </div>
-                                        <div className='justify-end flex items-center'>
-                                            <label className=' text-lg mx-1 text-gray-700' htmlFor='stars'>Rate: </label>
-                                        </div>
-                                    </div>
-                                    <div className='h-[50%] col-span-6'>
-                                        <div className='flex justify-start items-center'>
-                                            <Field as="select" className='border-none focus:border-none focus:outline-none border-b w-[90%] text-lg text-gray-700' name="employee" id="employee">
-                                                <option value="">select employee</option>
-                                                <option value="berkAkin">Berk Akın</option>
-                                            </Field>
-                                        </div>
-                                        <div className='flex justify-start items-center mt-1'>
-                                            {
-                                                Array.from({ length: 5 }).map((item, index) => {
-                                                    const isActive = hoverIndex !== null ? index <= hoverIndex : index <= (selectedIndex ?? +1)
-                                                    return (
-                                                        <>
-                                                            <p className={`${isActive ? "text-orange-400" : ""} cursor-pointer text-lg text-gray-700`}
-                                                                onClick={() => { setSelectedIndex(index); setFieldValue("stars", index + 1) }} onMouseEnter={() => setHoverIndex(index)} onMouseLeave={() => setHoverIndex(null)}>★</p>
-                                                        </>
-                                                    )
+                <Formik onSubmit={handleSubmit} initialValues={initialValues}>
+                    {({ setFieldValue }) => (
+                        <Form className="p-4 space-y-1">
+                            <div className='flex flex-col space-y-1'>
 
-                                                })}
+                                <label className='text-gray-700' htmlFor='employee'>Employee</label>
+                                <Field as="select" className="border resize-none w-full rounded-sm px-2 py-1 focus:outline-none" name="employee" id="employee">
+                                    <option value="">select employee</option>
+                                    <option value="berkAkin">Berk Akın</option>
+                                </Field>
 
-                                        </div>
+                                <label className='text-gray-700' htmlFor='stars'>Rate</label>
+                                <div className='flex'>
+                                    {
+                                        Array.from({ length: 5 }).map((item, index) => {
+                                            const isActive = hoverIndex !== null ? index <= hoverIndex : index <= (selectedIndex ?? +1)
+                                            return (
+                                                <>
+                                                    <p className={`${isActive ? "text-orange-400" : ""} cursor-pointer text-lg text-gray-700 ps-1`}
+                                                        onClick={() => { setSelectedIndex(index); setFieldValue("stars", index + 1) }} onMouseEnter={() => setHoverIndex(index)} onMouseLeave={() => setHoverIndex(null)}>★</p>
+                                                </>
+                                            )
 
-                                    </div>
+                                        })}
+
                                 </div>
-                                <div className='h-[25%] flex justify-center items-center pb-5'>
-                                    <button type='submit' className='rounded-sm bg-sky-400 hover:bg-sky-500 text-white h-[40px] text-4xl w-36'>+</button>
-                                </div>
-                            </Form >
-                        )}
-                    </Formik >
-                </div>
+                            </div>
+
+
+
+                            <div className="flex justify-center pt-2">
+                                <button type='submit' className=' text-white px-6 py-2 rounded-sm bg-sky-400 hover:bg-sky-500  transition'>Rate Others</button>
+                            </div>
+                        </Form >
+                    )}
+                </Formik >
             </div>
             <div className='col-span-2 shadow-lg border rounded-lg bg-white'>
                 <div className='w-full h-[15%] flex justify-center items-start'>
