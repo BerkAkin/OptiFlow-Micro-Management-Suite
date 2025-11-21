@@ -2,7 +2,7 @@ import React from 'react'
 
 function MoodTable() {
     return (
-        <div className=' w-full h-[300px] '>
+        <div className=' w-full h-full '>
             <div className='h-[10%] w-full text-center flex justify-center items-start'>
                 <p className={`text-xl text-center px-2 text-white bg-rose-400 rounded-b-sm font-rubik`}>Previous Moods</p>
             </div>
@@ -18,7 +18,7 @@ function MoodTable() {
                     Date
                 </div>
             </div>
-            <div className="h-[60%] border-b overflow-y-auto ">
+            <div className="h-[70%] overflow-y-auto ">
                 <div className="text-gray-700 p-2 bg-gray-50 hover:bg-gray-200 text-md grid grid-cols-10">
                     <div className="col-span-3 text-center ">
                         Happy
@@ -31,7 +31,7 @@ function MoodTable() {
                     </div>
                 </div>
             </div>
-            <div className='h-[20%] flex items-center'>
+            <div className='h-[10%] flex items-center'>
                 <div className='grid grid-cols-12'>
                     <div className='col-span-3'>
                     </div>
