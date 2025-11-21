@@ -19,13 +19,14 @@ const handleReport = (values: EmergencyFormTypes) => {
     console.log(values);
 };
 
+
 function EmergencyPopUp() {
     return (
         <div className="absolute inset-0 bg-black/50 z-20 flex items-center justify-center">
             <div className="w-96 bg-white rounded-lg shadow-lg border">
 
                 <div className="w-full py-2 bg-red-500 rounded-t-lg text-center">
-                    <p className="text-2xl text-white font-rubik">Emergency</p>
+                    <p className="text-2xl text-white font-rubik">Get Help</p>
                 </div>
 
                 <Formik initialValues={initialValues} onSubmit={handleReport}>
