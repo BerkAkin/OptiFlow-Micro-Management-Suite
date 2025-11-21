@@ -1,6 +1,12 @@
 import DynamicForm from '../../DynamicForm/DynamicForm'
 import DynamicTable from '../../DynamicTable/DynamicTable'
 
+interface filterValues {
+    date: string,
+    description: string
+}
+
+
 function MyDayOffs() {
 
     const handleSubmit = (values: any) => {
@@ -25,11 +31,19 @@ function MyDayOffs() {
         { "topic": "Deneme Leave", "description": "Denemeler", "days": "10", "Date": "2025-02-12" },
     ]
 
+    const filterFields = [
+        { name: "date", type: "date" as const, },
+        { name: "description", type: "text" as const, placeholder: "Temp Description" },
+    ]
+    const handleFilter = (values: filterValues) => {
+        console.log(values);
+    }
+
     return (
         <div className='grid grid-cols-9 gap-6 w-full h-[500px]'>
 
             <div className='col-span-7 border bg-white rounded-lg shadow-custom h-[500px] w-full'>
-                <DynamicTable textScheme='text-sky-400' colorScheme='bg-sky-400' data={tempData} title='My Leavings' />
+                <DynamicTable filterFields={filterFields} handleFilter={handleFilter} textScheme='text-sky-400' colorScheme='bg-sky-400' data={tempData} title='My Leavings' />
             </div>
             <div className='col-span-2 border bg-white rounded-lg shadow-custom border h-[400px] '>
                 <DynamicForm btnText='Take a day' colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-400' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
