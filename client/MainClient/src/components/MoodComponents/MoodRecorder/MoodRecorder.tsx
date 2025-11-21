@@ -35,7 +35,7 @@ function MoodRecorder() {
 
     return (
         <div className='grid'>
-            <div className='bg-white rounded-lg border shadow-lg h-24 flex items-center'>
+            <div className='bg-white rounded-lg border shadow-custom h-24 flex items-center'>
 
                 <Formik initialValues={initialValues} onSubmit={handleMoodRecord}>
                     {({ isSubmitting, values }) => (

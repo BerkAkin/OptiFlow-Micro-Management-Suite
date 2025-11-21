@@ -10,8 +10,8 @@ function HorizontalCard({ item }: HorizontalCardProps) {
                 <img className="w-full h-full object-cover rounded-lg" src={item.image}></img>
             </div>
             <div className="h-44 text-gray-700" >
-                <p className="p-5 w-[100%] text-2xl font-bold  font-roobert">
-                    <span className="border-indigo-400 border-b-2 font-roobert">{item.header}</span>
+                <p className="p-5 w-[100%] text-2xl font-bold  font-rubik">
+                    <span className="border-indigo-400 border-b-2 font-rubik">{item.header}</span>
                 </p>
                 <p className="p-5 w-[100%]  text-gray-600">
                     {item.text}

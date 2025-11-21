@@ -29,7 +29,7 @@ function LandingLayout() {
 
         <div style={{ textShadow: "0px 1px 1px rgb(0 0 0 / 0.2)", backgroundImage: `url(${dotBg})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }} className="grid w-[100%] h-[700px]">
           <div className="flex items-end justify-center">
-            <p data-aos="fade-top" className="font-roobert text-5xl text-gray-700 font-bold text-shadow-xl">Manage Your Corporation As It <span className="border-b-2 border- border-indigo-400">Deserves</span> </p>
+            <p data-aos="fade-top" className="font-rubik text-5xl text-gray-700 font-bold text-shadow-xl">Manage Your Corporation As It <span className="border-b-2 border- border-indigo-400">Deserves</span> </p>
           </div>
           <div className="grid justify-center">
             <div className="flex items-center">
@@ -61,7 +61,7 @@ function LandingLayout() {
           <div className="flex items-center justify-center">
             <div>
               <div className="text-center mb-10 " >
-                <h1 className="font-roobert text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is OptiFlow Management Suite?</h1>
+                <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is OptiFlow Management Suite?</h1>
               </div>
               <p className={`ps-2 text-center leading-9 text-gray-600 text-xl`} >
                 OptiFlow is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
@@ -98,7 +98,7 @@ function LandingLayout() {
               </div>
 
               <div className="my-6">
-                <p className="font-roobert text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose OptiFlow Management Suite?</p>
+                <p className="font-rubik text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose OptiFlow Management Suite?</p>
               </div>
 
               <div >
@@ -124,7 +124,7 @@ function LandingLayout() {
 
         <div className="bg-gray-50 py-20">
           <div className="flex justify-center text-gray-700 items-center">
-            <h1 className='text-5xl mb-2'><span className="border-b font-roobert">Available Plans</span></h1>
+            <h1 className='text-5xl mb-2'><span className="border-b font-rubik">Available Plans</span></h1>
           </div>
           <div data-aos="fade-top" className="flex items-center my-5  justify-center " >
             <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MicroPlan} />
@@ -133,7 +133,7 @@ function LandingLayout() {
           </div>
 
           <div className="text-center mt-8 container mx-auto flex justify-center">
-            <p className="font-roobert font-bold text-xl text-gray-700">Looking for a Customized Solution?</p>
+            <p className="font-rubik font-bold text-xl text-gray-700">Looking for a Customized Solution?</p>
           </div>
           <div className="text-center  pt-4 container mx-auto flex justify-center text-gray-500">
             <p className="w-[60%]">

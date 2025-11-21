@@ -4,7 +4,7 @@ function MoodTable() {
     return (
         <div className=' w-full h-[300px] '>
             <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                <p className={`text-xl text-center px-2 text-white bg-rose-400 rounded-b-sm font-roobert`}>Previous Moods</p>
+                <p className={`text-xl text-center px-2 text-white bg-rose-400 rounded-b-sm font-rubik`}>Previous Moods</p>
             </div>
 
             <div className={`h-[10%] p-2 text-rose-400 font-bold border-b text-md grid grid-cols-10`}>

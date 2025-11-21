@@ -25,7 +25,7 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
     return (
         <div>
             <div className={`${colorScheme} w-full py-1 rounded-t-lg text-center`}>
-                <p className="text-xl text-white font-roobert">{title}</p>
+                <p className="text-xl text-white font-rubik">{title}</p>
             </div>
 
             <Formik initialValues={initialValues} onSubmit={onSubmit}>
@@ -45,7 +45,7 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
                         ))}
                         {children}
                         <div className="flex justify-center pt-2">
-                            <button type="submit" className={`${colorScheme} ${hoverScheme} text-white px-6 py-2 rounded-sm  transition`} >
+                            <button type="submit" className={`${colorScheme} ${hoverScheme} text-white px-6 py-2 w-[150px] rounded-sm transition`} >
                                 {btnText}
                             </button>
                         </div>

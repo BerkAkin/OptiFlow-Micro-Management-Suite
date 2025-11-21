@@ -25,7 +25,7 @@ function EmergencyPopUp() {
             <div className="w-96 bg-white rounded-lg shadow-lg border">
 
                 <div className="w-full py-2 bg-red-500 rounded-t-lg text-center">
-                    <p className="text-2xl text-white font-roobert">Emergency</p>
+                    <p className="text-2xl text-white font-rubik">Emergency</p>
                 </div>
 
                 <Formik initialValues={initialValues} onSubmit={handleReport}>

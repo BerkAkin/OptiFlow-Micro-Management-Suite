@@ -10,16 +10,16 @@ function MoodPage() {
             <div>
                 <MoodRecorder />
             </div>
-            <div className='grid grid-cols-10 my-5 gap-5'>
-                <div className='bg-white col-span-4 shadow-lg border rounded-lg'>
+            <div className='grid grid-cols-10 my-6 gap-6'>
+                <div className='bg-white col-span-4 shadow-custom border rounded-lg'>
                     <MoodTable />
                 </div>
-                <div className='bg-white h-[300px] col-span-6 shadow-lg border rounded-lg border'>
+                <div className='bg-white h-[300px] col-span-6 shadow-custom border rounded-lg border'>
                     <PreviousMoods />
                 </div>
             </div>
-            <div className='grid grid-cols-10 my-5 gap-5'>
-                <div className='bg-white col-span-3 shadow-lg border rounded-lg'>
+            <div className='grid grid-cols-10 my-6 gap-6'>
+                <div className='bg-white col-span-3 shadow-custom border rounded-lg'>
                     <GetHelp />
                 </div>
                 <div className=' col-span-7'>

@@ -17,7 +17,7 @@ function PackCard({ Header, HeaderBg, ButtonText, Price, SingleItems, Text, Heig
 
             <div className={`border bg-white mx-4 w-${Width} h-[${Height}px] ${IsHover ? "hover:scale-105" : ""} rounded-lg shadow-lg hover:ease-in transition duration-150`}>
                 <div className={`bg-${HeaderBg} grid grid-cols-[75%_25%] rounded-t-lg`} style={{ height: (Height * 15 / 100) }}>
-                    <div className='flex items-center justify-center'><p className='text-white text-3xl font-roobert'>{Header}</p></div>
+                    <div className='flex items-center justify-center'><p className='text-white text-3xl font-rubik'>{Header}</p></div>
                     <div className='flex items-center justify-center border-s'><p className='text-white text-3xl'>${Price}</p></div>
                 </div>
                 <div className='text-gray-800  pt-3 px-2 text-center justify-center flex items-center' style={{ height: (Height * 25 / 100) }}>

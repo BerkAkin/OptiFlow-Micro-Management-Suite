@@ -23,11 +23,11 @@ function MyDayOffs() {
     ]
 
     return (
-        <div className='grid grid-cols-9 gap-2 w-full h-[500px]'>
+        <div className='grid grid-cols-9 gap-6 w-full h-[500px]'>
 
-            <div className='col-span-7 border bg-white rounded-lg shadow-lg h-[500px] w-full'>
+            <div className='col-span-7 border bg-white rounded-lg shadow-custom h-[500px] w-full'>
                 <div className='justify-center flex '>
-                    <p className={`text-2xl text-center rounded-b-sm px-2 text-white bg-sky-400 font-roobert`}>Days Off</p>
+                    <p className={`text-2xl text-center rounded-b-sm px-2 text-white bg-sky-400 font-rubik`}>Days Off</p>
                 </div>
                 <div className={`h-[10%] p-2 text-sky-400 font-bold border-b text-md grid grid-cols-10`}>
                     <div className="col-span-2 text-start">
@@ -86,7 +86,7 @@ function MyDayOffs() {
 
                 </div>
             </div>
-            <div className='col-span-2 border bg-white rounded-lg shadow-lg border h-[400px] '>
+            <div className='col-span-2 border bg-white rounded-lg shadow-custom border h-[400px] '>
                 <DynamicForm btnText='Take a day' colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-400' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
             </div>
 

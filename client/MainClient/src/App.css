@@ -23,8 +23,8 @@ body {
 }
 
 @font-face {
-    font-family:'roobert';
-   src: local('roobert'), url(./fonts/Roobert.ttf) format('truetype');
+    font-family:'rubik';
+   src: local('rubik'), url(./fonts/RubikRegular.ttf) format('truetype');
 }
 ::-webkit-scrollbar {
     width: 5px;

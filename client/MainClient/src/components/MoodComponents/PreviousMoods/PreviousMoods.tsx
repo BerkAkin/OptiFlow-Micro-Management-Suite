@@ -21,7 +21,7 @@ const moodLabels: any = {
 
 function PreviousMoods() {
     return (
-        <div className='h-full p-3'>
+        <div className='h-full p-6'>
             <Line data={data} options={{
                 scales: {
                     y: {

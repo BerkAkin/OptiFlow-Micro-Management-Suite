@@ -8,9 +8,9 @@ function MySuggestions() {
 
 
     return (
-        <div className='border w-full h-[500px] bg-white rounded-lg shadow-lg border'>
+        <div className='border w-full h-[500px] bg-white rounded-lg shadow-custom border'>
             <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center px-2 text-white bg-indigo-400 rounded-b-sm font-roobert`}>My Suggestions</p>
+                <p className={`text-2xl text-center px-2 text-white bg-indigo-400 rounded-b-sm font-rubik`}>My Suggestions</p>
             </div>
 
             <div className={`h-[10%] p-2 text-indigo-400 font-bold border-b text-md grid grid-cols-10`}>

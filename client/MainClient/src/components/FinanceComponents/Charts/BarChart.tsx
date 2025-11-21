@@ -39,14 +39,14 @@ function BarChart() {
     return (
         <div className="h-[420px]">
             <div className='flex justify-center'>
-                <p className={`text-xl text-center px-2 rounded-b-sm text-white font-roobert`} style={{ backgroundColor: `${color[0]}` }}>
+                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
                     Monthly
                     <span>
                         <button className={`h-[20px] text-white text-2xl ps-1`} onClick={handleNext}> ⇄</button>
                     </span>
                 </p>
             </div>
-            <div className='h-[70%] pt-5'>
+            <div className='h-[70%] p-6'>
                 <Chart
                     type="bar"
                     data={ChartData}
@@ -57,17 +57,17 @@ function BarChart() {
                     }}
                 />
             </div>
-            <div className=' h-[20%] pt-5 flex items-center justify-center'>
+            <div className='py-6 flex items-center justify-center'>
                 <div className={`bg-white rounded-sm  grid grid-cols-3`}>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-roobert`} style={{ backgroundColor: `${color[0]}` }}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
                     </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-roobert`} style={{ backgroundColor: `${color[0]}` }}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
                     </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-roobert`} style={{ backgroundColor: `${color[0]}` }}>
+                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
                         <p className='text-sm'>Bütçe:</p>
                         <p className='text-sm'>2500</p>
 

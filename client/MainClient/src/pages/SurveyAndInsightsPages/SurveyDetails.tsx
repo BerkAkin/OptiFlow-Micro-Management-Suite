@@ -58,25 +58,25 @@ function SurveyDetails() {
 
     /* Value kısmı eklenecek iç answer inputunda */
     return (
-        <div className='m-10 bg-white container mx-auto shadow-md '>
+        <div className='m-10 bg-white container mx-auto shadow-custom border '>
             <div className='text-center'>
-                <p className='text-3xl text-gray-700 p-5 font-roobert' >{surveyName}</p>
+                <p className='text-3xl text-gray-700 p-6 font-rubik' >{surveyName}</p>
             </div>
             <Formik initialValues={{}} onSubmit={(values) => { console.log("Gönderilen cevaplar:", values) }}>
                 {({ values, handleChange }) => (
                     <Form>
                         <div>
                             {survey.questions.map((question) => (
-                                <div key={question.id} className='rounded-sm p-5 m-5'>
+                                <div key={question.id} className='rounded-sm p-6 m-6'>
                                     <div>
                                         <div><p className='text-lg text-gray-800'>{question.id}{`) `}{question.text}</p></div>
                                     </div>
 
-                                    <div className='mt-4'>
+                                    <div className='mt-6'>
                                         {question.answers.map((answer, index) => (
-                                            <div key={index} className='ps-4 my-2 flex justify-start items-center'>
+                                            <div key={index} className='ps-6 my-2 flex justify-start items-center'>
                                                 <input onChange={handleChange} className='hidden peer' value={answer.text} type='radio' id={`${question.id}-${answer.id}`} name={`${question.id}`}></input>
-                                                <label htmlFor={`${question.id}-${answer.id}`} className=" block w-[25%] text-lg bg-gray-100 text-gray-700 p-3 cursor-pointer rounded-sm peer-checked:bg-indigo-400 peer-checked:text-white hover:bg-indigo-100 transition">{answer.text}</label>
+                                                <label htmlFor={`${question.id}-${answer.id}`} className=" block w-[25%] text-lg bg-gray-100 text-gray-700 p-2 cursor-pointer rounded-sm peer-checked:bg-indigo-400 peer-checked:text-white hover:bg-indigo-100 transition">{answer.text}</label>
                                             </div>
                                         ))}
                                     </div>
@@ -88,7 +88,7 @@ function SurveyDetails() {
                         </div>
                         <div className='flex justify-end items-center '>
 
-                            <button type='submit' onClick={() => console.log()} className=' m-5 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'>Send Answers</button>
+                            <button type='submit' onClick={() => console.log()} className=' m-6 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'>Send Answers</button>
                         </div>
                     </Form>
                 )}

@@ -80,8 +80,8 @@ function FinanceBillsPage() {
             {
                 isAdd &&
                 <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
-                    <div className='bg-white rounded-lg shadow-lg border h-[510px] w-72'>
-                        <DynamicForm colorScheme='bg-sky-600' hoverScheme='hover:bg-sky-700' btnText='Add' fields={fields} initialValues={initalProductValues} onSubmit={onAddApproveHandler} title='Add Product' />
+                    <div className='bg-white rounded-lg shadow-custom border h-[510px] w-72'>
+                        <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' btnText='Add' fields={fields} initialValues={initalProductValues} onSubmit={onAddApproveHandler} title='Add Product' />
                         <div className='border'>
                             <button onClick={() => setIsAdd(!isAdd)} className='w-full bg-red-400 text-white p-2 rounded-sm hover:bg-red-500  '>Cancel</button>
                         </div>
@@ -91,11 +91,11 @@ function FinanceBillsPage() {
 
             <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
                 <Form>
-                    <div className=' container w-[900px] mx-auto my-10 bg-white shadow-md p-10'>
+                    <div className=' container w-[900px] mx-auto my-10 bg-white shadow-custom border p-10'>
                         <div className='grid grid-cols-10 mt-10'>
                             <div className='col-span-7 flex border-b justify-start'><p>*LOGO GELECEK*</p></div>
                             <div className='col-span-3 border-b'>
-                                <p className='text-6xl text-gray-600 py-5 font-roobert' >INVOICE</p>
+                                <p className='text-6xl text-gray-600 py-5 font-rubik' >INVOICE</p>
                             </div>
                         </div>
 
@@ -151,7 +151,7 @@ function FinanceBillsPage() {
                         <div className='mt-20'>
 
                             <table className="w-full border">
-                                <thead className="bg-gray-300 font-roobert">
+                                <thead className="bg-gray-300 font-rubik">
                                     <tr>
                                         <th scope="col" className="px-6 ">
                                             Cinsi

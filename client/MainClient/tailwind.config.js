@@ -4,8 +4,11 @@ module.exports = {
   theme: {
   extend: {
     fontFamily: {
-      roobert: ['Roobert', 'sans-serif'],
+      rubik: ['Rubik', 'sans-serif'],
     },
+    boxShadow:{
+        custom: "0 10px 35px rgba(0,0,0,0.08)",
+    }
   },
 },
    safelist: [

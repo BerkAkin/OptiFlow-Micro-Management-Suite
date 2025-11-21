@@ -17,7 +17,7 @@ function MakeSuggestionCard() {
     ]
 
     return (
-        <div className='absolute h-72 w-64 bg-white rounded-lg border shadow-lg z-20 left-1/2 transform -translate-x-1/2 top-16'>
+        <div className='absolute h-72 w-64 bg-white rounded-lg border shadow-custom z-20 left-1/2 transform -translate-x-1/2 top-16'>
             <DynamicForm btnText='+' colorScheme='bg-indigo-400' hoverScheme='hover:bg-indigo-500' initialValues={initialValues} onSubmit={handleSubmit} title='Make Suggestion' fields={fields} />
         </div>
     )

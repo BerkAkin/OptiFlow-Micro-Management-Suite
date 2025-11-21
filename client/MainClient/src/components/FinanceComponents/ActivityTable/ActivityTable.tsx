@@ -29,7 +29,7 @@ function ActivityTable() {
         <div className='h-[500px]'>
 
             <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center text-white bg-sky-400 rounded-b-sm font-roobert px-2 `}>Latest Activity</p>
+                <p className={`text-2xl text-center text-white bg-sky-400 rounded-b-sm font-rubik px-6 `}>Latest Activity</p>
             </div>
 
             <div className={`h-[10%] p-2 text-sky-400 font-bold border-b text-md grid grid-cols-10`}>

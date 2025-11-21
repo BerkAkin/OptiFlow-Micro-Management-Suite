@@ -4,7 +4,7 @@ module.exports = {
   theme: {
 extend: {
     fontFamily: {
-      roobert: ['Roobert', 'sans-serif'],
+      rubik: ['rubik', 'sans-serif'],
     },
   },
 },

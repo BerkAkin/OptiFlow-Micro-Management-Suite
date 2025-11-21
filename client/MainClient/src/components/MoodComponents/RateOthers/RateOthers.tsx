@@ -23,10 +23,10 @@ function RateOthers() {
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
     return (
-        <div className='grid grid-cols-10 gap-5'>
-            <div className='col-span-5 shadow-lg border rounded-lg bg-white'>
+        <div className='grid grid-cols-10 gap-6'>
+            <div className='col-span-5 shadow-custom border rounded-lg bg-white'>
                 <div className='w-full'>
-                    <p className={`text-center px-4 text-lg text-white bg-sky-400 font-roobert rounded-t-lg`}>Rate Others</p>
+                    <p className={`text-center px-4 text-xl py-1 text-white bg-sky-400 font-rubik rounded-t-lg`}>Rate Others</p>
                 </div>
                 <Formik onSubmit={handleSubmit} initialValues={initialValues}>
                     {({ setFieldValue }) => (
@@ -65,9 +65,9 @@ function RateOthers() {
                     )}
                 </Formik >
             </div>
-            <div className='col-span-2 shadow-lg border rounded-lg bg-white'>
+            <div className='col-span-2 shadow-custom border rounded-lg bg-white'>
                 <div className='w-full h-[15%] flex justify-center items-start'>
-                    <p className={`text-center px-4 text-lg text-white bg-orange-400 rounded-b-sm font-roobert`}>My Score</p>
+                    <p className={`text-center px-4 text-lg text-white bg-orange-400 rounded-b-sm font-rubik`}>My Score</p>
                 </div>
                 <div className='h-[50%] flex justify-center items-center'>
                     <p className={`text-7xl pt-4 text-amber-500`}>★</p>
