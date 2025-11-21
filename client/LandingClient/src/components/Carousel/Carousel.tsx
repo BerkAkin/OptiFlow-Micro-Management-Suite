@@ -32,7 +32,7 @@ function Carousel({ items }: CarouselProps) {
                         whileHover={{ y: index === 0 ? 20 : 0, transition: { duration: 0.3 } }}
                         animate={{ y: index === 5 ? [-20, -10, 0] : 0, transition: { duration: 0.5 } }}
                         key={item.id} onClick={rotateCarousel}
-                        className={`grid grid-cols-2 absolute shadow-md cursor-pointer rounded-sm w-[700px] h-[400px] border`}
+                        className={`grid grid-cols-2 absolute shadow-md cursor-pointer rounded-lg w-[700px] h-[400px] border`}
                         style={{ backgroundImage: `url(${item.image})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", zIndex: carouselItems.length - index, marginLeft: index * 35, marginBottom: index * 25 }}
                     >
 
@@ -40,7 +40,7 @@ function Carousel({ items }: CarouselProps) {
                         <div>
                         </div>
                         <div>
-                            <div className='bg-white h-[280px] rounded-b-xs border'>
+                            <div className='bg-white h-[280px] rounded-b-lg border'>
                                 <h2 className="font-roobert font-bold text-center p-5 text-xl">{item.title}</h2>
                                 <p className="text-sm p-5 text-center" >{item.text}</p>
                             </div>

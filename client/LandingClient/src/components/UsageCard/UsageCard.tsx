@@ -11,9 +11,9 @@ function UsageCard({ item }: UsageCardProps) {
 
 
     return (
-        <div className='border w-[300px] h-[450px] shadow-md rounded-sm my-2 bg-white hover:ease-in transition duration-150 hover:scale-105 cursor-pointer'>
+        <div className='border w-[300px] h-[450px] shadow-md rounded-lg my-2 bg-white hover:ease-in transition duration-150 hover:scale-105 cursor-pointer'>
             <div className='h-[300px]'>
-                <img className="w-full h-full object-cover rounded-t-sm" src={item.img}></img>
+                <img className="w-full rounded-t-lg h-full object-cover rounded-t-sm" src={item.img}></img>
             </div>
             <div className='h-[100px]'>
                 <div className='flex justify-center h-[75px]'>

@@ -5,33 +5,12 @@ import { ModalContext } from "../../context/ModalContext";
 
 function Navbar() {
 
-
-  /* LOGIN ARTIK BAŞKA SEKMEDE OLACAK O YÜZDEN LOGİN MODALI KALDIRABİLİRİM */
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { setIsModal, setModalType } = useContext(ModalContext);
 
-  const openLogin = () => {
-    setIsModal(true);
-    setModalType("login");
-  }
   const openRegister = () => {
     setIsModal(true);
     setModalType("register");
   }
-
-  const logout = () => {
-    localStorage.removeItem("lgkey");
-    setIsLoggedIn(false);
-    window.location.reload()
-  };
-
-  useEffect(() => {
-    const token = localStorage.getItem("lgkey");
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, []);
 
   return (
 
@@ -67,10 +46,10 @@ function Navbar() {
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <li>
-                <a href="http://localhost:3001" target="_blank" className="text-center block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</a>
+                <a href="http://localhost:3001" target="_blank" className="text-center rounded-sm block bg-indigo-500 w-24 text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Login</a>
               </li>
               <li>
-                <button onClick={openRegister} className="border border-gray-400 w-24 block py-2 px-3 md:p-0 text-gray-600 md:dark:hover:text-indigo-500">Purchase</button>
+                <button onClick={openRegister} className="border border-gray-400 w-24 rounded-sm block py-2 px-3 md:p-0 text-gray-600 md:dark:hover:text-indigo-500">Purchase</button>
               </li>
             </ul>
           </div>

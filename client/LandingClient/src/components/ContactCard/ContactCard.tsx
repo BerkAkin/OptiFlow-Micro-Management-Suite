@@ -9,9 +9,9 @@ interface ContactCardProps {
 
 function ContactCard({ item }: ContactCardProps) {
     return (
-        <div className="pt-4 h-[100%] shadow-[10px_0px_8px_0px_rgba(0,_0,_0,_0.1)] hover:translate-x-2 cursor-pointer hover:ease-in transition duration-150">
+        <div className="pt-4 h-[100%] rounded-lg shadow-[10px_0px_8px_0px_rgba(0,_0,_0,_0.1)] hover:translate-x-2 cursor-pointer hover:ease-in transition duration-150">
             <div className="pt-8 ps-8">
-                <div className="border p-2 bg-indigo-500 rounded-sm size-12">
+                <div className="p-2 bg-indigo-500 rounded-lg size-12">
                     <img src={item.icon} />
                 </div>
             </div>

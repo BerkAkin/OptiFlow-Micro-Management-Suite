@@ -36,8 +36,8 @@ function LandingLayout() {
               <h1 data-aos="fade-top" className="text-2xl text-gray-700 font-light" >Review - Subscribe - Manage !</h1>
             </div>
             <div className="flex items-start justify-evenly">
-              <button className="border border-gray-700 bg-white w-24 block py-2 px-3 md:p-0 text-gray-700 md:dark:hover:text-indigo-500 text-lg w-36 me-5">Review Packs</button>
-              <button className="block bg-indigo-500 w-36 text-lg text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Purchase</button>
+              <button className="border rounded-sm border-gray-700 bg-white w-24 block py-2 px-3 md:p-0 text-gray-700 md:dark:hover:text-indigo-500 text-lg w-36 me-5">Review Packs</button>
+              <button className="block rounded-sm bg-indigo-500 w-36 text-lg text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Purchase</button>
             </div>
           </div>
         </div>

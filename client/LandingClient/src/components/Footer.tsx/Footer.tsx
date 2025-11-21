@@ -37,7 +37,7 @@ function Footer() {
               <div className="container mt-8 mx-auto h-[300px] w-[65%] grid grid-cols-[30%_70%]">
 
 
-                <div className="bg-[#141414]">
+                <div className="bg-[#141414] rounded-lg">
                   <div className="h-[25%]">
                     <h1 className="p-5 text-white font-bold text-xl font-roobert">OptiFlow</h1>
                   </div>
