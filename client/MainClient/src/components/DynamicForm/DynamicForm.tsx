@@ -9,16 +9,15 @@ interface Fields {
     as?: "textarea" | "select",
     placeholder: string
 }
-
 interface FormProps {
     title: string,
     colorScheme: string,
     hoverScheme: string,
     btnText: string,
-    fields: Fields[];
+    fields: Fields[] | null;
     initialValues: any;
     onSubmit: (values: any) => void;
-    children?: React.ReactNode;
+    children?: React.ReactNode | ((props: any) => React.ReactNode);
 }
 
 function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initialValues, onSubmit, children }: FormProps) {
@@ -31,7 +30,7 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
             <Formik initialValues={initialValues} onSubmit={onSubmit}>
                 {({ isSubmitting, setFieldValue, values }) => (
                     <Form className="p-4 space-y-1">
-                        {fields.map((item, index) => (
+                        {fields && fields.map((item, index) => (
                             <div className="flex flex-col space-y-1">
                                 <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
                                 {
@@ -43,7 +42,7 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
                                 }
                             </div>
                         ))}
-                        {children}
+                        {typeof children === 'function' ? children({ setFieldValue, values }) : children}
                         <div className="flex justify-center pt-2">
                             <button type="submit" className={`${colorScheme} ${hoverScheme} text-white px-6 py-2 w-[150px] rounded-sm transition`} >
                                 {btnText}
