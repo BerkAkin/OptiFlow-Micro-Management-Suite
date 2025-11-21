@@ -1,6 +1,7 @@
 import React from 'react'
 import { Field, Form, Formik } from 'formik'
 import { useState } from 'react'
+import DynamicTable from '../../DynamicTable/DynamicTable';
 
 
 interface filterValues {
@@ -20,53 +21,21 @@ function SuggestionList() {
         month: "",
         year: "",
     }
-
+    const tempData: any = [
+        { "header": "Deneme Header", "description": "Denemeler", "votes": "10", "status": "approved", "date": "2025-02-12" },
+    ]
 
     return (
 
         <div className='h-[675px] bg-white rounded-lg shadow-custom border'>
-            <div className='w-full h-[10%] text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center px-2 text-white bg-indigo-400 rounded-b-sm font-rubik`}>All Suggestions</p>
-            </div>
+            <DynamicTable textScheme='text-indigo-400' colorScheme='bg-indigo-400' data={tempData} title='Suggestions' />
 
-            <div className={`p-2 h-[5%] flex items-end text-indigo-400 font-bold border-b text-md grid grid-cols-10`}>
-                <div className="col-span-2 text-start">
-                    Header
-                </div>
-                <div className="col-span-5 text-start px-4">
-                    Description
-                </div>
-                <div className="col-span-1 text-center ">
-                    Votes
-                </div>
-                <div className="col-span-1 text-center">
-                    Status
-                </div>
-                <div className="col-span-1 text-center">
-                    Date
-                </div>
-            </div>
-            <div className="h-[75%] border-b overflow-y-auto ">
-                <div className="text-gray-700 p-2 bg-gray-50 hover:bg-gray-200 text-md grid grid-cols-10">
-                    <div className="col-span-2 text-start">
-                        Deneme Header
-                    </div>
-                    <div className="col-span-5 text-start px-4">
-                        Deneme Description
-                    </div>
-                    <div className="col-span-1 text-center ">
-                        12
-                    </div>
-                    <div className="col-span-1 text-center">
-                        Approved
-                    </div>
-                    <div className="col-span-1 text-center">
-                        12.02.2025
-                    </div>
-                </div>
-            </div>
 
-            <div className='h-[10%] flex items-center pt-1'>
+
+
+
+
+            {/* <div className='h-[10%] flex items-center pt-1'>
                 <Formik onSubmit={handleFilter} initialValues={filterInitialValues}>
                     <Form>
                         <div className='grid grid-cols-12'>
@@ -94,7 +63,7 @@ function SuggestionList() {
                     </Form>
                 </Formik>
             </div>
-
+ */}
 
         </div>
     )
