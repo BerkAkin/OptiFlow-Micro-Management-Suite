@@ -10,7 +10,7 @@ function MySuggestions() {
 
     return (
         <div className='border w-full h-[500px] bg-white rounded-lg shadow-custom border'>
-            <DynamicTable textScheme='text-indigo-400' colorScheme='bg-indigo-400' data={tempData} title='My Leavings' />
+            <DynamicTable textScheme='text-indigo-400' colorScheme='bg-indigo-400' data={tempData} title='My Suggestions' />
         </div>
     )
 }
