@@ -34,7 +34,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                 <p className={`text-2xl text-center text-white ${colorScheme} rounded-b-sm font-rubik px-6 `}>{title}</p>
             </div>
 
-            <div className={`h-[8%] p-2 ${textScheme} font-bold border-b text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
+            <div className={`h-[10%] p-2 ${textScheme} font-bold border-b text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
                 {columns.map((item) => (
                     <div className={`${item === "description" ? "text-start ps-2" : "text-center"}`}>
                         {item.toUpperCase()}
@@ -43,7 +43,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
 
 
             </div>
-            <div className="h-[75%] overflow-y-auto border-b ">
+            <div className="h-[70%] overflow-y-auto border-b ">
                 {data.map((row, index) => (
                     <div key={index} className={`text-gray-700 p-2 bg-gray-50 hover:bg-gray-200 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
                         {columns.map((col) => (
@@ -54,7 +54,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                     </div>
                 ))}
             </div>
-            <div className='h-[7%] flex items-center'>
+            <div className='h-[10%] flex items-center'>
                 {handleFilter && filterFields && (
 
                     <Formik onSubmit={handleFilter} initialValues={filterInitials}>
