@@ -65,7 +65,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                         <div className='col-span-4'>
 
                                             {item.type === 'select' ? (
-                                                <Field className="px-6 py-1.5 w-[90%] border" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
+                                                <Field className="px-6 py-1.5 w-[90%] border text-gray-600" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
                                                     <option value="">Select</option>
                                                     {item.options?.map(opt => (
                                                         <option value={opt.value}>{opt.label}</option>
@@ -73,7 +73,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                                 </Field>
 
                                             ) : (
-                                                <Field className="w-[90%] px-6 py-1 border  focus:outline-none" type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} />
+                                                <Field className="w-[90%] px-6 py-1 border text-gray-600 focus:outline-none" type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} />
                                             )}
                                         </div>
                                     ))}
