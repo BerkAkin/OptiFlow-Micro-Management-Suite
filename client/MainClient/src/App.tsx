@@ -9,6 +9,8 @@ import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
 import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
+import HelpPage from './pages/HelpPages/HelpPage';
+import RatePage from './pages/RatePages/RatePage';
 
 function App() {
   return (
@@ -18,18 +20,22 @@ function App() {
           <Route path='/' element={<MainPage />} >
             <Route index element={<FinanceDashboardPage />} />
 
-            <Route path='finance/financeDashboard' element={<FinanceDashboardPage />} />
+            <Route path='finance/dashboard' element={<FinanceDashboardPage />} />
 
-            <Route path='finance/financeBills' element={<FinanceBillsPage />} />
-            <Route path='survey/surveyBuilder' element={<SurveyBuilder />} />
-            <Route path='survey/surveys' element={<Surveys />} ></Route>
-            <Route path='survey/surveys/:slug' element={<SurveyDetails />} />
-            <Route path='survey/surveys/:slug/result' element={<SurveyResults />} />
+            <Route path='finance/bill' element={<FinanceBillsPage />} />
+            <Route path='survey/builder' element={<SurveyBuilder />} />
+            <Route path='survey/dashboard' element={<Surveys />} ></Route>
+            <Route path='survey/details/:slug' element={<SurveyDetails />} />
+            <Route path='survey/result/:slug' element={<SurveyResults />} />
 
-            <Route path='suggest/suggestions' element={<SuggestionsPage />} />
+            <Route path='suggest/dashboard' element={<SuggestionsPage />} />
 
             <Route path='profile' element={<ProfilePage />} />
-            <Route path='moodRecords' Component={MoodPage} />
+            <Route path='mood/dashboard' element={<MoodPage />} />
+
+            <Route path='help/dashboard' element={<HelpPage />} />
+
+            <Route path='rate/dashboard' element={<RatePage />} />
 
           </Route>
         </Routes>
