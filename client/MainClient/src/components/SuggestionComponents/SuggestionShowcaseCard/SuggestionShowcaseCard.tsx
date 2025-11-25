@@ -1,4 +1,6 @@
 import React from 'react'
+import star from '../../../assets/star.svg'
+import crown from '../../../assets/crown.svg'
 
 interface suggestionShowcaseProps {
     isStar: boolean
@@ -10,7 +12,7 @@ function SuggestionShowcaseCard({ isStar, Description, VoteCount }: suggestionSh
     return (
         <div className='bg-white rounded-lg h-[100px] shadow-custom border border-gray-200 grid grid-cols-10'>
             <div className='col-span-2 flex items-center justify-center'>
-                <p className={`${isStar == true ? "text-6xl" : "text-7xl pb-2"} text-amber-500`}>{isStar == true ? "★" : "☺︎"}</p>
+                <p className={`${isStar == true ? "text-6xl" : "text-7xl pb-2"} text-amber-500`}>{isStar == true ? <img src={star} width={60} /> : <img src={crown} width={60} />}</p>
             </div>
             <div className='col-span-6'>
                 <p className='text-gray-700 text-lg h-full w-full pt-6 px-6'>{Description}</p>
