@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import up from '../../../assets/up.svg'
+import down from '../../../assets/down.svg'
+import list from '../../../assets/list.svg'
 
 interface SuggestionCardProps {
     Status: string,
@@ -32,14 +35,33 @@ function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, 
             </div>
             <div className='p-6 text-center flex justify-center items-center h-[25%] w-full grid grid-cols-3'>
                 <div className='justify-center flex'>
-                    <button className='cursor-pointer bg-red-500 rounded-full shadow-custom  w-6 text-white'>✘</button>
-                    <button className='cursor-pointer bg-green-500 rounded-full shadow-custom  w-6 text-white mx-1 '>✔</button>
+                    <button className='cursor-pointer bg-red-500 rounded-full shadow-custom   text-white'>✘</button>
+                    <button className='cursor-pointer bg-green-500 rounded-full shadow-custom  text-white mx-1 '>✔</button>
                 </div>
                 <div>
-                    <p className='text-gray-800'><span><button className='cursor-pointer text-2xl'>⇩</button></span> {VoteCount} <span><button className=' cursor-pointer text-2xl'>⇧</button></span></p>
+                    <p className='text-gray-800'>
+                        <span>
+                            <button className='cursor-pointer '>
+                                <img src={down} width={20} alt="" />
+                            </button>
+                        </span>
+                        <span className='mx-1'>{VoteCount}</span>
+                        <span>
+                            <button className=' cursor-pointer text-2xl'>
+                                <img src={up} width={20} alt="" />
+                            </button>
+                        </span>
+                    </p>
                 </div>
                 <div>
-                    <p className='text-gray-800'><button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}><span>☰</span> </button> {CommentCount} <span></span></p>
+                    <p className='text-gray-800'>
+                        <button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}>
+                            <span>
+                                <img src={list} width={20} alt="" />
+                            </span>
+                        </button> {CommentCount}
+                        <span></span>
+                    </p>
                 </div>
             </div>
             {commentSection &&
