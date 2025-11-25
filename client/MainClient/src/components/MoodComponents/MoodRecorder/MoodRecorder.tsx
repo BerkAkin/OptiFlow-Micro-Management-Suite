@@ -3,6 +3,7 @@ import sad from '../../../../src/assets/sad.svg'
 import verySad from '../../../../src/assets/verySad.svg'
 import veryHappy from '../../../../src/assets/veryHappy.svg'
 import neutral from '../../../../src/assets/neutral.svg'
+import save from '../../../assets/save.svg'
 import { Field, FieldArray, Form, Formik } from 'formik'
 
 
@@ -75,7 +76,7 @@ function MoodRecorder() {
                                 )} />
                             </div>
                             <div className='col-span-2 flex items-center justify-center'>
-                                <button type='submit' className='cursor-pointer m-2 hover:bg-sky-500 rounded-sm bg-sky-400 text-white text-lg p-2 w-24'>+</button>
+                                <button type='submit' className='cursor-pointer'><img src={save} alt="" width={50} /></button>
                             </div>
                         </Form>
                     )}
