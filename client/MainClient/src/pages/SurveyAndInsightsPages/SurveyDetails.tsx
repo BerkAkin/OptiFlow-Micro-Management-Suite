@@ -1,6 +1,7 @@
 import { Form, Formik } from 'formik';
 import { useState } from 'react'
 import { useParams } from 'react-router';
+import send from '../../assets/send.svg';
 
 
 type Answer = {
@@ -88,7 +89,7 @@ function SurveyDetails() {
                         </div>
                         <div className='flex justify-end items-center '>
 
-                            <button type='submit' onClick={() => console.log()} className='cursor-pointer m-6 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'>Send Answers</button>
+                            <button type='submit' onClick={() => console.log()} className='cursor-pointer m-6 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'><img src={send} width={25} alt="" /></button>
                         </div>
                     </Form>
                 )}
