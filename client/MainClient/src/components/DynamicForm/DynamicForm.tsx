@@ -1,5 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React from 'react'
+import send from '../../assets/send.svg';
 
 interface Fields {
     label: string,
@@ -44,8 +45,8 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
                         ))}
                         {typeof children === 'function' ? children({ setFieldValue, values }) : children}
                         <div className="flex justify-center pt-2">
-                            <button type="submit" className={`${colorScheme} ${hoverScheme} cursor-pointer text-white px-6 py-2 w-[150px] rounded-sm transition`} >
-                                {btnText}
+                            <button type="submit" className={`${colorScheme} ${hoverScheme} cursor-pointer text-white w-[50px] py-2 flex items-center  justify-center rounded-sm transition`} >
+                                <img src={send} alt="" width={25} />
                             </button>
                         </div>
                     </Form>
