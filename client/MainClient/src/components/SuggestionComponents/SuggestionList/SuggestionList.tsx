@@ -25,7 +25,7 @@ function SuggestionList() {
 
     return (
 
-        <div className='h-[675px] bg-white rounded-lg shadow-custom border'>
+        <div className='h-[675px] bg-white rounded-lg shadow-custom border border-gray-200'>
             <DynamicTable handleFilter={handleFilter} filterFields={filterFields} textScheme='text-indigo-400' colorScheme='bg-indigo-400' data={tempData} title='Suggestions' />
         </div>
     )

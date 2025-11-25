@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router';
 
 
 type Answer = {
@@ -58,7 +58,7 @@ function SurveyDetails() {
 
     /* Value kısmı eklenecek iç answer inputunda */
     return (
-        <div className='m-10 bg-white container mx-auto shadow-custom border '>
+        <div className='container m-10 bg-white mx-auto shadow-custom border border-gray-200 '>
             <div className='text-center'>
                 <p className='text-3xl text-gray-700 p-6 font-rubik' >{surveyName}</p>
             </div>
@@ -75,7 +75,7 @@ function SurveyDetails() {
                                     <div className='mt-6'>
                                         {question.answers.map((answer, index) => (
                                             <div key={index} className='ps-6 my-2 flex justify-start items-center'>
-                                                <input onChange={handleChange} className='hidden peer' value={answer.text} type='radio' id={`${question.id}-${answer.id}`} name={`${question.id}`}></input>
+                                                <input onChange={handleChange} className='cursor-pointer hidden peer' value={answer.text} type='radio' id={`${question.id}-${answer.id}`} name={`${question.id}`}></input>
                                                 <label htmlFor={`${question.id}-${answer.id}`} className=" block w-[25%] text-lg bg-gray-100 text-gray-700 p-2 cursor-pointer rounded-sm peer-checked:bg-indigo-400 peer-checked:text-white hover:bg-indigo-100 transition">{answer.text}</label>
                                             </div>
                                         ))}
@@ -88,7 +88,7 @@ function SurveyDetails() {
                         </div>
                         <div className='flex justify-end items-center '>
 
-                            <button type='submit' onClick={() => console.log()} className=' m-6 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'>Send Answers</button>
+                            <button type='submit' onClick={() => console.log()} className='cursor-pointer m-6 p-2 rounded-sm text-lg text-white bg-green-600 hover:bg-green-700'>Send Answers</button>
                         </div>
                     </Form>
                 )}

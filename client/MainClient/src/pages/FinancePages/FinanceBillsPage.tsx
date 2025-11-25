@@ -80,10 +80,10 @@ function FinanceBillsPage() {
             {
                 isAdd &&
                 <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
-                    <div className='bg-white rounded-lg shadow-custom border h-[510px] w-72'>
+                    <div className='bg-white rounded-lg shadow-custom border border-gray-200 h-[510px] w-72'>
                         <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' btnText='Add' fields={fields} initialValues={initalProductValues} onSubmit={onAddApproveHandler} title='Add Product' />
-                        <div className='border'>
-                            <button onClick={() => setIsAdd(!isAdd)} className='w-full bg-red-400 text-white p-2 rounded-sm hover:bg-red-500  '>Cancel</button>
+                        <div className='border border-gray-200'>
+                            <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer w-full bg-red-400 text-white p-2 rounded-sm hover:bg-red-500  '>Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -91,10 +91,10 @@ function FinanceBillsPage() {
 
             <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
                 <Form>
-                    <div className=' container w-[900px] mx-auto my-10 bg-white shadow-custom border p-10'>
+                    <div className='w-[900px] mx-auto my-10 bg-white shadow-custom border border-gray-200 p-10'>
                         <div className='grid grid-cols-10 mt-10'>
-                            <div className='col-span-7 flex border-b justify-start'><p>*LOGO GELECEK*</p></div>
-                            <div className='col-span-3 border-b'>
+                            <div className='col-span-7 flex border-b border-gray-200 justify-start'><p>*LOGO GELECEK*</p></div>
+                            <div className='col-span-3 border-b border-gray-200'>
                                 <p className='text-6xl text-gray-600 py-5 font-rubik' >INVOICE</p>
                             </div>
                         </div>
@@ -125,21 +125,21 @@ function FinanceBillsPage() {
                             <div className='text-gray-600 border-y py-2 border-gray-700  text-sm'>
                                 <p className='font-bold text-gray-700'>SAYIN</p>
                                 <div className='space-x-5 space-y-2'>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="First Name" name="firstname"></Field>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Last Name" name="lastname"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="First Name" name="firstname"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Last Name" name="lastname"></Field>
                                 </div>
                                 <div className='space-x-5 space-y-2'>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Addres" name="address"></Field>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Tax Office" name="taxoffice"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Addres" name="address"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Tax Office" name="taxoffice"></Field>
 
                                 </div>
                                 <div className='space-x-5 space-y-2'>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Phone Number" name="phoneNum"></Field>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Fax Number" name="fax"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Phone Number" name="phoneNum"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Fax Number" name="fax"></Field>
                                 </div>
                                 <div className='space-x-5 space-y-2'>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="E-Mail" name="email"></Field>
-                                    <Field className="border rounded-sm px-2 py-1 focus:outline-none" placeholder="Serial Number (Person)" name="personserialnum"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="E-Mail" name="email"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Serial Number (Person)" name="personserialnum"></Field>
                                 </div>
 
 
@@ -150,7 +150,7 @@ function FinanceBillsPage() {
 
                         <div className='mt-20'>
 
-                            <table className="w-full border">
+                            <table className="w-full border border-gray-200">
                                 <thead className="bg-gray-300 font-rubik">
                                     <tr>
                                         <th scope="col" className="px-6 ">
@@ -173,7 +173,7 @@ function FinanceBillsPage() {
                                 </thead>
                                 <tbody>
                                     {products.map((item) => (
-                                        <tr className="bg-white border-b text-sm text-gray-600">
+                                        <tr className="bg-white border-b border-gray-200 text-sm text-gray-600">
                                             <th scope="row" className="px-6">
                                                 {item.type}
                                             </th>
@@ -198,7 +198,7 @@ function FinanceBillsPage() {
                             </table>
 
                             <div className='flex justify-end my-5'>
-                                <button onClick={() => setIsAdd(!isAdd)} className=' bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
+                                <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
                             </div>
                         </div>
                         <div className='mt-5 grid grid-cols-10'>
@@ -216,7 +216,7 @@ function FinanceBillsPage() {
                             </div>
                         </div>
                         <div className='flex justify-end'>
-                            <button onClick={() => onSubmitHandler} className=' bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
+                            <button onClick={() => onSubmitHandler} className='cursor-pointer bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
                         </div>
 
 

@@ -47,7 +47,7 @@ function AddPaymentForm() {
                         {IsPartly &&
                             <div>
                                 <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partCount'>Part Count</label>
-                                <Field type="number" className="border w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Part Count" name="partCount" />
+                                <Field type="number" className="border border-gray-200 w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Part Count" name="partCount" />
                             </div>
                         }
                     </div>
@@ -55,7 +55,7 @@ function AddPaymentForm() {
                         {IsPartly &&
                             <div>
                                 <label className={`${IsPartly ? "text-gray-700" : "text-gray-400"} my-3 text-lg`} htmlFor='partPrice'>Part Price</label>
-                                <Field type="number" className="border w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Price of Part" name="partPrice" />
+                                <Field type="number" className="border border-gray-200 w-full rounded-sm px-2 py-1 focus:outline-none" placeholder="Price of Part" name="partPrice" />
                             </div>
                         }
 

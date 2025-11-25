@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 import { Doughnut, } from "react-chartjs-2";
 
@@ -29,13 +29,13 @@ function SurveyResults() {
     }
 
     return (
-        <div className='my-10 container mx-auto'>
+        <div className='container my-10 mx-auto'>
             <div className='mx-auto grid grid-cols-2 gap-6' >
                 {initialTempSurvey.surveys.map((item, index) => (
-                    <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border rounded-lg`}>
+                    <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg`}>
                         <div className='col-span-4'>
                             <Link to={`${item.status === "Active" ? `/survey/surveys/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
-                                <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-e`}>
+                                <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-gray-200 border-e`}>
                                     <div className='h-[50%] flex items-center justify-center'>
                                         <p className='font-rubik text-center text-2xl text-gray-600 mx-4'>
                                             {item.text}

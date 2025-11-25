@@ -35,29 +35,29 @@ function MoodRecorder() {
 
     return (
         <div className='grid'>
-            <div className='bg-white rounded-lg border shadow-custom h-24 flex items-center'>
+            <div className='bg-white rounded-lg border border-gray-200 shadow-custom h-24 flex items-center'>
 
                 <Formik initialValues={initialValues} onSubmit={handleMoodRecord}>
                     {({ isSubmitting, values }) => (
                         <Form className='grid grid-cols-10 '>
-                            <div className='col-span-3 flex items-center border-e'>
+                            <div className='col-span-3 flex items-center border-e border-gray-200'>
                                 {(moods).map((item) => (
                                     <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodSelect) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer ${item.hover} rounded-full p-1`} >
                                         <img width={60} src={item.img}></img>
-                                        <Field hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodSelect" />
+                                        <Field className="cursor-pointer" hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodSelect" />
                                     </label>
                                 ))}
                             </div>
 
 
-                            <div className='col-span-5 flex items-center border-e'>
+                            <div className='col-span-5 flex items-center border-e border-gray-200'>
                                 <FieldArray name='selectedReasons' render={arrayHelpers => (
                                     <div className='grid grid-cols-8 gap-1'>
                                         {MoodReasons.map((item, key) => {
                                             const isSelected = values.selectedReasons.includes(item);
                                             return (
                                                 <div className='col-span-1 flex items-center justify-center'>
-                                                    <p className={` px-2 w-max border cursor-pointer hover:text-white hover:bg-indigo-300 rounded-lg ${isSelected ? "bg-indigo-400 text-white" : "text-gray-700 bg-white"}`}
+                                                    <p className={` px-2 w-max border border-gray-200 cursor-pointer hover:text-white hover:bg-indigo-300 rounded-lg ${isSelected ? "bg-indigo-400 text-white" : "text-gray-700 bg-white"}`}
                                                         onClick={() => {
                                                             if (isSelected) {
                                                                 arrayHelpers.remove(values.selectedReasons.indexOf(item));
@@ -75,7 +75,7 @@ function MoodRecorder() {
                                 )} />
                             </div>
                             <div className='col-span-2 flex items-center justify-center'>
-                                <button type='submit' className='m-2 hover:bg-sky-500 rounded-sm bg-sky-400 text-white text-lg p-2 w-24'>+</button>
+                                <button type='submit' className='cursor-pointer m-2 hover:bg-sky-500 rounded-sm bg-sky-400 text-white text-lg p-2 w-24'>+</button>
                             </div>
                         </Form>
                     )}

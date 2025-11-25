@@ -43,10 +43,10 @@ function LoginModal() {
     return (
         <div>
             <div>
-                <div className="border shadow-lg my-2 rounded-lg bg-white w-96">
+                <div className="border border-gray-200 shadow-custom my-2 rounded-lg bg-white w-96">
                     <p className="my-10 text-gray-700 text-3xl  text-center">Optiflow Management Suite </p>
                 </div>
-                <div className='w-96 h-[500px] flex justify-center items-center pe-2 bg-white border rounded-lg shadow-md '>
+                <div className='w-96 h-[500px] flex justify-center items-center pe-2 bg-white border border-gray-200 rounded-lg shadow-custom'>
                     <Formik initialValues={{ email: "", password: "" }} onSubmit={(values) => loginMutation.mutate(values)}>
                         {({ isSubmitting }) => (
                             <Form>
@@ -55,11 +55,11 @@ function LoginModal() {
                                 </div>
                                 <div className="grid grid-cols-1 h-48">
                                     <div className="mb-1">
-                                        <Field type="text" name="email" placeholder="E-Mail" className="text-gray-700 border-b focus:outline-none p-2 mt-1 w-full bg-transparent focus:bg-transparent" />
+                                        <Field type="text" name="email" placeholder="E-Mail" className="text-gray-700 border border-gray-200 focus:outline-none p-2 mt-1 w-full bg-transparent focus:bg-transparent" />
                                         <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
                                     </div>
                                     <div>
-                                        <Field type={showPassword ? "text" : "password"} name="password" placeholder="Password" className="text-gray-700 border-b focus:outline-none p-2 mt-1 w-full bg-transparent" />
+                                        <Field type={showPassword ? "text" : "password"} name="password" placeholder="Password" className="text-gray-700 border border-gray-200 focus:outline-none p-2 mt-1 w-full bg-transparent" />
                                         <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
                                     </div>
                                     <label className="flex items-center gap-2 mb-2 text-sm text-gray-700">

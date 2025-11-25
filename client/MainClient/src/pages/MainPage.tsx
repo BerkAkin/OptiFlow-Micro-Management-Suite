@@ -1,7 +1,7 @@
 import Navbar from '../components/Navbar/Navbar'
 import LoginModal from '../components/LoginContainer/LoginContainer'
 import { useAuthContext } from '../context/AuthContext'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from 'react-router'
 import { useState, useEffect } from 'react';
 import EmergencyPopUp from '../components/EmergencyPopUp/EmergencyPopUp';
 

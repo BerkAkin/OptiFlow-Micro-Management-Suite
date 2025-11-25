@@ -8,7 +8,7 @@ interface suggestionShowcaseProps {
 
 function SuggestionShowcaseCard({ isStar, Description, VoteCount }: suggestionShowcaseProps) {
     return (
-        <div className='bg-white rounded-lg h-[100px] shadow-custom border grid grid-cols-10'>
+        <div className='bg-white rounded-lg h-[100px] shadow-custom border border-gray-200 grid grid-cols-10'>
             <div className='col-span-2 flex items-center justify-center'>
                 <p className={`${isStar == true ? "text-6xl" : "text-7xl pb-2"} text-amber-500`}>{isStar == true ? "★" : "☺︎"}</p>
             </div>

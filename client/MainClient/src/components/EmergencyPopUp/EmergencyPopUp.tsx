@@ -23,7 +23,7 @@ const handleReport = (values: EmergencyFormTypes) => {
 function EmergencyPopUp() {
     return (
         <div className="absolute inset-0 bg-black/50 z-20 flex items-center justify-center">
-            <div className="w-96 bg-white rounded-lg shadow-lg border">
+            <div className="w-96 bg-white rounded-lg shadow-lg border border-gray-200">
 
                 <div className="w-full py-2 bg-red-500 rounded-t-lg text-center">
                     <p className="text-2xl text-white font-rubik">Get Help</p>
@@ -39,7 +39,7 @@ function EmergencyPopUp() {
                                     as="select"
                                     name="person"
                                     id="person"
-                                    className="border rounded px-2 py-1 focus:outline-none"
+                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
                                 >
                                     <option value="">Select Person</option>
                                     <option value="BerkAkin">Berk AKIN</option>
@@ -52,7 +52,7 @@ function EmergencyPopUp() {
                                     as="select"
                                     name="affectedPerson"
                                     id="affectedPerson"
-                                    className="border rounded px-2 py-1 focus:outline-none"
+                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
                                 >
                                     <option value="">Select Person</option>
                                     <option value="BerkAkin">Berk AKIN</option>
@@ -65,7 +65,7 @@ function EmergencyPopUp() {
                                     type="date"
                                     name="date"
                                     id="date"
-                                    className="border rounded px-2 py-1 focus:outline-none"
+                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
                                 />
                             </div>
 
@@ -77,7 +77,7 @@ function EmergencyPopUp() {
                                     name="incident"
                                     id="incident"
                                     placeholder="Describe the incident..."
-                                    className="border rounded px-2 py-1 resize-none focus:outline-none"
+                                    className="border border-gray-200 rounded px-2 py-1 resize-none focus:outline-none"
                                 />
                             </div>
 

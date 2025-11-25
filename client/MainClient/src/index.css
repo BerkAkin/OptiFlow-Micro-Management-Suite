@@ -1,11 +1,14 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+
+@theme  {
+   --shadow-custom: 0px 1px 10px 0px rgba(0,0,0,0.1);
+   --font-rubik: ;
+}
+
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "cadmium";
+  font-family: 'rubik';
 }
 
 html,
@@ -16,11 +19,16 @@ body {
 }
 
 
-
 @font-face {
     font-family: 'cadmium';
      src: local('cadmium'), url(./fonts/Cadmium.ttf) format('truetype');
 }
+
+@font-face {
+    font-family: 'roobert';
+    src: local('roobert'), url(./fonts/Roobert.ttf) format('truetype');
+}
+
 
 @font-face {
     font-family:'rubik';

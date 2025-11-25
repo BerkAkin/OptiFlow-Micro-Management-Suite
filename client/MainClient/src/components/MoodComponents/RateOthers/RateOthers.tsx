@@ -30,7 +30,7 @@ function RateOthers() {
                     return (
                         <div>
                             <label className='text-gray-700' htmlFor='employee'>Employee</label>
-                            <Field as="select" className="border resize-none text-gray-600 w-full rounded-sm px-2 py-1 focus:outline-none" name="employee" id="employee">
+                            <Field as="select" className="cursor-pointer border border-gray-200 resize-none text-gray-600 w-full rounded-sm px-2 py-1 focus:outline-none" name="employee" id="employee">
                                 <option value="">Select Employee</option>
                                 <option value="berkAkin">Berk Akın</option>
                             </Field>

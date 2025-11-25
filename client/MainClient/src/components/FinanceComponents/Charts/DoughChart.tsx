@@ -41,7 +41,7 @@ function DoughChart() {
                 <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
                     Categorical
                     <span>
-                        <button className={`h-[20px] text-white text-2xl ps-1`} onClick={handleNext}> ⇄</button>
+                        <button className={`h-[20px] text-white text-2xl ps-1 cursor-pointer`} onClick={handleNext}> ⇄</button>
                     </span>
 
                 </p>

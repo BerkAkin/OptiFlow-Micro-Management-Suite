@@ -31,38 +31,38 @@ function FinanceDashboardPage() {
     return (
         <div className='container mx-auto mt-6'>
             <div className='grid grid-cols-10 gap-6'>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border '>
+                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 '>
                     <BarChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom  rounded-lg border'>
+                <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200'>
                     <DoughChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border'>
+                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200'>
 
                     <VerticalChart />
                 </div>
-                <div className='col-span-4 bg-white shadow-custom rounded-lg border overflow-y-auto'>
+                <div className='col-span-4 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto'>
                     <Calendar />
                 </div>
             </div>
 
             <div className='flex justify-center mx-auto grid grid-cols-10 gap-6 my-6'>
-                <div className='col-span-8 bg-white shadow-custom border rounded-lg'>
+                <div className='col-span-8 bg-white shadow-custom border border-gray-200 rounded-lg'>
                     <ActivityTable />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom border rounded-lg'>
+                <div className='col-span-2 bg-white shadow-custom border border-gray-200 rounded-lg'>
                     <AddActivityForm />
                 </div>
             </div>
 
             <div className='flex justify-center grid grid-cols-10 gap-6 mb-6'>
-                <div className='col-span-4 bg-white shadow-custom border rounded-lg'>
+                <div className='col-span-4 bg-white shadow-custom border border-gray-200 rounded-lg'>
                     <InstallmentPaymentsCard />
                 </div>
-                <div className='col-span-4 bg-white shadow-custom border rounded-lg'>
+                <div className='col-span-4 bg-white shadow-custom border border-gray-200 rounded-lg'>
                     <RemainingPaymentsCard />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom border rounded-lg'>
+                <div className='col-span-2 bg-white shadow-custom border border-gray-200 rounded-lg'>
                     <AddPaymentForm />
                 </div>
 

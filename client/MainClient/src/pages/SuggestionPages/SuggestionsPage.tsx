@@ -51,7 +51,7 @@ function SuggestIdeas() {
     return (
         <div className='container mx-auto my-10 grid grid-cols-10 flex justify-center gap-6'>
 
-            <div className='col-span-2 bg-white h-[800px] rounded-lg shadow-custom border'>
+            <div className='col-span-2 bg-white h-[800px] rounded-lg shadow-custom border border-gray-200'>
                 <div className=' w-full text-center flex justify-center items-start'>
                     <p className={`text-2xl text-center px-5 text-white bg-indigo-400 rounded-b-sm font-rubik`}>Current Suggestions</p>
                 </div>

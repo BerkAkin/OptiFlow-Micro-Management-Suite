@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router"
 
 
 type Surveys = {
@@ -82,12 +82,12 @@ function SurveyResults() {
     }
 
     return (
-        <div className='container mx-auto border my-10 bg-white rounded-lg shadow-md' >
+        <div className='container mx-auto border border-gray-200 my-10 bg-white rounded-lg shadow-md' >
 
             {initialTempSurvey.surveys.map((item, index) => (
                 <div key={index} className={`h-[800px] grid grid-cols-10`}>
                     <div className="col-span-2">
-                        <div className={`w-full h-full flex items-center justify-center border-e`}>
+                        <div className={`w-full h-full flex items-center justify-center border-e border-gray-200`}>
                             <p className='font-rubik text-center text-3xl text-gray-600 mx-6'>{slug} Results</p>
                         </div>
                     </div>

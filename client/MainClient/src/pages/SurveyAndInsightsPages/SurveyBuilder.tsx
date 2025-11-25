@@ -108,36 +108,36 @@ function SurveyBuilder() {
 
     /* Value kısmı eklenecek iç answer inputunda */
     return (
-        <div className='m-10 bg-white container mx-auto border shadow-custom rounded-lg'>
+        <div className='container m-10 bg-white mx-auto border border-gray-200 shadow-custom rounded-lg'>
             <div className='text-center'>
                 <p className='text-5xl text-gray-600 p-6 font-rubik'>Build New Survey</p>
             </div>
             <div className='flex justify-end m-6'>
-                <input value={newQuestionHeader} onChange={(e) => setNewQuestionHeader(e.target.value)} className='ps-6 mx-6 border outline-none focus:outline-none' placeholder='New Question'></input>
-                <button onClick={() => handleAddNewQuestion(newQuestionHeader)} className=' bg-green-600 hover:bg-green-700 rounded-sm text-white p-2 text-lg'>+ Add New Question</button>
+                <input value={newQuestionHeader} onChange={(e) => setNewQuestionHeader(e.target.value)} className='cursor-pointer ps-6 mx-6 border border-gray-200 outline-none focus:outline-none' placeholder='New Question'></input>
+                <button onClick={() => handleAddNewQuestion(newQuestionHeader)} className='cursor-pointer bg-green-600 hover:bg-green-700 rounded-sm text-white p-2 text-lg'>+ Add New Question</button>
 
             </div>
             <div>
                 {survey.questions.map((question) => (
-                    <div key={question.id} className='rounded-lg p-6 m-6 border'>
+                    <div key={question.id} className='rounded-lg p-6 m-6 border border-gray-200'>
                         <div className='grid grid-cols-10'>
                             <div className='col-span-9'><p className='text-lg text-gray-800 '>{question.id}{`) `}{question.text}</p></div>
-                            <div className='col-span-1'><button onClick={() => deleteQuestion(question.id)} className=' bg-red-400 hover:bg-red-500 rounded-sm text-white p text-lg p-1'>- Delete Question</button></div>
+                            <div className='col-span-1'><button onClick={() => deleteQuestion(question.id)} className='cursor-pointer bg-red-400 hover:bg-red-500 rounded-sm text-white p text-lg p-1'>- Delete Question</button></div>
                         </div>
 
                         <div className='mt-6'>
                             {question.answers.map((answer, index) => (
                                 <div key={index} className='ps-4 my-2 flex justify-start items-center'>
-                                    <input className='hidden peer' value={answer.text} type='radio' id={`${question.id}-${answer.id}`} name={`${question.id}`}></input>
-                                    <label htmlFor={`${question.id}-${answer.id}`} className=" block w-[25%] border text-lg bg-gray-100 text-gray-700 p-3 cursor-pointer rounded-sm peer-checked:bg-indigo-400 peer-checked:text-white hover:bg-indigo-100 transition">{answer.text}</label>
-                                    <button onClick={() => deleteAnswer(question.id, answer.id)} className='inline  bg-red-400 hover:bg-red-500 rounded-sm text-white p-1 mx-2 text-lg'>- Delete Answer</button>
+                                    <input className='hidden peer cursor-pointer' value={answer.text} type='radio' id={`${question.id}-${answer.id}`} name={`${question.id}`}></input>
+                                    <label htmlFor={`${question.id}-${answer.id}`} className=" block w-[25%] border border-gray-200 text-lg bg-gray-100 text-gray-700 p-3 cursor-pointer rounded-sm peer-checked:bg-indigo-400 peer-checked:text-white hover:bg-indigo-100 transition">{answer.text}</label>
+                                    <button onClick={() => deleteAnswer(question.id, answer.id)} className='inline cursor-pointer bg-red-400 hover:bg-red-500 rounded-sm text-white p-1 mx-2 text-lg'>- Delete Answer</button>
 
                                 </div>
                             ))}
                         </div>
                         <div className='flex justify-end'>
-                            <input onChange={(e) => setNewAnswer(e.target.value)} className='ps-6 mx-6 border outline-none focus:outline-none' placeholder='New Answer'></input>
-                            <button onClick={() => handleAddNewAnswer(question.id, newAnswer)} className=' bg-blue-400 hover:bg-blue-500 rounded-sm text-white p-2 text-lg'>+ Add New Answer</button>
+                            <input onChange={(e) => setNewAnswer(e.target.value)} className='cursor-pointer ps-6 mx-6 border border-gray-200 outline-none focus:outline-none' placeholder='New Answer'></input>
+                            <button onClick={() => handleAddNewAnswer(question.id, newAnswer)} className='cursor-pointer bg-blue-400 hover:bg-blue-500 rounded-sm text-white p-2 text-lg'>+ Add New Answer</button>
                         </div>
 
                     </div>
@@ -145,7 +145,7 @@ function SurveyBuilder() {
                 ))}
             </div>
             <div className='flex justify-end'>
-                <button onClick={handleFinishSurvey} className='m-6 bg-green-600 hover:bg-green-700 rounded-sm text-white p-2 text-lg'>Finish Survey</button>
+                <button onClick={handleFinishSurvey} className='cursor-pointer m-6 bg-green-600 hover:bg-green-700 rounded-sm text-white p-2 text-lg'>Finish Survey</button>
             </div>
 
         </div>

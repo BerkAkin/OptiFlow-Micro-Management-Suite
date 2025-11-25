@@ -1,5 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import MainPage from './pages/MainPage';
 import FinanceDashboardPage from './pages/FinancePages/FinanceDashboardPage';
 import FinanceBillsPage from './pages/FinancePages/FinanceBillsPage';
