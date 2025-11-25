@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+* {
+  font-family: 'roobert';
+}
+html,
+body {
+  width:100%; 
+  height:100%;
+  
+}
+
+
+@font-face {
+    font-family: 'cadmium';
+     src: local('cadmium'), url(./fonts/Cadmium.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'roobert';
+    src: local('roobert'), url(./fonts/Roobert.ttf) format('truetype');
+}
+
+
+@font-face {
+    font-family:'rubik';
+   src: local('rubik'), url(./fonts/RubikRegular.ttf) format('truetype');
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #474747;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #474747;
+}

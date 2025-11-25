@@ -13,7 +13,7 @@ function Footer() {
         <OpenStreetMapView />
 
         <div className="h-[100%] w-[100%] grid relative " style={{ backgroundColor: "#1f1f1f" }}>
-          <div className="border grid grid-cols-3 h-[250px] w-[65%] absolute transform left-1/2 -translate-x-1/2 -translate-y-1/3 bg-white overflow-hidden">
+          <div className="border border-gray-200 grid grid-cols-3 h-[250px] w-[65%] absolute transform left-1/2 -translate-x-1/2 -translate-y-1/3 bg-white overflow-hidden">
             {FooterContactsConstants.map((item, index) => (
               <div key={index}>
                 <ContactCard item={item} />
@@ -24,7 +24,7 @@ function Footer() {
 
           <div className="relative pt-5">
             <div className="absolute top-60 w-[100%]">
-              <div className="container border-indigo-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
+              <div className=" border-indigo-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
                 <div className="flex items-center text-start">
                   <h1 className="text-white text-4xl font-rubik">OptiFlow Management Suite</h1>
                 </div>
@@ -34,7 +34,7 @@ function Footer() {
               </div>
 
 
-              <div className="container mt-8 mx-auto h-[300px] w-[65%] grid grid-cols-[30%_70%]">
+              <div className="mt-8 mx-auto h-[300px] w-[65%] grid grid-cols-[30%_70%]">
 
 
                 <div className="bg-[#141414] rounded-lg">

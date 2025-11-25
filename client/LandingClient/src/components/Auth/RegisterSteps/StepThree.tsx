@@ -10,7 +10,7 @@ function StepThree({ handleChange, previousStep, nextStep, setIsModal }: any) {
         <div>
             <div className="text-center">
                 <h1 className='text-4xl text-white'>PURCHASE SUBSCRIPTION</h1>
-                <h1 className='text-lg text-white my-6'><span className="border-b">Plan Selection</span></h1>
+                <h1 className='text-lg text-white my-6'><span className="">Plan Selection</span></h1>
             </div>
             <div className="flex items-center justify-center">
 

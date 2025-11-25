@@ -6,7 +6,7 @@ function ModalContainer() {
 
     return (
         <>
-            <div className=' w-[100%] h-full bg-black/40 absolute z-10 flex items-center justify-center backdrop-blur-sm '>
+            <div className='inset-0 w-[100%] bg-black/40 absolute z-100 fixed flex items-center justify-center backdrop-blur-sm '>
                 <RegisterModal />
             </div>
         </>

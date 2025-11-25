@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ModalContext } from "../../context/ModalContext";
 
 
@@ -9,12 +9,13 @@ function Navbar() {
 
   const openRegister = () => {
     setIsModal(true);
+
     setModalType("register");
   }
 
   return (
 
-    <nav className="bg-white h-[120px] border">
+    <nav className="bg-white h-[120px] border border-gray-200">
       <div className="grid h-[100%] grid-cols-3 gap-0">
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
           <span className="text-3xl font-semibold ">OptiFlow Management Suite</span>
@@ -28,11 +29,11 @@ function Navbar() {
             </svg>
           </button>
           <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul className="text-xl flex flex-col rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+            <ul className="text-xl flex flex-col rounded-lg md:flex-row md:space-x-12 rtl:space-x-reverse md:mt-0">
               <li >
                 <a href="Modules" className="block text-gray-600 hover:text-indigo-500 ">Modules</a>
               </li>
-              <li className="mx-10">
+              <li>
                 <a href="" className="block  text-gray-600 md:dark:hover:text-indigo-500">Packages</a>
               </li>
               <li>

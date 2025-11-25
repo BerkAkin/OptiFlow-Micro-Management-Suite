@@ -43,12 +43,12 @@ function LandingLayout() {
         </div>
 
 
-        <div data-aos="fade-down" className="relative grid bg-gray-50" >
+        <div data-aos="fade-down" className="relative grid bg-gray-50 py-10" >
           <InfoBox items={infoBoxOne} />
           <div className="my-10">
-            <div className="grid grid-cols-4 mt-12 container mx-auto">
+            <div className="grid grid-cols-4 mt-12 w-[80%] mx-auto">
               {UsageCardConstants.map((item, index) => (
-                <div className=" flex justify-center" key={index}>
+                <div className=" flex justify-center " key={index}>
                   <UsageCard item={item} />
                 </div>
               ))}
@@ -57,8 +57,8 @@ function LandingLayout() {
         </div>
 
 
-        <div data-aos="fade-up" className="grid grid-cols-[45%_55%] shadow-sm">
-          <div className="flex items-center justify-center">
+        <div data-aos="fade-up" className="grid grid-cols-12">
+          <div className="flex items-center justify-center col-span-5">
             <div>
               <div className="text-center mb-10 " >
                 <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is OptiFlow Management Suite?</h1>
@@ -70,14 +70,14 @@ function LandingLayout() {
               </p>
             </div>
           </div>
-          <div className={`w-100 h-[700px] flex items-center justify-center `}>
+          <div className={`col-span-7 h-[700px] flex items-center justify-center`}>
             <Carousel items={CarouselConstant} />
           </div>
         </div>
 
 
 
-        <div data-aos="fade-down" className="h-[600px] my-12 ">
+        <div data-aos="fade-down" className="h-[600px] my-10 w-[90%] mx-auto">
           {IndustriesConsts.map((item, index) => (
             <div key={index}>
               <HorizontalCard item={item} />
@@ -124,7 +124,7 @@ function LandingLayout() {
 
         <div className="bg-gray-50 py-20">
           <div className="flex justify-center text-gray-700 items-center">
-            <h1 className='text-5xl mb-2'><span className="border-b font-rubik">Available Plans</span></h1>
+            <h1 className='text-5xl mb-2'><span className="border-b border-gray-200 font-rubik">Available Plans</span></h1>
           </div>
           <div data-aos="fade-top" className="flex items-center my-5  justify-center " >
             <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MicroPlan} />
@@ -132,10 +132,10 @@ function LandingLayout() {
             <PackCard Text="Temp Text3" ButtonText="Details" Price={900} Header="Midi Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MidiPlan} />
           </div>
 
-          <div className="text-center mt-8 container mx-auto flex justify-center">
+          <div className="text-center mt-8  mx-auto flex justify-center">
             <p className="font-rubik font-bold text-xl text-gray-700">Looking for a Customized Solution?</p>
           </div>
-          <div className="text-center  pt-4 container mx-auto flex justify-center text-gray-500">
+          <div className="text-center  pt-4 mx-auto flex justify-center text-gray-500">
             <p className="w-[60%]">
               OptiFlow Management Suite is designed to adapt to your organization’s unique needs.
               If you’re interested in a tailored plan or want to explore specific module configurations, our team is ready to help.

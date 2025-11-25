@@ -14,12 +14,12 @@ function ProgressCounter({ depth, currentStep }: ProgressCounterProps) {
 
                     return (
                         <div className='my-5 flex items-center' key={index}>
-                            <div className={`${isCompleted ? 'border border-indigo-300 bg-indigo-500' : ""} border rounded-full size-4 text-center text-white items-center flex justify-center`}></div>
-                            <div className={`${(index + 1) < currentStep ? 'border-b border-indigo-300 ' : ''} border-b w-20 h-1`}></div>
+                            <div className={`${isCompleted ? ' bg-indigo-500' : ""} border border-gray-200 rounded-full size-4 text-center text-white items-center flex justify-center`}></div>
+                            <div className={`${(index + 1) < currentStep ? 'border-b border-indigo-300 ' : ''} border-b border-gray-200 w-20 h-1`}></div>
                         </div>
                     )
                 })}
-                <div className={`${currentStep == 4 ? "border border-indigo-300 bg-indigo-500" : ""} border rounded-full size-4 text-center text-white items-center flex justify-center`}></div>
+                <div className={`${currentStep == 4 ? "border border-indigo-300 bg-indigo-500" : ""} border border-gray-200 rounded-full size-4 text-center text-white items-center flex justify-center`}></div>
             </div >
 
 
