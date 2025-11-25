@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Chart } from "react-chartjs-2";
-
+import swap from '../../../assets/swap.svg'
 
 
 function BarChart() {
@@ -42,7 +42,9 @@ function BarChart() {
                 <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
                     Monthly
                     <span>
-                        <button className={`h-[20px] text-white text-2xl ps-1 cursor-pointer`} onClick={handleNext}> ⇄</button>
+                        <button className={`h-[20px] text-white text-2xl ps-1 cursor-pointer`} onClick={handleNext}>
+                            <img src={swap} width={25} alt='' />
+                        </button>
                     </span>
                 </p>
             </div>
