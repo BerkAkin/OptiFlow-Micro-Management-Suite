@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
-
 import { Doughnut, } from "react-chartjs-2";
+import happy from '../../assets/happyWhite.svg'
+import sad from '../../assets/sadWhite.svg'
 
 type Survey = {
     text: string,
@@ -34,7 +35,7 @@ function SurveyResults() {
                 {initialTempSurvey.surveys.map((item, index) => (
                     <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg`}>
                         <div className='col-span-4'>
-                            <Link to={`${item.status === "Active" ? `/survey/surveys/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
+                            <Link to={`${item.status === "Active" ? `/survey/details/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
                                 <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-gray-200 border-e`}>
                                     <div className='h-[50%] flex items-center justify-center'>
                                         <p className='font-rubik text-center text-2xl text-gray-600 mx-4'>
@@ -43,7 +44,7 @@ function SurveyResults() {
                                                 {item.status === "Timeout" ?
                                                     (
                                                         <span className='h-[10%] flex justify-end text-sky-500'>
-                                                            <Link to={`${item.slug}/result`}>Go to Result {">"}</Link>
+                                                            <Link to={`/survey/result/${item.slug}`}>Go to Result {">"}</Link>
                                                         </span>
                                                     ) :
                                                     ""}
@@ -73,12 +74,12 @@ function SurveyResults() {
                                     options={{ plugins: { legend: { display: true, position: "bottom" } } }} />
                             </div>
 
-                            <div className='bg-orange-400 text-white rounded-sm '>
-                                <div className='h-[50%] flex items-center justify-center'> <p className=' text-8xl'>☺</p></div>
+                            <div className='bg-orange-400 text-white '>
+                                <div className='h-[50%]  flex items-center justify-center'><img src={happy} alt="" width={80} /></div>
                                 <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.satisfactionCount} </p></div>
                             </div>
-                            <div className='bg-sky-400 text-white rounded-sm '>
-                                <div className='h-[50%] flex items-center justify-center'> <p className=' text-6xl pt-5'>☹</p></div>
+                            <div className='bg-sky-400 text-white rounded-e-sm '>
+                                <div className='h-[50%] flex items-center justify-center'> <img src={sad} alt="" width={80} /></div>
                                 <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
                             </div>
 
