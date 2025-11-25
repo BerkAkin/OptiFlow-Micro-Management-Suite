@@ -1,5 +1,6 @@
 import { Link } from 'react-router'
 import DynamicTable from '../../DynamicTable/DynamicTable'
+import external from '../../../assets/external.svg'
 
 
 interface FilterTypes {
@@ -7,7 +8,7 @@ interface FilterTypes {
 }
 
 const InstallCardProps = [
-    { "description": "Deneme", "Price": 12, "Parts": "2/4", "": <Link className='bg-gray-400 text-white p-1 px-2 me-1 cursor-pointer hover:bg-gray-500 rounded-sm' to={`Deneme`}>↗</Link> },
+    { "description": "Deneme", "Price": 12, "Parts": "2/4", "": <Link className='cursor-pointer' to={`Deneme`}><img className='ms-5' src={external} width={25} alt="" /></Link> },
 ]
 
 const handleFilter = (values: FilterTypes) => {
