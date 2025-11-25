@@ -3,6 +3,13 @@ import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router";
 import MakeSuggestionCard from "../SuggestionComponents/MakeSuggestionCard/MakeSuggestionCard";
 import happy from '../../assets/happy.svg'
+import suggestion from '../../assets/suggestion.svg'
+import bill from '../../assets/bill.svg'
+import help from '../../assets/help.svg'
+import rating from '../../assets/rating.svg'
+import finance from '../../assets/finance.svg'
+import survey from '../../assets/survey.svg'
+import makeSuggestion from '../../assets/makeSuggestion.svg'
 
 
 
@@ -34,12 +41,13 @@ function Navbar() {
   return (
 
     <nav className="bg-white h-[80px] border border-gray-200">
-      <div className="grid h-[100%] grid-cols-3 gap-0">
-        <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
+      <div className="grid h-[100%] grid-cols-12 gap-0">
+
+        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
           <span className="text-3xl font-semibold ">OptiFlow Management Suite</span>
         </div>
 
-        <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
+        <div className="col-span-6 space-x-6 w-[100%] flex flex-wrap items-center justify-center p-4">
 
           <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
             <span className="sr-only">Seçenekler</span>
@@ -48,61 +56,70 @@ function Navbar() {
             </svg>
           </button>
 
-          <div className="hidden w-full md:block md:w-auto mx-1">
+          <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeDashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">Finance Dashboard</Link>
+              <Link to={`/finance/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={finance} alt="" /></Link>
             </ul>
           </div>
-          <div className="hidden w-full md:block md:w-auto mx-1">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <li className="relative" ref={(el) => { elementsRef.current[0] = el }} >
-                <button className="cursor-pointer mt-2" onClick={() => setIsOpen(!isOpen)}>Survey ▼</button>
+          <div className="hidden w-full md:block md:w-auto">
+            <ul className="text-xl flex flex-col md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+              <li onClick={() => setIsOpen(!isOpen)} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200 relative" ref={(el) => { elementsRef.current[0] = el }} >
+                <img width={30} src={survey} alt="" />
                 {isOpen && (
-                  <div className="absolute border-x border-b border-gray-200 right-0 translate-x-[25%] text-center mt-4 w-40 bg-white text-black rounded-b-lg shadow-lg z-10">
-                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/surveys`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
-                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/surveyBuilder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
+                  <div className="absolute border-x border-b border-gray-200 right-0 translate-x-[30%] text-center mt-4 w-40 bg-white text-black rounded-b-lg shadow-lg z-10">
+                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/dashboard`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
+                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/builder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
                   </div>
                 )}
               </li>
             </ul>
           </div>
-          <div className="hidden w-full md:block md:w-auto mx-1">
+          <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/suggest/suggestions`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">Suggestions</Link>
+              <Link to={`/suggest/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={suggestion} alt="" /></Link>
             </ul>
           </div>
-
+          <div className="hidden w-full md:block md:w-auto">
+            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+              <Link to={`/help/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={help} alt="" /></Link>
+            </ul>
+          </div>
+          <div className="hidden w-full md:block md:w-auto">
+            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+              <Link to={`/rate/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={rating} alt="" /></Link>
+            </ul>
+          </div>
         </div>
 
 
 
-        <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
-          <div className="hidden w-full md:block md:w-auto mx-1">
+        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center ">
+          <div className="hidden w-full md:block md:w-auto ">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/financeBills`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">🧾</Link>
+              <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
             </ul>
           </div>
-          <div className="hidden w-full md:block md:w-auto mx-1">
+          <div className="hidden w-full md:block md:w-auto mx-2">
             <div ref={(el) => { elementsRef.current[1] = el }} className="relative inline-block flex flex-col">
-              <button onClick={() => setIsSuggestion(!isSuggestion)} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200">🗳️</button>
+              <button onClick={() => setIsSuggestion(!isSuggestion)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={makeSuggestion} alt="" /></button>
               {isSuggestion && <MakeSuggestionCard />}
             </div>
           </div>
-          <div className="hidden w-full md:block md:w-auto mx-1">
+          <div className="hidden w-full md:block md:w-auto ">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`moodRecords`} className="block px-4 py-2 mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={happy} alt="" /></Link>
+              <Link to={`mood/dashboard`} className="block px-4  mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={happy} alt="" /></Link>
             </ul>
           </div>
 
-          <div className="hidden w-full md:block md:w-auto mx-5">
+          <div className="hidden w-full md:block md:w-auto ms-2 pt-3">
             {
               isAuth === true ? (
                 <div ref={(el) => { elementsRef.current[2] = el }} className="relative ">
-                  <button className="cursor-pointer border border-gray-200 rounded-full size-10" onClick={() => setIsProfile(!isProfile)}></button>
+                  <button className="cursor-pointer border border-gray-200 rounded-full size-8" onClick={() => setIsProfile(!isProfile)}></button>
                   {isProfile &&
-                    <div className='absolute border border-gray-200 h-80 w-72 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-16'>
+                    <div className='absolute border border-gray-200 h-56 w-48 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-14'>
                       <div className="flex justify-center mt-4">
-                        <p className="border border-gray-200 rounded-full size-32"></p>
+                        <p className="border border-gray-200 rounded-full size-24"></p>
                       </div>
                       <div className="flex justify-center my-4">
                         <Link to={'profile'} className="text-xl text-gray-500 hover:text-gray-700">My Profile</Link>
