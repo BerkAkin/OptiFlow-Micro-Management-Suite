@@ -62,16 +62,16 @@ function BarChart() {
             <div className='py-6 flex items-center justify-center'>
                 <div className={`bg-white rounded-sm  grid grid-cols-3`}>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Curr:</p>
+                        <p className='text-xs'>2500</p>
                     </div>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Prev:</p>
+                        <p className='text-xs'>2500</p>
                     </div>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Diff:</p>
+                        <p className='text-xs'>2500</p>
 
                     </div>
                 </div>
