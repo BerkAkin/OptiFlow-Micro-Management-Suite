@@ -1,4 +1,7 @@
 import { Field, Form, Formik } from "formik";
+import left from '../../assets/left.svg'
+import right from '../../assets/right.svg'
+import magnify from '../../assets/magnify.svg'
 
 interface filterFields {
     name: string,
@@ -59,8 +62,8 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
 
                     <Formik onSubmit={handleFilter} initialValues={filterInitials}>
                         <Form>
-                            <div className='grid grid-cols-12 px-6'>
-                                <div className="col-span-10 grid grid-cols-12">
+                            <div className='grid grid-cols-12 px-10'>
+                                <div className=" col-span-10 grid grid-cols-12">
                                     {filterFields.map((item) => (
                                         <div className='col-span-4'>
 
@@ -78,12 +81,19 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                         </div>
                                     ))}
                                 </div>
-                                <div className='col-span-1 flex justify-start items-center'>
-                                    <button type="submit" className='cursor-pointer rounded-sm bg-gray-400 hover:bg-gray-500 text-3xl w-[50px] text-white w-full mx-2'>{"⌕"}</button>
+                                <div className=' col-span-1 flex justify-start items-center'>
+                                    <button type="submit" className='cursor-pointer'>
+                                        <img src={magnify} alt="" width={25} />
+
+                                    </button>
                                 </div>
-                                <div className='flex col-span-1 items-center'>
-                                    <button className='cursor-pointer rounded-sm bg-gray-400 hover:bg-gray-500 h-[30px] w-[50px] text-white w-[50%] ms-2'>{"🡸"}</button>
-                                    <button className='cursor-pointer rounded-sm bg-gray-400 hover:bg-gray-500 h-[30px] w-[50px] text-white w-[50%] mx-2'>{"🡺"}</button>
+                                <div className=' flex col-span-1 min-w-[80px] items-center'>
+                                    <button className="cursor-pointer w-full h-full p-2">
+                                        <img src={left} alt="" width={35} />
+                                    </button>
+                                    <button className="cursor-pointer w-full h-full p-2">
+                                        <img src={right} alt="" width={35} />
+                                    </button>
                                 </div>
 
                             </div>
