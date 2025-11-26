@@ -9,21 +9,22 @@ interface Fields {
     id: string,
     type: "text" | "number" | "checkbox" | "date" | "file",
     as?: "textarea" | "select",
-    placeholder: string
+    placeholder: string,
+    options?: { value: string, label: string }[]
 }
 interface FormProps {
     title: string,
     colorScheme: string,
     hoverScheme: string,
-    btnText: string,
     fields: Fields[] | null;
     initialValues: any;
     onSubmit: (values: any) => void;
     onCancel?: () => void;
     children?: React.ReactNode | ((props: any) => React.ReactNode);
+
 }
 
-function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initialValues, onSubmit, children, onCancel }: FormProps) {
+function DynamicForm({ title, colorScheme, hoverScheme, fields, initialValues, onSubmit, children, onCancel }: FormProps) {
     return (
         <div>
             <div className={`${colorScheme} w-full py-1 rounded-t-lg text-center`}>
@@ -37,10 +38,17 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
                             <div className="flex flex-col space-y-1">
                                 <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
                                 {
-                                    item.type !== "file" ? (
-                                        <Field as={item.as} name={item.name} placeholder={item.placeholder} id={item.id} type={item.type} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" />
+                                    item.type === "file" ? (
+                                        <input hidden id={item.id} name={item.name} type="file" onChange={(e) => { const file = e.target.files?.[0] || null; setFieldValue(item.name, file); }} />
+                                    ) : item.as === "select" ? (
+                                        <Field as="select" name={item.name} id={item.id} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" >
+                                            <option value="">Select</option>
+                                            {item.options?.map(opt => (
+                                                <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                            ))}
+                                        </Field>
                                     ) : (
-                                        <input hidden id={item.id} name={item.name} type={item.type} onChange={(e) => { const file = e.target.files?.[0] || null; setFieldValue(item.name, file); }} />
+                                        <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" />
                                     )
                                 }
                             </div>
