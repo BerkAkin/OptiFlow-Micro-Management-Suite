@@ -1,6 +1,7 @@
 import { Field, Form, Formik } from 'formik';
 import React from 'react'
 import send from '../../assets/send.svg';
+import cancel from '../../assets/cancel.svg';
 
 interface Fields {
     label: string,
@@ -18,10 +19,11 @@ interface FormProps {
     fields: Fields[] | null;
     initialValues: any;
     onSubmit: (values: any) => void;
+    onCancel?: () => void;
     children?: React.ReactNode | ((props: any) => React.ReactNode);
 }
 
-function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initialValues, onSubmit, children }: FormProps) {
+function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initialValues, onSubmit, children, onCancel }: FormProps) {
     return (
         <div>
             <div className={`${colorScheme} w-full py-1 rounded-t-lg text-center`}>
@@ -48,6 +50,11 @@ function DynamicForm({ title, btnText, colorScheme, hoverScheme, fields, initial
                             <button type="submit" className={`${colorScheme} ${hoverScheme} cursor-pointer text-white w-[50px] py-2 flex items-center  justify-center rounded-sm transition`} >
                                 <img src={send} alt="" width={25} />
                             </button>
+                            {onCancel &&
+                                <button type='button' onClick={onCancel} className={`bg-red-400 hover:bg-red-500 cursor-pointer text-white w-[50px] py-2 mx-2 flex items-center  justify-center rounded-sm transition`} >
+                                    <img src={cancel} alt="" width={25} />
+                                </button>
+                            }
                         </div>
                     </Form>
                 )}
