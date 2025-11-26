@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import HelpPage from './pages/HelpPages/HelpPage';
 import RatePage from './pages/RatePages/RatePage';
+import ChatWindow from './pages/HelpPages/ChatWindow/ChatWindow';
 
 function App() {
   return (
@@ -33,7 +34,9 @@ function App() {
             <Route path='profile' element={<ProfilePage />} />
             <Route path='mood/dashboard' element={<MoodPage />} />
 
-            <Route path='help/dashboard' element={<HelpPage />} />
+            <Route path='help/dashboard' element={<HelpPage />} >
+              <Route path='chat/:userId' element={<ChatWindow />} />
+            </Route>
 
             <Route path='rate/dashboard' element={<RatePage />} />
 
