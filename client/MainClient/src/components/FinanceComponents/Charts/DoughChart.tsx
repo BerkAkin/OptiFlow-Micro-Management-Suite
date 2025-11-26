@@ -62,16 +62,16 @@ function DoughChart() {
             <div className=' py-6 flex items-center justify-center'>
                 <div className={` bg-white rounded-sm grid grid-cols-3`}>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Excp:</p>
+                        <p className='text-xs'>2500</p>
                     </div>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Gain:</p>
+                        <p className='text-xs'>2500</p>
                     </div>
                     <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-sm'>Bütçe:</p>
-                        <p className='text-sm'>2500</p>
+                        <p className='text-xs'>Net:</p>
+                        <p className='text-xs'>2500</p>
 
                     </div>
                 </div>
