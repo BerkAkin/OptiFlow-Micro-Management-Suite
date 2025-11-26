@@ -3,13 +3,19 @@ import DynamicForm from '../../DynamicForm/DynamicForm'
 function HelpRequestCard() {
     const handleSubmit = (values: any) => { console.log(values) }
     const initialValues = {
-        topic: "",
+        category: "",
         description: ""
     }
 
     const fields = [
-        { name: "topic", label: "Topic", id: "topic", placeholder: "Temp Topic", type: "text" as const },
-        { name: "description", label: "Description", id: "description", placeholder: "Temp Description", type: "text" as const, as: "textarea" as const }
+        {
+            name: "category", label: "Category", id: "category", placeholder: "", type: "text" as const, as: "select" as const, options: [
+                { value: "workEnvironment", label: "Work Environment" },
+                { value: "ergonomy", label: "Ergonomy" },
+                { value: "colleagues", label: "Colleagues" },
+            ]
+        },
+        { name: "description", label: "Description", id: "description", placeholder: "Description...", type: "text" as const, as: "textarea" as const }
     ]
 
     return (

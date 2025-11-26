@@ -27,8 +27,8 @@ function AddPaymentForm() {
     }
 
     const fields = [
-        { name: "description", label: "Description", id: "description", type: "text" as const, placeholder: "Temp Description" },
-        { name: "to", label: "To", id: "to", type: "text" as const, placeholder: "Temp To" },
+        { name: "description", label: "Description", id: "description", type: "text" as const, placeholder: "Description..." },
+        { name: "to", label: "To", id: "to", type: "text" as const, placeholder: "To..." },
         { name: "date", label: "Date", id: "date", type: "date" as const, placeholder: "" },
         { name: "quantity", label: "quantity", id: "quantity", type: "number" as const, placeholder: "1" },
 

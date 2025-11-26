@@ -16,7 +16,7 @@ const handleFilter = (values: FilterTypes) => {
 }
 
 const filterFields = [
-    { name: "description", placeholder: "Temp Description", type: "text" as const }
+    { name: "description", placeholder: "Description...", type: "text" as const }
 ]
 
 function InstallmentPaymentsCard() {

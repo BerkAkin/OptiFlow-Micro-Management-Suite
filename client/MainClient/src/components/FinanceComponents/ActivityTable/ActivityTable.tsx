@@ -15,7 +15,7 @@ function ActivityTable() {
     ]
     const filterFields = [
         { name: "date", type: "date" as const, placeholder: "", },
-        { name: "type", type: "select" as const, placeholder: "Temp type", options: [{ label: "Income", value: "Income" }, { label: "Expense", value: "Expense" }] },
+        { name: "type", type: "select" as const, placeholder: "", options: [{ label: "Income", value: "Income" }, { label: "Expense", value: "Expense" }] },
     ]
     const filterFunction = (values: filterValues) => {
         console.log(values);

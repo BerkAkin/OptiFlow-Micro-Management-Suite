@@ -70,8 +70,8 @@ function FinanceBillsPage() {
     }
 
     const fields = [
-        { name: "type", id: "type", type: "text" as const, label: "Type", placeholder: "Temp Type" },
-        { name: "description", id: "description", type: "text" as const, label: "Description", placeholder: "Temp Description" },
+        { name: "type", id: "type", type: "text" as const, label: "Type", placeholder: "Type..." },
+        { name: "description", id: "description", type: "text" as const, label: "Description", placeholder: "Description..." },
         { name: "quantity", id: "quantity", type: "number" as const, label: "Quantity", placeholder: "" },
         { name: "price", id: "price", type: "number" as const, label: "Price", placeholder: "" },
         { name: "total", id: "total", type: "text" as const, label: "Total", placeholder: "" },

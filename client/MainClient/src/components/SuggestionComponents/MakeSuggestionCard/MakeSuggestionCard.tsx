@@ -12,8 +12,8 @@ function MakeSuggestionCard() {
     }
 
     const fields = [
-        { name: "topic", label: "Topic", id: "topic", placeholder: "Temp Topic", type: "text" as const },
-        { name: "description", label: "Description", id: "description", placeholder: "Temp Description", type: "text" as const, as: "textarea" as const }
+        { name: "topic", label: "Topic", id: "topic", placeholder: "Topic...", type: "text" as const },
+        { name: "description", label: "Description", id: "description", placeholder: "Description...", type: "text" as const, as: "textarea" as const }
     ]
 
     return (

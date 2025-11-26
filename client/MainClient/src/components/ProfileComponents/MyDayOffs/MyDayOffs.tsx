@@ -23,8 +23,8 @@ function MyDayOffs() {
     const fields = [
         { name: "datesBetween", id: "datesBetween", type: "date" as const, label: "Date", placeholder: "" },
         { name: "days", id: "days", type: "number" as const, label: "Days", placeholder: "" },
-        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Temp Description" },
-        { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Temp Topic" },
+        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Description..." },
+        { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Topic..." },
     ]
 
     const tempData: any = [
@@ -33,7 +33,7 @@ function MyDayOffs() {
 
     const filterFields = [
         { name: "date", type: "date" as const, },
-        { name: "description", type: "text" as const, placeholder: "Temp Description" },
+        { name: "description", type: "text" as const, placeholder: "Description..." },
     ]
     const handleFilter = (values: filterValues) => {
         console.log(values);

@@ -16,7 +16,7 @@ function MySuggestions() {
     ]
     const filterFields = [
         { name: "status", type: "select" as const, options: [{ value: "approved", label: "Approved" }, { value: "rejected", label: "Rejected" }] },
-        { name: "description", type: "text" as const, placeholder: "Temp Description", },
+        { name: "description", type: "text" as const, placeholder: "Description...", },
         { name: "date", type: "date" as const, },
     ]
     const handleFilter = (values: filterValues) => {
