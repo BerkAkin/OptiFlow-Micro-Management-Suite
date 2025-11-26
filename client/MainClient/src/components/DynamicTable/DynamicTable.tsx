@@ -62,7 +62,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
 
                     <Formik onSubmit={handleFilter} initialValues={filterInitials}>
                         <Form>
-                            <div className='grid grid-cols-12 px-10'>
+                            <div className='grid grid-cols-12 pe-10 ps-2 flex items-center'>
                                 <div className=" col-span-10 grid grid-cols-12">
                                     {filterFields.map((item) => (
                                         <div className='col-span-4'>
