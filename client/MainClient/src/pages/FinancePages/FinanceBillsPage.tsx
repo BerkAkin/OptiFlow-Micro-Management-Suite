@@ -1,6 +1,8 @@
 import { Field, Form, Formik } from 'formik'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import DynamicForm from '../../components/DynamicForm/DynamicForm';
+import add from '../../assets/add.svg'
+import print from '../../assets/print.svg'
 
 interface productShape {
     type: string,
@@ -80,11 +82,10 @@ function FinanceBillsPage() {
             {
                 isAdd &&
                 <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
-                    <div className='bg-white rounded-lg shadow-custom border border-gray-200 h-[510px] w-72'>
-                        <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' btnText='Add' fields={fields} initialValues={initalProductValues} onSubmit={onAddApproveHandler} title='Add Product' />
-                        <div className='border border-gray-200'>
-                            <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer w-full bg-red-400 text-white p-2 rounded-sm hover:bg-red-500  '>Cancel</button>
-                        </div>
+                    <div className='bg-white rounded-lg shadow-custom border border-gray-200 h-[450px] w-72'>
+
+                        <DynamicForm colorScheme='bg-gray-400' hoverScheme='hover:bg-gray-500' btnText='Add' fields={fields} initialValues={initalProductValues} onCancel={() => setIsAdd(!isAdd)} onSubmit={onAddApproveHandler} title='Add Product' />
+
                     </div>
                 </div>
             }
@@ -198,7 +199,9 @@ function FinanceBillsPage() {
                             </table>
 
                             <div className='flex justify-end my-5'>
-                                <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer bg-sky-400 text-white p-2 hover:bg-sky-500'>Add New Product</button>
+                                <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer text-white px-2 '>
+                                    <img src={add} width={30} alt='Add new product' />
+                                </button>
                             </div>
                         </div>
                         <div className='mt-5 grid grid-cols-10'>
@@ -216,7 +219,9 @@ function FinanceBillsPage() {
                             </div>
                         </div>
                         <div className='flex justify-end'>
-                            <button onClick={() => onSubmitHandler} className='cursor-pointer bg-green-600 text-white p-2 hover:bg-green-700'>Create Invoice</button>
+                            <button onClick={() => onSubmitHandler} className='cursor-pointer text-white px-1'>
+                                <img src={print} alt='Create invoice' width={35} />
+                            </button>
                         </div>
 
 
