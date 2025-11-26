@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import DynamicForm from '../DynamicForm/DynamicForm';
 
 interface EmergencyFormTypes {
     person: string;
@@ -19,78 +19,29 @@ const handleReport = (values: EmergencyFormTypes) => {
     console.log(values);
 };
 
+interface Fields {
+    label: string,
+    name: string,
+    id: string,
+    type: "text" | "number" | "checkbox" | "date" | "file",
+    as?: "textarea" | "select",
+    placeholder: string
+}
+const fields = [
+    { name: "person", label: "Person", id: "person", type: "text" as const, as: "select" as const, placeholder: "", options: [{ label: "Berk Akın", value: "berkakin" }] },
+    { name: "affectedPerson", label: "Affected Person", id: "affectedPerson", type: "text" as const, as: "select" as const, placeholder: "", options: [{ label: "Berk Akın", value: "berkakin" }] },
+    { name: "date", label: "Date", id: "date", type: "date" as const, placeholder: "" },
+    { name: "incident", label: "Incident", id: "incident", type: "text" as const, as: "textarea" as const, placeholder: "Describe the incident..." },
+
+]
 
 function EmergencyPopUp() {
     return (
         <div className="absolute inset-0 bg-black/50 z-20 flex items-center justify-center">
             <div className="w-96 bg-white rounded-lg shadow-lg border border-gray-200">
 
-                <div className="w-full py-2 bg-red-500 rounded-t-lg text-center">
-                    <p className="text-2xl text-white font-rubik">Get Help</p>
-                </div>
+                <DynamicForm colorScheme='bg-red-500' hoverScheme='hover:bg-red-600' initialValues={initialValues} fields={fields} onSubmit={handleReport} title='Submit Mobbing' />
 
-                <Formik initialValues={initialValues} onSubmit={handleReport}>
-                    {({ isSubmitting }) => (
-                        <Form className="p-4 space-y-4">
-
-                            <div className="flex flex-col space-y-1">
-                                <label className="text-gray-700" htmlFor="person">Person</label>
-                                <Field
-                                    as="select"
-                                    name="person"
-                                    id="person"
-                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
-                                >
-                                    <option value="">Select Person</option>
-                                    <option value="BerkAkin">Berk AKIN</option>
-                                </Field>
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <label className="text-gray-700" htmlFor="affectedPerson">Affected Person</label>
-                                <Field
-                                    as="select"
-                                    name="affectedPerson"
-                                    id="affectedPerson"
-                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
-                                >
-                                    <option value="">Select Person</option>
-                                    <option value="BerkAkin">Berk AKIN</option>
-                                </Field>
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <label className="text-gray-700" htmlFor="date">Date</label>
-                                <Field
-                                    type="date"
-                                    name="date"
-                                    id="date"
-                                    className="border border-gray-200 rounded px-2 py-1 focus:outline-none"
-                                />
-                            </div>
-
-                            <div className="flex flex-col space-y-1">
-                                <label className="text-gray-700" htmlFor="incident">Incident</label>
-                                <Field
-                                    as="textarea"
-                                    rows={3}
-                                    name="incident"
-                                    id="incident"
-                                    placeholder="Describe the incident..."
-                                    className="border border-gray-200 rounded px-2 py-1 resize-none focus:outline-none"
-                                />
-                            </div>
-
-                            <div className="flex justify-center pt-2">
-                                <button
-                                    type="submit"
-                                    className="bg-red-500 text-white px-6 py-2 rounded-sm hover:bg-red-600 transition" >
-                                    Report
-                                </button>
-                            </div>
-                        </Form>
-                    )}
-                </Formik>
             </div>
         </div>
     );

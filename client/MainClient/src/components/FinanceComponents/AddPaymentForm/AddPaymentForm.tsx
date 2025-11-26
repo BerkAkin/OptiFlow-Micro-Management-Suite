@@ -36,7 +36,7 @@ function AddPaymentForm() {
     ]
     return (
         <div>
-            <DynamicForm btnText='Add Payment' colorScheme='bg-orange-400' hoverScheme='hover:bg-orange-500' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Add Payment' >
+            <DynamicForm colorScheme='bg-orange-400' hoverScheme='hover:bg-orange-500' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Add Payment' >
                 <div>
                     <div>
 

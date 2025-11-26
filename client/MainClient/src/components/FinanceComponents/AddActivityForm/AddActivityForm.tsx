@@ -33,7 +33,7 @@ function AddActivityForm() {
     ]
     return (
         <div>
-            <DynamicForm btnText='Add Activity' colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' initialValues={initialValues} title='Add Activity' onSubmit={handleSubmit} fields={fields} />
+            <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' initialValues={initialValues} title='Add Activity' onSubmit={handleSubmit} fields={fields} />
         </div >
     )
 }
