@@ -21,47 +21,37 @@ function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, 
     const [commentSection, setCommentSection] = useState<boolean>(false);
 
     return (
-        <div className='border border-gray-200 rounded-lg m-6 relative'>
+        <div className='border border-gray-200 rounded-lg m-6'>
             <div className='p-1 text-center flex justify-center items-center h-[25%] w-full'>
                 <p className='text-gray-900'>
                     {Header}
-                    <span className={`text-lg font-bold text-${Status == "Approved" ? "green" : Status == "Refused" ? "red" : "sky"}-600`}>
-                        {Status == "Approved" ? " ✔" : Status == "Refused" ? " ✘" : " ━"}
-                    </span>
+                    <button className='cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
+                    <button className='cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
                 </p>
             </div>
-            <div className='text-center flex justify-center items-center h-[25%]'>
+            <div className='text-center flex justify-center items-center h-[65%]'>
                 <p className='text-sm text-gray-700 px-6'>{Description}</p>
             </div>
-            <div className='p-6 text-center flex justify-center items-center h-[25%] w-full grid grid-cols-3'>
-                <div className='justify-center flex'>
-                    <button className='cursor-pointer bg-red-500 rounded-full shadow-custom   text-white'>✘</button>
-                    <button className='cursor-pointer bg-green-500 rounded-full shadow-custom  text-white mx-1 '>✔</button>
-                </div>
-                <div>
-                    <p className='text-gray-800'>
-                        <span>
-                            <button className='cursor-pointer '>
-                                <img src={down} width={20} alt="" />
-                            </button>
-                        </span>
-                        <span className='mx-1'>{VoteCount}</span>
-                        <span>
-                            <button className=' cursor-pointer text-2xl'>
-                                <img src={up} width={20} alt="" />
-                            </button>
-                        </span>
+            <div className='p-6 text-center flex justify-center items-center h-[10%]  w-full grid grid-cols-2'>
+                <div className=' flex items-center justify-start'>
+                    <p className='text-gray-800 grid grid-cols-3 flex items-center'>
+
+                        <button className='cursor-pointer'>
+                            <img src={down} width={20} alt="" />
+                        </button>
+                        {VoteCount}
+
+                        <button className=' cursor-pointer text-2xl '>
+                            <img src={up} width={20} alt="" />
+                        </button>
+
                     </p>
                 </div>
-                <div>
-                    <p className='text-gray-800'>
-                        <button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}>
-                            <span>
-                                <img src={list} width={20} alt="" />
-                            </span>
-                        </button> {CommentCount}
-                        <span></span>
-                    </p>
+                <div className=' flex items-center justify-end'>
+                    <button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}>
+                        <img src={list} width={20} alt="" />
+                    </button>
+                    <p className='text-gray-800 mx-1'> {CommentCount}</p>
                 </div>
             </div>
             {commentSection &&
