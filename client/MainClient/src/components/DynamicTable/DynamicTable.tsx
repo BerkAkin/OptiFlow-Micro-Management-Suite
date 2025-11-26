@@ -68,7 +68,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                         <div className='col-span-4'>
 
                                             {item.type === 'select' ? (
-                                                <Field className=" cursor-pointer px-6 py-1.5 w-[90%] border border-gray-200 text-gray-600" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
+                                                <Field className="rounded-sm cursor-pointer px-6 py-1.5 w-[90%] border border-gray-200 text-gray-600" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
                                                     <option value="">Select</option>
                                                     {item.options?.map(opt => (
                                                         <option value={opt.value}>{opt.label}</option>
@@ -76,7 +76,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                                 </Field>
 
                                             ) : (
-                                                <Field className="cursor-pointer w-[90%] px-6 py-1 border border-gray-200 text-gray-600 focus:outline-none" type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} />
+                                                <Field className="rounded-sm cursor-pointer w-[90%] px-6 py-1 border border-gray-200 text-gray-600 focus:outline-none" type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} />
                                             )}
                                         </div>
                                     ))}
