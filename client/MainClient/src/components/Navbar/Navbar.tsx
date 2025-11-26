@@ -9,7 +9,9 @@ import help from '../../assets/help.svg'
 import rating from '../../assets/rating.svg'
 import finance from '../../assets/finance.svg'
 import survey from '../../assets/survey.svg'
+import helpRequest from '../../assets/helpRequest.svg'
 import makeSuggestion from '../../assets/makeSuggestion.svg'
+import HelpRequestCard from "../HelpComponents/HelpRequestCard/HelpRequestCard";
 
 
 
@@ -18,9 +20,10 @@ function Navbar() {
   const { isAuth, setIsAuth } = useAuthContext();
 
   const [isSuggestion, setIsSuggestion] = useState<boolean>(false);
+  const [isHelp, setIsHelp] = useState<boolean>(false);
   const [isProfile, setIsProfile] = useState<boolean>(false);
-
   const [isOpen, setIsOpen] = useState(false);
+
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -30,6 +33,7 @@ function Navbar() {
         setIsOpen(false)
         setIsSuggestion(false)
         setIsProfile(false)
+        setIsHelp(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -94,6 +98,14 @@ function Navbar() {
 
 
         <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center ">
+
+          <div className="hidden w-full md:block md:w-auto me-2">
+            <div ref={(el) => { elementsRef.current[3] = el }} className="relative inline-block flex flex-col">
+              <button onClick={() => setIsHelp(!isHelp)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={helpRequest} alt="" /></button>
+              {isHelp && <HelpRequestCard />}
+            </div>
+          </div>
+
           <div className="hidden w-full md:block md:w-auto ">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
