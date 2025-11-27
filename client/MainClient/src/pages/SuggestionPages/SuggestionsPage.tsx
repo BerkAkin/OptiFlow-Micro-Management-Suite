@@ -9,6 +9,7 @@ import SuggestionShowcaseCard from '../../components/SuggestionComponents/Sugges
 
 const Data = [
     {
+        Id: 0,
         Status: "Approved",
         Header: "Sokak Hayvanları",
         Description: "Bence soğuk havada hayvanları ofiste ayrılmış bölümün içerisine almalıyız",
@@ -26,6 +27,7 @@ const Data = [
         ]
     },
     {
+        Id: 1,
         Status: " ",
         Header: "Sokak Hayvanları",
         Description: "Ofis camları günde 5 saat kadar açılmalı ve öyle kalmalı",
@@ -53,7 +55,7 @@ function SuggestIdeas() {
 
             <div className='col-span-2 bg-white h-[800px] rounded-lg shadow-custom border border-gray-200'>
                 <div className=' w-full text-center flex justify-center items-start'>
-                    <p className={`text-2xl text-center px-5 text-white bg-indigo-400 rounded-b-sm font-rubik`}>Current Suggestions</p>
+                    <p className={`text-xl text-center px-5 text-white bg-indigo-400 rounded-b-sm font-rubik`}>Current Suggestions</p>
                 </div>
                 <div className='h-[95%] overflow-y-auto'>
                     {Data.map((item, index) => (
