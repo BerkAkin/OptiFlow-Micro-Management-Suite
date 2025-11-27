@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import up from '../../../assets/up.svg'
 import down from '../../../assets/down.svg'
+import add from '../../../assets/add.svg'
 import list from '../../../assets/list.svg'
+import { Field, Form, Formik } from 'formik'
 
 interface SuggestionCardProps {
     Status: string,
@@ -56,9 +58,18 @@ function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, 
             </div>
             {commentSection &&
                 <div className='border-t border-gray-200 h-[200px] w-full overflow-y-auto'>
+                    <Formik initialValues={{ comment: "" }} onSubmit={(values: any) => { console.log(values) }}>
+                        <Form>
+                            <div className='flex justify-center items-center'>
+                                <Field as="textarea" rows={2} className="resize-none border rounded-md focus:outline-none border-gray-200 w-[70%] mx-3 px-2 my-2" name="comment" placeholder="Comment..." />
+                                <button type='submit'><img src={add} width={25} alt="" /></button>
+                            </div>
+
+                        </Form>
+                    </Formik>
                     {Comments.map((item, index) => (
                         <div key={index} className="border-b border-gray-200 last:border-none py-2 px-5 text-sm text-gray-600 text-center">
-                            {index + 1}) {item.CommentText}
+                            {index + 1}{")"} {item.CommentText}
                             <span className="text-sm text-gray-400 ps-1">{item.Date}</span>
                         </div>
                     ))}
