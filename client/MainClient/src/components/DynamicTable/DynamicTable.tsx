@@ -34,7 +34,7 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
     return (
         <div className='h-full'>
             <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                <p className={`text-2xl text-center text-white ${colorScheme} rounded-b-sm font-rubik px-6 `}>{title}</p>
+                <p className={`text-xl text-center text-white ${colorScheme} rounded-b-sm font-rubik px-6 `}>{title}</p>
             </div>
 
             <div className={`h-[10%] p-2 ${textScheme} font-bold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
