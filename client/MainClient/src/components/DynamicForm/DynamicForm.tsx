@@ -9,7 +9,7 @@ interface Fields {
     id: string,
     type: "text" | "number" | "checkbox" | "date" | "file",
     as?: "textarea" | "select",
-    placeholder: string,
+    placeholder?: string,
     options?: { value: string, label: string }[]
 }
 interface FormProps {
