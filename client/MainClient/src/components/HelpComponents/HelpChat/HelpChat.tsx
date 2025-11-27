@@ -12,13 +12,13 @@ function HelpChat() {
         <div className='h-full grid grid-cols-12 gap-6'>
             <div className='col-span-3 border border-gray-200 bg-white rounded-lg shadow-custom'>
                 <div className='flex justify-center mb-6'>
-                    <p className='px-6 rounded-b-md bg-lime-600 text-lg text-white'>Employees</p>
+                    <p className='px-6 rounded-b-md bg-lime-600 text-xl text-white'>Employees</p>
                 </div>
                 <div className='overflow-y-auto overflow-x-hidden h-[350px]'>
                     {
                         users.map((item) => (
                             <Link to={`chat/${item.id}`} className='cursor-pointer'>
-                                <div className='grid grid-cols-8 '>
+                                <div className='grid grid-cols-8 border rounded-md shadow-sm border-gray-200 my-2 mx-4 hover:bg-gray-50'>
                                     <div className='col-span-2 flex justify-center p-1'>
                                         <img className='border border-gray-400 rounded-full' width={60} height={45} src="" alt="" />
                                     </div>
