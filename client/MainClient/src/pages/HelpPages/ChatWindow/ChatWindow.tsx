@@ -30,9 +30,9 @@ const ChatWindow = () => {
     const sortedMessages = [...messages].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     return (
-        <div className='h-[400px] m-6 flex flex-col'>
+        <div className='h-[400px] m-4 flex flex-col'>
 
-            <div className='border-x border-t border-gray-200 rounded-t-lg h-[90%] overflow-y-auto p-2 flex flex-col gap-2'>
+            <div className='border-x border-t border-gray-200 rounded-t-md h-[90%] overflow-y-auto p-2 flex flex-col gap-2'>
                 <div className='border-b border-gray-200'>
                     <p className='text-gray-500 text-xl px-1 font-semibold'>{userId} Berk Akın</p>
                 </div>
