@@ -37,7 +37,7 @@ const ChatWindow = () => {
                     <p className='text-gray-500 text-xl px-1 font-semibold'>{userId} Berk Akın</p>
                 </div>
                 {sortedMessages.map(msg => (
-                    <div key={msg.id} className={`p-2 rounded-md max-w-[70%] ${msg.sender === "me" ? "bg-lime-300 self-end" : "bg-gray-200 self-start"}`} >
+                    <div key={msg.id} className={`p-2 rounded-md max-w-[70%] ${msg.sender === "me" ? "bg-lime-500 self-end" : "bg-gray-200 self-start"}`} >
                         <div>{msg.text}</div>
                         <div className='text-xs text-gray-500 mt-1'>{new Date(msg.date).toLocaleString()}</div>
                     </div>
