@@ -80,6 +80,25 @@ const installmentData = {
   ],
 };
 
+const remainingsData = {
+  maxPage: 6,
+  values: [
+    {
+      description: "Deneme",
+      Price: 123,
+      To: "Berk",
+    },
+  ],
+  filterFields: [
+    {
+      name: "description",
+      placeholder: "Description...",
+      type: "text" as const,
+    },
+    { name: "to", placeholder: "To", type: "text" as const },
+  ],
+};
+
 export const fetchMonthlyData = async () => {
   //const res = await api.get("/api/finance/monthly");
   //return res.data
@@ -102,6 +121,11 @@ export const fetchLatestActivity = async (filters: any, page: number) => {
 };
 
 export const fetchInstallments = async (filters: any, page: number) => {
-  /*  const res  = api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
+  /*  const res  = api.get('/api/finance/installements'{params:{...filters,page}}); axios oto query string yapıyor*/
   return installmentData;
+};
+
+export const fetchRemainings = async (filters: any, page: number) => {
+  /* const res= api.get('/api/fiance/remainings',{params:{...filters,page}}); */
+  return remainingsData;
 };
