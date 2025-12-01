@@ -17,14 +17,16 @@ interface TableProps {
     data: Record<string, any>[],
     filterFields?: filterFields[],
     handleFilter?: (values: any) => void,
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    onNext?: () => void
+    onPrev?: () => void
 }
 
 
 
 
 
-function DynamicTable({ title, colorScheme, textScheme, data, children, handleFilter, filterFields }: TableProps) {
+function DynamicTable({ title, colorScheme, textScheme, data, children, handleFilter, filterFields, onNext, onPrev }: TableProps) {
 
     const columns = Object.keys(data[0]);
     const gridTemplate = columns.map(col => (col === 'description' ? '4fr' : '1fr')).join(' ')
@@ -88,10 +90,10 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                                     </button>
                                 </div>
                                 <div className=' flex col-span-1 min-w-[80px] items-center'>
-                                    <button className="cursor-pointer w-full h-full p-2">
+                                    <button type="button" onClick={onPrev} className="cursor-pointer w-full h-full p-2">
                                         <img src={left} alt="" width={35} />
                                     </button>
-                                    <button className="cursor-pointer w-full h-full p-2">
+                                    <button type="button" onClick={onNext} className="cursor-pointer w-full h-full p-2">
                                         <img src={right} alt="" width={35} />
                                     </button>
                                 </div>
