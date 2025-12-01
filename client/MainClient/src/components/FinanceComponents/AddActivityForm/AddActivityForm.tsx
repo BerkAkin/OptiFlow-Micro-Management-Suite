@@ -14,7 +14,10 @@ function AddActivityForm() {
         date: new Date().toISOString().split("T")[0],
         description: "",
         type: "",
-        isExpense: false
+        isExpense: false,
+        isPartly: false,
+        partCount: 0,
+        partPrice: 0,
 
     }
 
@@ -26,14 +29,16 @@ function AddActivityForm() {
         { name: "date", label: "Date", id: "date", type: "date" as const, placeholder: "Date..." },
         { name: "description", label: "Description", id: "description", type: "text" as const, placeholder: "Description..." },
         { name: "type", label: "Type", id: "type", type: "text" as const, placeholder: "Type..." },
+        { name: "isPartly", label: "Is Partly?", id: "isPartly", type: "checkbox" as const, placeholder: "" },
+        { name: "partCount", label: "Part Count", id: "partCount", type: "number" as const, placeholder: "Part Count..." },
+        { name: "partPrice", label: "Part Price", id: "partPrice", type: "number" as const, placeholder: "Part Price..." },
         { name: "isExpense", label: "Is Expense?", id: "isExpense", type: "checkbox" as const, placeholder: "" },
         { name: "file-upload", label: "Select File ", id: "file-upload", type: "file" as const, placeholder: "" },
-
-
     ]
+
     return (
         <div>
-            <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' initialValues={initialValues} title='Add Activity' onSubmit={handleSubmit} fields={fields} />
+            <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' initialValues={initialValues} title='Add Transaction' onSubmit={handleSubmit} fields={fields} />
         </div >
     )
 }
