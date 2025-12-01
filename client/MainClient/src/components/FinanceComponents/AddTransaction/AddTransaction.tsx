@@ -1,9 +1,15 @@
+import { useCreateTransaction } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicForm from '../../DynamicForm/DynamicForm';
 
 function AddTransaction() {
 
+    const mutation = useCreateTransaction();
+
     const handleSubmit = (data: any) => {
-        console.log(data);
+        mutation.mutate(data, {
+            onSuccess: (data) => { console.log("Data Saved YAY", data) },
+            onError: (error) => { console.log("Error Na!", error) }
+        })
     }
 
     const initialValues = {
