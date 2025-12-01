@@ -4,6 +4,7 @@ import { CategoricalService } from "../../services/FinanceServices/CategoricalSe
 import { MostService } from "../../services/FinanceServices/MostService";
 import { LatestActivityService } from "../../services/FinanceServices/LatestActivityService";
 import { InstallmentService } from "../../services/FinanceServices/InstallmentService";
+import { RemainingsService } from "../../services/FinanceServices/RemainingsService";
 
 export const useMonthly = () => {
   return useQuery({
@@ -37,5 +38,12 @@ export const useInstallments = (filters: any, page: number) => {
   return useQuery({
     queryKey: ["financeInstallment", filters, page],
     queryFn: () => InstallmentService(filters, page),
+  });
+};
+
+export const useRemainings = (filters: any, page: number) => {
+  return useQuery({
+    queryKey: ["financeRemainings", filters, page],
+    queryFn: () => RemainingsService(filters, page),
   });
 };
