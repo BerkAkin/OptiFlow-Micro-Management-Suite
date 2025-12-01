@@ -1,28 +1,39 @@
-import { Link } from 'react-router'
+import { useInstallments } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicTable from '../../DynamicTable/DynamicTable'
-import external from '../../../assets/external.svg'
+import { useState } from 'react'
 
 
-interface FilterTypes {
-    description: string
-}
 
-const InstallCardProps = [
-    { "description": "Deneme", "Price": 12, "Parts": "2/4", "": <Link className='cursor-pointer' to={`Deneme`}><img className='ms-5' src={external} width={25} alt="" /></Link> },
-]
-
-const handleFilter = (values: FilterTypes) => {
-    console.log(values)
-}
-
-const filterFields = [
-    { name: "description", placeholder: "Description...", type: "text" as const }
-]
 
 function InstallmentPaymentsCard() {
+
+    const [page, setPage] = useState(1);
+    const [filters, setFilters] = useState({})
+
+    const handleFilter = (values: any) => {
+        setPage(1)
+        setFilters(values)
+    }
+
+    const onPrev = () => {
+        if (page > 1) setPage(page - 1)
+    }
+
+    const onNext = () => {
+        if (page < maxPage) setPage(page + 1)
+    }
+
+    const { error, isLoading, data } = useInstallments(filters, page);
+
+    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return (<p>Loading...</p>)
+    const { maxPage, values, filterFields } = data
+    console.log(data)
+    console.log(filters)
+    console.log(page)
     return (
         <div className='w-full h-full'>
-            <DynamicTable handleFilter={handleFilter} filterFields={filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={InstallCardProps} title='Installments' />
+            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={values} title='Installments' />
         </div>
 
     )
