@@ -28,7 +28,7 @@ function LatestTransactions() {
     return (
 
         <div className='h-full'>
-            <DynamicTable onNext={nextPage} onPrev={prevPage} textScheme='text-sky-400' colorScheme='bg-sky-400' data={data.values} title='Latest Activity' handleFilter={filterFunction} filterFields={data.filterFields} />
+            <DynamicTable onNext={nextPage} onPrev={prevPage} textScheme='text-sky-400' colorScheme='bg-sky-400' data={data.values} title='Transaction History' handleFilter={filterFunction} filterFields={data.filterFields} />
         </div>
     )
 }
