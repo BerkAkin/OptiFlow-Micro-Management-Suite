@@ -44,17 +44,6 @@ const dataLatestActivity = {
       price: 5000,
       invoice: "",
     },
-    {
-      type: "-",
-      name: "Deneme 2",
-      description: "Denemeler 2",
-      by: "Berk",
-      date: "2025-12-12",
-      exchange: "TL",
-      quantity: 1,
-      price: 4000,
-      invoice: "",
-    },
   ],
 
   filterFields: [
@@ -67,6 +56,26 @@ const dataLatestActivity = {
         { label: "Income", value: "Income" },
         { label: "Expense", value: "Expense" },
       ],
+    },
+  ],
+};
+
+const installmentData = {
+  maxPage: 2,
+  values: [
+    {
+      description: "Denemeler",
+      date: "2025.02.12",
+      parts: "2/4",
+      price: 5000,
+    },
+  ],
+
+  filterFields: [
+    {
+      name: "description",
+      type: "text" as const,
+      placeholder: "Description...",
     },
   ],
 };
@@ -90,4 +99,9 @@ export const fetchMostData = async () => {
 export const fetchLatestActivity = async (filters: any, page: number) => {
   /*  const res  = api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
   return dataLatestActivity;
+};
+
+export const fetchInstallments = async (filters: any, page: number) => {
+  /*  const res  = api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
+  return installmentData;
 };
