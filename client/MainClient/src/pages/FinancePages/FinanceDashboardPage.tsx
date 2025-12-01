@@ -31,7 +31,7 @@ function FinanceDashboardPage() {
     return (
         <div className='container mx-auto mt-6'>
             <div className='grid grid-cols-10 gap-6'>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 '>
+                <div className='col-span-3 bg-white shadow-custom rounded-lg border border-gray-200 '>
                     <BarChart />
                 </div>
                 <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200'>
@@ -41,7 +41,7 @@ function FinanceDashboardPage() {
 
                     <VerticalChart />
                 </div>
-                <div className='col-span-4 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto'>
+                <div className='col-span-3 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto'>
                     <Calendar />
                 </div>
             </div>
