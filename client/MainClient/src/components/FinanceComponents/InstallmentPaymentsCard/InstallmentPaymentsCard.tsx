@@ -28,6 +28,7 @@ function InstallmentPaymentsCard() {
 
     if (error || !data) return (<p>Error...</p>)
     if (isLoading) return (<p>Loading...</p>)
+
     return (
         <div className='w-full h-full'>
             <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Installments' />
