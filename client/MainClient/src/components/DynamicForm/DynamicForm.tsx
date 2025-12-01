@@ -36,7 +36,11 @@ function DynamicForm({ title, colorScheme, hoverScheme, fields, initialValues, o
                     <Form className="p-4 space-y-1">
                         {fields && fields.map((item, index) => (
                             <div className="flex flex-col space-y-1">
-                                <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
+                                {item.type !== "checkbox" ?
+                                    (
+                                        <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
+                                    ) : ""
+                                }
                                 {
                                     item.type === "file" ? (
                                         <input hidden id={item.id} name={item.name} type="file" onChange={(e) => { const file = e.target.files?.[0] || null; setFieldValue(item.name, file); }} />
@@ -47,9 +51,16 @@ function DynamicForm({ title, colorScheme, hoverScheme, fields, initialValues, o
                                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
                                             ))}
                                         </Field>
-                                    ) : (
-                                        <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" />
+                                    ) : item.type === "checkbox" ? (
+                                        <div className='flex justify-start space-x-2'>
+                                            <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
+                                            <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className=" cursor-pointer accent-sky-500 " />
+                                        </div>
+
                                     )
+                                        : (
+                                            <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" />
+                                        )
                                 }
                             </div>
                         ))}
