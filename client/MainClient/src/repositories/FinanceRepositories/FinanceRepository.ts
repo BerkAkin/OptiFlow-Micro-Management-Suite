@@ -30,8 +30,50 @@ const dataMost = {
   ],
 };
 
+const dataLatestActivity = {
+  maxPage: 10,
+  values: [
+    {
+      type: "+",
+      name: "Deneme ",
+      description: "Denemeler",
+      by: "Work",
+      date: "2025-02-12",
+      exchange: "$",
+      quantity: 3,
+      price: 5000,
+      invoice: "",
+    },
+    {
+      type: "-",
+      name: "Deneme 2",
+      description: "Denemeler 2",
+      by: "Berk",
+      date: "2025-12-12",
+      exchange: "TL",
+      quantity: 1,
+      price: 4000,
+      invoice: "",
+    },
+  ],
+
+  filterFields: [
+    { name: "date", type: "date" as const, placeholder: "" },
+    {
+      name: "type",
+      type: "select" as const,
+      placeholder: "",
+      options: [
+        { label: "Income", value: "Income" },
+        { label: "Expense", value: "Expense" },
+      ],
+    },
+  ],
+};
+
 export const fetchMonthlyData = async () => {
   //const res = await api.get("/api/finance/monthly");
+  //return res.data
   return data;
 };
 
@@ -43,4 +85,9 @@ export const fetchCategoricalData = async () => {
 export const fetchMostData = async () => {
   /* const res = await api.get('/api/finance/most') */
   return dataMost;
+};
+
+export const fetchLatestActivity = async (filters: any, page: number) => {
+  /*  const res  = api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
+  return dataLatestActivity;
 };
