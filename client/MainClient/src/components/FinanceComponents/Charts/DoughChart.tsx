@@ -1,55 +1,34 @@
-import { useState } from 'react'
 import { Doughnut } from "react-chartjs-2";
-import swap from '../../../assets/swap.svg'
+import { useCategorical } from '../../../hooks/FinanceHooks/useFinance';
 
-
-
-//CHARTLART OPTİMİZE EDİELCEK. VERİLERİ VERİTABANINDAN GELİKTEN SONRA INDEX MANTIĞI İLE 
-//VERİLER ARASINDA DÖNÜŞÜM YAPIALCAK KAROSEL İLE DEĞİL
 
 function DoughChart() {
 
-    const ChartExample = [[65, 81, 56, 55, 40], [36, 12, 85, 56, 24]];
-    const Colors = [['#22c55e', '#4ade80', '#16a34a', '#166534', '#65a30d', '#bbf7d0',], ['#f87171', '#ef4444', '#fca5a5', '#dc2626', '#fb7185', '#991b1b']]
-
-    const [chartData, setChartData] = useState<number[][]>(ChartExample);
-    const [color, setColors] = useState<string[][]>(Colors);
-
+    const { data, isLoading, error } = useCategorical();
+    if (isLoading) return <p className="p-6">Loading...</p>;
+    if (error || !data) return <p className="p-6">Error loading chart</p>;
+    const { categories, values } = data;
 
     const ChartData = {
-        labels: ['Yiyecek', 'Ulaşım', 'Tekstil', 'Ofis ve Kırtasiye', 'Temizlik', 'Eğlence Hizmetleri'],
+        labels: categories,
         datasets: [
             {
                 label: "İşlem Sayısı",
-                data: chartData[0],
-                backgroundColor: color[0],
+                data: values,
+                backgroundColor: ['#f87171', '#ef4444', '#dc2626', '#be123c', '#f43f5e', '#fb7185'],
             },
         ],
-    };
-
-
-    const handleNext = () => {
-        const rotated = [...chartData!.slice(1), chartData![0]];
-        setChartData(rotated);
-        const colorRotate = [...color!.slice(1), color![0]]
-        setColors(colorRotate);
     };
 
 
     return (
         <div className="h-[420px]">
             <div className='flex justify-center'>
-                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
+                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik bg-red-400`}>
                     Categorical
-                    <span>
-                        <button className={`h-[20px] text-white text-2xl ps-1 cursor-pointer`} onClick={handleNext}>
-                            <img src={swap} width={25} alt='' />
-                        </button>
-                    </span>
-
                 </p>
             </div>
-            <div className='h-[70%] pt-6'>
+            <div className='h-[90%] p-6'>
                 <Doughnut
                     data={ChartData}
                     options={{
@@ -59,24 +38,7 @@ function DoughChart() {
                     }}
                 />
             </div>
-            <div className=' py-6 flex items-center justify-center'>
-                <div className={` bg-white rounded-sm grid grid-cols-3`}>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-xs'>Excp:</p>
-                        <p className='text-xs'>2500</p>
-                    </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-xs'>Gain:</p>
-                        <p className='text-xs'>2500</p>
-                    </div>
-                    <div className={`flex items-center justify-evenly text-white p-2 m-1 font-rubik`} style={{ backgroundColor: `${color[0][0]}` }}>
-                        <p className='text-xs'>Net:</p>
-                        <p className='text-xs'>2500</p>
 
-                    </div>
-                </div>
-
-            </div>
 
         </div>
     )
