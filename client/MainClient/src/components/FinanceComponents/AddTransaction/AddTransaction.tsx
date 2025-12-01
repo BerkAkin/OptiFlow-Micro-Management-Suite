@@ -1,6 +1,6 @@
 import DynamicForm from '../../DynamicForm/DynamicForm';
 
-function AddActivityForm() {
+function AddTransaction() {
 
     const handleSubmit = (data: any) => {
         console.log(data);
@@ -43,4 +43,4 @@ function AddActivityForm() {
     )
 }
 
-export default AddActivityForm
+export default AddTransaction
