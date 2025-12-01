@@ -14,7 +14,7 @@ function AddTransaction() {
         date: new Date().toISOString().split("T")[0],
         description: "",
         type: "",
-        isExpense: false,
+        isIncome: false,
         isPartly: false,
         partCount: 0,
         partPrice: 0,
@@ -32,7 +32,7 @@ function AddTransaction() {
         { name: "isPartly", label: "Is Partly?", id: "isPartly", type: "checkbox" as const, placeholder: "" },
         { name: "partCount", label: "Part Count", id: "partCount", type: "number" as const, placeholder: "Part Count..." },
         { name: "partPrice", label: "Part Price", id: "partPrice", type: "number" as const, placeholder: "Part Price..." },
-        { name: "isExpense", label: "Is Expense?", id: "isExpense", type: "checkbox" as const, placeholder: "" },
+        { name: "isIncome", label: "Is Income?", id: "isIncome", type: "checkbox" as const, placeholder: "" },
         { name: "file-upload", label: "Select File ", id: "file-upload", type: "file" as const, placeholder: "" },
     ]
 
