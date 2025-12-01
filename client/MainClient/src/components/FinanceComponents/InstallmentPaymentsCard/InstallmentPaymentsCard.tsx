@@ -20,20 +20,17 @@ function InstallmentPaymentsCard() {
     }
 
     const onNext = () => {
-        if (page < maxPage) setPage(page + 1)
+        if (!data) return
+        if (page < data.maxPage) setPage(page + 1)
     }
 
     const { error, isLoading, data } = useInstallments(filters, page);
 
     if (error || !data) return (<p>Error...</p>)
     if (isLoading) return (<p>Loading...</p>)
-    const { maxPage, values, filterFields } = data
-    console.log(data)
-    console.log(filters)
-    console.log(page)
     return (
         <div className='w-full h-full'>
-            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={values} title='Installments' />
+            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Installments' />
         </div>
 
     )
