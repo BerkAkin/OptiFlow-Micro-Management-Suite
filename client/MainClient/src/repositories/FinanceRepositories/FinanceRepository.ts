@@ -116,16 +116,21 @@ export const fetchMostData = async () => {
 };
 
 export const fetchLatestActivity = async (filters: any, page: number) => {
-  /*  const res  = api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
+  /*  const res  = await api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
   return dataLatestActivity;
 };
 
 export const fetchInstallments = async (filters: any, page: number) => {
-  /*  const res  = api.get('/api/finance/installements'{params:{...filters,page}}); axios oto query string yapıyor*/
+  /*  const res  = await api.get('/api/finance/installements'{params:{...filters,page}}); axios oto query string yapıyor*/
   return installmentData;
 };
 
 export const fetchRemainings = async (filters: any, page: number) => {
-  /* const res= api.get('/api/fiance/remainings',{params:{...filters,page}}); */
+  /* const res= await api.get('/api/finance/remainings',{params:{...filters,page}}); */
   return remainingsData;
+};
+
+export const createTransaction = async (payload: any) => {
+  const res = await api.post("/api/finance/transactions", payload);
+  return res.data;
 };
