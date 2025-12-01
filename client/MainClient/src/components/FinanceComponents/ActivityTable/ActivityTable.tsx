@@ -11,7 +11,6 @@ function ActivityTable() {
     const { isLoading, error, data } = useLatestActivity(filters, page);
     if (isLoading) return (<p>Loading...</p>)
     if (error || !data) return (<p>Error...</p>)
-    const { values, filterFields, maxPage } = data;
 
     const filterFunction = (values: any) => {
         setPage(1);
@@ -20,7 +19,7 @@ function ActivityTable() {
 
     const nextPage = () => {
         if (!data) return;
-        if (page < maxPage) setPage(page + 1)
+        if (page < data.maxPage) setPage(page + 1)
     }
     const prevPage = () => {
         if (page > 1) setPage(page - 1);
@@ -29,7 +28,7 @@ function ActivityTable() {
     return (
 
         <div className='h-full'>
-            <DynamicTable onNext={nextPage} onPrev={prevPage} textScheme='text-sky-400' colorScheme='bg-sky-400' data={values} title='Latest Activity' handleFilter={filterFunction} filterFields={filterFields} />
+            <DynamicTable onNext={nextPage} onPrev={prevPage} textScheme='text-sky-400' colorScheme='bg-sky-400' data={data.values} title='Latest Activity' handleFilter={filterFunction} filterFields={data.filterFields} />
         </div>
     )
 }
