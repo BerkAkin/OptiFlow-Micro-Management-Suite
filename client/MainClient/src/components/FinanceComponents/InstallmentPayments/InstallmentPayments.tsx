@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-function InstallmentPaymentsCard() {
+function InstallmentPayments() {
 
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({})
@@ -37,4 +37,4 @@ function InstallmentPaymentsCard() {
     )
 }
 
-export default InstallmentPaymentsCard
+export default InstallmentPayments

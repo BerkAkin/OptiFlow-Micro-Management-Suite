@@ -4,7 +4,7 @@ import { useRemainings } from '../../../hooks/FinanceHooks/useFinance';
 
 
 
-function TodaysPaymentsCard() {
+function RemainingPayments() {
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({})
 
@@ -32,4 +32,4 @@ function TodaysPaymentsCard() {
     )
 }
 
-export default TodaysPaymentsCard
+export default RemainingPayments

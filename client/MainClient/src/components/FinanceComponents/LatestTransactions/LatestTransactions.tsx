@@ -4,7 +4,7 @@ import DynamicTable from '../../DynamicTable/DynamicTable';
 
 
 
-function ActivityTable() {
+function LatestTransactions() {
     const [filters, setFilters] = useState({});
     const [page, setPage] = useState(1);
 
@@ -33,4 +33,4 @@ function ActivityTable() {
     )
 }
 
-export default ActivityTable
+export default LatestTransactions
