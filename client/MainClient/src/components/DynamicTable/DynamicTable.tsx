@@ -38,8 +38,8 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
             </div>
 
             <div className={`h-[10%] p-2 ${textScheme} font-bold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
-                {columns.map((item) => (
-                    <div className={`${item === "description" ? "text-start ps-2" : "text-center"}`}>
+                {columns.map((item, index) => (
+                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center"}`}>
                         {item.toUpperCase()}
                     </div>
                 ))}
@@ -64,14 +64,14 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                         <Form>
                             <div className='grid grid-cols-12 pe-10 ps-2 flex items-center'>
                                 <div className=" col-span-10 grid grid-cols-12">
-                                    {filterFields.map((item) => (
-                                        <div className='col-span-4'>
+                                    {filterFields.map((item, index) => (
+                                        <div key={index} className='col-span-4'>
 
                                             {item.type === 'select' ? (
-                                                <Field className="rounded-sm cursor-pointer px-6 py-1.5 w-[90%] border border-gray-200 text-gray-600" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
+                                                <Field className="rounded-sm cursor-pointer px-6 py-1 w-[90%] border border-gray-200 text-gray-600 focus:outline-none" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
                                                     <option value="">Select</option>
-                                                    {item.options?.map(opt => (
-                                                        <option value={opt.value}>{opt.label}</option>
+                                                    {item.options?.map((opt, index) => (
+                                                        <option key={index} value={opt.value}>{opt.label}</option>
                                                     ))}
                                                 </Field>
 
