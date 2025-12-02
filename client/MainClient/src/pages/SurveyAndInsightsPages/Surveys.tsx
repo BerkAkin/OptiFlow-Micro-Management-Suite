@@ -2,37 +2,20 @@ import { Link } from 'react-router'
 import { Doughnut, } from "react-chartjs-2";
 import happy from '../../assets/happyWhite.svg'
 import sad from '../../assets/sadWhite.svg'
-
-type Survey = {
-    text: string,
-    slug: string,
-    date: string,
-    status: string,
-    participationCount: number,
-    satisfactionCount: number,
-    totalEmployee: number
-}
-type Surveys = {
-    surveys: Survey[]
-}
-
-
+import { useSurveys } from '../../hooks/SurveyHooks/useSurvey';
 
 
 
 function SurveyResults() {
-    const initialTempSurvey: Surveys = {
-        surveys: [
-            { text: "Management Survey Chapter One", slug: "Management-Survey-Chapter-One", date: "05.11.2025 07.11.2025", status: "Active", participationCount: 87, satisfactionCount: 56, totalEmployee: 100 },
-            { text: "Management Survey Chapter Two", slug: "Management-Survey-Chapter-Two", date: "02.11.2025 04.11.2025", status: "Timeout", participationCount: 94, satisfactionCount: 82, totalEmployee: 100 },
-            { text: "Management Survey Chapter Two", slug: "Management-Survey-Chapter-Two", date: "02.11.2025 04.11.2025", status: "Timeout", participationCount: 94, satisfactionCount: 82, totalEmployee: 100 },
-        ]
-    }
+    const { data, isLoading, error } = useSurveys();
+
+    if (isLoading) return (<p>Loading...</p>)
+    if (error || !data) return (<p>Error...</p>)
 
     return (
         <div className='container my-10 mx-auto'>
             <div className='mx-auto grid grid-cols-2 gap-6' >
-                {initialTempSurvey.surveys.map((item, index) => (
+                {data.data.map((item, index) => (
                     <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg`}>
                         <div className='col-span-4'>
                             <Link to={`${item.status === "Active" ? `/survey/details/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
