@@ -36,7 +36,7 @@ function SurveyDetails() {
                             {data.questions.map((question) => (
                                 <div key={question.id} className='rounded-sm p-6 m-6'>
                                     <div>
-                                        <div><p className='text-lg text-gray-800'>{question.id}{`) `}{question.text}</p></div>
+                                        <div><p className='text-lg text-gray-800'>{question.id + 1}{`) `}{question.text}</p></div>
                                     </div>
 
                                     <div className='mt-6'>
