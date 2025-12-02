@@ -12,6 +12,7 @@ import survey from '../../assets/survey.svg'
 import helpRequest from '../../assets/helpRequest.svg'
 import makeSuggestion from '../../assets/makeSuggestion.svg'
 import HelpRequestCard from "../HelpComponents/HelpRequestCard/HelpRequestCard";
+import icon from '../../assets/icon.png'
 
 
 
@@ -48,7 +49,7 @@ function Navbar() {
       <div className="grid h-[100%] grid-cols-12 gap-0">
 
         <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
-          <span className="text-3xl font-semibold ">OptiFlow Management Suite</span>
+          <span className="text-3xl font-semibold ">OptiFlow Management Suite<img className="inline ps-1" src={icon} width={45}></img></span>
         </div>
 
         <div className="col-span-6 space-x-6 w-[100%] flex flex-wrap items-center justify-center p-4">
