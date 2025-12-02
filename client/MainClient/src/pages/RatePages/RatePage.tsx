@@ -6,11 +6,11 @@ import UserComments from "../../components/RateComponents/UserComments/UserComme
 function RatePage() {
     return (
         <div className='my-6 container mx-auto space-y-6'>
-            <div className='grid grid-cols-12 gap-6 h-[380px]'>
-                <div className='col-span-9 shadow-custom rounded-lg border border-gray-200'>
+            <div className='grid grid-cols-12 gap-6 '>
+                <div className='col-span-9 '>
                     <RatingTable />
                 </div>
-                <div className='col-span-3 shadow-custom rounded-lg border border-gray-200'>
+                <div className='col-span-3 '>
                     <RateOthers />
                 </div>
             </div>
