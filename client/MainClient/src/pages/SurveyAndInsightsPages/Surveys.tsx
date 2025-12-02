@@ -19,52 +19,62 @@ function SurveyResults() {
                     <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg`}>
                         <div className='col-span-4'>
                             <Link to={`${item.status === "Active" ? `/survey/details/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
-                                <div className={`${item.status === "Timeout" ? "bg-gray-100" : "hover:bg-indigo-50"} w-full h-full border-gray-200 border-e`}>
-                                    <div className='h-[50%] flex items-center justify-center'>
-                                        <p className='font-rubik text-center text-2xl text-gray-600 mx-4'>
+                                <div className={`${item.status === "Timeout" ? "bg-gray-50" : "hover:bg-indigo-50"} w-full h-full border-gray-200 border-e rounded-s-lg`}>
+                                    <div className='h-[40%] flex items-center justify-center'>
+                                        <p className='font-rubik text-center text-2xl text-gray-600 mx-2 relative '>
                                             {item.text}
-                                            <span className='text-sm'>
-                                                {item.status === "Timeout" ?
-                                                    (
-                                                        <span className='h-[10%] flex justify-end text-sky-500'>
-                                                            <Link to={`/survey/result/${item.slug}`}>Go to Result {">"}</Link>
-                                                        </span>
-                                                    ) :
-                                                    ""}
-                                            </span>
+                                            {item.status === "Timeout" ?
+                                                (
+                                                    <span className='h-[10%] absolute bottom-0 right-0 z-10 pt-2 text-sm text-sky-500'>
+                                                        <Link to={`/survey/result/${item.slug}`}>Go to Result {">"}</Link>
+                                                    </span>
+                                                ) : ""
+                                            }
+
                                         </p>
 
                                     </div>
-                                    <div className='h-[25%] flex items-end justify-center'>
-                                        <p className={item.status === "Active" ? "font-rubik text-green-700 p-2 text-xl" : "font-rubik text-red-600 text-xl"}>{item.status}</p>
+                                    <div className='h-[20%]'>
+
                                     </div>
-                                    <div className='h-[25%] flex items-center justify-center'>
-                                        <p className='text-gray-600 font-rubik '>{item.date}</p>
+                                    <div className='h-[40%] grid grid-cols-3'>
+                                        <div>
+                                            <div className='flex items-end justify-center'><img className='bg-orange-400 rounded-full' src={happy} alt="" width={40} /></div>
+                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.satisfactionCount} </p></div>
+                                        </div>
+                                        <div className=''>
+                                            <div className='flex justify-center'>
+                                                <p className={item.status === "Active" ? "font-rubik text-green-600 text-xl " : "font-rubik text-red-500 text-xl"}>{item.status}</p>
+                                            </div>
+                                            <div className='flex justify-center'>
+                                                <p className='text-gray-600 font-rubik text-md'>{item.date}</p>
+
+                                            </div>
+                                        </div>
+                                        <div >
+                                            <div className='flex items-end justify-center'> <img className='bg-sky-400 rounded-full' src={sad} alt="" width={40} /></div>
+                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </Link>
                         </div>
-                        <div className='col-span-6 grid  h-full grid-cols-3'>
-                            <div className='my-auto'>
-                                <Doughnut
-                                    data={{
-                                        labels: ['Participators', 'Nonparticipators'],
-                                        datasets: [{
-                                            data: [item.participationCount, item.totalEmployee - item.participationCount],
-                                            backgroundColor: ['#34d399', '#22c55e',],
-                                        }]
-                                    }}
-                                    options={{ plugins: { legend: { display: true, position: "bottom" } } }} />
-                            </div>
+                        <div className='col-span-6 grid h-full p-6'>
 
-                            <div className='bg-orange-400 text-white '>
-                                <div className='h-[50%]  flex items-center justify-center'><img src={happy} alt="" width={80} /></div>
-                                <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.satisfactionCount} </p></div>
-                            </div>
-                            <div className='bg-sky-400 text-white rounded-e-sm '>
-                                <div className='h-[50%] flex items-center justify-center'> <img src={sad} alt="" width={80} /></div>
-                                <div className='h-[50%] flex items-center justify-center'><p className=' text-4xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
-                            </div>
+                            <Doughnut
+                                data={{
+                                    labels: ['Respondents', 'Non respondents'],
+                                    datasets: [{
+                                        data: [item.participationCount, item.totalEmployee - item.participationCount],
+                                        backgroundColor: ['#34d399', '#22c55e',],
+                                    }]
+                                }}
+                                options={{ plugins: { legend: { display: true, position: "right" } }, animation: true, maintainAspectRatio: false }} />
+
+
+
 
                         </div>
                     </div>
