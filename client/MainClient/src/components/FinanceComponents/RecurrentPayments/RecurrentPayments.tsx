@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import DynamicTable from '../../DynamicTable/DynamicTable'
-import { useRemainings } from '../../../hooks/FinanceHooks/useFinance';
+import { useRecurrent } from '../../../hooks/FinanceHooks/useFinance';
 
 
 
-function RemainingPayments() {
+function RecurrentPayments() {
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({})
 
@@ -20,16 +20,16 @@ function RemainingPayments() {
         setFilters(values)
     }
 
-    const { isLoading, error, data } = useRemainings(filters, page);
+    const { isLoading, error, data } = useRecurrent(filters, page);
     if (error || !data) return (<p>Error...</p>)
     if (isLoading) return (<p>Loading...</p>)
 
     return (
         <div className='w-full h-full'>
-            <DynamicTable onNext={onNext} onPrev={onPrev} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Remainings' />
+            <DynamicTable onNext={onNext} onPrev={onPrev} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Recurrent Payments' />
         </div>
 
     )
 }
 
-export default RemainingPayments
+export default RecurrentPayments
