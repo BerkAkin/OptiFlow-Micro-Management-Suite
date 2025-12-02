@@ -1,4 +1,4 @@
-import { useInstallments } from '../../../hooks/FinanceHooks/useFinance';
+import { useInstallment } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicTable from '../../DynamicTable/DynamicTable'
 import { useState } from 'react'
 
@@ -24,7 +24,7 @@ function InstallmentPayments() {
         if (page < data.maxPage) setPage(page + 1)
     }
 
-    const { error, isLoading, data } = useInstallments(filters, page);
+    const { error, isLoading, data } = useInstallment(filters, page);
 
     if (error || !data) return (<p>Error...</p>)
     if (isLoading) return (<p>Loading...</p>)
