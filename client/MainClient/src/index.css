@@ -3,7 +3,12 @@
 
 @theme  {
    --shadow-custom: 0px 1px 10px 0px rgba(0,0,0,0.1);
-   --font-rubik: ;
+   --color-pale-100:#F5F5F5;
+   --color-pale-200:#F0F2F5;
+   --color-pale-300:#EDEDED;
+   --color-pale-400:#FAF9F6;
+   --color-pale-500:#F7F6F3;
+
 }
 
 
