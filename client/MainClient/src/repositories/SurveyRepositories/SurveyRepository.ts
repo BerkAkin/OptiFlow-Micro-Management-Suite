@@ -109,3 +109,8 @@ export const fetchSurveyResult = async (slug: string) => {
   return res.data */
   return tempResult;
 };
+
+export const sendSurvey = async (payload: any) => {
+  const res = await api.post(`/api/surveys`, payload);
+  return res.data;
+};
