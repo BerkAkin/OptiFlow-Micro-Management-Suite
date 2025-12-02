@@ -68,6 +68,7 @@ const installmentData = {
       date: "2025.02.12",
       parts: "2/4",
       price: 5000,
+      detail: "/dtl/ins/1",
     },
   ],
 
@@ -80,13 +81,14 @@ const installmentData = {
   ],
 };
 
-const remainingsData = {
+const recurrentData = {
   maxPage: 6,
   values: [
     {
       description: "Deneme",
-      Price: 123,
-      To: "Berk",
+      price: 123,
+      to: "Berk",
+      recurs: "25th",
     },
   ],
   filterFields: [
@@ -107,27 +109,37 @@ export const fetchMonthlyData = async () => {
 
 export const fetchCategoricalData = async () => {
   //const res = await api.get("/api/finance/categorical");
+  //return res.data
+
   return catData;
 };
 
 export const fetchMostData = async () => {
   /* const res = await api.get('/api/finance/most') */
+  //return res.data
+
   return dataMost;
 };
 
 export const fetchLatestActivity = async (filters: any, page: number) => {
   /*  const res  = await api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
+  //return res.data
+
   return dataLatestActivity;
 };
 
 export const fetchInstallments = async (filters: any, page: number) => {
   /*  const res  = await api.get('/api/finance/installements'{params:{...filters,page}}); axios oto query string yapıyor*/
+  //return res.data
+
   return installmentData;
 };
 
-export const fetchRemainings = async (filters: any, page: number) => {
+export const fetchRecurrent = async (filters: any, page: number) => {
   /* const res= await api.get('/api/finance/remainings',{params:{...filters,page}}); */
-  return remainingsData;
+  //return res.data
+
+  return recurrentData;
 };
 
 export const createTransaction = async (payload: any) => {
