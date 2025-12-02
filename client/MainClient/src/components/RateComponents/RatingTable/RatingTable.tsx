@@ -16,7 +16,7 @@ function RatingTable() {
     }
 
     return (
-        <div className='h-full'>
+        <div className='h-full bg-white rounded-lg shadow-custom'>
             <DynamicTable colorScheme='bg-red-400' textScheme='text-red-400' data={tempData} title='Employee Ratings' filterFields={filterFields} handleFilter={handleFilter} />
         </div>
     )
