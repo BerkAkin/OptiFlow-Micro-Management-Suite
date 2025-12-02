@@ -2,6 +2,7 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import { SurveyListService } from "../../services/SurveyServices/SurveyListService";
 import { SurveyDetailsService } from "../../services/SurveyServices/SurveyDetailsService";
 import { sendSurveyAnswersService } from "../../services/SurveyServices/SendSurveyAnswersService";
+import { SurveyResultService } from "../../services/SurveyServices/SurveyResultService";
 
 export const useSurveys = () => {
   return useQuery({
@@ -27,5 +28,12 @@ export const useSubmitSurvey = () => {
     onError: (error: any) => {
       console.log("Error", error);
     },
+  });
+};
+
+export const useSurveyResult = (slug: string) => {
+  return useQuery({
+    queryKey: ["surveyResult", slug],
+    queryFn: () => SurveyResultService(slug),
   });
 };
