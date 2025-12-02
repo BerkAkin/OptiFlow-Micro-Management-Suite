@@ -3,6 +3,7 @@ import { SurveyListService } from "../../services/SurveyServices/SurveyListServi
 import { SurveyDetailsService } from "../../services/SurveyServices/SurveyDetailsService";
 import { sendSurveyAnswersService } from "../../services/SurveyServices/SendSurveyAnswersService";
 import { SurveyResultService } from "../../services/SurveyServices/SurveyResultService";
+import { SurveyBuilderService } from "../../services/SurveyServices/SurveyBuilderService";
 
 export const useSurveys = () => {
   return useQuery({
@@ -35,5 +36,17 @@ export const useSurveyResult = (slug: string) => {
   return useQuery({
     queryKey: ["surveyResult", slug],
     queryFn: () => SurveyResultService(slug),
+  });
+};
+
+export const useSendSurvey = () => {
+  return useMutation({
+    mutationFn: (payload: any) => SurveyBuilderService(payload),
+    onSuccess: (data: any) => {
+      console.log("Survey submitted successfully!", data);
+    },
+    onError: (error: any) => {
+      console.log("Error", error);
+    },
   });
 };
