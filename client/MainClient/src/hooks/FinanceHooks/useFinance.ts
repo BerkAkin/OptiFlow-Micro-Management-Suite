@@ -4,7 +4,7 @@ import { CategoricalService } from "../../services/FinanceServices/CategoricalSe
 import { MostService } from "../../services/FinanceServices/MostService";
 import { LatestActivityService } from "../../services/FinanceServices/LatestActivityService";
 import { InstallmentService } from "../../services/FinanceServices/InstallmentService";
-import { RemainingsService } from "../../services/FinanceServices/RemainingsService";
+import { RecurrentService } from "../../services/FinanceServices/RecurrentService";
 import { CreateTransaction } from "../../services/FinanceServices/AddTransactionService";
 
 export const useMonthly = () => {
@@ -35,17 +35,17 @@ export const useLatestActivity = (filters: any, page: number) => {
   });
 };
 
-export const useInstallments = (filters: any, page: number) => {
+export const useInstallment = (filters: any, page: number) => {
   return useQuery({
     queryKey: ["financeInstallment", filters, page],
     queryFn: () => InstallmentService(filters, page),
   });
 };
 
-export const useRemainings = (filters: any, page: number) => {
+export const useRecurrent = (filters: any, page: number) => {
   return useQuery({
     queryKey: ["financeRemainings", filters, page],
-    queryFn: () => RemainingsService(filters, page),
+    queryFn: () => RecurrentService(filters, page),
   });
 };
 
