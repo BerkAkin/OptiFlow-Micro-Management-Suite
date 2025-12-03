@@ -8,6 +8,7 @@ import { Field, Form, Formik } from 'formik'
 interface SuggestionCardProps {
     Status: string,
     Header: string,
+    Date: string,
     Description: string,
     VoteCount: number,
     CommentCount: number,
@@ -18,36 +19,39 @@ interface SuggestionCardProps {
 
 }
 
-function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, Comments }: SuggestionCardProps) {
+function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, Comments, Date }: SuggestionCardProps) {
 
     const [commentSection, setCommentSection] = useState<boolean>(false);
 
     return (
-        <div className='border border-gray-200 rounded-lg m-6'>
-            <div className='p-1 text-center flex justify-center items-center h-[25%] w-full'>
+        <div className='border border-gray-200 rounded-lg '>
+            <div className='text-center py-4 flex justify-center items-center  w-full'>
                 <p className='text-gray-900'>
                     {Header}
                     <button className='cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
                     <button className='cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
                 </p>
             </div>
-            <div className='text-center flex justify-center items-center h-[65%]'>
+            <div className='text-center py-4 flex justify-center items-center '>
                 <p className='text-sm text-gray-700 px-6'>{Description}</p>
             </div>
-            <div className='p-6 text-center flex justify-center items-center h-[10%]  w-full grid grid-cols-2'>
+            <div className='text-center px-6 py-4 flex justify-center items-center   w-full grid grid-cols-3'>
                 <div className=' flex items-center justify-start'>
                     <p className='text-gray-800 grid grid-cols-3 flex items-center'>
 
                         <button className='cursor-pointer'>
-                            <img src={down} width={20} alt="" />
+                            <img className='hover:bg-red-300 rounded-full' src={down} width={20} alt="" />
                         </button>
                         {VoteCount}
 
                         <button className=' cursor-pointer text-2xl '>
-                            <img src={up} width={20} alt="" />
+                            <img className='hover:bg-green-300 rounded-full' src={up} width={20} alt="" />
                         </button>
 
                     </p>
+                </div>
+                <div className=' flex justify-center items-center'>
+                    <p className={`${Status === "Approved" ? 'text-green-600' : 'text-red-500'} `}>{Status}</p>
                 </div>
                 <div className=' flex items-center justify-end'>
                     <button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}>
@@ -55,6 +59,9 @@ function SuggestionCard({ Status, Header, Description, VoteCount, CommentCount, 
                     </button>
                     <p className='text-gray-800 mx-1'> {CommentCount}</p>
                 </div>
+            </div>
+            <div className='flex items-center  py-1 justify-center'>
+                <p className='text-sm text-gray-400'>{Date}</p>
             </div>
             {commentSection &&
                 <div className='border-t border-gray-200 h-[200px] w-full overflow-y-auto'>
