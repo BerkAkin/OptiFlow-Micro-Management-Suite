@@ -1,11 +1,16 @@
-import { Field, Formik, Form } from 'formik';
+import { useMakeSuggestion } from '../../../hooks/SuggestionHooks/useSuggestion';
 import DynamicForm from '../../DynamicForm/DynamicForm';
 
 
 
 function MakeSuggestionCard() {
 
-    const handleSubmit = (values: any) => { console.log(values) }
+    const mutation = useMakeSuggestion();
+
+    const handleSubmit = (values: any) => {
+        mutation.mutate(values)
+    }
+
     const initialValues = {
         topic: "",
         description: ""
