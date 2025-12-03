@@ -9,9 +9,8 @@ import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
 import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
-import HelpPage from './pages/HelpPages/HelpPage';
-import RatePage from './pages/RatePages/RatePage';
-import ChatWindow from './pages/HelpPages/ChatWindow/ChatWindow';
+import SupportPage from './pages/SupportPages/SupportPage';
+import ChatWindow from './pages/SupportPages/SupportChatWindow/SupportChatWindow';
 
 function App() {
   return (
@@ -34,11 +33,10 @@ function App() {
             <Route path='profile' element={<ProfilePage />} />
             <Route path='mood/dashboard' element={<MoodPage />} />
 
-            <Route path='help/dashboard' element={<HelpPage />} >
+            <Route path='support/dashboard' element={<SupportPage />} >
               <Route path='chat/:userId' element={<ChatWindow />} />
             </Route>
 
-            <Route path='rate/dashboard' element={<RatePage />} />
 
           </Route>
         </Routes>
