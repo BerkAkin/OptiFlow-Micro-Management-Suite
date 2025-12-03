@@ -4,7 +4,7 @@ import { VoteSuggestionService } from "../../services/SuggestionServices/VoteSug
 import { CommentSuggestionService } from "../../services/SuggestionServices/CommentSuggestionService";
 import { ApproveOrRejectSuggestionService } from "../../services/SuggestionServices/ApproveOrRejectSuggestionService";
 import { SuggestionShowcaseService } from "../../services/SuggestionServices/SuggestionShowcaseService";
-import { MakeSuggestion } from "../../services/SuggestionServices/MakeSuggestion";
+import { MakeSuggestionService } from "../../services/SuggestionServices/MakeSuggestionService";
 
 export const useSuggestions = () => {
   return useQuery({
@@ -58,7 +58,7 @@ export const useShowcase = () => {
 
 export const useMakeSuggestion = () => {
   return useMutation({
-    mutationFn: (values: any) => MakeSuggestion(values),
+    mutationFn: (values: any) => MakeSuggestionService(values),
     onSuccess: (data: any) => {
       console.log("Suggestion decision submitted successfully!", data);
     },
