@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
 import { Link } from "react-router";
 import MakeSuggestionCard from "../SuggestionComponents/MakeSuggestionCard/MakeSuggestionCard";
@@ -6,12 +6,11 @@ import happy from '../../assets/happy.svg'
 import suggestion from '../../assets/suggestion.svg'
 import bill from '../../assets/bill.svg'
 import help from '../../assets/help.svg'
-import rating from '../../assets/rating.svg'
 import finance from '../../assets/finance.svg'
 import survey from '../../assets/survey.svg'
 import helpRequest from '../../assets/helpRequest.svg'
 import makeSuggestion from '../../assets/makeSuggestion.svg'
-import HelpRequestCard from "../HelpComponents/HelpRequestCard/HelpRequestCard";
+import SupportRequestCard from "../SupportComponents/SupportRequestCard/SupportRequestCard";
 import icon from '../../assets/icon.png'
 
 
@@ -86,14 +85,10 @@ function Navbar() {
           </div>
           <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/help/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={help} alt="" /></Link>
+              <Link to={`/support/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={help} alt="" /></Link>
             </ul>
           </div>
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/rate/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={rating} alt="" /></Link>
-            </ul>
-          </div>
+
         </div>
 
 
@@ -103,7 +98,7 @@ function Navbar() {
           <div className="hidden w-full md:block md:w-auto me-2">
             <div ref={(el) => { elementsRef.current[3] = el }} className="relative inline-block flex flex-col">
               <button onClick={() => setIsHelp(!isHelp)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={helpRequest} alt="" /></button>
-              {isHelp && <HelpRequestCard />}
+              {isHelp && <SupportRequestCard />}
             </div>
           </div>
 
