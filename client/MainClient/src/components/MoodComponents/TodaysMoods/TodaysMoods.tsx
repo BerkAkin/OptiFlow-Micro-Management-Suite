@@ -10,7 +10,7 @@ function TodaysMoods() {
 
 
     const tempData = [
-        { "user": "Berk Akın", "mood": "Happy", "tags": "Work, Food, Weather", "date": "30.11.2025" },
+        { "employee": "Berk Akın", "mood": "Happy", "tags": "Work, Food, Weather", "date": "30.11.2025" },
     ]
     const handleFilter = (values: filterTypes) => {
         console.log(values)
