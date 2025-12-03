@@ -1,4 +1,3 @@
-import React from 'react'
 import star from '../../../assets/star.svg'
 import crown from '../../../assets/crown.svg'
 
