@@ -122,15 +122,15 @@ export const fetchMostData = async () => {
 };
 
 export const fetchLatestActivity = async (filters: any, page: number) => {
-  /*  const res  = await api.get('/api/finance/latestActivity'{params:{...filters,page}}); axios oto query string yapıyor*/
-  //return res.data
+  /*  const res  = await api.get('/api/finance/latestActivity',{params:{...filters,page}});
+  //return res.data*/
 
   return dataLatestActivity;
 };
 
 export const fetchInstallments = async (filters: any, page: number) => {
-  /*  const res  = await api.get('/api/finance/installements'{params:{...filters,page}}); axios oto query string yapıyor*/
-  //return res.data
+  /*  const res  = await api.get('/api/finance/installements',{params:{...filters,page}});
+  //return res.data*/
 
   return installmentData;
 };
