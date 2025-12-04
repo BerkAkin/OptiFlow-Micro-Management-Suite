@@ -1,17 +1,19 @@
 
 import { Doughnut } from "react-chartjs-2";
+import { useCategoricalSupport } from "../../../hooks/SupportHooks/UseSupport";
 
 function SupportDoughChart() {
 
-    const ChartExample = [65, 81, 56, 55, 40];
-
+    const { data, isLoading, error } = useCategoricalSupport();
+    if (isLoading) return (<p>Loading...</p>)
+    if (error || !data) return (<p>Error...</p>)
 
     const ChartData = {
-        labels: ['Employees', 'Work Environment', 'Stress', 'Health', 'Incident'],
+        labels: data.labels,
         datasets: [
             {
                 label: "İşlem Sayısı",
-                data: ChartExample,
+                data: data.values,
                 backgroundColor: ["#65a30d", "#84cc16", "#4d7c0f", "#3f6212", "#365314", "#a3e635"],
             },
         ],
