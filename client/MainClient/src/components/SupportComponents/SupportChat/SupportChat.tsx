@@ -1,13 +1,14 @@
 import { Link, Outlet } from 'react-router'
+import { useSupportEmployees } from '../../../hooks/SupportHooks/UseSupport';
 
-
-const users = [
-    { id: 0, name: "Berk Akın", img: "Image", latestMessage: "This is a message from Berk and it's so long...", date: "25.11.2025" },
-    { id: 1, name: "Berk Akın", img: "Image", latestMessage: "This is a message", date: "25.11.2025" },
-    { id: 2, name: "Berk Akın", img: "Image", latestMessage: "This is a message", date: "25.11.2025" },
-]
 
 function SupportChat() {
+
+    const { data, isLoading, error } = useSupportEmployees();
+
+    if (isLoading) return (<p>Loading...</p>)
+    if (error || !data) return (<p>Error...</p>)
+
     return (
         <div className='h-full grid grid-cols-12 gap-6'>
             <div className='col-span-3 border border-gray-200 bg-white rounded-lg shadow-custom'>
@@ -16,7 +17,7 @@ function SupportChat() {
                 </div>
                 <div className='overflow-y-auto overflow-x-hidden h-[350px]'>
                     {
-                        users.map((item) => (
+                        data.map((item) => (
                             <Link to={`chat/${item.id}`} className='cursor-pointer'>
                                 <div className='grid grid-cols-8  border rounded-md shadow-sm border-gray-200 my-2 mx-4 hover:bg-gray-50'>
 
@@ -29,10 +30,10 @@ function SupportChat() {
                                     </div>
                                     <div className='col-span-2 flex items-center justify-center overflow-hidden text-start items-center flex'>
 
-                                        <p className="text-gray-400">278</p>
+                                        <p className="text-gray-400">{item.votes}</p>
                                     </div>
                                     <div className='col-span-2 flex items-center justify-center text-end'>
-                                        <p className="text-gray-400">4.8 ★</p>
+                                        <p className="text-gray-400">{item.stars} ★</p>
                                     </div>
 
                                 </div>
