@@ -1,7 +1,7 @@
 import SupportChat from '../../components/SupportComponents/SupportChat/SupportChat'
 import SupportBarChart from '../../components/SupportComponents/SupportCharts/SupportBarChart'
 import SupportDoughChart from '../../components/SupportComponents/SupportCharts/SupportDoughChart'
-import RateOthers from '../../components/RateComponents/RateOthers/RateOthers'
+import RateOthers from '../../components/SupportComponents/RateOthers/RateOthers'
 
 function SupportPage() {
     return (
