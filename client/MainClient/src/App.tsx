@@ -10,7 +10,7 @@ import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import SupportPage from './pages/SupportPages/SupportPage';
-import ChatWindow from './pages/SupportPages/SupportChatWindow/SupportChatWindow';
+import ChatWindow from './pages/SupportPages/SupportChatWindow';
 
 function App() {
   return (
