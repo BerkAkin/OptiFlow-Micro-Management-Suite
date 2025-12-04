@@ -1,7 +1,13 @@
+import { useRequestSupport } from '../../../hooks/SupportHooks/UseSupport'
 import DynamicForm from '../../DynamicForm/DynamicForm'
 
 function SupportRequestCard() {
-    const handleSubmit = (values: any) => { console.log(values) }
+
+    const mutation = useRequestSupport();
+
+    const handleSubmit = (values: any) => {
+        mutation.mutate(values)
+    }
     const initialValues = {
         category: "",
         description: ""
