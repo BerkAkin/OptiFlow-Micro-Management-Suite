@@ -1,0 +1,11 @@
+services:
+  landingclient:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5172:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: ["npm", "run", "dev", "--", "--host"]
