@@ -5,6 +5,9 @@ import veryHappy from '../../../../src/assets/veryHappy.svg'
 import neutral from '../../../../src/assets/neutral.svg'
 import save from '../../../assets/save.svg'
 import { Field, FieldArray, Form, Formik } from 'formik'
+import { useRecordMood } from '../../../hooks/MoodHooks/UseMood'
+
+
 
 
 const MoodReasons = [
@@ -28,17 +31,20 @@ const initialValues: initialValueTypes = {
     moodSelect: 0
 }
 
-const handleMoodRecord = (values: any) => {
-    console.log(values)
-}
 
 function MoodRecorder() {
+
+    const mutation = useRecordMood();
+
+    const handleMoodRecord = (values: any) => {
+        mutation.mutate(values);
+    }
 
     return (
         <div className='grid'>
             <div className='bg-white rounded-lg border border-gray-200 shadow-custom h-24 flex items-center'>
 
-                <Formik initialValues={initialValues} onSubmit={handleMoodRecord}>
+                <Formik initialValues={initialValues} onSubmit={handleMoodRecord} validateOnChange={false} validateOnBlur={false}>
                     {({ isSubmitting, values }) => (
                         <Form className='grid grid-cols-10 '>
                             <div className='col-span-3 flex items-center border-e border-gray-200'>
