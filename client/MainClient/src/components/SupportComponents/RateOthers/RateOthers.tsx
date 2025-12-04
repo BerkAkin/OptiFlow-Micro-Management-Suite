@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import DynamicForm from '../../DynamicForm/DynamicForm'
+import { useRateOthers } from '../../../hooks/SupportHooks/UseSupport'
 
 
 interface FormValueTypes {
@@ -13,9 +14,6 @@ const initialValues: FormValueTypes = {
     stars: 0,
 }
 
-const handleSubmit = (values: FormValueTypes) => {
-    console.log(values)
-}
 
 
 
@@ -23,6 +21,12 @@ function RateOthers() {
 
     const [hoverIndex, setHoverIndex] = useState<number | null>(null);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+    const mutation = useRateOthers();
+
+    const handleSubmit = (values: FormValueTypes) => {
+        mutation.mutate(values);
+    }
 
 
     const fields = [
