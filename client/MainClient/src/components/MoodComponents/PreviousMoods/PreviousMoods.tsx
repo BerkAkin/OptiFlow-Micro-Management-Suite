@@ -1,27 +1,35 @@
 import { Line } from 'react-chartjs-2'
+import { usePreviousMoods } from '../../../hooks/MoodHooks/UseMood';
 
-const data = {
-    labels: ["Pzt", "Salı", "Çar", "Per", "Cuma"],
-    datasets: [
-        {
-            label: "Mood",
-            data: [1, 3, 2, 4, 5],
-        },
-    ],
-};
-
-const moodLabels: any = {
-    1: "Kötü",
-    2: "Orta",
-    3: "İyi",
-    4: "Çok İyi",
-    5: "Mükemmel"
-};
 
 function PreviousMoods() {
+
+    const { data, isLoading, error } = usePreviousMoods(1);
+    if (isLoading) return (<p>Loading...</p>)
+    if (error || !data) return (<p>Error...</p>)
+    const { days, values } = data;
+
+    const chartData = {
+        labels: days,
+        datasets: [
+            {
+                label: "Mood",
+                data: values
+            },
+        ],
+    };
+
+    const moodLabels: any = {
+        1: "Kötü",
+        2: "Orta",
+        3: "İyi",
+        4: "Çok İyi",
+        5: "Mükemmel"
+    };
+
     return (
         <div className='h-full p-6'>
-            <Line data={data} options={{
+            <Line data={chartData} options={{
                 scales: {
                     y: {
 
@@ -34,6 +42,7 @@ function PreviousMoods() {
                     }
                 },
                 maintainAspectRatio: false,
+                borderColor: "#fb7185",
                 plugins: { legend: { display: false } }
             }} />
         </div>
