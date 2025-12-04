@@ -1,16 +1,19 @@
 import { Chart } from "react-chartjs-2";
+import { useMonthlySupport } from "../../../hooks/SupportHooks/UseSupport";
 
 function SupportBarChart() {
 
-    const ChartExample = [[65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40]]
+    const { data, isLoading, error } = useMonthlySupport();
+    if (isLoading) return (<p>Loading...</p>)
+    if (error || !data) return (<p>Error...</p>)
 
     const ChartData = {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        labels: data.months,
         datasets: [
             {
                 type: 'bar' as const,
                 backgroundColor: "#65a30d",
-                data: ChartExample[0],
+                data: data.newData,
             },
         ],
     }
