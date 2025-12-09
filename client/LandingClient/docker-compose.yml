@@ -3,11 +3,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
+    networks:
+      - project_micro_network
     ports:
       - "5172:5173"
     volumes:
       - .:/app
       - landing-packages:/app/node_modules
     command: ["npm", "run", "dev", "--", "--host"]
+    
 volumes:
   landing-packages:
+
+networks:
+    project_micro_network:
+        external: true
