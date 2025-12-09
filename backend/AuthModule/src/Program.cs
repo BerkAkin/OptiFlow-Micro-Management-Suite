@@ -45,8 +45,9 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AuthDBContext>();
+    dbContext.Database.EnsureDeleted();
     dbContext.Database.Migrate();
-   // DbSeeder.Seed(dbContext);
+    DbSeeder.Seed(dbContext);
 }
 
 
