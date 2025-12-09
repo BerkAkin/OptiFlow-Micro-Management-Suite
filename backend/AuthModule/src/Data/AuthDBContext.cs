@@ -11,6 +11,9 @@ namespace AuthModule.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
