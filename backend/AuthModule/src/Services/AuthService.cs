@@ -40,7 +40,7 @@ namespace AuthModule.Services
                 tenant.TenantModules = new List<TenantModule>();
                  foreach (var moduleId in registerDTO.SelectedModuleIds)
                 {
-                    tenant.TenantModules.Add(new TenantModule{ModuleId = moduleId});
+                    tenant.TenantModules.Add(new TenantModule{ModuleId = Convert.ToInt32(moduleId)});
                 }
                 await _context.Tenants.AddAsync(tenant);
                 await _context.SaveChangesAsync(); 
@@ -59,9 +59,16 @@ namespace AuthModule.Services
                 TenantId = tenant.Id,
                 DateCreate = DateTime.UtcNow,
                 DateUpdate = DateTime.UtcNow,
-                DepartmentId = 4
-          
-            };
+                DepartmentId = 4,
+                Street = registerDTO.Street, 
+                Street2 = registerDTO.Street2,
+                ApartmentNum = registerDTO.ApartmentNum,
+                DoorNumber = registerDTO.DoorNumber,
+                Province = registerDTO.Province,
+                District = registerDTO.District,
+                FullAddress = registerDTO.FullAddress,
+
+    };
 
 
             await _context.Users.AddAsync(user);
