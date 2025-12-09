@@ -5,9 +5,16 @@ services:
       dockerfile: Dockerfile.dev
     ports:
       - "5173:5173"
+    networks:
+      - project_micro_network
     volumes:
       - .:/app
       - main-packages:/app/node_modules
     command: ["npm", "run", "dev", "--", "--host"]
+    
 volumes:
     main-packages:
+
+networks:
+    project_micro_network:
+        external: true
