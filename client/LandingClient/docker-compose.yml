@@ -7,5 +7,7 @@ services:
       - "5172:5173"
     volumes:
       - .:/app
-      - /app/node_modules
+      - landing-packages:/app/node_modules
     command: ["npm", "run", "dev", "--", "--host"]
+volumes:
+  landing-packages:
