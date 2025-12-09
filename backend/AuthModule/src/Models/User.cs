@@ -10,8 +10,12 @@ namespace AuthModule.Models
         public string Surname { get; set; }
         public string Email { get; set; }
         public string PasswordHash { get; set; }
-        public DateTime DateCreate { get; set; } = DateTime.UtcNow;
-        public DateTime DateUpdate { get; set; } = DateTime.UtcNow;
+        public string PhoneNum { get; set; }
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; }
+        public DateTime BirthDate { get; set; }
+        public DateTime DateCreate { get; set; }
+        public DateTime DateUpdate { get; set; }
         public RefreshToken RefreshToken { get; set; }
         public int TenantId { get; set; }
         public Tenant Tenant { get; set; }
