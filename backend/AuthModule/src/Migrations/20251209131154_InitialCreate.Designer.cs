@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthModule.Migrations
 {
     [DbContext(typeof(AuthDBContext))]
-    [Migration("20250826170121_InitialCreate")]
+    [Migration("20251209131154_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -24,6 +24,23 @@ namespace AuthModule.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("AuthModule.Models.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
+                });
 
             modelBuilder.Entity("AuthModule.Models.Module", b =>
                 {
@@ -39,7 +56,7 @@ namespace AuthModule.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Module");
+                    b.ToTable("Modules");
                 });
 
             modelBuilder.Entity("AuthModule.Models.RefreshToken", b =>
@@ -85,7 +102,7 @@ namespace AuthModule.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tenant");
+                    b.ToTable("Tenants");
                 });
 
             modelBuilder.Entity("AuthModule.Models.TenantModule", b =>
@@ -119,11 +136,17 @@ namespace AuthModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DateCreate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateUpdate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -137,6 +160,10 @@ namespace AuthModule.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -145,6 +172,8 @@ namespace AuthModule.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("TenantId");
 
@@ -183,11 +212,19 @@ namespace AuthModule.Migrations
 
             modelBuilder.Entity("AuthModule.Models.User", b =>
                 {
+                    b.HasOne("AuthModule.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AuthModule.Models.Tenant", "Tenant")
                         .WithMany()
                         .HasForeignKey("TenantId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Department");
 
                     b.Navigation("Tenant");
                 });
