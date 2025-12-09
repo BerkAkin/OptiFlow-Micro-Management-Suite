@@ -4,26 +4,23 @@ public static class DbSeeder
 {
     public static void Seed(AuthDBContext context)
     {
-        if (context.Users.Any()) return; 
+        if(context.Departments.Any()) return;
+        if(context.Modules.Any()) return;
 
-       
-        var tenantA = new Tenant { Name = "TenantA", };
-        var tenantB = new Tenant { Name = "TenantB" };
 
-        var moduleD = new Module { Name = "D_Module" };
-        var moduleF = new Module { Name = "F_Module" };
+        var financeModule = new Module { Name = "FIN" };
+        var surveyModule = new Module { Name = "SUR" };
+        var suggestionModule = new Module { Name = "SUG" };
+        var supportModule = new Module { Name = "SUP" };
+        var moodsModule = new Module { Name = "MOO" };
 
-        tenantA.TenantModules = new List<TenantModule> {
-            new TenantModule { Tenant = tenantA, Module = moduleD },
-            new TenantModule { Tenant = tenantA, Module = moduleF }
-        };
-        tenantB.TenantModules = new List<TenantModule> {
-            new TenantModule { Tenant = tenantB, Module = moduleF }
-        };
+        var financeAccountant = new Department { Name = "Finance Accountant" };
+        var humanResources = new Department { Name = "Human Resources" };
+        var manager = new Department { Name = "Manager" };
+        var employee = new Department { Name = "Employee" };
 
-        context.Users.AddRange(
-            new User { Name = "User1", Surname="Temp", PasswordHash="asdafasf", Email="berk@mail", Tenant = tenantA }
-        );
+        context.Departments.AddRange(employee,financeAccountant,humanResources,manager);
+        context.Modules.AddRange(financeModule,surveyModule,suggestionModule,supportModule,moodsModule);
 
         context.SaveChanges();
     }
