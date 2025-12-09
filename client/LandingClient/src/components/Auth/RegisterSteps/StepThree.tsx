@@ -1,47 +1,81 @@
-import { MicroPlan, MidiPlan, MacroPlan } from "../../../constants/PacksConstants"
+import React, { useState } from 'react'
 
-import PackCard from '../../PackCard/PackCard';
+function StepThree({ handleChange, registerInfo, setRegisterInfo, previousStep, setIsModal }: any) {
 
-function StepThree({ handleChange, previousStep, nextStep, setIsModal }: any) {
+    const [date, setDate] = useState<Date | null>(new Date());
 
+    async function handleSubmit() {
+        console.log(registerInfo)
+        try {
+            const res = await fetch("http://", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(registerInfo),
+            });
 
+            if (!res.ok) throw new Error("Kayıt başarısız!");
+            console.log("Kayıt Başarılı")
+
+        } catch (err) {
+            console.error(err);
+        }
+    }
 
     return (
-        <div>
-            <div className="text-center">
-                <h1 className='text-4xl text-white'>PURCHASE SUBSCRIPTION</h1>
-                <h1 className='text-lg text-white my-6'><span className="">Plan Selection</span></h1>
-            </div>
-            <div className="flex items-center justify-center">
+        <div className='border-white/10'>
+            <div className='w-96 h-[450px] pt-6 bg-white rounded-sm space-y-6'>
 
-                <PackCard Text="TempText1" ButtonText="Select" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={MicroPlan} />
-
-                <PackCard Text="TempText2" ButtonText="Select" Price={1000} Header="Macro Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={false} SingleItems={MacroPlan} />
-
-                <PackCard Text="TempText3" ButtonText="Select" Price={900} Header="Midi Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={false} SingleItems={MidiPlan} />
-
-
-            </div>
-
-            <div className='grid grid-cols-3 flex mt-9'>
-                <div className='justify-center flex'>
-                    <input onChange={handleChange} type="radio" name="packSelection" value="Economic" className=" h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-red-400" />
+                <div className="text-center">
+                    <h1 className='text-4xl text-gray-700'>PURCHASE SUBSCRIPTION</h1>
+                    <h1 className='text-lg text-gray-700 mt-6'><span>Payment Info</span></h1>
                 </div>
-                <div className=' justify-center flex'>
-                    <input onChange={handleChange} type="radio" name="packSelection" value="General" className=" h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-purple-400" />
+                <div className='w-full flex justify-center'>
+                    <select className='w-[95%] border-gray-200 border focus:outline-none p-2' name='selectedModuleIds' onChange={handleChange}>
+                        <option>Select Pack...</option>
+                        <option value={["1", "2"]}>Mini</option>
+                        <option value={["1", "2", "3", "4"]}>Optimal</option>
+                        <option value={["1", "2", "3", "4", "5"]}>Macro</option>
+                    </select>
                 </div>
-                <div className=' justify-center flex'>
-                    <input onChange={handleChange} type="radio" name="packSelection" value="Full" className=" h-5 w-5 cursor-pointer appearance-none rounded-full border border-slate-300 checked:border-yellow-400" />
-                </div>
-            </div>
-            <div className="flex justify-center mt-8">
-                <button onClick={previousStep} className='bg-black w-36 mx-2 text-white h-12' >Previous</button>
-                <button onClick={nextStep} className='bg-black  w-36 mx-2 text-white h-12' >Next</button>
-                <button onClick={() => setIsModal(false)} className='bg-red-800 mx-2 w-36 text-white' >Cancel</button>
-            </div>
 
+
+                {/* <div className='text-center '>
+                    <input onChange={handleChange} type="text" name="nameAndSurname" placeholder="First and Last Name" className="w-56 h-8 ps-2 text-gray-700 border border-gray-200 focus:outline-none bg-transparent focus:bg-transparent" />
+                </div>
+
+
+                <div className='text-center '>
+                    <input onChange={handleChange} type="text" name="cardNumber" placeholder="Card Number" className="w-56 h-8 ps-2 text-gray-700 border border-gray-200 focus:outline-none bg-transparent focus:bg-transparent" />
+
+                </div> */}
+
+
+                <div className='text-center '>
+
+                </div>
+
+                {/*  <div className='text-center flex justify-center text-gray-700  '>
+
+                    <input onChange={handleChange} type="text" name="cvv" placeholder="CVV" className="w-10 text-center text-gray-700 border border-gray-200 focus:outline-none bg-transparent focus:bg-transparent" />
+                    <p className=' ms-6 me-1 text-start text-gray-400'>Valid Date:</p>
+                    <input name='validDateMonth' onChange={handleChange} className="w-4 text-sm text-gray-700 border border-gray-200 focus:outline-none bg-transparent focus:bg-transparent" />
+                    <span className='mx-1'>/</span>
+                    <input name='validDateYear' onChange={handleChange} className="w-4 text-sm text-gray-700 border border-gray-200 focus:outline-none bg-transparent focus:bg-transparent" />
+                </div> */}
+
+
+
+                <div className="flex justify-center mt-8">
+
+                    <button onClick={previousStep} className='bg-black w-16 mx-1 text-white h-12' >Previous</button>
+                    <button onClick={handleSubmit} className='bg-green-800 w-24 mx-2 text-white h-12' >Purchase</button>
+
+                    <button onClick={() => setIsModal(false)} className='bg-red-800 mx-1 w-16 text-white' >Cancel</button>
+
+                </div>
+            </div>
         </div>
+
     )
 }
-
 export default StepThree
