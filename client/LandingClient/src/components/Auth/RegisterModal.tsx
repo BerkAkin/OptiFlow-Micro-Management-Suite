@@ -4,7 +4,6 @@ import { ModalContext } from '../../context/ModalContext'
 import StepOne from './RegisterSteps/StepOne';
 import StepTwo from './RegisterSteps/StepTwo';
 import StepThree from './RegisterSteps/StepThree';
-import StepFour from './RegisterSteps/StepFour';
 import ProgressCounter from '../ProgressCounter/ProgressCounter';
 
 
@@ -21,12 +20,12 @@ interface registerInfoProps {
     province: string,
     district: string,
     fullAddress: string,
-    packSelection: string,
-    nameAndSurname: string,
-    cardNumber: string,
-    validDateMonth: string,
-    validDateYear: string,
-    cvv: string,
+    selectedModuleIds: number[],
+    /* nameAndSurname: string,
+       cardNumber: string,
+      validDateMonth: string,
+      validDateYear: string,
+      cvv: string, */
 }
 
 function RegisterModal() {
@@ -47,12 +46,12 @@ function RegisterModal() {
         province: "",
         district: "",
         fullAddress: "",
-        packSelection: "",
-        nameAndSurname: "",
-        cardNumber: "",
-        validDateMonth: "",
-        validDateYear: "",
-        cvv: "",
+        selectedModuleIds: [],
+        /* nameAndSurname: "",
+          cardNumber: "",
+         validDateMonth: "",
+         validDateYear: "",
+         cvv: "", */
     });
     const nextStep = () => {
         setStep(prev => prev + 1);
@@ -86,12 +85,7 @@ function RegisterModal() {
             case 3:
                 return (
                     <>
-                        <StepThree handleChange={handleChange} registerInfo={registerInfo} setRegisterInfo={setRegisterInfo} nextStep={nextStep} setIsModal={setIsModal} previousStep={prevStep} />
-                    </>)
-            case 4:
-                return (
-                    <>
-                        <StepFour handleChange={handleChange} registerInfo={registerInfo} setRegisterInfo={setRegisterInfo} setIsModal={setIsModal} previousStep={prevStep} />
+                        <StepThree handleChange={handleChange} registerInfo={registerInfo} setRegisterInfo={setRegisterInfo} setIsModal={setIsModal} previousStep={prevStep} />
                     </>)
             default:
                 return null;
