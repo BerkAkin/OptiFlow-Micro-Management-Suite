@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthModule", "AuthModule\AuthModule\AuthModule.csproj", "{C135A3FD-DFB2-2294-A5F7-7CE50163B4BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthModule", "AuthModule\src\AuthModule.csproj", "{C135A3FD-DFB2-2294-A5F7-7CE50163B4BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway\Gateway.csproj", "{38F20DB7-9036-2404-9873-15AE7A95308B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroFinanceModule", "MicroFinanceModule\MicroFinanceModule\MicroFinanceModule.csproj", "{D17EF1D6-2785-F35A-4E6A-BD4ADD5735FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\src\Gateway.csproj", "{38F20DB7-9036-2404-9873-15AE7A95308B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

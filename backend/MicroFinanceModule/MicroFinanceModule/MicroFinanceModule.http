@@ -1,6 +1,0 @@
-@MicroFinanceModule_HostAddress = http://localhost:5097
-
-GET {{MicroFinanceModule_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
