@@ -38,8 +38,11 @@ namespace AuthModule.Controllers
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO) {
-            var result =await _authService.Login(loginDTO);
-            return Ok(new { token=result });
+     
+               var res = await _authService.Login(loginDTO);
+                return Ok(res);
+            
+           
         }
 
 
