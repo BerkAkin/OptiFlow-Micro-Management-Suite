@@ -9,7 +9,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:8080
-      - ConnectionStrings__DefaultConnection=Server=auth-db;Database=AuthServiceDB;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+      - ConnectionStrings__AuthModuleDb=Server=auth-db;Database=db_auth;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
     volumes:
       - ./AuthModule/src:/app
       - auth-service-bin:/app/bin  
