@@ -1,9 +1,13 @@
 version: '3.8'
 
 services:
+
+
   auth-service:
     image: mcr.microsoft.com/dotnet/sdk:8.0
     container_name: auth-service
+    networks:
+      - project_micro_network
     ports:
       - "5000:8080"
     environment:
@@ -19,6 +23,9 @@ services:
     depends_on:
       - auth-db
 
+
+
+
   auth-db:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: auth-db
@@ -27,10 +34,38 @@ services:
       - MSSQL_SA_PASSWORD=MicroUser123!
     ports:
       - "1433:1433"
+    networks:
+      - project_micro_network
     volumes:
     - auth-mssql-db:/var/opt/mssql
+
+
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+    networks:
+        - project_micro_network
+    environment:
+        RABBITMQ_DEFAULT_USER: user
+        RABBITMQ_DEFAULT_PASS: password
+    volumes:
+        - rabbitmq_data:/var/lib/rabbitmq
+
+
+
 
 volumes:
     auth-service-bin:
     auth-service-obj:
     auth-mssql-db:
+    rabbitmq_data:
+    
+    
+networks:
+    project_micro_network:
+        external: true
