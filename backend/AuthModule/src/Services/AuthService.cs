@@ -32,10 +32,37 @@ namespace AuthModule.Services
             if (user is not null)
                 throw new Exception("Email zaten kayıtlı");
 
-            user = _mapper.Map<User>(registerDTO);
-            user.DateCreate = DateTime.Now;
-            user.DateUpdate = DateTime.Now;
-            user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDTO.Password);
+            var tenant = await _context.Tenants.FirstOrDefaultAsync(t => t.Name == registerDTO.Tenant);
+
+            if (tenant is null)
+            {
+                tenant = new Tenant{ Name = registerDTO.Tenant};
+                tenant.TenantModules = new List<TenantModule>();
+                 foreach (var moduleId in registerDTO.SelectedModuleIds)
+                {
+                    tenant.TenantModules.Add(new TenantModule{ModuleId = moduleId});
+                }
+                await _context.Tenants.AddAsync(tenant);
+                await _context.SaveChangesAsync(); 
+
+               
+            }
+
+            user = new User
+            {
+                Name = registerDTO.Name,
+                Surname = registerDTO.Surname,
+                Email = registerDTO.Email,
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDTO.Password),
+                PhoneNum = registerDTO.PhoneNum,
+                BirthDate = registerDTO.BirthDate,
+                TenantId = tenant.Id,
+                DateCreate = DateTime.UtcNow,
+                DateUpdate = DateTime.UtcNow,
+                DepartmentId = 4
+          
+            };
+
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
@@ -88,6 +115,7 @@ namespace AuthModule.Services
 
             return accessToken;
 
+
         }
 
 
@@ -100,10 +128,11 @@ namespace AuthModule.Services
                 throw new Exception("Refresh token bulunamadı");
 
 
-            var user = await _context.Users.Include(u => u.RefreshToken).FirstOrDefaultAsync(u => u.RefreshToken.Token == refreshToken);
-            
+            var user = await _context.Users.Include(u=>u.RefreshToken).Include(u => u.Tenant).ThenInclude(t => t.TenantModules).ThenInclude(tm => tm.Module)
+                .FirstOrDefaultAsync(u => u.RefreshToken.Token == refreshToken);
+
             if (user == null || user.RefreshToken.Expires < DateTime.UtcNow)
-                throw new Exception("Refresh token geçersiz veya süresi dolmuş"); //YENİDEN GİRİŞ YAPMALI Kİ TOKEN ALSIN
+                throw new Exception("Refresh token geçersiz veya süresi dolmuş"); 
 
 
             var newAccessToken = _tokenCreateService.GenerateAccessToken(user);
