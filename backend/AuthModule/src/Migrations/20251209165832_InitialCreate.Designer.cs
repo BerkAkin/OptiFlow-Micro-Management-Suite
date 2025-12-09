@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthModule.Migrations
 {
     [DbContext(typeof(AuthDBContext))]
-    [Migration("20251209131154_InitialCreate")]
+    [Migration("20251209165832_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -136,6 +136,10 @@ namespace AuthModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApartmentNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
@@ -148,7 +152,19 @@ namespace AuthModule.Migrations
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<string>("District")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DoorNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -161,6 +177,18 @@ namespace AuthModule.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street2")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
