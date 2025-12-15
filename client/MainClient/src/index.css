@@ -8,6 +8,7 @@
    --color-pale-300:#EDEDED;
    --color-pale-400:#FAF9F6;
    --color-pale-500:#F7F6F3;
+   --color-pale-600:#f6f8fd;
 
 }
 
@@ -39,6 +40,12 @@ body {
     font-family:'rubik';
    src: local('rubik'), url(./fonts/RubikRegular.ttf) format('truetype');
 }
+
+@font-face {
+    font-family:'inter';
+   src: local('inter'), url(./fonts/Inter.ttf) format('truetype');
+}
+
 ::-webkit-scrollbar {
     width: 5px;
 }
