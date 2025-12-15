@@ -35,24 +35,24 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
 
     return (
         <div className='h-full'>
-            <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                <p className={`text-xl text-center text-white ${colorScheme} rounded-b-sm font-rubik px-6 `}>{title}</p>
+            <div className='h-[10%] text-start flex justify-start '>
+                <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>{title}</p>
             </div>
 
-            <div className={`h-[10%] p-2 ${textScheme} font-bold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
+            <div className={`h-[8%]  p-2 text-slate-600 tracking-wide font-semibold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
                 {columns.map((item, index) => (
-                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center"}`}>
+                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center ps-3"} `}>
                         {item.toUpperCase()}
                     </div>
                 ))}
 
 
             </div>
-            <div className="h-[70%] overflow-y-auto border-b border-gray-200">
+            <div className="h-[72%] overflow-y-auto border-b border-gray-200">
                 {data.map((row, index) => (
-                    <div key={index} className={`text-gray-700 p-2 bg-gray-50 hover:bg-gray-200 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
+                    <div key={index} className={`text-slate-500 font-normal p-2 bg-gray-50 hover:bg-slate-100 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
                         {columns.map((col) => (
-                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center"}`}>
+                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-3"}`}>
                                 {row[col] as any}
                             </div>
                         ))}
