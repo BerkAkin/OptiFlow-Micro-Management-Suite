@@ -35,7 +35,6 @@ const dataLatestActivity = {
   values: [
     {
       type: "+",
-      name: "Deneme ",
       description: "Denemeler",
       by: "Work",
       date: "2025-02-12",
