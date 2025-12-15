@@ -23,18 +23,30 @@ function DoughChart() {
 
     return (
         <div className="h-[420px]">
-            <div className='flex justify-center'>
-                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik bg-red-400`}>
+            <div className='h-[90%] p-6'>
+                <p className={`text-xl p-2 font-semibold font-rubik text-slate-800`}>
                     Categorical
                 </p>
-            </div>
-            <div className='h-[90%] p-6'>
                 <Doughnut
                     data={ChartData}
                     options={{
+                        cutout: '60%',
                         maintainAspectRatio: false,
                         responsive: true,
-                        plugins: { legend: { display: true, align: "center", position: "bottom" } }
+                        plugins: {
+                            legend: {
+                                display: true,
+                                labels: {
+                                    usePointStyle: true,
+                                    pointStyle: 'circle',
+
+                                },
+                                align: "center",
+                                position: "bottom"
+                            }
+                        },
+
+
                     }}
                 />
             </div>
