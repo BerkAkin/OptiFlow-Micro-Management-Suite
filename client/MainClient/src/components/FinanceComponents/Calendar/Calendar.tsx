@@ -36,6 +36,7 @@ function Calendar() {
     return (
         <div className="fc-toolbar fc-header-toolbar p-6 h-[420px]">
             <FullCalendar
+                height={360}
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
                 selectable={true}
@@ -44,7 +45,7 @@ function Calendar() {
                 editable={true}
                 themeSystem=''
                 headerToolbar={{
-                    left: 'prev,next today',
+                    left: 'prev,next',
                     center: 'title',
                     right: ''
                 }}
