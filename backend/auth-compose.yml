@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+
+
+  auth-module:
+    image: mcr.microsoft.com/dotnet/sdk:8.0
+    container_name: auth-module
+    networks:
+      - auth-module-network
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__AuthModuleDb=Server=auth-db;Database=db_auth;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+    volumes:
+      - ./AuthModule/src:/app
+      - auth-module-bin:/app/bin  
+      - auth-module-obj:/app/obj
+    working_dir: /app
+    command: dotnet watch run --urls "http://+:8080"
+    depends_on:
+      - auth-db
+
+
+
+
+  auth-db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: auth-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=MicroUser123!
+    ports:
+      - "1433:1433"
+    networks:
+      - auth-module-network
+    volumes:
+    - auth-mssql-db:/var/opt/mssql
+
+
+
+
+
+volumes:
+    auth-module-bin:
+    auth-module-obj:
+    auth-mssql-db:
+    
+    
+networks:
+    auth-module-network:
+        external: true
