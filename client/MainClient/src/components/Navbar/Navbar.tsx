@@ -44,11 +44,11 @@ function Navbar() {
 
   return (
 
-    <nav className="bg-white h-[80px] border border-gray-200">
-      <div className="grid h-[100%] grid-cols-12 gap-0">
+    <nav className="h-[80px] w-[100%] mx-auto">
+      <div className="grid h-[100%]  h-[80px] container mx-auto grid-cols-12 gap-0">
 
-        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
-          <span className="text-3xl font-semibold ">OptiFlow Management Suite<img className="inline ps-1" src={icon} width={45}></img></span>
+        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-start ">
+          <span className="text-2xl font-semibold ">OptiFlow Management Suite<img className="inline ps-1" src={icon} width={45}></img></span>
         </div>
 
         <div className="col-span-6 space-x-6 w-[100%] flex flex-wrap items-center justify-center p-4">
