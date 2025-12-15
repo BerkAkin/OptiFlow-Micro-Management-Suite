@@ -11,17 +11,17 @@ function FinanceDashboardPage() {
     return (
         <div className='container mx-auto mt-6'>
             <div className='grid grid-cols-10 gap-6'>
-                <div className='col-span-3 bg-white shadow-custom rounded-lg border border-gray-200 '>
+                <div className='col-span-4 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <BarChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200'>
+                <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <DoughChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200'>
+                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
 
                     <VerticalChart />
                 </div>
-                <div className='col-span-3 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto'>
+                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <Calendar />
                 </div>
             </div>
