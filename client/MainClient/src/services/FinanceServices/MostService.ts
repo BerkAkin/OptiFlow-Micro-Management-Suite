@@ -3,8 +3,8 @@ import { fetchMostData } from "../../repositories/FinanceRepositories/FinanceRep
 export const MostService = async () => {
   const data = await fetchMostData();
 
-  const categories = data.categories.map((item) => (item ? item.category : ""));
-  const values = data.categories.map((item) => (item ? item.value : 0));
+  const categories = data.map((item: any) => (item ? item.category : ""));
+  const values = data.map((item: any) => (item ? item.expense : 0));
 
   return { categories, values };
 };
