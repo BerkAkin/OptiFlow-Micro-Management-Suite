@@ -1,11 +1,12 @@
-﻿using FinanceModule.Entities;
+﻿using FinanceModule.DTOs;
+using FinanceModule.Entities;
 using FinanceModule.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceModule.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/finance")]
     [ApiController]
     public class TransactionController : ControllerBase
     {
@@ -17,17 +18,21 @@ namespace FinanceModule.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> AddTransaction([FromBody] Transaction transaction)
+        public async Task<IActionResult> AddTransaction([FromBody] TransactionViewModel transaction)
         {
            await _service.AddAsync(transaction);
            return Ok("Transaction Saved");
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetTransactionSummary()
+        public async Task<IActionResult> GetTransactionSummary([FromQuery] FinanceFilterDto filters)
         {
-            var data = await _service.GetAllTransactions();
-            return Ok(data);
+            var (data, maxPage) = await _service.GetAllTransactions(filters);
+            return Ok(new
+            {
+                values = data,
+                maxPage
+            });
         }
 
         [HttpGet("MonthlySummary")]
