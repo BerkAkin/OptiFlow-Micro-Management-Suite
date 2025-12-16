@@ -7,7 +7,7 @@ interface filterFields {
     name: string,
     type: 'text' | 'select' | 'date',
     placeholder?: string,
-    options?: { label: string, value: string }[]
+    options?: { label: string, value: string | number }[]
 }
 
 interface TableProps {
@@ -28,10 +28,11 @@ interface TableProps {
 
 function DynamicTable({ title, colorScheme, textScheme, data, children, handleFilter, filterFields, onNext, onPrev }: TableProps) {
 
-    const columns = Object.keys(data[0]);
+
+    const columns = data.length > 0 ? Object.keys(data[0]) : [];
     const gridTemplate = columns.map(col => (col === 'description' ? '4fr' : '1fr')).join(' ')
     const filterInitials = filterFields ? Object.fromEntries(filterFields.map((item) => [item.name, ""])) : {}
-
+    console.log(data);
 
     return (
         <div className='h-full'>
@@ -41,19 +42,21 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
 
             <div className={`h-[8%]  p-2 text-slate-600 tracking-wide font-semibold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
                 {columns.map((item, index) => (
-                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center ps-3"} `}>
-                        {item.toUpperCase()}
+                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center ps-3  "} text-sm uppercase `}>
+                        {item === "exchangeType" ? "Exchange" : item}
                     </div>
                 ))}
 
 
             </div>
             <div className="h-[72%] overflow-y-auto border-b border-gray-200">
-                {data.map((row, index) => (
+                {data?.map((row, index) => (
                     <div key={index} className={`text-slate-500 font-normal p-2 bg-gray-50 hover:bg-slate-100 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
                         {columns.map((col) => (
-                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-3"}`}>
-                                {row[col] as any}
+                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-3 "} text-sm`}>
+
+                                {col === "date" && row[col] ? row[col].split("T")[0] : row[col]}
+
                             </div>
                         ))}
                     </div>
