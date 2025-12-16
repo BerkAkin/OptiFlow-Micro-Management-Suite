@@ -18,7 +18,7 @@ namespace FinanceModule.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<(List<Transaction>,int MaxPage)> GetAllTransactions(FinanceFilterDto filters)
+        public async Task<(List<Transaction> data,int maxPage)> GetAllTransactions(FinanceFilterDto filters)
         {
             var query = _context.Transactions.AsQueryable();
 
@@ -34,7 +34,7 @@ namespace FinanceModule.Repositories
                 query = query.Where(x => x.Date.Date == parsedDate.Date);
             }
 
-            int pageSize = 8;
+            int pageSize = 10;
             int totalCount = await query.CountAsync();
             int maxPage = (int)Math.Ceiling((double)totalCount / pageSize);
 
@@ -83,8 +83,6 @@ namespace FinanceModule.Repositories
                 }).ToListAsync();   
         }
 
-
-
         public async Task<List<CategoricalTransactionSummary>> GetMostCategorySummary()
         {
             return await _context.Transactions.Where(t => t.Date.Year == DateTime.Now.Year && t.Date.Month == DateTime.Now.Month).Where(t=>!t.IsIncome)
@@ -97,33 +95,54 @@ namespace FinanceModule.Repositories
               .ToListAsync();
         }
         
-        public async Task<List<Transaction>> GetInstallments()
+        public async Task<(List<Transaction>,int maxPage)> GetInstallments(InstallRecurFilterDto filters)
         {
-            return await _context.Transactions.Where(t => t.IsPartly).Where(t=>!t.IsIncome).OrderByDescending(o => o.Date).ToListAsync();
+            var query = _context.Transactions.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filters.Description))
+            {
+                query = query.Where(x => x.Description.Contains(filters.Description));
+            }
+
+           
+
+            var data = await query.Where(t => t.IsPartly).Where(t => !t.IsIncome).OrderByDescending(o => o.Date).ToListAsync();
+
+            int pageSize = 10;
+            int totalCount = data.Count;
+            int maxPage = (int)Math.Ceiling((double)totalCount/ pageSize);
+
+            data = data.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToList();
+            return (data, maxPage);
         }
 
-        public async Task<List<RecurrentsViewModel>> GetRecurrents()
-        {
-            DateTime now = DateTime.Now;
+        public async Task<(List<RecurrentsViewModel> data,int maxPage)> GetRecurrents(InstallRecurFilterDto filters)
+        {  
+            int pageSize = 10;
+            var query = _context.Transactions.AsQueryable();
+            if (!string.IsNullOrEmpty(filters.Description))
+            {
+                query = query.Where(x => x.Description.Contains(filters.Description));
+            }
 
+           
+
+            DateTime now = DateTime.Now;
             DateTime start = new DateTime(now.Year, now.Month, 1);
             DateTime end = start.AddMonths(1);
-
             DateTime prevStart = start.AddMonths(-1);
             DateTime prevEnd = start;
 
-            var currentMonthExpenses = await _context.Transactions
-            .Where(t => !t.IsIncome)
+            var currentMonthExpenses = await query.Where(t => !t.IsIncome)
             .Where(t => t.Date >= start && t.Date < end)
             .ToListAsync();
 
             
-            var previousMonthExpenses = await _context.Transactions
-            .Where(t => !t.IsIncome)
+            var previousMonthExpenses = await query.Where(t => !t.IsIncome)
             .Where(t => t.Date >= prevStart && t.Date < prevEnd)
             .ToListAsync();
 
-            var recurrent = currentMonthExpenses
+            var recurrentAll = currentMonthExpenses
             .Where(curr =>
                 previousMonthExpenses.Any(prev =>
                     prev.Description == curr.Description &&
@@ -137,10 +156,15 @@ namespace FinanceModule.Repositories
                 Price = t.Price,
                 To = t.Who,
                 Recurs = t.Date.Day
-            })
-            .ToList();
+            }).ToList();
+          
+            int totalCount = recurrentAll.Count;
+            int maxPage = (int)Math.Ceiling((double)totalCount / pageSize);
 
-            return recurrent;
+            var recurrent = recurrentAll.Skip((filters.Page - 1) * pageSize).Take(pageSize).ToList();
+
+
+            return (recurrent,maxPage);
         }
 
         
