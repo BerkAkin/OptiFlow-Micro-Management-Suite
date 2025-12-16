@@ -6,7 +6,7 @@ services:
     ports:
       - "5173:5173"
     networks:
-      - project_micro_network
+      - project-micro-network
     volumes:
       - .:/app
       - main-packages:/app/node_modules
@@ -16,5 +16,5 @@ volumes:
     main-packages:
 
 networks:
-    project_micro_network:
+    project-micro-network:
         external: true
