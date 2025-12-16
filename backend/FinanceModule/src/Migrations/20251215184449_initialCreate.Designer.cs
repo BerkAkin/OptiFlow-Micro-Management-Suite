@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinanceModule.Migrations
 {
     [DbContext(typeof(FinanceDBContext))]
-    [Migration("20251213193459_first")]
-    partial class first
+    [Migration("20251215184449_initialCreate")]
+    partial class initialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace FinanceModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ByWho")
+                    b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -44,7 +44,11 @@ namespace FinanceModule.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Exchange")
+                    b.Property<string>("ExchangeType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvoicePath")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -53,10 +57,6 @@ namespace FinanceModule.Migrations
 
                     b.Property<bool>("IsPartly")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("PartCount")
                         .HasColumnType("int");
@@ -67,7 +67,7 @@ namespace FinanceModule.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Type")
+                    b.Property<string>("Who")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
