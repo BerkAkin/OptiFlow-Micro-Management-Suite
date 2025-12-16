@@ -93,9 +93,9 @@ function Navbar() {
 
 
 
-        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-center ">
+        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-end ">
 
-          <div className="hidden w-full md:block md:w-auto me-2">
+          <div className="hidden w-full md:block md:w-auto ">
             <div ref={(el) => { elementsRef.current[3] = el }} className="relative inline-block flex flex-col">
               <button onClick={() => setIsHelp(!isHelp)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={helpRequest} alt="" /></button>
               {isHelp && <SupportRequestCard />}
@@ -107,7 +107,7 @@ function Navbar() {
               <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
             </ul>
           </div>
-          <div className="hidden w-full md:block md:w-auto mx-2">
+          <div className="hidden w-full md:block md:w-auto ">
             <div ref={(el) => { elementsRef.current[1] = el }} className="relative inline-block flex flex-col">
               <button onClick={() => setIsSuggestion(!isSuggestion)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={makeSuggestion} alt="" /></button>
               {isSuggestion && <MakeSuggestionCard />}
@@ -119,11 +119,11 @@ function Navbar() {
             </ul>
           </div>
 
-          <div className="hidden w-full md:block md:w-auto ms-2 pt-3">
+          <div className="hidden w-full md:block md:w-auto mx-3 pt-3">
             {
               isAuth === true ? (
                 <div ref={(el) => { elementsRef.current[2] = el }} className="relative ">
-                  <button className="cursor-pointer border border-gray-200 rounded-full size-8" onClick={() => setIsProfile(!isProfile)}></button>
+                  <button className="cursor-pointer border border-gray-300 rounded-full size-8" onClick={() => setIsProfile(!isProfile)}></button>
                   {isProfile &&
                     <div className='absolute border border-gray-200 h-56 w-48 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-14'>
                       <div className="flex justify-center mt-4">
