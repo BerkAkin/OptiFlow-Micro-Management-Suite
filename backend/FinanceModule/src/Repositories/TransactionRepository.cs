@@ -18,15 +18,34 @@ namespace FinanceModule.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Transaction>> GetAllTransactions()
+        public async Task<(List<Transaction>,int MaxPage)> GetAllTransactions(FinanceFilterDto filters)
         {
-            return await _context.Transactions.OrderBy(x=>x.Date).ToListAsync();
+            var query = _context.Transactions.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filters.Type))
+            {
+            bool isIncome = filters.Type == "1";
+            query = query.Where(x => x.IsIncome == isIncome);
+            }
+          
+            
+            if (!string.IsNullOrEmpty(filters.Date) && DateTime.TryParse(filters.Date, out DateTime parsedDate))
+            {
+                query = query.Where(x => x.Date.Date == parsedDate.Date);
+            }
+
+            int pageSize = 8;
+            int totalCount = await query.CountAsync();
+            int maxPage = (int)Math.Ceiling((double)totalCount / pageSize);
+
+            var data = await query.OrderByDescending(x => x.Date).Skip((filters.Page - 1) * pageSize).Take(pageSize).ToListAsync();
+            return (data, maxPage);
         }
 
-        public async Task<List<MonthlyTransactionViewModel>> GetMonthlySummary()
+        public async Task<MonthlySummaryViewModel> GetMonthlySummary()
         {
-            return await _context.Transactions.Where(t => t.Date >= DateTime.UtcNow.AddMonths(-11) && t.Date <= DateTime.UtcNow)
-                .GroupBy(t => new { t.Date.Year, t.Date.Month }).Select(g => new MonthlyTransactionViewModel
+            var grouped = await _context.Transactions.Where(t => t.Date >= DateTime.UtcNow.AddMonths(-11) && t.Date <= DateTime.UtcNow)
+                .GroupBy(t => new { t.Date.Year, t.Date.Month }).Select(g => new 
                 {
                     Year = g.Key.Year,
                     Month = g.Key.Month,
@@ -36,6 +55,22 @@ namespace FinanceModule.Repositories
                 .OrderBy(x => x.Year)
                 .ThenBy(x => x.Month)
                 .ToListAsync();
+
+
+            return new MonthlySummaryViewModel
+            {
+                Incomes = grouped.Select(x => new MonthlyValueViewModel
+                {
+                    Month = x.Month,
+                    Value = x.Income
+                }).ToList(),
+
+                Expenses = grouped.Select(x => new MonthlyValueViewModel
+                {
+                    Month = x.Month,
+                    Value = x.Expense
+                }).ToList()
+            };
         }
 
         public async Task<List<CategoricalTransactionSummary>> GetCategoricalSummary()
@@ -91,7 +126,7 @@ namespace FinanceModule.Repositories
             var recurrent = currentMonthExpenses
             .Where(curr =>
                 previousMonthExpenses.Any(prev =>
-                    prev.Name == curr.Name &&
+                    prev.Description == curr.Description &&
                     prev.Category == curr.Category &&
                     Math.Abs(prev.Date.Day - curr.Date.Day) <= 3
                 )
@@ -100,7 +135,7 @@ namespace FinanceModule.Repositories
             {
                 Description = t.Description,
                 Price = t.Price,
-                To = t.ByWho,
+                To = t.Who,
                 Recurs = t.Date.Day
             })
             .ToList();
