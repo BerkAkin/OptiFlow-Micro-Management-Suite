@@ -9,6 +9,7 @@ namespace FinanceModule.Mappings
         public MappingProfile() {
 
             CreateMap<Transaction, TransactionViewModel>();
+            CreateMap<TransactionViewModel, Transaction>();
             CreateMap<Transaction, InstallmentsViewModel>().ForMember(dest => dest.Parts, opt => opt.MapFrom(src => src.IsPartly ? src.PartCount: 0));
         } 
     }
