@@ -15,18 +15,20 @@ namespace FinanceModule.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(Transaction model)
+        public async Task AddAsync(TransactionViewModel model)
         {
-            await _repository.AddAsync(model);
+            Transaction transaction = _mapper.Map<Transaction>(model);
+            await _repository.AddAsync(transaction);
         }
 
-        public async Task<List<TransactionViewModel>> GetAllTransactions()
+        public async Task<(List<TransactionViewModel> Data,int MaxPage)> GetAllTransactions(FinanceFilterDto filters)
         {
-          var data =  await _repository.GetAllTransactions();
-          return _mapper.Map<List<TransactionViewModel>>(data);
+          var (transactions,maxPage) =  await _repository.GetAllTransactions(filters);
+          var mapped = _mapper.Map<List<TransactionViewModel>>(transactions);
+            return (mapped, maxPage);
         }
 
-        public async Task<List<MonthlyTransactionViewModel>> GetMonthlySummary()
+        public async Task<MonthlySummaryViewModel> GetMonthlySummary()
         {
             return await _repository.GetMonthlySummary();
             
