@@ -21,7 +21,7 @@ namespace FinanceModule.Services
             await _repository.AddAsync(transaction);
         }
 
-        public async Task<(List<TransactionViewModel> Data,int MaxPage)> GetAllTransactions(FinanceFilterDto filters)
+        public async Task<(List<TransactionViewModel> data,int maxPage)> GetAllTransactions(FinanceFilterDto filters)
         {
           var (transactions,maxPage) =  await _repository.GetAllTransactions(filters);
           var mapped = _mapper.Map<List<TransactionViewModel>>(transactions);
@@ -44,16 +44,18 @@ namespace FinanceModule.Services
             return await _repository.GetMostCategorySummary();
         }
 
-        public async Task<List<InstallmentsViewModel>> GetInstallments()
+        public async Task<(List<InstallmentsViewModel> data,int maxPage)> GetInstallments(InstallRecurFilterDto filters)
         {
-            var data = await _repository.GetInstallments();
-            return _mapper.Map<List<InstallmentsViewModel>>(data);
+            var (installments,maxPage) = await _repository.GetInstallments(filters);
+            var mapped=  _mapper.Map<List<InstallmentsViewModel>>(installments);
+            return (mapped, maxPage);
         }
 
-        public async Task<List<RecurrentsViewModel>> GetRecurrents()
+        public async Task<(List<RecurrentsViewModel>data,int maxPage)> GetRecurrents(InstallRecurFilterDto filters)
         {
-            var data = await _repository.GetRecurrents();
-            return _mapper.Map<List<RecurrentsViewModel>>(data);
+            var (data,maxPage) = await _repository.GetRecurrents(filters);
+            var mapped = _mapper.Map<List<RecurrentsViewModel>>(data);
+            return (mapped, maxPage);
         }
     }
 }
