@@ -25,7 +25,7 @@ function RecurrentPayments() {
     if (isLoading) return (<p>Loading...</p>)
 
     return (
-        <div className='w-full h-full'>
+        <div className='w-full h-[500px]'>
             <DynamicTable onNext={onNext} onPrev={onPrev} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Recurrent Payments' />
         </div>
 
