@@ -57,17 +57,17 @@ namespace FinanceModule.Controllers
         }
 
         [HttpGet("Installments")]
-        public async Task<IActionResult> GetInstallments()
+        public async Task<IActionResult> GetInstallments([FromQuery] InstallRecurFilterDto filters)
         {
-            var data = await _service.GetInstallments();
-            return Ok(data);
+            var (data, maxPage) = await _service.GetInstallments(filters);
+            return Ok(new {values = data, maxPage });
         }
 
         [HttpGet("Recurrents")]
-        public async Task<IActionResult> GetRecurrents()
+        public async Task<IActionResult> GetRecurrents([FromQuery] InstallRecurFilterDto filters)
         {
-            var data = await _service.GetRecurrents();
-            return Ok(data);
+            var (data,maxPage) = await _service.GetRecurrents(filters);
+            return Ok(new {values = data, maxPage});
         }
     }
 }
