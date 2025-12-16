@@ -24,7 +24,7 @@ function Transactions() {
                         </div>
                     </div>
                 </div>
-                <div className='col-span-2 h-[600px] bg-white shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='col-span-2 h-[550px] bg-white shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <AddTransaction />
                 </div>
             </div>
