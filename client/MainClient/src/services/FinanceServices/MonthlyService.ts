@@ -1,10 +1,5 @@
 import { fetchMonthlyData } from "../../repositories/FinanceRepositories/FinanceRepository";
 
-interface IncomeExpense {
-  month: string;
-  value: number;
-}
-
 export const MonthlyService = async () => {
   const data = await fetchMonthlyData();
 
@@ -23,14 +18,16 @@ export const MonthlyService = async () => {
     "December",
   ];
 
-  const incomeData = months.map((month) => {
-    const item = data.Incomes.find((x: IncomeExpense) => x.month === month);
-    return item ? item.value : 0;
+  const incomeData = months.map((_, index) => {
+    const monthNum = index + 1;
+    const monthData = data.incomes.find((x: any) => x.month === monthNum);
+    return monthData ? monthData.value : 0;
   });
 
-  const expenseData = months.map((month) => {
-    const item = data.Expenses.find((x: IncomeExpense) => x.month === month);
-    return item ? item.value : 0;
+  const expenseData = months.map((_, index) => {
+    const monthNum = index + 1;
+    const monthData = data.expenses.find((x: any) => x.month === monthNum);
+    return monthData ? monthData.value : 0;
   });
 
   return { months, incomeData, expenseData };
