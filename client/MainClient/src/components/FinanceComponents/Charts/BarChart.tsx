@@ -1,12 +1,14 @@
 import { Chart } from "react-chartjs-2";
 import { useMonthly } from '../../../hooks/FinanceHooks/useFinance';
+import Spinner from "../../Spinner/Spinner";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 
 function BarChart() {
 
     const { data, isLoading, error } = useMonthly();
-    if (isLoading) return <p className="p-6">Loading...</p>;
-    if (error || !data) return <p className="p-6">Error loading chart</p>;
+    if (isLoading) return (<Spinner />);
+    if (error || !data) return (<ErrorMessage />);
     const { months, incomeData, expenseData } = data;
 
     const ChartData = {
@@ -30,7 +32,7 @@ function BarChart() {
     return (
         <div className="h-[420px] ">
             <div className='h-[80%] p-6'>
-                <p className={`text-xl px-1 pb-2 font-semibold font-rubik text-slate-800`} >
+                <p className={`text-xl px-1 font-semibold font-rubik text-slate-800`} >
                     Monthly
                 </p>
                 <Chart
