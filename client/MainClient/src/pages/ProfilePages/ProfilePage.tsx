@@ -34,11 +34,11 @@ function ProfilePage() {
 
 
                 <div className='col-span-1 bg-white rounded-lg shadow-custom border border-gray-200 '>
-                    <div className='h-[20%]'>
-                        <p className={`text-lg rounded-t-lg text-center rounded-b-sm text-white bg-neutral-400 font-rubik`}>Last Day Online</p>
+                    <div className='h-[50%] text-start flex justify-start items-center '>
+                        <p className={`text-lg font-semibold text-slate-800 font-rubik px-4`}>Last Online</p>
                     </div>
 
-                    <div className='h-[75%] flex items-center justify-center'>
+                    <div className='h-[50%] flex items-start justify-center'>
                         <p className={`text-2xl text-gray-600 font-rubik`}>25.12.2025</p>
                     </div>
 
