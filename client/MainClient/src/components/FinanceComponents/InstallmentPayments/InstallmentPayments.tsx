@@ -1,6 +1,8 @@
 import { useInstallment } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicTable from '../../DynamicTable/DynamicTable'
 import { useState } from 'react'
+import Spinner from '../../Spinner/Spinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 
 
@@ -12,6 +14,8 @@ function InstallmentPayments() {
 
 
     const { error, isLoading, data } = useInstallment(filters, page);
+    if (error || !data) return (<ErrorMessage />)
+    if (isLoading) return (<Spinner />)
 
     const handleFilter = (values: any) => {
         setPage(1)
@@ -29,11 +33,10 @@ function InstallmentPayments() {
 
 
 
-    if (error || !data) return (<p>Error...</p>)
-    if (isLoading) return (<p>Loading...</p>)
+
 
     return (
-        <div className='w-full h-[500px]'>
+        <div className='w-full h-full'>
             <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Installments' />
         </div>
 
