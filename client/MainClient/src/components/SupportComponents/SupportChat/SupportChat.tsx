@@ -12,10 +12,10 @@ function SupportChat() {
     return (
         <div className='h-full grid grid-cols-12 gap-6'>
             <div className='col-span-3 border border-gray-200 bg-white rounded-lg shadow-custom'>
-                <div className='flex justify-center mb-6'>
-                    <p className='px-6 rounded-b-md bg-lime-600 text-xl text-white'>Employees</p>
+                <div className='h-[10%] text-start flex justify-start'>
+                    <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>Employees</p>
                 </div>
-                <div className='overflow-y-auto overflow-x-hidden h-[350px]'>
+                <div className='overflow-y-auto overflow-x-hidden h-[350px] p-2'>
                     {
                         data.map((item) => (
                             <Link to={`chat/${item.id}`} className='cursor-pointer'>
