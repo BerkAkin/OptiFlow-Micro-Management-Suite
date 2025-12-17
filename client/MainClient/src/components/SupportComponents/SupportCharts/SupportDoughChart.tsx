@@ -21,11 +21,11 @@ function SupportDoughChart() {
     return (
 
         <div>
-            <div className='flex justify-center'>
-                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik bg-lime-600`}>Most Support Categories</p>
-            </div>
-            <div className='h-[350px] pt-6'>
-                <Doughnut data={ChartData} options={{ maintainAspectRatio: false, responsive: true, plugins: { legend: { display: true, align: "center", position: "bottom" } } }} />
+            <div className='h-[350px] p-6'>
+                <p className={`text-xl px-1 pb-5 font-semibold font-rubik text-slate-800`} >
+                    Most Support Categories
+                </p>
+                <Doughnut data={ChartData} options={{ cutout: '60%', maintainAspectRatio: false, responsive: true, plugins: { legend: { display: true, align: "center", position: "bottom", labels: { usePointStyle: true } } } }} />
             </div>
         </div>
     )
