@@ -35,7 +35,7 @@ function RateOthers() {
     ]
 
     return (
-        <div className='bg-white border border-gray-200 rounded-lg h-full'>
+        <div className='bg-white border border-gray-200 rounded-lg h-[300px]'>
             <DynamicForm onSubmit={handleSubmit} fields={fields} colorScheme='bg-lime-600' hoverScheme='hover:bg-lime-700' title='Rate Others' initialValues={initialValues} >
                 {({ setFieldValue, values }) => {
                     return (
