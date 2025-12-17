@@ -3,6 +3,7 @@
   color: white !important;
   border:none !important;
   border-radius: 2px !important;
+  
 }
 
 .fc-button:hover {
@@ -11,16 +12,16 @@
 
 .fc-header-toolbar{
   color: #374151;
+    font-weight: 400 !important; 
 }
 
 .fc-toolbar-title {
   font-size: 18px !important;   
-  font-weight: 600 !important; 
 }
 
 .fc-scrollgrid,
 .fc-scrollgrid td,
 .fc-scrollgrid th {
   border: none !important;
-  
+  font-weight: 400 !important; 
 }
