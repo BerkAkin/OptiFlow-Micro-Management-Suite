@@ -43,7 +43,7 @@ function AddTransaction() {
     ]
 
     return (
-        <div>
+        <div className='h-full'>
             <DynamicForm colorScheme='bg-blue-400' hoverScheme='hover:bg-blue-500' initialValues={initialValues} title='Add Transaction' onSubmit={handleSubmit} fields={fields} />
         </div >
     )
