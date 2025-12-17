@@ -29,18 +29,18 @@ function FinanceDashboardPage() {
                 </div>
             </div>
             <div className='grid grid-cols-10 gap-6 my-6'>
-                <div className='col-span-8 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='col-span-8 h-[570px] border bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <LatestTransactions />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='col-span-2 h-[570px] bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <AddTransaction />
                 </div>
             </div>
             <div className='grid grid-cols-10 gap-6 mb-10'>
-                <div className='col-span-5 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='col-span-5 h-[500px] bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <InstallmentPayments />
                 </div>
-                <div className='col-span-5 bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='col-span-5 h-[500px] bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
                     <RecurrentPayments />
                 </div>
             </div>
