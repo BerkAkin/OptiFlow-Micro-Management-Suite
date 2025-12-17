@@ -14,17 +14,18 @@ function SupportBarChart() {
                 type: 'bar' as const,
                 backgroundColor: "#65a30d",
                 data: data.newData,
+                barPercentage: 0.7,
             },
         ],
     }
 
     return (
         <div className="h-full">
-            <div className='flex justify-center'>
-                <p className={`text-xl text-center px-6 rounded-b-sm text-white font-rubik bg-lime-600`}>Monthly Support Counts</p>
-            </div>
             <div className="p-6 h-[90%]">
-                <Chart type="bar" data={ChartData} options={{ maintainAspectRatio: false, responsive: true, plugins: { legend: { display: false } } }} />
+                <p className={`text-xl px-1 pb-5 font-semibold font-rubik text-slate-800`} >
+                    Monthly Support Counts
+                </p>
+                <Chart type="bar" data={ChartData} options={{ scales: { x: { grid: { display: false } }, y: { ticks: { stepSize: 100 }, border: { display: false } } }, maintainAspectRatio: false, responsive: true, plugins: { legend: { display: false } } }} />
             </div>
 
         </div>
