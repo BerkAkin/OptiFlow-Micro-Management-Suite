@@ -1,11 +1,13 @@
 import { Bar } from "react-chartjs-2";
 import { useMost } from "../../../hooks/FinanceHooks/useFinance";
+import Spinner from "../../Spinner/Spinner";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 
 function VerticalChart() {
     const { data, isLoading, error } = useMost();
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return (<Spinner />)
+    if (error || !data) return (<ErrorMessage />)
     const { categories, values } = data
 
     const ChartData = {
