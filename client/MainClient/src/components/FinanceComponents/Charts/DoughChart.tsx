@@ -1,12 +1,14 @@
 import { Doughnut } from "react-chartjs-2";
 import { useCategorical } from '../../../hooks/FinanceHooks/useFinance';
+import Spinner from "../../Spinner/Spinner";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 
 function DoughChart() {
 
     const { data, isLoading, error } = useCategorical();
-    if (isLoading) return <p className="p-6">Loading...</p>;
-    if (error || !data) return <p className="p-6">Error loading chart</p>;
+    if (isLoading) return (<Spinner />);
+    if (error || !data) return (<ErrorMessage />);
     const { categories, values } = data;
 
     const ChartData = {
@@ -39,7 +41,6 @@ function DoughChart() {
                                 labels: {
                                     usePointStyle: true,
                                     pointStyle: 'circle',
-
                                 },
                                 align: "center",
                                 position: "bottom"
