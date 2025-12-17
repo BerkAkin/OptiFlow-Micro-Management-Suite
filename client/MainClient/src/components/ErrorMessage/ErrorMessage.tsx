@@ -10,7 +10,7 @@ function ErrorMessage() {
                     <div className={`absolute h-24 w-1 rotate-[-45deg] rounded-full  ${styles.line}`}></div>
                 </div>
                 <div className='h-[40%] flex justify-center'>
-                    <div className={`${styles.glowText}`}>Hata</div>
+                    <div className={`${styles.glowText}`}>Error</div>
                 </div>
 
 
