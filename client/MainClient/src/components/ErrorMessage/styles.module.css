@@ -1,0 +1,38 @@
+
+
+.line {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.reverseLine {
+    animation: glow 2s ease-in-out infinite;
+}
+.glowText{
+       animation: glowText 2s ease-in-out infinite;
+}
+
+
+
+@keyframes glow {
+  0% {
+    background-color: transparent;
+  }
+  50% {
+    background-color:#fca5a5
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes glowText {
+    0% {
+    color: transparent;
+  }
+  50% {
+    color:#f87171
+  }
+  100% {
+    color: transparent;
+  }  
+}
