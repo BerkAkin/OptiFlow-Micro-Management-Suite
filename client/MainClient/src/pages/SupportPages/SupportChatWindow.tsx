@@ -60,11 +60,11 @@ const SupportChatWindow = () => {
 
             <div className='col-span-8'>
                 <div className='border-x border-t border-gray-200 rounded-t-md h-[90%] overflow-y-auto  flex flex-col gap-2'>
-                    <div className='flex justify-center'>
-                        <p className='px-6 rounded-b-md bg-lime-600 text-xl text-white'>Employee Chat</p>
+                    <div className='h-[10%] text-start flex justify-start'>
+                        <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>Chat</p>
                     </div>
                     <div className='border-b border-gray-200 p-2'>
-                        <p className='text-gray-500 text-xl px-1 font-semibold'>Berk Akın</p>
+                        <p className='text-gray-500 text-md px-2 font-semibold'>Berk Akın</p>
                     </div>
                     {sortedMessages.map(msg => (
                         <div key={msg.id} className={`p-2 rounded-md max-w-[70%] ${msg.sender === "me" ? "bg-lime-500 self-end" : "bg-gray-200 self-start"}`} >
