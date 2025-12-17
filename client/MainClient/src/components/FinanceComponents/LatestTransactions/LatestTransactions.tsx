@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useLatestActivity } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicTable from '../../DynamicTable/DynamicTable';
+import Spinner from '../../Spinner/Spinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 
 
@@ -9,8 +11,8 @@ function LatestTransactions() {
     const [page, setPage] = useState(1);
 
     const { isLoading, error, data } = useLatestActivity(filters, page);
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return (<Spinner />)
+    if (error || !data) return (<ErrorMessage />)
 
     const filterFunction = (values: any) => {
         setPage(1);
