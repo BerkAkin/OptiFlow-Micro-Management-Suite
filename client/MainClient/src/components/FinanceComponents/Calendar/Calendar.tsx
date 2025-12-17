@@ -34,9 +34,9 @@ function Calendar() {
     }
 
     return (
-        <div className="fc-toolbar fc-header-toolbar p-6 h-[420px]">
+        <div className="fc-toolbar fc-header-toolbar p-3 h-[420px]">
             <FullCalendar
-                height={360}
+                height={400}
                 plugins={[dayGridPlugin, interactionPlugin]}
                 initialView="dayGridMonth"
                 selectable={true}
