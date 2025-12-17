@@ -69,9 +69,10 @@ function SurveyResults() {
                                     datasets: [{
                                         data: [item.participationCount, item.totalEmployee - item.participationCount],
                                         backgroundColor: ['#34d399', '#22c55e',],
-                                    }]
+                                    }],
+
                                 }}
-                                options={{ plugins: { legend: { display: true, position: "right" } }, animation: true, maintainAspectRatio: false }} />
+                                options={{ plugins: { legend: { display: true, position: "right", labels: { usePointStyle: true, pointStyle: "circle" } } }, animation: true, maintainAspectRatio: false }} />
 
 
 
