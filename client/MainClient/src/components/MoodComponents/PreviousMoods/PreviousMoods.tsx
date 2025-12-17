@@ -28,23 +28,36 @@ function PreviousMoods() {
     };
 
     return (
-        <div className='h-full p-6'>
-            <Line data={chartData} options={{
-                scales: {
-                    y: {
+        <div className=''>
+            <div className='h-[20%] text-start flex justify-start '>
+                <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>Previous Moods</p>
+            </div>
+            <div className='h-[80%] text-start flex justify-start px-2'>
+                <Line data={chartData} options={{
 
-                        ticks: {
-                            stepSize: 1,
-                            callback: function (value) {
-                                return moodLabels[value] || value;
-                            }
+                    scales: {
+                        y: {
+
+                            ticks: {
+                                stepSize: 1,
+                                callback: function (value) {
+                                    return moodLabels[value] || value;
+                                }
+                            },
+                            border: { display: false },
+
+                        },
+                        x: {
+                            grid: { display: false }
                         }
-                    }
-                },
-                maintainAspectRatio: false,
-                borderColor: "#fb7185",
-                plugins: { legend: { display: false } }
-            }} />
+                    },
+                    maintainAspectRatio: false,
+                    responsive: true,
+                    borderColor: "#a5b4fc",
+                    plugins: { legend: { display: false } }
+                }} />
+            </div>
+
         </div>
     )
 }
