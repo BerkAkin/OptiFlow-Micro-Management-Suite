@@ -12,7 +12,7 @@ function MoodPage() {
                 <div className='bg-white h-[500px] col-span-7 shadow-custom border border-gray-200 rounded-lg'>
                     <TodaysMoods />
                 </div>
-                <div className='bg-white h-[300px] col-span-3 shadow-custom border border-gray-200 rounded-lg '>
+                <div className='bg-white h-[350px] col-span-3 shadow-custom border border-gray-200 rounded-lg '>
                     <PreviousMoods />
                 </div>
 
