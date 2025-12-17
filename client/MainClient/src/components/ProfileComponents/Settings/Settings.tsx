@@ -5,11 +5,11 @@ function Settings() {
         <div className='h-[500px] grid grid-cols-9 '>
 
             <div className='col-span-8 bg-white rounded-lg shadow-custom border border-gray-200'>
-                <div className='h-[10%] w-full text-center flex justify-center items-start'>
-                    <p className={`text-2xl text-center px-2 text-white bg-orange-400 rounded-b-sm font-rubik`}>Settings</p>
+                <div className='text-start flex justify-start '>
+                    <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 pt-4`}>Settings</p>
                 </div>
                 <div className='mt-6'>
-                    <p className='ps-5 font-rubik text-lg text-orange-400 font-bold'>Push Preferences</p>
+                    <p className='ps-5 font-rubik text-lg text-slate-600 font-bold'>Push Preferences</p>
                 </div>
                 <div className='my-1'>
                     <hr className='border-gray-200' />
@@ -35,7 +35,7 @@ function Settings() {
                     </div>
                 </div>
                 <div className='mt-6'>
-                    <p className='ps-5 font-rubik text-lg text-orange-400 font-bold'>E-mail Preferences</p>
+                    <p className='ps-5 font-rubik text-lg text-slate-600 font-bold'>E-mail Preferences</p>
                 </div>
                 <div className='my-1'>
                     <hr className='border-gray-200' />
