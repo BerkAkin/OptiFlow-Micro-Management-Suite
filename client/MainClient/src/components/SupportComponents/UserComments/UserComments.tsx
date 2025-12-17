@@ -14,8 +14,8 @@ function UserComments({ UserId }: { UserId: number }) {
 
 
             <div className=" border rounded-md border-gray-200 ">
-                <div className='flex justify-center mb-6'>
-                    <p className='px-6 rounded-b-md bg-lime-600 text-xl text-white'>Employee Comments</p>
+                <div className='h-[10%] text-start flex justify-start'>
+                    <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>Comments</p>
                 </div>
                 <div className="h-[370px] overflow-y-auto">
                     {data.map(item => (
