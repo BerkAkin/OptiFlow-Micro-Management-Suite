@@ -1,6 +1,7 @@
 ﻿using FinanceModule.DTOs;
 using FinanceModule.Queries.Dashboard;
 using FinanceModule.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceModule.Controllers
@@ -10,30 +11,12 @@ namespace FinanceModule.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly TransactionService _service;
-        private readonly TransactionsQuery _transactionsQuery;
-        private readonly CategoricalSummaryQuery _categoricalQuery;
-        private readonly MonthlySummaryQuery _monthlySummaryQuery;
-        private readonly MostCategorySummaryQuery _mostCategorySummaryQuery;
-        private readonly InstallementsQuery _installmentsQuery;
-        private readonly RecurrentsQuery _recurrentsQuery;
+        private readonly IMediator _mediator;
 
-        public TransactionController (
-            TransactionService service, 
-            TransactionsQuery query, 
-            CategoricalSummaryQuery categoricalQuery,
-            MonthlySummaryQuery monthlySummaryQuery,
-            MostCategorySummaryQuery mostCategorySummaryQuery,
-            InstallementsQuery installementsQuery,
-            RecurrentsQuery recurrentsQuery
-        )
+        public TransactionController(IMediator mediator, TransactionService service)
         {
+            _mediator = mediator;  
             _service = service;
-            _transactionsQuery = query;
-            _categoricalQuery = categoricalQuery;
-            _monthlySummaryQuery = monthlySummaryQuery;
-            _mostCategorySummaryQuery = mostCategorySummaryQuery;
-            _installmentsQuery = installementsQuery;
-            _recurrentsQuery = recurrentsQuery;
         }
 
 
@@ -47,47 +30,47 @@ namespace FinanceModule.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransactionSummary([FromQuery] FinanceFilterDTO filters)
         {
-            var (data, maxPage) = await _transactionsQuery.Execute(filters);
+            var result = await _mediator.Send(new TransactionsQuery(filters));
             return Ok(new
             {
-                values = data,
-                maxPage
+                values = result.data,
+                result.maxPage
             });
         }
 
         [HttpGet("MonthlySummary")]
         public async Task<IActionResult> GetMonthlySummary()
         {
-            var data = await _monthlySummaryQuery.Execute();
+            var data = await _mediator.Send(new MonthlySummaryQuery());
             return Ok(data);
         }
 
         [HttpGet("CategoricalSummary")]
         public async Task<IActionResult> GetCategoricalSummary()
         {
-            var data = await _categoricalQuery.Execute();
+            var data = await _mediator.Send(new CategoricalSummaryQuery());
             return Ok(data);
         }
 
         [HttpGet("MostCategoricalSummary")]
         public async Task<IActionResult> GetMostCategorySummary()
         {
-            var data = await _mostCategorySummaryQuery.Execute();
+            var data = await _mediator.Send(new MostCategorySummaryQuery());
             return Ok(data);
         }
 
         [HttpGet("Installments")]
         public async Task<IActionResult> GetInstallments([FromQuery] InstallRecurFilterDTO filters)
         {
-            var (data, maxPage) = await _installmentsQuery.Execute(filters);
-            return Ok(new {values = data, maxPage });
+            var result = await _mediator.Send(new InstallmentsQuery(filters));
+            return Ok(new {values = result.data, result.maxPage });
         }
 
         [HttpGet("Recurrents")]
         public async Task<IActionResult> GetRecurrents([FromQuery] InstallRecurFilterDTO filters)
         {
-            var (data,maxPage) = await _recurrentsQuery.Execute(filters);
-            return Ok(new {values = data, maxPage});
+            var result = await _mediator.Send(new RecurrentsQuery(filters));
+            return Ok(new {values = result.data, result.maxPage});
         }
     }
 }
