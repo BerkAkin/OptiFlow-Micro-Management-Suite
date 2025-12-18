@@ -1,6 +1,6 @@
 ﻿namespace FinanceModule.DTOs
 {
-    public class FinanceFilterDto
+    public class FinanceFilterDTO
     {
         public string? Type { get; set; }
         public string? Date { get; set; }
