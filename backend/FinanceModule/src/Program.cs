@@ -9,19 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 
-//BAÐLANTI DÝZESÝNÝ OKUYUP BAÐLANTI KURMA KODU
 var connectionString = builder.Configuration.GetConnectionString("FinanceModuleDb");
 builder.Services.AddDbContext<FinanceDBContext>(options => { options.UseSqlServer(connectionString); });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.AddScoped<TransactionService>();
 builder.Services.AddScoped<TransactionRepository>();
-
-builder.Services.AddScoped<TransactionsQuery>();
-builder.Services.AddScoped<CategoricalSummaryQuery>();
-builder.Services.AddScoped<MonthlySummaryQuery>();
-builder.Services.AddScoped<MostCategorySummaryQuery>();
-builder.Services.AddScoped<InstallementsQuery>();
-builder.Services.AddScoped<RecurrentsQuery>();
 
 
 builder.Services.AddAutoMapper(cfg =>
