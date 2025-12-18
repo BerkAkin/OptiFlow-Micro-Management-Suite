@@ -1,17 +1,20 @@
 ﻿using FinanceModule.DBOperations;
 using FinanceModule.DTOs;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public class CategoricalSummaryQuery
+
+    public record CategoricalSummaryQuery(): IRequest<List<CategoricalTransactionSummaryDTO>>;
+    public class CategoricalSummaryQueryHandler : IRequestHandler<CategoricalSummaryQuery, List<CategoricalTransactionSummaryDTO>>
     {
         private readonly FinanceDBContext _context;
-        public CategoricalSummaryQuery(FinanceDBContext context) { 
+        public CategoricalSummaryQueryHandler(FinanceDBContext context) { 
             _context = context;
         }
 
-        public async Task<List<CategoricalTransactionSummaryDTO>> Execute()
+        public async Task<List<CategoricalTransactionSummaryDTO>> Handle(CategoricalSummaryQuery request, CancellationToken cancellationToken)
         {
             var now = DateTime.Now;
             var start = new DateTime(now.Year, now.Month, 1);
