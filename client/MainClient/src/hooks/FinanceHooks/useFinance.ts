@@ -1,4 +1,9 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import {
+  useQuery,
+  useMutation,
+  QueryClient,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { MonthlyService } from "../../services/FinanceServices/MonthlyService";
 import { CategoricalService } from "../../services/FinanceServices/CategoricalService";
 import { MostService } from "../../services/FinanceServices/MostService";
@@ -50,7 +55,17 @@ export const useRecurrent = (filters: any, page: number) => {
 };
 
 export const useCreateTransaction = () => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: (payload: any) => CreateTransaction(payload),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["financeMonthly"] });
+      queryClient.invalidateQueries({ queryKey: ["financeCategorical"] });
+      queryClient.invalidateQueries({ queryKey: ["financeMost"] });
+      queryClient.invalidateQueries({ queryKey: ["financeLatestActivity"] });
+      queryClient.invalidateQueries({ queryKey: ["financeInstallment"] });
+      queryClient.invalidateQueries({ queryKey: ["financeRemainings"] });
+    },
   });
 };
