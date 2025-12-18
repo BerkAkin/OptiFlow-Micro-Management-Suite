@@ -1,5 +1,6 @@
 using FinanceModule.DBOperations;
 using FinanceModule.Mappings;
+using FinanceModule.Queries.Dashboard;
 using FinanceModule.Repositories;
 using FinanceModule.Services;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,13 @@ builder.Services.AddDbContext<FinanceDBContext>(options => { options.UseSqlServe
 
 builder.Services.AddScoped<TransactionService>();
 builder.Services.AddScoped<TransactionRepository>();
+
+builder.Services.AddScoped<TransactionsQuery>();
+builder.Services.AddScoped<CategoricalSummaryQuery>();
+builder.Services.AddScoped<MonthlySummaryQuery>();
+builder.Services.AddScoped<MostCategorySummaryQuery>();
+builder.Services.AddScoped<InstallementsQuery>();
+builder.Services.AddScoped<RecurrentsQuery>();
 
 
 builder.Services.AddAutoMapper(cfg =>
