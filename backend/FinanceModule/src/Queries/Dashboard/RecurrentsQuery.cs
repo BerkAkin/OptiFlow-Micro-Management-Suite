@@ -1,18 +1,22 @@
 ﻿using FinanceModule.DBOperations;
 using FinanceModule.DTOs;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public class RecurrentsQuery
+
+    public record RecurrentsQuery(InstallRecurFilterDTO filters): IRequest<(List<RecurrentsDTO> data, int maxPage)>;
+    
+    public class RecurrentsQueryHandler: IRequestHandler<RecurrentsQuery,(List<RecurrentsDTO> data, int maxPage)>
     {
         private readonly FinanceDBContext _context;
-        public RecurrentsQuery(FinanceDBContext context)
+        public RecurrentsQueryHandler(FinanceDBContext context)
         {
             _context = context;
         }
 
-        public async Task<(List<RecurrentsDTO> data, int maxPage)> Execute(InstallRecurFilterDTO filters)
+        public async Task<(List<RecurrentsDTO> data, int maxPage)> Handle(RecurrentsQuery request, CancellationToken cancellationToken)
         {
             DateTime now = DateTime.Now;
             DateTime currMonthStart = new DateTime(now.Year, now.Month, 1);
@@ -32,7 +36,7 @@ namespace FinanceModule.Queries.Dashboard
             int maxPage = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             var data = await query
-                .OrderByDescending(x => x.Date).Skip((filters.Page - 1) * pageSize).Take(pageSize).Select(x => new RecurrentsDTO
+                .OrderByDescending(x => x.Date).Skip((request.filters.Page - 1) * pageSize).Take(pageSize).Select(x => new RecurrentsDTO
                 {
                    Description = x.Description,
                    To= x.Who,
