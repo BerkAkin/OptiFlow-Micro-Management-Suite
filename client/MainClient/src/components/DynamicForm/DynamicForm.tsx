@@ -39,9 +39,12 @@ function DynamicForm({ title, colorScheme, hoverScheme, fields, initialValues, o
 
                                 {
                                     item.type === "file" ? (
-                                        <input className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" id={item.id} name={item.name} type="file" onChange={(e) => { const file = e.target.files?.[0] || null; setFieldValue(item.name, file); }} />
+                                        <>
+                                            <label htmlFor={item.id} className="cursor-pointer border border-gray-200 text-gray-500 w-full rounded-sm px-2 py-1 inline-block h-[35px] overflow-hidden" >{values[item.name] ? (values[item.name] as File).name : "Dosya seç"}</label>
+                                            <input className="hidden cursor-pointer border border-gray-200 text-gray-500 resize-none w-full rounded-sm px-2 py-1 focus:outline-none" id={item.id} name={item.name} type="file" onChange={(e) => { const file = e.target.files?.[0] || null; setFieldValue(item.name, file); }} />
+                                        </>
                                     ) : item.as === "select" ? (
-                                        <Field as="select" name={item.name} id={item.id} className="cursor-pointer border border-gray-200 w-full rounded-sm px-2 py-1 focus:outline-none" >
+                                        <Field as="select" name={item.name} id={item.id} className="cursor-pointer text-gray-500 border border-gray-200 w-full rounded-sm px-2 py-1 focus:outline-none" >
                                             <option value="">{item.placeholder}</option>
                                             {item.options?.map(opt => (
                                                 <option key={opt.value} value={opt.value}>{opt.label}</option>
@@ -49,13 +52,13 @@ function DynamicForm({ title, colorScheme, hoverScheme, fields, initialValues, o
                                         </Field>
                                     ) : item.type === "checkbox" ? (
                                         <div className='flex justify-start space-x-2'>
-                                            <label className="text-gray-700" htmlFor={item.id}>{item.label}</label>
+                                            <label className="text-gray-500" htmlFor={item.id}>{item.label}</label>
                                             <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className=" cursor-pointer accent-sky-500 " />
                                         </div>
 
                                     )
                                         : (
-                                            <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className="cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-4 py-1 focus:outline-none" />
+                                            <Field as={item.as} name={item.name} id={item.id} type={item.type} placeholder={item.placeholder} className="text-gray-500 cursor-pointer border border-gray-200 resize-none w-full rounded-sm px-4 py-1 focus:outline-none" />
                                         )
                                 }
                             </div>
