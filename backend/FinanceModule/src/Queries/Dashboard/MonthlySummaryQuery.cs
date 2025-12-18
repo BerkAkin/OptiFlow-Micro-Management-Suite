@@ -1,19 +1,20 @@
 ﻿using FinanceModule.DBOperations;
 using FinanceModule.DTOs;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public class MonthlySummaryQuery
+    public record MonthlySummaryQuery():IRequest<MonthlySummaryDTO>;
+    public class MonthlySummaryQueryHandler: IRequestHandler<MonthlySummaryQuery,MonthlySummaryDTO>
     {
         private readonly FinanceDBContext _context;
-        public MonthlySummaryQuery(FinanceDBContext context)
+        public MonthlySummaryQueryHandler(FinanceDBContext context)
         {
              _context = context;
         }
 
-        public async Task<MonthlySummaryDTO> Execute()
+        public async Task<MonthlySummaryDTO> Handle(MonthlySummaryQuery request, CancellationToken cancellationToken)
         {
             DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-11);
             DateTime endDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(1);
