@@ -28,22 +28,21 @@ interface TableProps {
 
 function DynamicTable({ title, colorScheme, textScheme, data, children, handleFilter, filterFields, onNext, onPrev }: TableProps) {
 
-
     const columns = data.length > 0 ? Object.keys(data[0]) : [];
     const gridTemplate = columns.map(col => (col === 'description' ? '4fr' : '1fr')).join(' ')
     const filterInitials = filterFields ? Object.fromEntries(filterFields.map((item) => [item.name, ""])) : {}
-    console.log(data);
 
     return (
         <div className='h-full'>
-            <div className='h-[10%] text-start flex justify-start '>
-                <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>{title}</p>
+            <div className='h-[10%] text-start flex justify-between'>
+                <p className={`text-xl font-semibold text-slate-800 ps-4 py-4`}>{title}</p>
+                {/* <button type="button" className={`text-2xl pe-4 py-4 cursor-pointer`}>⟳</button> */}
             </div>
 
             <div className={`h-[8%]  p-2 text-slate-600 tracking-wide font-semibold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
                 {columns.map((item, index) => (
                     <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center ps-3  "} text-sm uppercase `}>
-                        {item === "exchangeType" ? "Exchange" : item}
+                        {item}
                     </div>
                 ))}
 
@@ -53,9 +52,9 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
                 {data?.map((row, index) => (
                     <div key={index} className={`text-slate-500 font-normal p-2 bg-gray-50 hover:bg-slate-100 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
                         {columns.map((col) => (
-                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-3 "} text-sm`}>
+                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-1 "} text-sm`}>
 
-                                {col === "date" && row[col] ? row[col].split("T")[0] : row[col]}
+                                {col === "date" && row[col] ? row[col].split("T")[0].split("-").reverse().join(".") : row[col]}
 
                             </div>
                         ))}
