@@ -1,6 +1,7 @@
 import { useToatsContext } from '../../../context/ToastContext';
 import { useCreateTransaction } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicForm from '../../DynamicForm/DynamicForm';
+import { addTransactionValidationScheme } from './AddTransactionValidations';
 
 function AddTransaction() {
 
@@ -49,7 +50,7 @@ function AddTransaction() {
 
     return (
         <div className='h-full'>
-            <DynamicForm colorScheme='bg-blue-400' hoverScheme='hover:bg-blue-500' initialValues={initialValues} title='Add Transaction' onSubmit={handleSubmit} fields={fields} />
+            <DynamicForm validationScheme={addTransactionValidationScheme} colorScheme='bg-blue-400' hoverScheme='hover:bg-blue-500' initialValues={initialValues} title='Add Transaction' onSubmit={handleSubmit} fields={fields} />
         </div >
     )
 }
