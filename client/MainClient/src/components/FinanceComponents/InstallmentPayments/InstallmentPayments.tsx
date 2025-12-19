@@ -13,7 +13,7 @@ function InstallmentPayments() {
     const [filters, setFilters] = useState({})
 
 
-    const { error, isLoading, data } = useInstallment(filters, page);
+    const { error, isLoading, data, isFetching, refetch } = useInstallment(filters, page);
     if (error || !data) return (<ErrorMessage />)
     if (isLoading) return (<Spinner />)
 
@@ -37,7 +37,7 @@ function InstallmentPayments() {
 
     return (
         <div className='w-full h-full'>
-            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Installments' />
+            <DynamicTable isRefreshing={isFetching} onRefresh={() => refetch({ cancelRefetch: false })} onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Installments' />
         </div>
 
     )
