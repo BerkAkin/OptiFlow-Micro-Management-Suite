@@ -10,7 +10,7 @@ function LatestTransactions() {
     const [filters, setFilters] = useState({});
     const [page, setPage] = useState(1);
 
-    const { isLoading, error, data } = useLatestActivity(filters, page);
+    const { isLoading, error, data, refetch, isFetching } = useLatestActivity(filters, page);
     if (isLoading) return (<Spinner />)
     if (error || !data) return (<ErrorMessage />)
 
@@ -30,7 +30,15 @@ function LatestTransactions() {
     return (
 
         <div className='h-full'>
-            <DynamicTable onNext={nextPage} onPrev={prevPage} textScheme='text-sky-400' colorScheme='bg-sky-400' data={data.values} title='Transaction History' handleFilter={filterFunction} filterFields={data.filterFields} />
+            <DynamicTable
+                onRefresh={() => refetch({ cancelRefetch: false, throwOnError: true })}
+                isRefreshing={isFetching}
+                onNext={nextPage}
+                onPrev={prevPage}
+                data={data.values}
+                title='Transaction History'
+                handleFilter={filterFunction}
+                filterFields={data.filterFields} />
         </div>
     )
 }
