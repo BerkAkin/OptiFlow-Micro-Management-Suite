@@ -2,6 +2,7 @@
 using FinanceModule.Queries.Dashboard;
 using FinanceModule.Services;
 using MediatR;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceModule.Controllers
@@ -23,8 +24,21 @@ namespace FinanceModule.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTransaction([FromBody] TransactionDTO transaction)
         {
-           await _service.AddAsync(transaction);
-           return Ok("Transaction Saved");
+            try
+            {
+                await _service.AddAsync(transaction);
+                return Ok("Transaction Saved");
+            }
+            catch(ValidationException exception)
+            {
+                var errorMessages = exception.Errors.Select(e => new {
+                    Property = e.PropertyName,
+                    Message = e.ErrorMessage
+                });
+
+                return BadRequest(new { Errors = errorMessages });
+            }
+          
         }
 
         [HttpGet]
