@@ -32,7 +32,7 @@ function TodaysMoods() {
 
     return (
         <div className=' w-full h-full '>
-            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-rose-400' colorScheme='bg-rose-400' data={data.values} title='Todays Moods' />
+            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Todays Moods' />
         </div>
     )
 }
