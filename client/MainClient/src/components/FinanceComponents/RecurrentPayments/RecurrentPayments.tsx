@@ -10,7 +10,7 @@ function RecurrentPayments() {
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({})
 
-    const { isLoading, error, data } = useRecurrent(filters, page);
+    const { isLoading, error, data, isFetching, refetch } = useRecurrent(filters, page);
     if (error || !data) return (<ErrorMessage />)
     if (isLoading) return (<Spinner />)
 
@@ -30,7 +30,7 @@ function RecurrentPayments() {
 
     return (
         <div className='w-full h-full'>
-            <DynamicTable onNext={onNext} onPrev={onPrev} handleFilter={handleFilter} filterFields={data.filterFields} textScheme='text-orange-400' colorScheme='bg-orange-400' data={data.values} title='Recurrent Payments' />
+            <DynamicTable onNext={onNext} isRefreshing={isFetching} onRefresh={() => refetch({ cancelRefetch: false })} onPrev={onPrev} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Recurrent Payments' />
         </div>
 
     )
