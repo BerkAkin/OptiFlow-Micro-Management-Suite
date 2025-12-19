@@ -1,13 +1,21 @@
+import { useToatsContext } from '../../../context/ToastContext';
 import { useCreateTransaction } from '../../../hooks/FinanceHooks/useFinance';
 import DynamicForm from '../../DynamicForm/DynamicForm';
 
 function AddTransaction() {
 
     const mutation = useCreateTransaction();
+    const { showToast } = useToatsContext();
 
     const handleSubmit = (data: any) => {
-        console.log(data);
-        mutation.mutate(data)
+        mutation.mutate(data, {
+            onSuccess: () => {
+                showToast("Transaction başarıyla eklendi!");
+            },
+            onError: () => {
+                showToast("Bir hata oluştu!", "error");
+            }
+        });
     }
 
     const initialValues = {
