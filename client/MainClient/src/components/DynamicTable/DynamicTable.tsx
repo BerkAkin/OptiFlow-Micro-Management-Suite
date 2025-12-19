@@ -2,6 +2,7 @@ import { Field, Form, Formik } from "formik";
 import left from '../../assets/left.svg'
 import right from '../../assets/right.svg'
 import magnify from '../../assets/magnify.svg'
+import icon from '../../assets/icon.png'
 
 interface filterFields {
     name: string,
@@ -12,21 +13,21 @@ interface filterFields {
 
 interface TableProps {
     title: string,
-    colorScheme: string,
-    textScheme: string,
     data: Record<string, any>[],
     filterFields?: filterFields[],
     handleFilter?: (values: any) => void,
     children?: React.ReactNode,
     onNext?: () => void
-    onPrev?: () => void
+    onPrev?: () => void,
+    onRefresh?: () => void,
+    isRefreshing?: any
 }
 
 
 
 
 
-function DynamicTable({ title, colorScheme, textScheme, data, children, handleFilter, filterFields, onNext, onPrev }: TableProps) {
+function DynamicTable({ title, data, children, handleFilter, filterFields, onNext, onPrev, onRefresh, isRefreshing }: TableProps) {
 
     const columns = data.length > 0 ? Object.keys(data[0]) : [];
     const gridTemplate = columns.map(col => (col === 'description' ? '4fr' : '1fr')).join(' ')
@@ -36,7 +37,10 @@ function DynamicTable({ title, colorScheme, textScheme, data, children, handleFi
         <div className='h-full'>
             <div className='h-[10%] text-start flex justify-between'>
                 <p className={`text-xl font-semibold text-slate-800 ps-4 py-4`}>{title}</p>
-                {/* <button type="button" className={`text-2xl pe-4 py-4 cursor-pointer`}>⟳</button> */}
+                <button onClick={onRefresh} type="button" className={`flex items-center justify-center cursor-pointer transition-all duration-200 mx-4 hover:opacity-100 opacity-70
+                        ${isRefreshing ? 'animate-spin opacity-100' : 'text-slate-400'}`}>
+                    <img src={icon} width={30} />
+                </button>
             </div>
 
             <div className={`h-[8%]  p-2 text-slate-600 tracking-wide font-semibold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
