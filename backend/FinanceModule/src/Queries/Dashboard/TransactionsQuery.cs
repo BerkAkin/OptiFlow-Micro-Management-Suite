@@ -30,7 +30,7 @@ namespace FinanceModule.Queries.Dashboard
                 query = query.Where(x => x.Date.Date == parsedDate.Date);
             }
 
-            int pageSize = 11;
+            int pageSize = 14;
             int page = request.filters.Page <= 0 ? 1 : request.filters.Page;
             int totalCount = await query.CountAsync();
             int maxPage = (int)Math.Ceiling((double)totalCount / pageSize);
