@@ -13,22 +13,23 @@ function AddTransaction() {
             onSuccess: () => {
                 showToast("Transaction başarıyla eklendi!");
             },
-            onError: () => {
+            onError: (e: any) => {
+                console.log(e);
                 showToast("Bir hata oluştu!", "error");
             }
         });
     }
 
     const initialValues = {
-        quantity: "",
+        quantity: 1,
         who: "",
         exchange: "",
         date: new Date().toISOString().split("T")[0],
         description: "",
         income: false,
         partly: false,
-        parts: "",
-        price: "",
+        parts: 1,
+        price: 1,
         category: "",
         invoice: "",
 
@@ -36,11 +37,11 @@ function AddTransaction() {
 
     const fields = [
         { name: "description", label: "Description", id: "description", type: "text" as const, as: "textarea" as const, placeholder: "Description" },
-        { name: "quantity", label: "Quantity", id: "quantity", type: "text" as const, placeholder: "Quantity" },
-        { name: "parts", label: "Part Count", id: "partCount", type: "text" as const, placeholder: "Part Count" },
-        { name: "price", label: "Price", id: "partPrice", type: "text" as const, placeholder: "Price" },
+        { name: "quantity", label: "Quantity", id: "quantity", type: "number" as const, placeholder: "Quantity" },
+        { name: "parts", label: "Part Count", id: "partCount", type: "number" as const, placeholder: "Part Count" },
+        { name: "price", label: "Price", id: "partPrice", type: "number" as const, placeholder: "Price" },
         { name: "who", label: "Who", id: "Who", type: "text" as const, placeholder: "Who" },
-        { name: "exchangeType", label: "Exchange", id: "exchangeType", type: "text" as const, placeholder: "Exchange" },
+        { name: "exchange", label: "Exchange", id: "exchangeType", type: "text" as const, placeholder: "Exchange" },
         { name: "category", label: "Category", id: "category", type: "text" as const, as: "select" as const, options: [{ label: "Transport", value: "transport" }, { label: "Food", value: "food" }], placeholder: "Category" },
         { name: "date", label: "Date", id: "date", type: "date" as const, placeholder: "Date..." },
         { name: "invoice", label: "Select File", id: "invoicePath", type: "file" as const, placeholder: "Dosya:" },
