@@ -1,10 +1,11 @@
 ﻿using MediatR;
+using SurveyModule.Application.DTOs;
 using SurveyModule.Application.Interfaces.Repositories;
 
 namespace SurveyModule.Application.Queries.GetSurveyDetails
 {
-    public record GetSurveyDetailQuery(int SurveyId) : IRequest<GetSurveyDetailDto>;
-    public class GetSurveyDetailHandler: IRequestHandler<GetSurveyDetailQuery, GetSurveyDetailDto>
+    public record GetSurveyDetailQuery(int SurveyId) : IRequest<SurveyDto>;
+    public class GetSurveyDetailHandler: IRequestHandler<GetSurveyDetailQuery, SurveyDto>
     {
         private readonly ISurveyRepository _repository;
         public GetSurveyDetailHandler(ISurveyRepository repository)
@@ -12,7 +13,7 @@ namespace SurveyModule.Application.Queries.GetSurveyDetails
             _repository = repository;
         }
 
-        public async Task<GetSurveyDetailDto> Handle(GetSurveyDetailQuery request, CancellationToken cancellationToken)
+        public async Task<SurveyDto> Handle(GetSurveyDetailQuery request, CancellationToken cancellationToken)
         {
             return await _repository.GetSurveyDetail(request.SurveyId);
         }
