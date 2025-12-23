@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SurveyModule.Application.DTOs;
 using SurveyModule.Application.Interfaces.Repositories;
-using SurveyModule.Application.Queries.GetSurveyDetails;
 using SurveyModule.Application.Queries.GetSurveys;
+using SurveyModule.Domain.Entities;
 using SurveyModule.Infrastructure.Persistance;
 
 namespace SurveyModule.Infrastructure.Repositories
@@ -26,22 +27,29 @@ namespace SurveyModule.Infrastructure.Repositories
             }).ToListAsync();
         }
 
-        public async Task<GetSurveyDetailDto> GetSurveyDetail(int SurveyId)
+        public async Task<SurveyDto> GetSurveyDetail(int SurveyId)
         {
-            return await _context.Surveys.Where(x => x.Id == SurveyId).Select(x => new GetSurveyDetailDto
+            return await _context.Surveys.Where(x => x.Id == SurveyId).Select(x => new SurveyDto
             {
+                Id= x.Id,
                 Title= x.Title,
-                Questions= x.Questions.Select(q=> new GetSurveyQuestionDto
+                Questions= x.Questions.Select(q=> new QuestionDto
                 {
                     Id=q.Id,
                     Title= q.Title,
-                    Answers = q.Answers.Select(a=> new GetSurveyQuestionAnswerDto
+                    Answers = q.Answers.Select(a=> new AnswerDto
                     {
                         Id=a.Id,    
                         Title= a.Title,
                     }).ToList()   
                 }).ToList()
             }).SingleOrDefaultAsync();
+        }
+
+        public async Task AddSurvey(Survey survey)
+        {
+            await _context.AddAsync(survey);
+            await _context.SaveChangesAsync();
         }
     }
 }
