@@ -12,7 +12,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:8080 
-            - ConnectionStrings__SurveyModuleDb=Server=auth;Database=db_survey;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+            - ConnectionStrings__SurveyModuleDb=Server=survey-db;Database=db_survey;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./SurveyModule/src:/app
             - survey-module-bin:/app/bin  
