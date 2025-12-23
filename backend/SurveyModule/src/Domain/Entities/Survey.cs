@@ -6,6 +6,7 @@ namespace SurveyModule.Domain.Entities
     {
         public int Id { get; set; }
         public int CreatorId { get; set; }
+        public int TenantId { get; set; }
         public string Title { get; set; }
         public SurveyStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
