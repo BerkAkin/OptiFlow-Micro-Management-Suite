@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.8">
@@ -22,12 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Controllers\" />
     <Folder Include="Application\Commands\" />
-    <Folder Include="Application\Interfaces\" />
-    <Folder Include="Application\Queries\" />
     <Folder Include="Infrastructure\Persistance\Configurations\" />
-    <Folder Include="Infrastructure\Repositories\" />
   </ItemGroup>
 
 </Project>
