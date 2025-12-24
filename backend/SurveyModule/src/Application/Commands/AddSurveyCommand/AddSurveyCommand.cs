@@ -5,8 +5,8 @@ using SurveyModule.Domain.Entities;
 
 namespace SurveyModule.Application.Commands.AddSurvey
 {
-    public record AddSurveyCommand(SurveyDto survey) : IRequest<string>;
-    public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand ,string>
+    public record AddSurveyCommand(SurveyDto survey) : IRequest<Unit>;
+    public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand ,Unit>
     {
         private readonly ISurveyRepository _repository;
         public AddSurveyCommandHandler(ISurveyRepository repository)
@@ -14,7 +14,8 @@ namespace SurveyModule.Application.Commands.AddSurvey
             _repository = repository;
         }
 
-        public async Task<string> Handle(AddSurveyCommand command, CancellationToken cancellationToken) {
+        public async Task<Unit> Handle(AddSurveyCommand command, CancellationToken cancellationToken) {
+
 
             Survey surv = new Survey()
             {
@@ -30,7 +31,7 @@ namespace SurveyModule.Application.Commands.AddSurvey
             };
 
             await _repository.AddSurvey(surv);
-            return "Ekleme başarılı";
+            return Unit.Value;
         }
     }
 }
