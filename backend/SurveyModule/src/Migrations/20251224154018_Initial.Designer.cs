@@ -12,8 +12,8 @@ using SurveyModule.Infrastructure.Persistance;
 namespace SurveyModule.Migrations
 {
     [DbContext(typeof(SurveyDbContext))]
-    [Migration("20251220235649_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20251224154018_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,9 @@ namespace SurveyModule.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TenantId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
