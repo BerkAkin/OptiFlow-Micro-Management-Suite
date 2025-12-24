@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SurveyModule.Application.Interfaces.Repositories;
-using SurveyModule.Application.Queries.GetSurveyDetails;
-using SurveyModule.Application.Queries.GetSurveys;
+using SurveyModule.Application.Queries.GetSurveysQuery;
 using SurveyModule.Infrastructure.Persistance;
 using SurveyModule.Infrastructure.Repositories;
 using SurveyModule.Seeder;
