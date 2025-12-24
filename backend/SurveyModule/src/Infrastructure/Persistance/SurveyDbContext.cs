@@ -35,6 +35,11 @@ namespace SurveyModule.Infrastructure.Persistance
                 .HasForeignKey(ua => ua.UserId);
 
             modelBuilder.Entity<UserAnswer>()
+                .HasIndex(x => new { x.UserId, x.SurveyId, x.QuestionId })
+                .IsUnique();
+
+
+            modelBuilder.Entity<UserAnswer>()
                 .HasOne(ua => ua.Question)
                 .WithMany()
                 .HasForeignKey(ua => ua.QuestionId)
