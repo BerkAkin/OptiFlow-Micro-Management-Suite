@@ -1,6 +1,4 @@
-﻿using SurveyModule.Application.Queries.GetSurveyDetails;
-
-namespace SurveyModule.Application.DTOs
+﻿namespace SurveyModule.Application.DTOs
 {
     public class QuestionDto
     {
