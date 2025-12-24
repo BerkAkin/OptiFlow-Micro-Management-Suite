@@ -14,6 +14,7 @@ namespace SurveyModule.Seeder
         public async Task Seeder()
         {
            await SeedSurveys();
+            await SeedUsers();
         }
         public async Task SeedSurveys()
         {
@@ -33,7 +34,33 @@ namespace SurveyModule.Seeder
                         Answers= new List<Answer>{
                             new Answer
                             {
-                                Title="Dummy Answer 1"
+                                Title="Dummy Answer 1-1"
+                            },
+                             new Answer
+                            {
+                                Title="Dummy Answer 1-2"
+                            },
+                              new Answer
+                            {
+                                Title="Dummy Answer 1-3"
+                            },
+                        }
+
+                     },
+                     new Question {
+                        Title= "Dummy question 2",
+                        Answers= new List<Answer>{
+                            new Answer
+                            {
+                                Title="Dummy Answer 2-1"
+                            },
+                             new Answer
+                            {
+                                Title="Dummy Answer 2-2"
+                            },
+                              new Answer
+                            {
+                                Title="Dummy Answer 2-3"
                             },
                         }
 
@@ -42,9 +69,25 @@ namespace SurveyModule.Seeder
 
                 };
 
-                await _context.AddAsync(survey);
+                await _context.Surveys.AddAsync(survey);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task SeedUsers()
+        {
+            if (!_context.MiniUsers.Any())
+            {
+                MiniUser user = new MiniUser()
+                {
+                    Email = "Berk@mail.com",
+                    UserAnswers = new List<UserAnswer>() { },
+                    Username="BerkA"
+                };            
+            await _context.MiniUsers.AddAsync(user);
+            await _context.SaveChangesAsync();
+            }
+
         }
     }
 }
