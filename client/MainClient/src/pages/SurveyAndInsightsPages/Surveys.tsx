@@ -3,30 +3,34 @@ import { Doughnut, } from "react-chartjs-2";
 import happy from '../../assets/happyWhite.svg'
 import sad from '../../assets/sadWhite.svg'
 import { useSurveys } from '../../hooks/SurveyHooks/useSurvey';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import Spinner from '../../components/Spinner/Spinner';
+import SurveySatisfactionPopUp from '../../components/SurveyComponents/SurveySatisfactionPopUp';
 
 
 
 function SurveyResults() {
     const { data, isLoading, error } = useSurveys();
 
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return (<Spinner />)
+    if (error || !data) return (<ErrorMessage />)
 
     return (
         <div className='container my-10 mx-auto'>
+
             <div className='mx-auto grid grid-cols-2 gap-6' >
-                {data.data.map((item, index) => (
-                    <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg`}>
+                {data.map((item: any, index: number) => (
+                    <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg hover:scale-102 transition `}>
                         <div className='col-span-4'>
-                            <Link to={`${item.status === "Active" ? `/survey/details/${item.slug}` : ""} `} className={`${item.status === "Timeout" ? "cursor-default" : " cursor-pointer"}`}>
-                                <div className={`${item.status === "Timeout" ? "bg-gray-50" : "hover:bg-indigo-50"} w-full h-full border-gray-200 border-e rounded-s-lg`}>
+                            <Link to={`${item.status === 1 ? `/survey/details/${item.id}` : ""} `} className={`${item.status === 2 ? "cursor-default" : " cursor-pointer"}`}>
+                                <div className={`${item.status === 2 ? "bg-gray-50" : "hover:bg-indigo-50 transition"} w-full h-full border-gray-200 border-e rounded-s-lg`}>
                                     <div className='h-[40%] flex items-center justify-center'>
                                         <p className='font-rubik text-center text-2xl text-gray-600 mx-2 relative '>
-                                            {item.text}
-                                            {item.status === "Timeout" ?
+                                            {item.title}
+                                            {item.status === 2 ?
                                                 (
                                                     <span className='h-[10%] absolute bottom-0 right-0 z-10 pt-2 text-sm text-sky-500'>
-                                                        <Link to={`/survey/result/${item.slug}`}>Go to Result {">"}</Link>
+                                                        <Link to={`/survey/result/${item.id}`}>Go to Result {">"}</Link>
                                                     </span>
                                                 ) : ""
                                             }
@@ -40,20 +44,20 @@ function SurveyResults() {
                                     <div className='h-[40%] grid grid-cols-3'>
                                         <div>
                                             <div className='flex items-end justify-center'><img className='bg-orange-400 rounded-full' src={happy} alt="" width={40} /></div>
-                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.satisfactionCount} </p></div>
+                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.dissatisfactionCount}  </p></div>
                                         </div>
                                         <div className=''>
                                             <div className='flex justify-center'>
-                                                <p className={item.status === "Active" ? "font-rubik text-green-600 text-xl " : "font-rubik text-red-500 text-xl"}>{item.status}</p>
+                                                <p className={item.status === 1 ? "font-rubik text-green-600 text-xl " : "font-rubik text-red-500 text-xl"}>{item.status == 1 ? "Active" : "Timeout"}</p>
                                             </div>
                                             <div className='flex justify-center'>
-                                                <p className='text-gray-600 font-rubik text-md'>{item.date}</p>
+                                                <p className='text-gray-600 font-rubik text-md'>{item.date.split("T")[0].split("-").reverse().join(".")}</p>
 
                                             </div>
                                         </div>
                                         <div >
                                             <div className='flex items-end justify-center'> <img className='bg-sky-400 rounded-full' src={sad} alt="" width={40} /></div>
-                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.totalEmployee - item.satisfactionCount} </p></div>
+                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.satisfactionCount} </p></div>
                                         </div>
 
 
@@ -65,9 +69,9 @@ function SurveyResults() {
 
                             <Doughnut
                                 data={{
-                                    labels: ['Respondents', 'Non respondents'],
+                                    labels: ['Respondents'],
                                     datasets: [{
-                                        data: [item.participationCount, item.totalEmployee - item.participationCount],
+                                        data: [item.satisfactionCount + item.dissatisfactionCount],
                                         backgroundColor: ['#34d399', '#22c55e',],
                                     }],
 
