@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     networks:
-      - project_micro_network
+      - project-micro-network
     ports:
       - "5172:5173"
     volumes:
@@ -16,5 +16,5 @@ volumes:
   landing-packages:
 
 networks:
-    project_micro_network:
+    project-micro-network:
         external: true
