@@ -7,7 +7,7 @@ function StepThree({ handleChange, registerInfo, setRegisterInfo, previousStep, 
     async function handleSubmit() {
         console.log(registerInfo)
         try {
-            const res = await fetch("http://", {
+            const res = await fetch("http://api/Auth/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(registerInfo),
