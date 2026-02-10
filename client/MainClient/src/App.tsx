@@ -25,8 +25,8 @@ function App() {
             <Route path='finance/bill' element={<FinanceBillsPage />} />
             <Route path='survey/builder' element={<SurveyBuilder />} />
             <Route path='survey/dashboard' element={<Surveys />} ></Route>
-            <Route path='survey/details/:slug' element={<SurveyDetails />} />
-            <Route path='survey/result/:slug' element={<SurveyResults />} />
+            <Route path='survey/details/:id' element={<SurveyDetails />} />
+            <Route path='survey/result/:id' element={<SurveyResults />} />
 
             <Route path='suggest/dashboard' element={<SuggestionsPage />} />
 
