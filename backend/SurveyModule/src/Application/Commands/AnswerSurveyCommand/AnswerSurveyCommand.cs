@@ -5,7 +5,7 @@ using SurveyModule.Domain.Entities;
 
 namespace SurveyModule.Application.Commands.AnswerSurveyCommand
 {
-    public record AnswerSurveyCommand(UserAnswerDto UserAnswer): IRequest<Unit>;
+    public record AnswerSurveyCommand(UserAnswerDto UserAnswer,int userId): IRequest<Unit>;
     public class AnswerSurveyCommandHandler : IRequestHandler<AnswerSurveyCommand,Unit>
     {
         private readonly ISurveyRepository _surveyRepository;
@@ -18,7 +18,7 @@ namespace SurveyModule.Application.Commands.AnswerSurveyCommand
         {
             var entites = request.UserAnswer.Answers.Select(a => new UserAnswer
             {
-                UserId = request.UserAnswer.UserId,
+                UserId = request.userId,
                 SurveyId = request.UserAnswer.SurveyId,
                 AnswerId = a.AnswerId,
                 QuestionId = a.QuestionId,
