@@ -24,9 +24,10 @@ namespace AuthModule.Services
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                new Claim("uid",user.Id.ToString()),
+                new Claim("userId",user.Id.ToString()),
                 new Claim("tenantId", user.TenantId.ToString()),
                 new Claim("departmentId",user.DepartmentId.ToString()),
+                new Claim("email",user.Email.ToString()),
             };
 
             foreach (var module in user.Tenant.TenantModules.Select(m => m.Module.Name))
