@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceModule", "FinanceMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyModule", "SurveyModule\src\SurveyModule.csproj", "{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SuggestionModule", "SuggestionModule\src\SuggestionModule.csproj", "{8A3BC54A-DDF2-4019-9540-973F1C595292}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,13 +71,25 @@ Global
 		{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C}.Release|x64.Build.0 = Release|Any CPU
 		{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C}.Release|x86.ActiveCfg = Release|Any CPU
 		{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C}.Release|x86.Build.0 = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|x64.Build.0 = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Debug|x86.Build.0 = Debug|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|x64.ActiveCfg = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|x64.Build.0 = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|x86.ActiveCfg = Release|Any CPU
+		{8A3BC54A-DDF2-4019-9540-973F1C595292}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{9C771DC9-6BD1-A119-6579-3147C26ADB91} = {84047CDE-3D53-2185-2BCE-2AB43D820B03}
-		{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C} = {9C771DC9-6BD1-A119-6579-3147C26ADB91}
+		{838E4412-ABE9-B7D2-FEFB-CD95D9DE6062} = {61D7828E-F871-DFA5-CFE3-522961FCF08B}
+		{8A3BC54A-DDF2-4019-9540-973F1C595292} = {838E4412-ABE9-B7D2-FEFB-CD95D9DE6062}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CD8C15-DD7E-4421-943E-86AEC83BFE95}
