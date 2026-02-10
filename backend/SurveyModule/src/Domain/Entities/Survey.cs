@@ -11,5 +11,6 @@ namespace SurveyModule.Domain.Entities
         public SurveyStatus Status { get; set; } = SurveyStatus.Published;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public ICollection<Question> Questions { get; set; } = new List<Question>();
+        public ICollection<SatisfactionRate> SatisfactionRate {get;set;} = new List<SatisfactionRate>();
     }
 }
