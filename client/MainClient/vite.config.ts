@@ -13,7 +13,7 @@ export default defineConfig({
 
     proxy: {
       "/api": {
-        target: "http://finance-module:8080",
+        target: "http://gateway:8080",
         changeOrigin: true,
         secure: false,
       },
