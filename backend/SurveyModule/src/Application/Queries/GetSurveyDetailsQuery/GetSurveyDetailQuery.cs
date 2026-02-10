@@ -4,7 +4,7 @@ using SurveyModule.Application.Interfaces.Repositories;
 
 namespace SurveyModule.Application.Queries.GetSurveyDetailsQuery
 {
-    public record GetSurveyDetailQuery(int SurveyId) : IRequest<SurveyDto>;
+    public record GetSurveyDetailQuery(int SurveyId,int tenantId, int UserId) : IRequest<SurveyDto>;
     public class GetSurveyDetailHandler: IRequestHandler<GetSurveyDetailQuery, SurveyDto>
     {
         private readonly ISurveyRepository _repository;
@@ -15,7 +15,7 @@ namespace SurveyModule.Application.Queries.GetSurveyDetailsQuery
 
         public async Task<SurveyDto> Handle(GetSurveyDetailQuery request, CancellationToken cancellationToken)
         {
-            return await _repository.GetSurveyDetail(request.SurveyId);
+            return await _repository.GetSurveyDetail(request.SurveyId, request.tenantId,request.UserId);
         }
     }
 }
