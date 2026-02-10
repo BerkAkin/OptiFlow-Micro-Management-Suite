@@ -5,7 +5,7 @@ using SurveyModule.Domain.Entities;
 
 namespace SurveyModule.Application.Commands.AddSurvey
 {
-    public record AddSurveyCommand(SurveyDto survey) : IRequest<Unit>;
+    public record AddSurveyCommand(SurveyDto survey,int tenantId) : IRequest<Unit>;
     public class AddSurveyCommandHandler : IRequestHandler<AddSurveyCommand ,Unit>
     {
         private readonly ISurveyRepository _repository;
@@ -19,6 +19,7 @@ namespace SurveyModule.Application.Commands.AddSurvey
 
             Survey surv = new Survey()
             {
+                TenantId= command.tenantId,
                 Title = command.survey.Title,
                 Questions = command.survey.Questions.Select(q => new Question
                 {
