@@ -15,6 +15,7 @@ namespace SurveyModule.Infrastructure.Persistance
         public DbSet<Answer> Answers { get; set; }
         public DbSet<MiniUser> MiniUsers { get; set; }
         public DbSet<UserAnswer> UserAnswers { get; set; }
+        public DbSet<SatisfactionRate> SatisfactionRates { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +33,8 @@ namespace SurveyModule.Infrastructure.Persistance
             modelBuilder.Entity<MiniUser>()
                 .HasMany(u => u.UserAnswers)
                 .WithOne(ua => ua.User)
-                .HasForeignKey(ua => ua.UserId);
+                .HasForeignKey(ua => ua.UserId);      
+
 
             modelBuilder.Entity<UserAnswer>()
                 .HasIndex(x => new { x.UserId, x.SurveyId, x.QuestionId })
@@ -57,6 +59,9 @@ namespace SurveyModule.Infrastructure.Persistance
                 .HasForeignKey(ua => ua.SurveyId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<SatisfactionRate>()
+                .HasIndex(x => new { x.UserId, x.SurveyId })
+                .IsUnique();
 
         }
 
