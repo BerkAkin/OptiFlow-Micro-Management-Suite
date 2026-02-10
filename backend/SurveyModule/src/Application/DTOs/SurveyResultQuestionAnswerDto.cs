@@ -2,7 +2,7 @@
 {
     public class SurveyResultQuestionAnswerDto
     {
-        public int Id { get; set; }
-        public int Percent { get; set; }
+        public string Title { get; set; }
+        public int Count { get; set; }
     }
 }
