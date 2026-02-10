@@ -1,36 +1,176 @@
 version: '3.8'
 
-services:
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq
-    ports:
-        - "5672:5672"
-        - "15672:15672"
-    networks:
-        - project_micro_network
-    environment:
-        RABBITMQ_DEFAULT_USER: user
-        RABBITMQ_DEFAULT_PASS: password
-    volumes:
-        - rabbitmq_data:/var/lib/rabbitmq
+services: 
 
+    gateway:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: gateway
+        networks: 
+            - project-micro-network
+        ports:
+            - "5001:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+        volumes:
+            - ./Gateway/src:/app
+            - gateway-bin:/app/bin  
+            - gateway-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
 
-  redis:
-    image: redis:7-alpine
-    container_name: redis
-    ports: 
-    - "6379:6379"
-    networks:
-    - project_micro_network
-    restart: always
+    finance-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: finance-module
+        networks:
+            - project-micro-network
+        ports:
+            - "5002:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__FinanceModuleDb=Server=finance-db;Database=db_finance;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./FinanceModule/src:/app
+            - finance-module-bin:/app/bin  
+            - finance-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080" --non-interactive --restart-on-rude-edit
+        depends_on:
+            - finance-db
+            
+    survey-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: survey-module
+        networks: 
+            - project-micro-network
+        ports:
+            - "5003:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080 
+            - ConnectionStrings__SurveyModuleDb=Server=survey-db;Database=db_survey;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./SurveyModule/src:/app
+            - survey-module-bin:/app/bin  
+            - survey-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - survey-db
+            
+    
+    auth-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: auth-module
+        networks:
+            - project-micro-network
+        ports:
+            - "5000:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__AuthModuleDb=Server=auth-db;Database=db_auth;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./AuthModule/src:/app
+            - auth-module-bin:/app/bin  
+            - auth-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - auth-db
+
+    suggestion-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: suggestion-module
+        networks:
+            - project-micro-network
+        ports: 
+            - "5004:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__SuggestionModuleDb=Server=suggestion-db;Database=db_suggestion;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./SuggestionModule/src:/app
+            - suggestion-module-bin:/app/bin  
+            - suggestion-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - suggestion-db
+        
+    auth-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: auth-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1433:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - auth-mssql-db:/var/opt/mssql
+
+    finance-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: finance-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1434:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - finance-mssql-db:/var/opt/mssql
+                
+    survey-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: survey-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1435:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - survey-mssql-db:/var/opt/mssql
+            
+    suggestion-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: suggestion-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1436:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - suggestion-mssql-db:/var/opt/mssql
         
 
+
 volumes:
-    rabbitmq_data:
-    
+    suggestion-module-bin:
+    suggestion-module-obj:
+    suggestion-mssql-db:
+    survey-module-bin:
+    survey-module-obj:
+    survey-mssql-db:
+    finance-module-bin:
+    finance-module-obj:
+    finance-mssql-db:
+    auth-module-bin:
+    auth-module-obj:
+    auth-mssql-db:
+    gateway-bin:
+    gateway-obj:
     
 networks:
-    project_micro_network:
+    project-micro-network:
         external: true
