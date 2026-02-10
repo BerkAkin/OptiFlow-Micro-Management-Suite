@@ -12,7 +12,6 @@ export const fetchMonthlyData = async () => {
 export const fetchCategoricalData = async () => {
   try {
     const res = await api.get("/finance/CategoricalSummary");
-    console.log(res.data);
     return res.data;
   } catch (error) {
     console.log(error);
