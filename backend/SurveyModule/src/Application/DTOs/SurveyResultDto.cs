@@ -2,7 +2,7 @@
 {
     public class SurveyResultDto
     {
-        public int Id { get; set; }
+        public string Name { get; set; }
         public List<SurveyResultQuestionDto> Questions { get; set; }
     }
 }
