@@ -1,0 +1,6 @@
+@SuggestionModule_HostAddress = http://localhost:5088
+
+GET {{SuggestionModule_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
