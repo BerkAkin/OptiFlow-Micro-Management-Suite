@@ -1,6 +1,6 @@
 import { fetchSurveyResult } from "../../repositories/SurveyRepositories/SurveyRepository";
 
-export const SurveyResultService = async (slug: string) => {
-  const data = await fetchSurveyResult(slug);
+export const SurveyResultService = async (id: number) => {
+  const data = await fetchSurveyResult(id);
   return data;
 };
