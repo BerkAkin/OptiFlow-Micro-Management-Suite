@@ -21,14 +21,21 @@ namespace SurveyModule.Infrastructure.Repositories
                 Title = x.Title,
                 TenantId = x.TenantId,  
                 Id=x.Id,
-                Date= x.CreatedAt
+                Date= x.CreatedAt,
+                Status= x.Status,
+                SatisfactionCount= x.SatisfactionRate.Count(x=>x.Satisfaction == Domain.Enums.SatisfactionStatus.Liked),
+                DissatisfactionCount= x.SatisfactionRate.Count(x=>x.Satisfaction == Domain.Enums.SatisfactionStatus.Disliked),
 
             }).ToListAsync();
         }
 
-        public async Task<SurveyDto> GetSurveyDetail(int SurveyId)
+        public async Task<SurveyDto> GetSurveyDetail(int SurveyId,int tenantId, int UserId)
         {
-            return await _context.Surveys.AsNoTracking().Where(x => x.Id == SurveyId).Select(x => new SurveyDto
+            var userAnswer = await _context.UserAnswers.Where(x => x.UserId == UserId && x.SurveyId==SurveyId).AnyAsync();
+            if (userAnswer)
+                throw new InvalidOperationException("User is already took the survey");
+
+            return await _context.Surveys.AsNoTracking().Where(x => x.Id == SurveyId && x.TenantId== tenantId).Select(x => new SurveyDto
             {
                 Id= x.Id,
                 Title= x.Title,
@@ -66,32 +73,54 @@ namespace SurveyModule.Infrastructure.Repositories
 
         public async Task<SurveyResultDto> GetSurveyResult(int SurveyId)
         {
-            var answers = await _context.UserAnswers
-                .Where(x => x.SurveyId == SurveyId)
-                .ToListAsync();
+           var questions = await _context.UserAnswers.Where(x => x.SurveyId == SurveyId)
 
-            var result = new SurveyResultDto
+            .Join(_context.Questions,
+                userAnswer=>userAnswer.QuestionId, 
+                question => question.Id,
+                (userAnswer,question)=> new {userAnswer,question}
+            )
+            .Join(_context.Answers,
+                combined => combined.userAnswer.AnswerId,
+                answer => answer.Id,
+                (combined,answer)=> new {
+                    questionId= combined.question.Id,
+                    answerId= answer.Id,
+                    questionTitle=combined.question.Title,
+                    answerTitle=answer.Title,
+                })
+            .GroupBy(x=>x.questionId)
+            .Select(questionGroup => new SurveyResultQuestionDto
             {
-                Id = SurveyId,
-                Questions = answers
-                .GroupBy(x => x.QuestionId)
-                .Select(questionGroup => new SurveyResultQuestionDto
+                Title= questionGroup.First().questionTitle,
+                Answers= questionGroup
+                .GroupBy(x=>x.answerId)
+                .Select(answerGroup=> new SurveyResultQuestionAnswerDto
                 {
-                    Id = questionGroup.Key,
-                    Answers = questionGroup
-                    .GroupBy(x => x.AnswerId)
-                    .Select(answerGroup => new SurveyResultQuestionAnswerDto
-                    {
-                        Id = answerGroup.Key,
-                        Percent = (int)Math.Round((double)answerGroup.Count() * 100 / questionGroup.Count())
-                    }).ToList()
+                    Title= answerGroup.First().answerTitle,
+                    Count= answerGroup.Count()
                 }).ToList()
+            }).ToListAsync();
+
+            var SurveyName = await _context.Surveys.Where(x => x.Id == SurveyId).Select(x => x.Title).FirstAsync();
+
+            return new SurveyResultDto
+            {
+                Questions = questions,
+                Name = SurveyName
+
             };
 
-
-            return result;
-                
         }
 
+        public async Task AddSatisfaction(SatisfactionRate satisfaction)
+        {
+            var userSatisfaction = await _context.SatisfactionRates.Where(x=>x.UserId== satisfaction.UserId && x.SurveyId== satisfaction.SurveyId).AnyAsync();
+            if (userSatisfaction)
+                throw new InvalidOperationException("You already rated the survey");
+
+            await _context.SatisfactionRates.AddAsync(satisfaction);
+            await _context.SaveChangesAsync();
+        }
     }
 }
