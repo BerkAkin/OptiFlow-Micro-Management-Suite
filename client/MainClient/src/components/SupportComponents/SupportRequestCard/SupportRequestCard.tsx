@@ -9,19 +9,11 @@ function SupportRequestCard() {
         mutation.mutate(values)
     }
     const initialValues = {
-        category: "",
-        description: ""
+        message: ""
     }
 
     const fields = [
-        {
-            name: "category", label: "Category", id: "category", placeholder: "", type: "text" as const, as: "select" as const, options: [
-                { value: "workEnvironment", label: "Work Environment" },
-                { value: "ergonomy", label: "Ergonomy" },
-                { value: "colleagues", label: "Colleagues" },
-            ]
-        },
-        { name: "description", label: "Description", id: "description", placeholder: "Description...", type: "text" as const, as: "textarea" as const }
+        { name: "message", label: "Message", id: "message", placeholder: "Message...", type: "text" as const, as: "textarea" as const }
     ]
 
     return (
