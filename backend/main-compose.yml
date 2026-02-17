@@ -101,6 +101,26 @@ services:
         depends_on:
             - suggestion-db
         
+    support-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: support-module
+        networks:
+            - project-micro-network
+        ports: 
+            - "5005:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__SupportModuleDb=Server=support-db;Database=db_support;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./SupportModule/src:/app
+            - support-module-bin:/app/bin  
+            - support-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - support-db
+        
     auth-db:
         image: mcr.microsoft.com/mssql/server:2022-latest
         container_name: auth-db
@@ -153,9 +173,26 @@ services:
         volumes:
             - suggestion-mssql-db:/var/opt/mssql
         
+    support-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: support-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1437:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - support-mssql-db:/var/opt/mssql
+        
+
 
 
 volumes:
+    support-module-bin:
+    support-module-obj:
+    support-mssql-db:
     suggestion-module-bin:
     suggestion-module-obj:
     suggestion-mssql-db:
