@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using SupportModule.Application.DTOs;
 using SupportModule.Application.Interfaces;
-using SupportModule.Domain.Entites;
+using SupportModule.Domain.Entities;
 
 namespace SupportModule.Application.Commands.CreateSupportRequestCommand
 {
