@@ -1,7 +1,5 @@
-﻿
-
-using SupportModule.Application.DTOs;
-using SupportModule.Domain.Entites;
+﻿using SupportModule.Application.DTOs;
+using SupportModule.Domain.Entities;
 
 namespace SupportModule.Application.Interfaces
 {
@@ -10,5 +8,11 @@ namespace SupportModule.Application.Interfaces
         Task CreateSupportRequest(SupportMessage message, SupportRequest request);
         Task<List<SupportRequestsDto>> GetSupportRequests(int TenantId);
         Task<List<SupportMessageDto>> GetSupportMessages(int RequestId);
+        Task<List<SupportRequestsDto>> GetMyRequest(int UserId);
+        Task<List<MonthltRequestsCountDto>> GetMonthlyRequestCountsQuery(int tenantId);
+        Task<List<EmployeeDto>> GetEmployeeListQuery(int tenantId);
+        Task CreateEmployeeComment(UserComment comment);
+        Task<List<UserCommentDto>> GetEmployeeComments(int UserId);
+        Task DeleteEmployeeComment(int CommentId);
     }
 }
