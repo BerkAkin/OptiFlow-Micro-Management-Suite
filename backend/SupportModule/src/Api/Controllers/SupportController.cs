@@ -1,7 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using SupportModule.Application.Commands.CreateEmployeeCommentCommand;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
+using SupportModule.Application.Commands.DeleteEmployeeCommentCommand;
 using SupportModule.Application.DTOs;
+using SupportModule.Application.Queries.GetEmployeeCommentsQuery;
+using SupportModule.Application.Queries.GetEmployeeListQuery;
+using SupportModule.Application.Queries.GetMonthlyRequestCountsQuery;
+using SupportModule.Application.Queries.GetMyRequestsQuery;
 using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
 
@@ -23,27 +29,76 @@ namespace SupportModule.Api.Controllers
         [HttpPost("CreateSupportRequest")]
         public async Task<IActionResult> CreateSupportRequest([FromBody] SupportMessageDto supportMessage)
         {
-            //int currentUser = _currentUserService.User.UserId; ;
+            //int currentUser = _currentUserService.User.UserId;
             //int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new CreateSupportRequestCommand(supportMessage,1,1));
+            await _mediator.Send(new CreateSupportRequestCommand(supportMessage,1,1)); //tenantid ve user id ile oluşturulmalı
             return Ok(new { message = "İsteğiniz iletilmiştir" });
         }
 
         [HttpGet("GetSupportRequestList")]
         public async Task<IActionResult> GetSupportRequest()
         {
-            //int currentUser = _currentUserService.User.UserId; ;
             //int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetSupportRequestsQuery(1));
+            var data = await _mediator.Send(new GetSupportRequestsQuery(1));// tenant id ile alınacak liste
             return Ok(data);
         }
 
         [HttpGet("GetSupportMessages")]
-        public async Task<IActionResult> GetSupportMessages()
+        public async Task<IActionResult> GetSupportMessages([FromQuery] int RequestId)
         {
-            //int currentUser = _currentUserService.User.UserId; ;
-            //int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetSupportMessagesQuery(1));
+            var data = await _mediator.Send(new GetSupportMessagesQuery(RequestId));
+            return Ok(data);
+        }
+
+        [HttpGet("MyRequests")]
+        public async Task<IActionResult> GetMyRequests()
+        {
+            //int currentUser = _currentUserService.User.UserId; 
+            var data = await _mediator.Send(new GetMyRequestsQuery(1)); // kullanıcı kendi requestlerini currentuser ile almalı ve request id ile üstteki endpointden mesajları çekmeli 
+            return Ok(data);
+        }
+
+        [HttpGet("MonthlyRequestsCount")]
+        public async Task<IActionResult> GetMonthlyRequestsCount(int tenantId)
+        {
+            var data = await _mediator.Send(new GetMonthlyRequestCountsQuery(tenantId));
+            return Ok(data);
+        }
+
+        [HttpGet("EmployeeList")]
+        public async Task<IActionResult> GetEmployeeList()
+        {
+            int currentTenant = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetEmployeeListQuery(currentTenant));
+            return Ok(data);
+        }
+
+        [HttpPost("RateEmployee")]
+        public async Task<IActionResult> RateEmployee([FromBody] UserCommentDto Comment)
+        {
+            await _mediator.Send(new CreateEmployeeCommentCommand(Comment));
+            return Ok(new { message = "Yorum başarıyla kaydedildi" });
+        }
+
+        [HttpGet("GetEmployeeComments")]
+        public async Task<IActionResult> GetEmployeeComments([FromQuery] int UserId)
+        {
+            var data = await _mediator.Send(new GetEmployeeCommentsQuery(UserId));
+            return Ok(data);
+        }
+
+        [HttpDelete("DeleteEmployeeComment")]
+        public async Task<IActionResult> DeleteEmployeeComment([FromQuery] int commentId)
+        {
+            await _mediator.Send(new DeleteEmployeeCommentCommand(commentId));
+            return Ok(new { message = "Yorum başarıyla silindi" });
+        }
+
+        [HttpGet("GetMyEmployeeComments")]
+        public async Task<IActionResult> GetMyEmployeeComments()
+        {
+            int currentUser = _currentUserService.User.UserId; 
+            var data = await _mediator.Send(new GetEmployeeCommentsQuery(currentUser));
             return Ok(data);
         }
     }
