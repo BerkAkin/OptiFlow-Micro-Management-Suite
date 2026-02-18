@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SupportModule.Domain.Entites;
+using SupportModule.Domain.Entities;
 
 namespace SupportModule.Infrastructure.Persistence
 {
@@ -12,6 +12,9 @@ namespace SupportModule.Infrastructure.Persistence
 
         public DbSet<SupportRequest> SupportRequests { get; set; }
         public DbSet<SupportMessage> SupportMessages { get; set; }
+        public DbSet<MiniUser> Users { get; set; }
+        public DbSet<UserComment> UserComments { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +22,18 @@ namespace SupportModule.Infrastructure.Persistence
                 .HasOne(sm => sm.SupportRequest)
                 .WithMany(sr => sr.SupportMessages)
                 .HasForeignKey(sm => sm.SupportRequestId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<SupportRequest>()
+                .HasOne(sr => sr.User)
+                .WithMany(u => u.SupportRequest)
+                .HasForeignKey(sr => sr.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<UserComment>()
+                .HasOne(uc => uc.User)
+                .WithMany(u => u.UserComments)
+                .HasForeignKey(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
