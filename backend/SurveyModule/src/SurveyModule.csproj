@@ -24,6 +24,11 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\Persistance\Configurations\" />
+    <Folder Include="Infrastructure\Security\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProjectMicro.Shared\ProjectMicro.Shared.csproj" />
   </ItemGroup>
 
 </Project>
