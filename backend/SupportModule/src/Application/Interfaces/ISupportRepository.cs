@@ -9,7 +9,7 @@ namespace SupportModule.Application.Interfaces
         Task<List<SupportRequestsDto>> GetSupportRequests(int TenantId);
         Task<List<SupportMessageDto>> GetSupportMessages(int RequestId);
         Task<List<SupportRequestsDto>> GetMyRequest(int UserId);
-        Task<List<MonthltRequestsCountDto>> GetMonthlyRequestCountsQuery(int tenantId);
+        Task<List<MonthlyRequestsCountDto>> GetMonthlyRequestCountsQuery(int tenantId);
         Task<List<EmployeeDto>> GetEmployeeListQuery(int tenantId);
         Task CreateEmployeeComment(UserComment comment);
         Task<List<UserCommentDto>> GetEmployeeComments(int UserId);
