@@ -2,11 +2,12 @@ using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
 using SupportModule.Application.Interfaces;
-using SupportModule.Application.Middlewares;
 using SupportModule.Infrastructure.Hubs;
 using SupportModule.Infrastructure.Persistence;
 using SupportModule.Infrastructure.Repositories;
-using SupportModule.Infrastructure.Security;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,7 +49,6 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseMiddleware<CookieMiddleware>();
 app.MapControllers();
 app.MapHub<HrSupportHub>("/hr-support");
 
