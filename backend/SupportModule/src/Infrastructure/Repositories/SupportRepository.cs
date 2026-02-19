@@ -30,6 +30,7 @@ namespace SupportModule.Infrastructure.Repositories
                     Id= sr.Id,
                     IsClosed=sr.IsClosed,
                     UserName= sr.User.Username,
+                    Category= sr.Category,
                 })
                 .OrderByDescending(sr=>sr.CreatedAt)
                 .ToListAsync();
@@ -62,13 +63,14 @@ namespace SupportModule.Infrastructure.Repositories
                     IsClosed = sr.IsClosed,
                     CreatedAt = sr.CreatedAt,
                     UserName= sr.User.Username,
+                    Category= sr.Category,
                 })
                 .OrderByDescending(sr=>sr.CreatedAt)
                 .ToListAsync();
             return data;
         }
 
-        public async Task<List<MonthltRequestsCountDto>> GetMonthlyRequestCountsQuery(int tenantId)
+        public async Task<List<MonthlyRequestsCountDto>> GetMonthlyRequestCountsQuery(int tenantId)
         {
             var year = DateTime.UtcNow.Year;
 
@@ -76,7 +78,7 @@ namespace SupportModule.Infrastructure.Repositories
                 .AsNoTracking()
                 .Where(sr => sr.CreatedAt.Year == year)
                 .GroupBy(sr => sr.CreatedAt.Month)
-                .Select(g => new MonthltRequestsCountDto
+                .Select(g => new MonthlyRequestsCountDto
                 {
                     Month = g.Key,
                     Count = g.Count()
@@ -102,7 +104,7 @@ namespace SupportModule.Infrastructure.Repositories
                 
         }
 
-
+        //benzer işlevlere sahip endpointler kombine hale getirilip birleştirilmeli. Future optimization
         public async Task CreateEmployeeComment(UserComment comment)
         {
             await _supportDbContext.UserComments.AddAsync(comment);
