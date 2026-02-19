@@ -3,7 +3,8 @@ using SuggestionModule.Application.Interfaces;
 using SuggestionModule.Application.Queries.GetSuggestionsQuery;
 using SuggestionModule.Infrastructure.Persistence;
 using SuggestionModule.Infrastructure.Repositories;
-using SuggestionModule.Infrastructure.Security;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
