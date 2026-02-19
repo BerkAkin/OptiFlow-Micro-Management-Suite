@@ -7,7 +7,7 @@ using SurveyModule.Application.DTOs;
 using SurveyModule.Application.Queries.GetSurveyDetailsQuery;
 using SurveyModule.Application.Queries.GetSurveyResult;
 using SurveyModule.Application.Queries.GetSurveysQuery;
-using SurveyModule.Infrastructure.Security;
+using ProjectMicro.Shared.Interfaces;
 
 namespace SurveyModule.Api.Controllers
 {
