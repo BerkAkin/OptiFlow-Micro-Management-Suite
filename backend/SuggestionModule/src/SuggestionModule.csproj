@@ -22,7 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Infrastructure\Security\" />
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ProjectMicro.Shared\ProjectMicro.Shared.csproj" />
   </ItemGroup>
 
 </Project>
