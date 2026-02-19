@@ -4,9 +4,9 @@ using SupportModule.Application.Interfaces;
 
 namespace SupportModule.Application.Queries.GetMonthlyRequestCountsQuery
 {
-    public record GetMonthlyRequestCountsQuery(int tenantId):IRequest<List<MonthltRequestsCountDto>>;
+    public record GetMonthlyRequestCountsQuery(int tenantId):IRequest<List<MonthlyRequestsCountDto>>;
     
-    public class GetMonthlyRequestCountsQueryHandler: IRequestHandler<GetMonthlyRequestCountsQuery, List<MonthltRequestsCountDto>>
+    public class GetMonthlyRequestCountsQueryHandler: IRequestHandler<GetMonthlyRequestCountsQuery, List<MonthlyRequestsCountDto>>
     {
         private readonly ISupportRepository _supportRepository;
         public GetMonthlyRequestCountsQueryHandler(ISupportRepository supportRepository)
@@ -14,7 +14,7 @@ namespace SupportModule.Application.Queries.GetMonthlyRequestCountsQuery
             _supportRepository = supportRepository;
         }
 
-        public async Task<List<MonthltRequestsCountDto>> Handle(GetMonthlyRequestCountsQuery query, CancellationToken token)
+        public async Task<List<MonthlyRequestsCountDto>> Handle(GetMonthlyRequestCountsQuery query, CancellationToken token)
         {
             var data = await _supportRepository.GetMonthlyRequestCountsQuery(query.tenantId);
             return data;
