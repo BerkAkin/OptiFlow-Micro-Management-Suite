@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using SurveyModule.Application.Interfaces.Repositories;
-using SurveyModule.Application.Middlewares;
 using SurveyModule.Application.Queries.GetSurveysQuery;
 using SurveyModule.Infrastructure.Persistance;
 using SurveyModule.Infrastructure.Repositories;
-using SurveyModule.Infrastructure.Security;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Services;
 using SurveyModule.Seeder;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,7 +46,6 @@ var app = builder.Build();
 app.UseCors();
 
 
-app.UseMiddleware<CookieMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
