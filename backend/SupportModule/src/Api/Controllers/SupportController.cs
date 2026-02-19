@@ -10,6 +10,7 @@ using SupportModule.Application.Queries.GetMonthlyRequestCountsQuery;
 using SupportModule.Application.Queries.GetMyRequestsQuery;
 using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
+using ProjectMicro.Shared.Interfaces;
 
 namespace SupportModule.Api.Controllers
 {
