@@ -1,9 +1,11 @@
-using Gateway.Handlers;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Gateway.Middlewares;
 using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
+
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,13 +23,11 @@ builder.Services.AddAuthentication("Bearer")
             ValidIssuer = "AuthModule",
             ValidAudience = "Gateway",
             IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]))
+                Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:SecretKey"]))
         };
-
-       
     });
-builder.Services.AddTransient<JwtToHeaderHandler>();
-builder.Services.AddOcelot(builder.Configuration).AddDelegatingHandler<JwtToHeaderHandler>(true);
+builder.Services.AddAuthorization();
+builder.Services.AddOcelot(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
@@ -36,40 +36,20 @@ builder.Services.AddCors(options =>
             .WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
             .AllowAnyMethod()
-            .AllowCredentials()); 
+            .AllowCredentials());
 });
 
 var app = builder.Build();
-app.UseWebSockets(); 
+
 app.UseHttpsRedirection();
 app.UseCors("AllowAny");
+
+app.UseWebSockets();
+app.UseMiddleware<WebSocketAuthMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-app.Use(async (context, next) => {
-    if (context.Request.Path.Value.Contains("/hr-support") &&
-        context.Request.Query.TryGetValue("access_token", out var token))
-    {
-        var handler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
-        if (handler.CanReadToken(token))
-        {
-            var jwtToken = handler.ReadJwtToken(token);
-            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId" || c.Type == "sub")?.Value;
-
-            if (!string.IsNullOrEmpty(userId))
-            {
-                context.Request.Headers["X-User-Id"] = userId;
-                Console.WriteLine($"[Gateway Log] WebSocket için ID yakalandý: {userId}");
-            }
-        }
-    }
-    await next();
-});
-
 await app.UseOcelot();
-
-
 
 app.Run();
