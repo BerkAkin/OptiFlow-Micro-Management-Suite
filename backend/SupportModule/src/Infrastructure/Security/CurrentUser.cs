@@ -1,4 +1,4 @@
-﻿namespace SuggestionModule.Infrastructure.Security
+﻿namespace SupportModule.Infrastructure.Security
 {
     public class CurrentUser
     {

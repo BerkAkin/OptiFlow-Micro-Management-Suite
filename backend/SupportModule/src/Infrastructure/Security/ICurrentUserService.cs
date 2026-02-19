@@ -1,4 +1,4 @@
-﻿using SuggestionModule.Infrastructure.Security;
+﻿using SupportModule.Infrastructure.Security;
 
     public interface ICurrentUserService
     {
