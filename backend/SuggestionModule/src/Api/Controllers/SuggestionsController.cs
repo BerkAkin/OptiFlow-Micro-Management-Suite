@@ -8,6 +8,7 @@ using SuggestionModule.Application.Commands.MakeVoteCommand;
 using SuggestionModule.Application.DTOs;
 using SuggestionModule.Application.Queries.GetBestSuggestionsQuery;
 using SuggestionModule.Application.Queries.GetSuggestionsQuery;
+using ProjectMicro.Shared.Interfaces;
 
 namespace SuggestionModule.Api.Controllers
 {
