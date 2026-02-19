@@ -23,6 +23,7 @@ namespace SupportModule.Application.Commands.CreateSupportRequestCommand
                 CreatedAt= DateTime.UtcNow,
                 UserId= command.userId,
                 TenantId=command.tenantId,
+                Category = command.message.Category
             };
 
             SupportMessage spMsg = new SupportMessage() { 
