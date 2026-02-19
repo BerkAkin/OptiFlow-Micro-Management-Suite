@@ -64,7 +64,42 @@
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/support/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "support-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/support/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/hr-support",
+      "DownstreamScheme": "ws",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "support-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/hr-support",
+      "UpstreamHttpMethod": [ "GET" ],
+      "UseWebSockets": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      
     }
+
 
   ],
   "GlobalConfiguration": { "BaseUrl": "http://gateway:8080" }
