@@ -14,5 +14,7 @@ namespace SupportModule.Application.Interfaces
         Task CreateEmployeeComment(UserComment comment);
         Task<List<UserCommentDto>> GetEmployeeComments(int UserId);
         Task DeleteEmployeeComment(int CommentId);
+        Task<List<CategoricalRequestDto>> GetRequestsCategorical(int TenantId);
+
     }
 }
