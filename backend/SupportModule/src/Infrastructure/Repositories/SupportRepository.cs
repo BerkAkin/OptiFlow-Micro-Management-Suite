@@ -134,10 +134,28 @@ namespace SupportModule.Infrastructure.Repositories
 
             _supportDbContext.UserComments.Remove(data);
             await _supportDbContext.SaveChangesAsync();
-
-
-
         }
+
+
+        //DATETIME BİLGİLERİ İÇİN HELPER YAZILMALI
+
+        public async Task<List<CategoricalRequestDto>> GetRequestsCategorical(int TenantId)
+        {
+            int currentYear = DateTime.Now.Year; 
+            var data = await _supportDbContext.SupportRequests
+                .AsNoTracking()
+                .Where(rc => rc.TenantId == TenantId && rc.CreatedAt.Year == currentYear)
+                .GroupBy(rc => rc.Category)
+                .Select(grc => new CategoricalRequestDto
+                {
+                    Category= grc.Key,
+                    Count= grc.Count()
+                })
+                .ToListAsync();
+
+            return data;
+        }
+
 
     }
 }
