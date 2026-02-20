@@ -11,6 +11,7 @@ using SupportModule.Application.Queries.GetMyRequestsQuery;
 using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
 using ProjectMicro.Shared.Interfaces;
+using SupportModule.Application.Queries.GetRequestsCategorical;
 
 namespace SupportModule.Api.Controllers
 {
@@ -30,17 +31,17 @@ namespace SupportModule.Api.Controllers
         [HttpPost("CreateSupportRequest")]
         public async Task<IActionResult> CreateSupportRequest([FromBody] SupportMessageDto supportMessage)
         {
-            //int currentUser = _currentUserService.User.UserId;
-            //int currentTenant = _currentUserService.User.TenantId;
-            await _mediator.Send(new CreateSupportRequestCommand(supportMessage,1,1)); //tenantid ve user id ile oluşturulmalı
+            int currentUser = _currentUserService.User.UserId;
+            int currentTenant = _currentUserService.User.TenantId;
+            await _mediator.Send(new CreateSupportRequestCommand(supportMessage,currentUser,currentTenant)); 
             return Ok(new { message = "İsteğiniz iletilmiştir" });
         }
 
         [HttpGet("GetSupportRequestList")]
         public async Task<IActionResult> GetSupportRequest()
         {
-            //int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetSupportRequestsQuery(1));// tenant id ile alınacak liste
+            int currentTenant = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetSupportRequestsQuery(currentTenant));
             return Ok(data);
         }
 
@@ -54,8 +55,16 @@ namespace SupportModule.Api.Controllers
         [HttpGet("MyRequests")]
         public async Task<IActionResult> GetMyRequests()
         {
-            //int currentUser = _currentUserService.User.UserId; 
-            var data = await _mediator.Send(new GetMyRequestsQuery(1)); // kullanıcı kendi requestlerini currentuser ile almalı ve request id ile üstteki endpointden mesajları çekmeli 
+            int currentUser = _currentUserService.User.UserId; 
+            var data = await _mediator.Send(new GetMyRequestsQuery(currentUser));
+            return Ok(data);
+        }
+
+        [HttpGet("GetSupportRequestCategorical")]
+        public async Task<IActionResult> GetRequestsCategorical()
+        {
+            //var currentTenant = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetRequestsCategoricalQuery(1));
             return Ok(data);
         }
 
