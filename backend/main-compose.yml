@@ -33,6 +33,7 @@ services:
             - ConnectionStrings__FinanceModuleDb=Server=finance-db;Database=db_finance;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./FinanceModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
             - finance-module-bin:/app/bin  
             - finance-module-obj:/app/obj
         working_dir: /app
@@ -53,6 +54,7 @@ services:
             - ConnectionStrings__SurveyModuleDb=Server=survey-db;Database=db_survey;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./SurveyModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
             - survey-module-bin:/app/bin  
             - survey-module-obj:/app/obj
         working_dir: /app
@@ -74,6 +76,7 @@ services:
             - ConnectionStrings__AuthModuleDb=Server=auth-db;Database=db_auth;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./AuthModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
             - auth-module-bin:/app/bin  
             - auth-module-obj:/app/obj
         working_dir: /app
@@ -94,6 +97,7 @@ services:
             - ConnectionStrings__SuggestionModuleDb=Server=suggestion-db;Database=db_suggestion;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./SuggestionModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
             - suggestion-module-bin:/app/bin  
             - suggestion-module-obj:/app/obj
         working_dir: /app
@@ -114,6 +118,7 @@ services:
             - ConnectionStrings__SupportModuleDb=Server=support-db;Database=db_support;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./SupportModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
             - support-module-bin:/app/bin  
             - support-module-obj:/app/obj
         working_dir: /app
