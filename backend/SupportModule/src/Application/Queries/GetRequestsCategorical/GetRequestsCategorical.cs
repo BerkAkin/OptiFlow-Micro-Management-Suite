@@ -1,22 +1,33 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Interfaces;
+using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Queries.GetRequestsCategorical
 {
     public record GetRequestsCategoricalQuery(int TenantId): IRequest<List<CategoricalRequestDto>>;
     public class GetRequestsCategoricalHandler : IRequestHandler<GetRequestsCategoricalQuery, List<CategoricalRequestDto>>
     {
-        private readonly ISupportRepository _supportRepository;
-        public GetRequestsCategoricalHandler(ISupportRepository supportRepository) { 
+        private readonly SupportDbContext _dbContext;
+        public GetRequestsCategoricalHandler(SupportDbContext dbContext) {
 
-            _supportRepository = supportRepository;
+            _dbContext = dbContext;
         }
 
-        public async Task<List<CategoricalRequestDto>> Handle(GetRequestsCategoricalQuery request, CancellationToken cancellationToken)
+        public async Task<List<CategoricalRequestDto>> Handle(GetRequestsCategoricalQuery query, CancellationToken cancellationToken)
         {
-            var data = await _supportRepository.GetRequestsCategorical(request.TenantId);
-            return data;
+            int currentYear = DateTime.Now.Year;
+            return await _dbContext.SupportRequests
+                .AsNoTracking()
+                .Where(rc => rc.TenantId == query.TenantId && rc.CreatedAt.Year == currentYear)
+                .GroupBy(rc => rc.Category)
+                .Select(grc => new CategoricalRequestDto
+                {
+                    Category = grc.Key,
+                    Count = grc.Count()
+                })
+                .ToListAsync(cancellationToken);
+
         }
     }
 }
