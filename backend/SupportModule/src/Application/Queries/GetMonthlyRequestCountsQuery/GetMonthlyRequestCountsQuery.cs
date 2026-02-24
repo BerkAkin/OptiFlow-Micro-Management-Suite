@@ -1,6 +1,7 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Interfaces;
+using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Queries.GetMonthlyRequestCountsQuery
 {
@@ -8,16 +9,28 @@ namespace SupportModule.Application.Queries.GetMonthlyRequestCountsQuery
     
     public class GetMonthlyRequestCountsQueryHandler: IRequestHandler<GetMonthlyRequestCountsQuery, List<MonthlyRequestsCountDto>>
     {
-        private readonly ISupportRepository _supportRepository;
-        public GetMonthlyRequestCountsQueryHandler(ISupportRepository supportRepository)
+        private readonly SupportDbContext _dbContext;
+        public GetMonthlyRequestCountsQueryHandler(SupportDbContext dbContext)
         {
-            _supportRepository = supportRepository;
+            _dbContext = dbContext;
         }
 
-        public async Task<List<MonthlyRequestsCountDto>> Handle(GetMonthlyRequestCountsQuery query, CancellationToken token)
+        public async Task<List<MonthlyRequestsCountDto>> Handle(GetMonthlyRequestCountsQuery query, CancellationToken cancellationToken)
         {
-            var data = await _supportRepository.GetMonthlyRequestCountsQuery(query.tenantId);
-            return data;
+            var year = DateTime.UtcNow.Year;
+
+            return await _dbContext.SupportRequests
+                .AsNoTracking()
+                .Where(sr => sr.CreatedAt.Year == year && sr.TenantId== query.tenantId)
+                .GroupBy(sr => sr.CreatedAt.Month)
+                .Select(g => new MonthlyRequestsCountDto
+                {
+                    Month = g.Key,
+                    Count = g.Count()
+                })
+                .OrderBy(x => x.Month)
+                .ToListAsync(cancellationToken);
+
         }
     }
 }
