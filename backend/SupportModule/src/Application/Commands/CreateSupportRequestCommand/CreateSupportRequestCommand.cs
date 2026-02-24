@@ -1,39 +1,30 @@
 ﻿using MediatR;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Interfaces;
 using SupportModule.Domain.Entities;
+using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Commands.CreateSupportRequestCommand
 {
-    public record CreateSupportRequestCommand(SupportMessageDto message ,int userId, int tenantId) : IRequest<Unit>;
+    public record CreateSupportRequestCommand(CreateSupportRequestDto supportRequestDto ,int userId, int tenantId) : IRequest<Unit>;
 
     public class CreateSupportRequestCommandHandler : IRequestHandler<CreateSupportRequestCommand , Unit>
     {
-        private readonly ISupportRepository _repository;
-        public CreateSupportRequestCommandHandler(ISupportRepository repository)
+        private readonly SupportDbContext _dbContext;
+        public CreateSupportRequestCommandHandler(SupportDbContext dbContext)
         {
-            _repository = repository;
+            _dbContext = dbContext;
         }
 
         public async Task<Unit> Handle(CreateSupportRequestCommand command, CancellationToken cancellationToken)
         {
 
-            SupportRequest spRq = new SupportRequest()
-            {
-                CreatedAt= DateTime.UtcNow,
-                UserId= command.userId,
-                TenantId=command.tenantId,
-                Category = command.message.Category
-            };
+            SupportRequest spRq = new SupportRequest(command.userId, command.tenantId, command.supportRequestDto.Category);
 
-            SupportMessage spMsg = new SupportMessage() { 
-                CreatedAt= DateTime.UtcNow,
-                Message= command.message.Message,
-                SenderId= command.userId,
-                SupportRequest= spRq,
-            };
+            spRq.AddMessage(command.supportRequestDto.Content,spRq.UserId);
 
-            await _repository.CreateSupportRequest(spMsg,spRq);
+            await _dbContext.SupportRequests.AddAsync(spRq, cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
 
