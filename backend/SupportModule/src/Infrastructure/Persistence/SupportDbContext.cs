@@ -20,22 +20,26 @@ namespace SupportModule.Infrastructure.Persistence
         {
             modelBuilder.Entity<SupportMessage>()
                 .HasOne(sm => sm.SupportRequest)
-                .WithMany(sr => sr.SupportMessages)
+                .WithMany(sr => sr.Messages)
                 .HasForeignKey(sm => sm.SupportRequestId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<SupportRequest>()
                 .HasOne(sr => sr.User)
-                .WithMany(u => u.SupportRequest)
+                .WithMany(u => u.SupportRequests)
                 .HasForeignKey(sr => sr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UserComment>()
-                .HasOne(uc => uc.User)
+                .HasOne<MiniUser>()
                 .WithMany(u => u.UserComments)
                 .HasForeignKey(uc => uc.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
+
+
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
