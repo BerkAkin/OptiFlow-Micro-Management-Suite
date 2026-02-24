@@ -12,6 +12,7 @@ using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
 using ProjectMicro.Shared.Interfaces;
 using SupportModule.Application.Queries.GetRequestsCategorical;
+using SupportModule.Application.Commands.SendMessageCommand;
 
 namespace SupportModule.Api.Controllers
 {
@@ -29,15 +30,24 @@ namespace SupportModule.Api.Controllers
         }
 
         [HttpPost("CreateSupportRequest")]
-        public async Task<IActionResult> CreateSupportRequest([FromBody] SupportMessageDto supportMessage)
+        public async Task<IActionResult> CreateSupportRequest([FromBody] CreateSupportRequestDto supportRequest)
         {
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
-            await _mediator.Send(new CreateSupportRequestCommand(supportMessage,currentUser,currentTenant)); 
+
+            await _mediator.Send(new CreateSupportRequestCommand(supportRequest, currentUser,currentTenant)); 
             return Ok(new { message = "İsteğiniz iletilmiştir" });
         }
 
-        [HttpGet("GetSupportRequestList")]
+
+        [HttpGet("GetSupportRequestMessages")]
+        public async Task<IActionResult> GetSupportMessages([FromQuery] int RequestId)
+        {
+            var data = await _mediator.Send(new GetSupportMessagesQuery(RequestId));
+            return Ok(data);
+        }
+
+        [HttpGet("GetSupportRequests")]
         public async Task<IActionResult> GetSupportRequest()
         {
             int currentTenant = _currentUserService.User.TenantId;
@@ -45,14 +55,7 @@ namespace SupportModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("GetSupportMessages")]
-        public async Task<IActionResult> GetSupportMessages([FromQuery] int RequestId)
-        {
-            var data = await _mediator.Send(new GetSupportMessagesQuery(RequestId));
-            return Ok(data);
-        }
-
-        [HttpGet("MyRequests")]
+        [HttpGet("GetMyRequests")]
         public async Task<IActionResult> GetMyRequests()
         {
             int currentUser = _currentUserService.User.UserId; 
@@ -60,22 +63,23 @@ namespace SupportModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("GetSupportRequestCategorical")]
+        [HttpGet("GetSupportRequestsCategorical")]
         public async Task<IActionResult> GetRequestsCategorical()
         {
-            //var currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetRequestsCategoricalQuery(1));
+            var currentTenant = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetRequestsCategoricalQuery(currentTenant));
             return Ok(data);
         }
 
-        [HttpGet("MonthlyRequestsCount")]
-        public async Task<IActionResult> GetMonthlyRequestsCount(int tenantId)
+        [HttpGet("GetMonthlySupportRequestsCount")]
+        public async Task<IActionResult> GetMonthlyRequestsCount()
         {
-            var data = await _mediator.Send(new GetMonthlyRequestCountsQuery(tenantId));
+            var currentTenant = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetMonthlyRequestCountsQuery(currentTenant));
             return Ok(data);
         }
 
-        [HttpGet("EmployeeList")]
+        [HttpGet("GetEmployeeList")]
         public async Task<IActionResult> GetEmployeeList()
         {
             int currentTenant = _currentUserService.User.TenantId;
@@ -83,7 +87,7 @@ namespace SupportModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("RateEmployee")]
+        [HttpPost("CreateEmployeeRating")]
         public async Task<IActionResult> RateEmployee([FromBody] UserCommentDto Comment)
         {
             await _mediator.Send(new CreateEmployeeCommentCommand(Comment));
@@ -104,11 +108,19 @@ namespace SupportModule.Api.Controllers
             return Ok(new { message = "Yorum başarıyla silindi" });
         }
 
-        [HttpGet("GetMyEmployeeComments")]
+        [HttpGet("GetMyComments")]
         public async Task<IActionResult> GetMyEmployeeComments()
         {
             int currentUser = _currentUserService.User.UserId; 
             var data = await _mediator.Send(new GetEmployeeCommentsQuery(currentUser));
+            return Ok(data);
+        }
+
+        [HttpPost("SendMessage")]
+        public async Task<IActionResult> SendMessage([FromBody] SendMessageDto msg)
+        {
+            int currentUser = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new SendMessageCommand(msg,currentUser));
             return Ok(data);
         }
     }
