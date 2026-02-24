@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using SupportModule.Application.Commands.CreateSupportRequestCommand;
-using SupportModule.Application.Interfaces;
-using SupportModule.Infrastructure.Hubs;
-using SupportModule.Infrastructure.Persistence;
-using SupportModule.Infrastructure.Repositories;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
+using SupportModule.Application.Commands.CreateSupportRequestCommand;
+using SupportModule.Infrastructure.Hubs;
+using SupportModule.Infrastructure.Persistence;
+using SupportModule.Infrastructure.Seeders;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +34,6 @@ builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateSupportRequestCommand).Assembly));
-builder.Services.AddScoped<ISupportRepository,SupportRepository>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
@@ -62,7 +60,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHttpsRedirection();
 }
 
-
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<SupportDbContext>();
+    await DataSeeder.SeedAsync(context);
+}
 
 
 app.Run();
