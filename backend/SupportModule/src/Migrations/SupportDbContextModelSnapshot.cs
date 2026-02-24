@@ -54,15 +54,12 @@ namespace SupportModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Message")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ReceiverId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SenderId")
                         .HasColumnType("int");
@@ -135,7 +132,7 @@ namespace SupportModule.Migrations
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportMessage", b =>
                 {
                     b.HasOne("SupportModule.Domain.Entities.SupportRequest", "SupportRequest")
-                        .WithMany("SupportMessages")
+                        .WithMany("Messages")
                         .HasForeignKey("SupportRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -146,7 +143,7 @@ namespace SupportModule.Migrations
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportRequest", b =>
                 {
                     b.HasOne("SupportModule.Domain.Entities.MiniUser", "User")
-                        .WithMany("SupportRequest")
+                        .WithMany("SupportRequests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -156,25 +153,23 @@ namespace SupportModule.Migrations
 
             modelBuilder.Entity("SupportModule.Domain.Entities.UserComment", b =>
                 {
-                    b.HasOne("SupportModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SupportModule.Domain.Entities.MiniUser", null)
                         .WithMany("UserComments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
                 {
-                    b.Navigation("SupportRequest");
+                    b.Navigation("SupportRequests");
 
                     b.Navigation("UserComments");
                 });
 
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportRequest", b =>
                 {
-                    b.Navigation("SupportMessages");
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }
