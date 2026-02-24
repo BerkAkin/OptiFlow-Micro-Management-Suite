@@ -1,21 +1,29 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Interfaces;
+using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Queries.GetEmployeeListQuery
 {
     public record GetEmployeeListQuery(int tenantId):IRequest<List<EmployeeDto>>;
         public class GetEmployeeListQueryHandler : IRequestHandler<GetEmployeeListQuery, List<EmployeeDto>>
     {
-        private readonly ISupportRepository _supportRepository;
-        public GetEmployeeListQueryHandler(ISupportRepository supportRepository)
+        private readonly SupportDbContext _dbContext;
+        public GetEmployeeListQueryHandler(SupportDbContext dbContext)
         {
-            _supportRepository = supportRepository;
+            _dbContext = dbContext;
         }
         public async Task<List<EmployeeDto>> Handle(GetEmployeeListQuery query,CancellationToken cancellationToken)
         {
-            var data = await _supportRepository.GetEmployeeListQuery(query.tenantId);
-            return data;
+            return await _dbContext.Users
+                  .AsNoTracking()
+                  .Where(u => u.TenantId == query.tenantId)
+                  .Select(u => new EmployeeDto
+                  {
+                      UserId = u.Id,
+                      Username = u.Username
+                  })
+                  .ToListAsync(cancellationToken);
         }
     }
 }
