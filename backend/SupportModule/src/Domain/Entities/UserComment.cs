@@ -2,10 +2,17 @@
 {
     public class UserComment
     {
-        public int Id { get; set; }
-        public int UserId { get; set; }
-        public MiniUser User { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string Comment { get; set; }
+        public int Id { get; private set; }
+        public int UserId { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public string Comment { get; private set; }
+        private UserComment() { }
+
+        public UserComment(string comment, int userId)
+        {
+            Comment = comment;
+            UserId = userId;
+            CreatedAt = DateTime.UtcNow;
+        }
     }
 }
