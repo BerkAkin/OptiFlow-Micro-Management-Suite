@@ -1,29 +1,31 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Interfaces;
-using SupportModule.Domain.Entities;
+using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Commands.CreateEmployeeCommentCommand
 {
     public record CreateEmployeeCommentCommand(UserCommentDto comment): IRequest<Unit>;
 
     public class CreateEmployeeCommentCommandHandler: IRequestHandler<CreateEmployeeCommentCommand,Unit> {
-        private readonly ISupportRepository _supportRepository;
-        public CreateEmployeeCommentCommandHandler(ISupportRepository supportRepository)
+
+        private readonly SupportDbContext _dbContext;
+        public CreateEmployeeCommentCommandHandler(SupportDbContext dbContext)
         {
-            _supportRepository = supportRepository;
+            _dbContext = dbContext;
         }
-        //employee listin alındığı zamanda employee entity içindeki comments bağlantısı içinde değişiklik yapılarak optimize edilmeli entityler bucket of proptan çıkartılmalı. Future optimization
         public async Task<Unit> Handle(CreateEmployeeCommentCommand command, CancellationToken cancellationToken) {
 
-            UserComment userComment = new UserComment()
-            {
-                Comment= command.comment.Comment,
-                UserId= command.comment.UserId
-            };
+            var user = await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == command.comment.UserId,cancellationToken);
+            if (user == null)
+                throw new Exception("User is not exist");
 
-            await _supportRepository.CreateEmployeeComment(userComment);
+            user.AddComment(command.comment.Comment);
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }
 }
+//employee listin alındığı zamanda employee entity içindeki comments bağlantısı içinde değişiklik yapılarak optimize edilmeli entityler bucket of proptan çıkartılmalı. Future optimization
