@@ -3,13 +3,24 @@ import { fetchCategoricalSupport } from "../../repositories/SupportRepositories/
 export const CategoricalSupportService = async () => {
   const data = await fetchCategoricalSupport();
 
-  const labels = data.map((item) => {
-    return item.category;
+  const categories = [
+    "Environment",
+    "Colleagues",
+    "Workload",
+    "Mood",
+    "System",
+    "General",
+  ];
+
+  const categoricalData: Record<string, number> = {};
+
+  data.forEach((item: any) => {
+    categoricalData[item.categoryName] = item.count;
   });
 
-  const values = data.map((item) => {
-    return item.value;
+  const values = categories.map((item) => {
+    return categoricalData[item] ?? 0;
   });
 
-  return { labels, values };
+  return { categories, values };
 };
