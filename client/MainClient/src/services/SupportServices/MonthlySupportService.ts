@@ -18,10 +18,13 @@ export const MonthlySupportService = async () => {
     "December",
   ];
 
-  const newData = months.map((month) => {
-    const item = data.find((x: any) => x.month === month);
-    return item ? item.value : 0;
+  const monthMap: Record<number, number> = {};
+
+  data.forEach((item: any) => {
+    monthMap[item.month] = item.count;
   });
+
+  const newData = months.map((_, index) => monthMap[index + 1] ?? 0);
 
   return { months, newData };
 };
