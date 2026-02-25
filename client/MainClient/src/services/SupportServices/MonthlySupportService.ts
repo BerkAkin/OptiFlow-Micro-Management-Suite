@@ -19,7 +19,7 @@ export const MonthlySupportService = async () => {
   ];
 
   const newData = months.map((month) => {
-    const item = data.find((x) => x.month === month);
+    const item = data.find((x: any) => x.month === month);
     return item ? item.value : 0;
   });
 
