@@ -3,8 +3,9 @@ import { MonthlySupportService } from "../../services/SupportServices/MonthlySup
 import { CategoricalSupportService } from "../../services/SupportServices/CategoricalSupportService";
 import { RateOthersService } from "../../services/SupportServices/RateOthersService";
 import { RequestSupportService } from "../../services/SupportServices/RequestSupportService";
-import { EmployeesSupportService } from "../../services/SupportServices/EmployeesSupportService";
+import { SupportRequestsService } from "../../services/SupportServices/EmployeesSupportService";
 import { EmployeeCommentsSupportService } from "../../services/SupportServices/EmployeeCommentsSupportService";
+import { SupportMessagesService } from "../../services/SupportServices/SupportMessages";
 
 export const useMonthlySupport = () => {
   return useQuery({
@@ -20,14 +21,21 @@ export const useCategoricalSupport = () => {
   });
 };
 
-export const useSupportEmployees = () => {
+export const useSupportRequests = (tenantId: number) => {
   return useQuery({
-    queryKey: ["supportEmployees"],
-    queryFn: EmployeesSupportService,
+    queryKey: ["supportRequests"],
+    queryFn: () => SupportRequestsService(tenantId),
   });
 };
 
-export const useSupportEmployeeComments = (id: number) => {
+export const useSupportMessages = (requestId: number) => {
+  return useQuery({
+    queryKey: ["supportRequestMessages"],
+    queryFn: () => SupportMessagesService(requestId),
+  });
+};
+
+export const useSupportEmployeeComments = (id: string) => {
   return useQuery({
     queryKey: ["supportEmployeeComments", id],
     queryFn: () => EmployeeCommentsSupportService(id),
