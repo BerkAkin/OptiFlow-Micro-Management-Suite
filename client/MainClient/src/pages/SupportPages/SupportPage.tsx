@@ -1,7 +1,7 @@
-import SupportChat from '../../components/SupportComponents/SupportChat/SupportChat'
+import SupportRequests from '../../components/SupportComponents/SupportRequests/SupportRequests'
 import SupportBarChart from '../../components/SupportComponents/SupportCharts/SupportBarChart'
 import SupportDoughChart from '../../components/SupportComponents/SupportCharts/SupportDoughChart'
-import RateOthers from '../../components/SupportComponents/RateOthers/RateOthers'
+import RateEmployees from '../../components/MoodComponents/RateEmployees/RateEmployees'
 
 function SupportPage() {
     return (
@@ -11,17 +11,17 @@ function SupportPage() {
                 <div className='bg-white h-[400px] col-span-3 shadow-custom border border-gray-200 rounded-lg'>
                     <SupportDoughChart />
                 </div>
-                <div className='bg-white h-[400px] col-span-6 shadow-custom border border-gray-200 rounded-lg '>
+                <div className='bg-white h-[400px] col-span-9 shadow-custom border border-gray-200 rounded-lg '>
                     <SupportBarChart />
                 </div>
-                <div className='col-span-3 '>
-                    <RateOthers />
+            </div>
+            <div className='grid grid-cols-12 my-6 gap-6'>
+                <div className='col-span-12 h-[600px]'>
+                    <SupportRequests />
                 </div>
+            </div>
 
-            </div>
-            <div className='h-[450px]'>
-                <SupportChat />
-            </div>
+
         </div>
     )
 }
