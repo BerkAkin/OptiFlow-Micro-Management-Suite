@@ -32,7 +32,7 @@ namespace Gateway.Middlewares
                 {
                     var jwtToken = handler.ReadJwtToken(token);
 
-                    var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId" || c.Type == JwtRegisteredClaimNames.Sub )?.Value;
+                    var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
                     var tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == "tenantId")?.Value;
 
                     if (!string.IsNullOrEmpty(userId))
