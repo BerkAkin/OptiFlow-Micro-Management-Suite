@@ -15,27 +15,41 @@ const tempSupportCategorical = [
   { category: "Friends", value: 33 },
 ];
 
-const tempEmployees = [
+const tempRequests = [
   {
     id: 0,
+    category: "Environment",
     name: "Berk Akın",
-    img: "Image",
-    stars: "3",
-    votes: 400,
+    date: "25-10-2024",
+  },
+];
+
+const tempMessages = [
+  {
+    senderId: 0,
+    date: "25-10-2021",
+    message: "Merhaba bu bir deneme mesajıdır",
+  },
+  {
+    senderId: 1,
+    date: "26-10-2021",
+    message: "Merhaba bu bir deneme mesajına cevaptır",
+  },
+  {
+    senderId: 0,
+    date: "27-10-2021",
+    message: "Merhaba",
   },
 ];
 
 const tempEmployeeComments = [
   {
-    user: "Murat Eke",
-    comment: "Bu çalışan gerçekten çok çalışıyor",
-    stars: 5,
+    comment:
+      "Bu çalışan gerçekten çok çalışıyor Bu çalışan gerçekten çok çalışıyor Bu çalışan gerçekten çok",
     date: "25.11.2025",
   },
   {
-    user: "Mandrake Elbow",
     comment: "Kendisini sevmiyorum kudursun",
-    stars: 2,
     date: "15.07.2023",
   },
 ];
@@ -52,13 +66,19 @@ export const fetchCategoricalSupport = async () => {
   return tempSupportCategorical;
 };
 
-export const fetchEmployees = async () => {
+export const fetchSupportRequests = async (tenantId: number) => {
   /*   const res = await api.get("/api/support/employees");
   return res.data; */
-  return tempEmployees;
+  return tempRequests;
 };
 
-export const fetchEmployeeComments = async (id: number) => {
+export const fetchSupportMessages = async (requestId: number) => {
+  /*   const res = await api.get("/api/support/employees");
+  return res.data; */
+  return tempMessages;
+};
+
+export const fetchEmployeeComments = async (id: string) => {
   /*   const res = await api.get(`/api/support/employeeComments/${id}`);
   return res.data; */
   return tempEmployeeComments;
