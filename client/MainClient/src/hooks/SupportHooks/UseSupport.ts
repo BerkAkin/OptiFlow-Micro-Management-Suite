@@ -5,7 +5,7 @@ import { RateOthersService } from "../../services/SupportServices/RateOthersServ
 import { RequestSupportService } from "../../services/SupportServices/RequestSupportService";
 import { SupportRequestsService } from "../../services/SupportServices/EmployeesSupportService";
 import { EmployeeCommentsSupportService } from "../../services/SupportServices/EmployeeCommentsSupportService";
-import { SupportMessagesService } from "../../services/SupportServices/SupportMessages";
+import { SupportMessagesService } from "../../services/SupportServices/SupportMessagesService";
 
 export const useMonthlySupport = () => {
   return useQuery({
