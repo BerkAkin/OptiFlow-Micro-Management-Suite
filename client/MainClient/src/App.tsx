@@ -10,7 +10,8 @@ import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import SupportPage from './pages/SupportPages/SupportPage';
-import ChatWindow from './pages/SupportPages/SupportChatWindow';
+import UserComments from './components/MoodComponents/UserComments/UserComments';
+import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
 
 function App() {
   return (
@@ -34,8 +35,11 @@ function App() {
             <Route path='mood/dashboard' element={<MoodPage />} />
 
             <Route path='support/dashboard' element={<SupportPage />} >
-              <Route path='chat/:userId' element={<ChatWindow />} />
+              <Route path='request/:id/messages' element={<SupportMessages />} />
             </Route>
+
+
+
 
 
           </Route>
