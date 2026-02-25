@@ -9,7 +9,7 @@ function SupportDoughChart() {
     if (error || !data) return (<p>Error...</p>)
 
     const ChartData = {
-        labels: data.labels,
+        labels: data.categories,
         datasets: [
             {
                 label: "İşlem Sayısı",
