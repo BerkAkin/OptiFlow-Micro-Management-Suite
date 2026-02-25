@@ -55,9 +55,8 @@ const tempEmployeeComments = [
 ];
 
 export const fetchMonthlySupport = async () => {
-  /*   const res = await api.get("/api/support/monthly");
-  return res.data; */
-  return tempSupportMonthly;
+  const res = await api.get("/support/GetMonthlySupportRequestsCount");
+  return res.data;
 };
 
 export const fetchCategoricalSupport = async () => {
