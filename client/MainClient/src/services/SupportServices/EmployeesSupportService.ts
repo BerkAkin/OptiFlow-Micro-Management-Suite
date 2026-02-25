@@ -1,6 +1,6 @@
-import { fetchEmployees } from "../../repositories/SupportRepositories/SupportRepository";
+import { fetchSupportRequests } from "../../repositories/SupportRepositories/SupportRepository";
 
-export const EmployeesSupportService = async () => {
-  const data = await fetchEmployees();
+export const SupportRequestsService = async (tenantId: number) => {
+  const data = await fetchSupportRequests(tenantId);
   return data;
 };
