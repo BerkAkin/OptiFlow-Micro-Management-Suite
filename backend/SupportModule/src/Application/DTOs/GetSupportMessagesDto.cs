@@ -2,8 +2,8 @@
 {
     public class GetSupportMessagesDto
     {
-        public string Content { get; set; }
-        public int SenderId { get; set; }
+        public string Message { get; set; }
         public DateTime CreatedAt { get; set; }
+        public bool IsMine { get; set; }
     }
 }
