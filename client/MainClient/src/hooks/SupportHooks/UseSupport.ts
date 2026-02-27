@@ -1,11 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { MonthlySupportService } from "../../services/SupportServices/MonthlySupportService";
 import { CategoricalSupportService } from "../../services/SupportServices/CategoricalSupportService";
-import { RateOthersService } from "../../services/SupportServices/RateOthersService";
 import { RequestSupportService } from "../../services/SupportServices/RequestSupportService";
-import { SupportRequestsService } from "../../services/SupportServices/EmployeesSupportService";
-import { EmployeeCommentsSupportService } from "../../services/SupportServices/EmployeeCommentsSupportService";
+import { SupportRequestsService } from "../../services/SupportServices/SupportRequestsService";
 import { SupportMessagesService } from "../../services/SupportServices/SupportMessagesService";
+import { SendSupportRequestMessageService } from "../../services/SupportServices/SendSupportRequestMessageService";
 
 export const useMonthlySupport = () => {
   return useQuery({
@@ -21,32 +20,25 @@ export const useCategoricalSupport = () => {
   });
 };
 
-export const useSupportRequests = (tenantId: number) => {
+export const useSupportRequests = () => {
   return useQuery({
     queryKey: ["supportRequests"],
-    queryFn: () => SupportRequestsService(tenantId),
+    queryFn: () => SupportRequestsService(),
   });
 };
 
 export const useSupportMessages = (requestId: number) => {
   return useQuery({
-    queryKey: ["supportRequestMessages"],
+    queryKey: ["supportRequestMessages", requestId],
     queryFn: () => SupportMessagesService(requestId),
   });
 };
 
-export const useSupportEmployeeComments = (id: string) => {
-  return useQuery({
-    queryKey: ["supportEmployeeComments", id],
-    queryFn: () => EmployeeCommentsSupportService(id),
-  });
-};
-
-export const useRateOthers = () => {
+export const useSendSupportRequestMessage = () => {
   return useMutation({
-    mutationFn: (values: any) => RateOthersService(values),
+    mutationFn: (values: any) => SendSupportRequestMessageService(values),
     onSuccess: (data: any) => {
-      console.log("Rating submitted successfully!", data);
+      console.log("Message sent successfully!", data);
     },
     onError: (error: any) => {
       console.log("Error", error);
@@ -58,7 +50,7 @@ export const useRequestSupport = () => {
   return useMutation({
     mutationFn: (values: any) => RequestSupportService(values),
     onSuccess: (data: any) => {
-      console.log("Rating submitted successfully!", data);
+      console.log("Support requested successfully!", data);
     },
     onError: (error: any) => {
       console.log("Error", error);
