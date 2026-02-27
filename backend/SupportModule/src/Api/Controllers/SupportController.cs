@@ -43,7 +43,8 @@ namespace SupportModule.Api.Controllers
         [HttpGet("GetSupportRequestMessages")]
         public async Task<IActionResult> GetSupportMessages([FromQuery] int RequestId)
         {
-            var data = await _mediator.Send(new GetSupportMessagesQuery(RequestId));
+            int currentUser = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new GetSupportMessagesQuery(RequestId,currentUser));
             return Ok(data);
         }
 
