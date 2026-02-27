@@ -1,7 +1,6 @@
 import SupportRequests from '../../components/SupportComponents/SupportRequests/SupportRequests'
 import SupportBarChart from '../../components/SupportComponents/SupportCharts/SupportBarChart'
 import SupportDoughChart from '../../components/SupportComponents/SupportCharts/SupportDoughChart'
-import RateEmployees from '../../components/MoodComponents/RateEmployees/RateEmployees'
 
 function SupportPage() {
     return (
