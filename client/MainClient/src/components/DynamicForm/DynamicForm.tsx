@@ -10,7 +10,7 @@ interface Fields {
     type: "text" | "number" | "checkbox" | "date" | "file";
     as?: "textarea" | "select";
     placeholder?: string;
-    options?: { value: string, label: string }[];
+    options?: { value: string | number, label: string }[];
 }
 
 interface FormProps {
