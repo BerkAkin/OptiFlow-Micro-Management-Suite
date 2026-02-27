@@ -2,8 +2,8 @@
 {
     public enum SupportCategories
     {
-        Environment = 0,
-        Colleagues = 1,
+        Environment = 1,
+        Colleagues = 2,
         Workload = 3,
         Mood = 4,
         System = 5,
