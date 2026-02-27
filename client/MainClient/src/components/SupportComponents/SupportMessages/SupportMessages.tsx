@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { useSupportMessages } from '../../../hooks/SupportHooks/UseSupport';
+import { useSendSupportRequestMessage, useSupportMessages } from '../../../hooks/SupportHooks/UseSupport';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import { Field, Form, Formik } from 'formik';
@@ -10,6 +10,8 @@ function SupportMessages() {
 
     const { id } = useParams();
     const { data, isLoading, error } = useSupportMessages(Number(id));
+    const mutation = useSendSupportRequestMessage();
+
     const [messages, setMessages] = useState<any[]>([]);
     useEffect(() => {
         if (data) {
@@ -17,45 +19,57 @@ function SupportMessages() {
         }
     }, [data]);
 
+
     const handleSubmit = (values: any) => {
+        if (values.message.trim("") == "") {
+            console.log("boş mesaj")
+            return
+        }
         const newMessage = {
-            senderId: 0,
             message: values.message,
-            date: new Date().toLocaleDateString()
+            createdAt: new Date().toLocaleDateString(),
+            isMine: true,
+        };
+
+        const newSentMessage = {
+            message: values.message,
+            requestId: id,
         };
 
         setMessages(prev => [...prev, newMessage]);
-
+        mutation.mutate(newSentMessage);
     }
+
     const initialValues = {
         message: "",
         senderId: id
     }
+
     if (isLoading) return <Spinner />;
     if (error || !data) return <ErrorMessage />;
+
     return (
         <div className='border border-gray-200 bg-white rounded-lg shadow-custom h-[460px] w-full'>
             <div className='h-[10%] text-start flex justify-start border-b border-gray-200 pb-2'>
-                <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4 `}>Messages of {id} Request</p>
+                <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4 `}>Messages</p>
             </div>
 
-            <div className='overflow-y-auto h-[75%] px-3 py-4 '>
+            <div className='overflow-y-auto h-[75%] px-3 py-4  mb-4'>
                 {messages.map((item, index) =>
                 (
-                    item.senderId == 0
+                    item.isMine
                         ?
                         <div className='flex justify-end'>
                             <div key={index} className='border bg-lime-500 w-[25%] rounded-md border-gray-200 my-2 p-3'>
                                 <p className='text-white'>{item.message}</p>
-                                <p className=' text-end text-xs text-gray-200'>{item.date}</p>
+                                <p className=' text-end text-xs text-gray-200'>{item.createdAt}</p>
                             </div>
                         </div>
-
                         :
                         <div className='flex justify-start'>
                             <div key={index} className='border bg-lime-600 w-[25%] rounded-md border-gray-200 my-2 p-3'>
                                 <p className='text-white'>{item.message}</p>
-                                <p className=' text-end text-xs text-gray-200'>{item.date}</p>
+                                <p className=' text-end text-xs text-gray-200'>{item.createdAt}</p>
                             </div>
                         </div>
                 ))}
