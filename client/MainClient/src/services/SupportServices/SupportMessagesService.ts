@@ -2,5 +2,9 @@ import { fetchSupportMessages } from "../../repositories/SupportRepositories/Sup
 
 export const SupportMessagesService = async (requestId: number) => {
   const data = await fetchSupportMessages(requestId);
-  return data;
+  const newData = data.map((item: any) => ({
+    ...item,
+    createdAt: item.createdAt.split("T")[0].split("-").reverse().join("."),
+  }));
+  return newData;
 };
