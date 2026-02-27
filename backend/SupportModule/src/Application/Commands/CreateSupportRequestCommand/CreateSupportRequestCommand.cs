@@ -20,7 +20,7 @@ namespace SupportModule.Application.Commands.CreateSupportRequestCommand
 
             SupportRequest spRq = new SupportRequest(command.userId, command.tenantId, command.supportRequestDto.Category);
 
-            spRq.AddMessage(command.supportRequestDto.Content,spRq.UserId);
+            spRq.AddMessage(command.supportRequestDto.Message,spRq.UserId);
 
             await _dbContext.SupportRequests.AddAsync(spRq, cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
