@@ -4,7 +4,7 @@ namespace SupportModule.Application.DTOs
 {
     public class CreateSupportRequestDto
     {
-        public string Content { get; set; }
+        public string Message { get; set; }
         public SupportCategories Category { get; set; }
     }
 }
