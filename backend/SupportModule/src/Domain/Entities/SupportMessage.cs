@@ -3,16 +3,16 @@
     public class SupportMessage
     {
         public int Id { get; private set; }
-        public string Content { get; private set; }
+        public string Message { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public int SenderId { get; private set; }
         private SupportMessage() { }
-        public SupportMessage(string content, int senderId)
+        public SupportMessage(string message, int senderId)
         {
-            if (string.IsNullOrWhiteSpace(content))
+            if (string.IsNullOrWhiteSpace(message))
                 throw new ArgumentException("Message cannot be empty");
 
-            Content = content;
+            Message = message;
             SenderId = senderId;
             CreatedAt = DateTime.UtcNow;
         }
