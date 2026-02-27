@@ -51,3 +51,14 @@ export const fetchMoodChart = async (id: number) => {
   return res.data; */
   return tempPreviousMoods;
 };
+
+export const fetchEmployeeComments = async (id: string) => {
+  /*   const res = await api.get(`/mood/employeeComments/${id}`);
+  return res.data;
+  return tempEmployeeComments; */
+};
+
+export const rateOthers = async (payload: any) => {
+  const res = await api.post("/mood/rateOthers", payload);
+  return res.data;
+};
