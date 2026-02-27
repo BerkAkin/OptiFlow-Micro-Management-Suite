@@ -5,7 +5,7 @@ using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Queries.GetSupportMessagesQuery
 {
-    public record GetSupportMessagesQuery(int RequestId):IRequest<List<GetSupportMessagesDto>>;
+    public record GetSupportMessagesQuery(int RequestId,int currentUser):IRequest<List<GetSupportMessagesDto>>;
 
     public class GetSupportMessagesQueryHandler : IRequestHandler<GetSupportMessagesQuery,List<GetSupportMessagesDto>>
     {
@@ -22,11 +22,11 @@ namespace SupportModule.Application.Queries.GetSupportMessagesQuery
                 .Where(sm => sm.SupportRequestId == query.RequestId)
                 .Select(sm => new GetSupportMessagesDto
                 {
-                    Content = sm.Content,
+                    Message = sm.Message,
                     CreatedAt = sm.CreatedAt,
-                    SenderId= sm.SenderId,
+                    IsMine= sm.SenderId == query.currentUser
                 })
-                .OrderByDescending(sm => sm.CreatedAt)
+                .OrderBy(sm => sm.CreatedAt)
                 .ToListAsync(cancellationToken);
 
         }
