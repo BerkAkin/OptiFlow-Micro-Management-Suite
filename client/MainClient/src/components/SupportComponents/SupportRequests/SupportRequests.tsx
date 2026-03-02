@@ -1,15 +1,22 @@
 import { Link, Outlet } from 'react-router'
-import { useSupportRequests } from '../../../hooks/SupportHooks/UseSupport';
+import { useMarkAsClosed, useSupportRequests } from '../../../hooks/SupportHooks/UseSupport';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
+import { useEffect, useState } from 'react';
 
 
 function SupportRequests() {
 
     const { data, isLoading, error } = useSupportRequests();
+    const [outletContext, setOutletContext] = useState<{ id: number, isClosed: boolean } | null>(null);
+
+    const mutation = useMarkAsClosed();
+    const handleMarkAsClosed = (id: number) => { mutation.mutate(id); }
+
 
     if (isLoading) return <Spinner />
     if (error || !data) return <ErrorMessage />
+
 
     return (
         <div className='grid grid-cols-12 gap-6'>
@@ -21,14 +28,23 @@ function SupportRequests() {
                     {
                         data.map((item: any) => (
 
-                            <Link key={item.Id} to={`request\\${item.id}\\messages`} className='cursor-pointer'>
-                                <div className='grid grid-cols-8 h-[25%] border rounded-md shadow-sm border-gray-200 my-2 mx-2 hover:bg-gray-50'>
+                            <Link onClick={() => setOutletContext({ id: item.id, isClosed: item.isClosed })} key={item.Id} to={`request\\${item.id}\\messages`} className='cursor-pointer'>
+                                <div className='grid grid-cols-8 h-[30%] border rounded-md shadow-sm border-gray-200 my-2 mx-2 hover:bg-gray-50'>
+                                    <div className='col-span-8 mt-2 grid grid-cols-2'>
+                                        <div className='flex items-center justify-start px-2 text-start flex items-center '>
+                                            <p className='text-gray-400'>{item.isClosed ? "Closed" : "Open"}</p>
+
+                                        </div>
+                                        <div className='flex items-center justify-end text-start flex items-center '>
+                                            {item.isClosed ? "" : <button onClick={() => handleMarkAsClosed(item.id)} className='border-none outline-none bg-red-500 hover:bg-red-400 transition-all cursor-pointer text-xs mx-2 p-1 rounded text-white'>Close</button>}
+
+                                        </div>
+                                    </div>
                                     <div className='col-span-8 flex items-center justify-between px-2 text-start flex items-center'>
                                         <p className='text-gray-600'><span className='font-bold'>Category: </span>{item.category}</p>
-                                        <p className='text-gray-400'>{item.isClosed ? "Closed" : "Open"}</p>
                                     </div>
                                     <div className='col-span-8 flex items-center justify-start px-2 text-start flex items-center'>
-                                        <p className='text-gray-500'>Employee: {item.userName}</p>
+                                        <p className='text-gray-600 '><span className='font-bold'>Employee: </span> {item.userName}</p>
                                     </div>
                                     <div className='col-span-8 flex items-center justify-end px-2 text-start flex items-center'>
                                         <p className='text-gray-400'>{item.createdAt}</p>
@@ -45,7 +61,7 @@ function SupportRequests() {
             </div>
             <div className='col-span-9'>
                 <div className='col-span-4'>
-                    <Outlet />
+                    <Outlet context={{ isClosed: outletContext?.isClosed }} />
                 </div>
             </div>
 
