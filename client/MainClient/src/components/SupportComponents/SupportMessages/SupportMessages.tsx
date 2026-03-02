@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useOutletContext, useParams } from 'react-router'
 import { useSendSupportRequestMessage, useSupportMessages } from '../../../hooks/SupportHooks/UseSupport';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
@@ -9,6 +9,7 @@ import send from '../../../assets/send.svg';
 function SupportMessages() {
 
     const { id } = useParams();
+    const { isClosed } = useOutletContext<{ isClosed: boolean }>();
     const { data, isLoading, error } = useSupportMessages(Number(id));
     const mutation = useSendSupportRequestMessage();
 
@@ -47,7 +48,6 @@ function SupportMessages() {
 
     if (isLoading) return <Spinner />;
     if (error || !data) return <ErrorMessage />;
-
     return (
         <div className='border border-gray-200 bg-white rounded-lg shadow-custom h-[460px] w-full'>
             <div className='h-[10%] text-start flex justify-start border-b border-gray-200 pb-2'>
@@ -74,20 +74,26 @@ function SupportMessages() {
                         </div>
                 ))}
             </div>
-            <div className='h-[15%]'>
-                <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                    <Form>
-                        <div className='flex px-4'>
-                            <Field id="message" name="message" className="border border-gray-200 rounded px-4 mx-2 outline-none w-[95%]" placeholder="Message..." />
-                            <button type="submit" className={`bg-lime-600 text-white w-[5%] py-2 flex items-center justify-center rounded-sm transition-all hover:scale-[1.03] hover:bg-lime-500 active:scale-[0.98]`}>
-                                <img src={send} alt="Send" width={25} />
-                            </button>
+            {isClosed == false ?
+
+                <div className='h-[15%]'>
+                    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+                        <Form>
+                            <div className='flex px-4'>
+                                <Field id="message" name="message" className="border border-gray-200 rounded px-4 mx-2 outline-none w-[95%]" placeholder="Message..." />
+                                <button type="submit" className={`bg-lime-600 text-white w-[5%] py-2 flex items-center justify-center rounded-sm transition-all hover:scale-[1.03] hover:bg-lime-500 active:scale-[0.98]`}>
+                                    <img src={send} alt="Send" width={25} />
+                                </button>
 
 
-                        </div>
-                    </Form>
-                </Formik>
-            </div>
+                            </div>
+                        </Form>
+                    </Formik>
+                </div>
+                :
+
+                <></>}
+
         </div>
     );
 }
