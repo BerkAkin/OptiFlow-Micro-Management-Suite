@@ -13,6 +13,7 @@ using SupportModule.Application.Queries.GetSupportRequestsQuery;
 using ProjectMicro.Shared.Interfaces;
 using SupportModule.Application.Queries.GetRequestsCategorical;
 using SupportModule.Application.Commands.SendMessageCommand;
+using SupportModule.Application.Commands.MarkAsClosedCommand;
 
 namespace SupportModule.Api.Controllers
 {
@@ -122,6 +123,14 @@ namespace SupportModule.Api.Controllers
         {
             int currentUser = _currentUserService.User.UserId;
             var data = await _mediator.Send(new SendMessageCommand(msg,currentUser));
+            return Ok(data);
+        }
+
+        [HttpGet("MarkAsClosed")]
+        public async Task<IActionResult> MarkAsClosed([FromQuery] int RequestId)
+        {
+            var tenantId = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new MarkAsClosedCommand(RequestId, tenantId));
             return Ok(data);
         }
     }
