@@ -31,3 +31,9 @@ export const sendMessage = async (payload: any) => {
   const res = await api.post("support/sendMessage", payload);
   return res.data;
 };
+export const markAsClosed = async (id: number) => {
+  const res = await api.get("support/MarkAsClosed", {
+    params: { requestId: id },
+  });
+  return res.data;
+};
