@@ -5,6 +5,7 @@ import { RequestSupportService } from "../../services/SupportServices/RequestSup
 import { SupportRequestsService } from "../../services/SupportServices/SupportRequestsService";
 import { SupportMessagesService } from "../../services/SupportServices/SupportMessagesService";
 import { SendSupportRequestMessageService } from "../../services/SupportServices/SendSupportRequestMessageService";
+import { MarkAsClosedService } from "../../services/SupportServices/MarkAsClosedService";
 
 export const useMonthlySupport = () => {
   return useQuery({
@@ -51,6 +52,18 @@ export const useRequestSupport = () => {
     mutationFn: (values: any) => RequestSupportService(values),
     onSuccess: (data: any) => {
       console.log("Support requested successfully!", data);
+    },
+    onError: (error: any) => {
+      console.log("Error", error);
+    },
+  });
+};
+
+export const useMarkAsClosed = () => {
+  return useMutation({
+    mutationFn: (id: number) => MarkAsClosedService(id),
+    onSuccess: (data: any) => {
+      console.log("Support requested marked as closed successfully!", data);
     },
     onError: (error: any) => {
       console.log("Error", error);
