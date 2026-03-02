@@ -134,7 +134,7 @@ function Navbar() {
                       </div>
 
                       <div className="flex justify-center">
-                        <button className="text-xl text-red-500 hover:text-red-700" onClick={() => setIsAuth(0)}> Logout</button>
+                        <button className="text-xl text-red-500 hover:text-red-700" onClick={() => { setIsAuth(false); localStorage.removeItem("AccessToken"); }}> Logout</button>
                       </div>
                     </div>
                   }
