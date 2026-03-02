@@ -7,7 +7,7 @@ import EmergencyPopUp from '../components/EmergencyPopUp/EmergencyPopUp';
 
 function MainPage() {
 
-    const { isAuth } = useAuthContext();
+    const { isAuth, setIsAuth } = useAuthContext();
 
     const [isSecretMenuOpen, setIsSecretMenuOpen] = useState(false);
 
@@ -21,7 +21,12 @@ function MainPage() {
         window.addEventListener("keydown", handleKeyDown);
         return () => { window.removeEventListener("keydown", handleKeyDown); };
     }, []);
-
+    useEffect(() => {
+        const token = localStorage.getItem("AccessToken");
+        if (token) {
+            setIsAuth(true);
+        }
+    }, [setIsAuth]);
     if (!isAuth) {
         return (
             <div className="flex items-center justify-center h-screen">
