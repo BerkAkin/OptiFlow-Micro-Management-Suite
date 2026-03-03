@@ -9,5 +9,10 @@ namespace SupportModule.Infrastructure.Hubs
                 var senderId = Context.UserIdentifier ?? "BilinmeyenGonderici";            
                 await Clients.User(receiverUserId).SendAsync("ReceiveMessage", senderId, message);
         }
+        public override async Task OnConnectedAsync()
+        {
+            Console.WriteLine($"Bir kullanıcı bağlandı: {Context.UserIdentifier}");
+            await base.OnConnectedAsync();
+        }
     }
 }
