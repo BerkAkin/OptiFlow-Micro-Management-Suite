@@ -14,6 +14,7 @@ using ProjectMicro.Shared.Interfaces;
 using SupportModule.Application.Queries.GetRequestsCategorical;
 using SupportModule.Application.Commands.SendMessageCommand;
 using SupportModule.Application.Commands.MarkAsClosedCommand;
+using SupportModule.Application.Queries.GetUserListQuery;
 
 namespace SupportModule.Api.Controllers
 {
@@ -131,6 +132,15 @@ namespace SupportModule.Api.Controllers
         {
             var tenantId = _currentUserService.User.TenantId;
             var data = await _mediator.Send(new MarkAsClosedCommand(RequestId, tenantId));
+            return Ok(data);
+        }
+
+        [HttpGet("GetUserList")]
+        public async Task<IActionResult> GetUserList()
+        {
+            int currentUser = _currentUserService.User.UserId;
+            var tenantId = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetUserListQuery(tenantId, currentUser));
             return Ok(data);
         }
     }
