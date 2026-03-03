@@ -29,19 +29,28 @@ function SupportChat({ CurrentUserOnChat, closeChatWindow }: { CurrentUserOnChat
 
 
     useEffect(() => {
-        if (connection)
+        if (connection) {
             connection.start()
                 .then(() => {
+                    connection.off("ReceiveMessage");
                     connection.on("ReceiveMessage", (senderId, message) => {
-                        setMessages(prev => [...prev, { senderId: CurrentUserOnChat.username, message }])
-                    })
+                        if (senderId.toString() === CurrentUserOnChat.userId.toString()) {
+                            setMessages(prev => [...prev, {
+                                senderId: CurrentUserOnChat.username,
+                                message: message
+                            }]);
+                        } else {
+                            console.log("Başka birinden mesaj geldi:", senderId);
+                        }
+                    });
                 })
                 .catch(e => console.log("Bağlantı Hatası: ", e));
-    }, [connection])
-
-    useEffect(() => {
-        setMessages([])
-    }, [CurrentUserOnChat])
+            return () => {
+                connection.off("ReceiveMessage");
+                setMessages([]);
+            };
+        }
+    }, [connection, CurrentUserOnChat]);
 
 
 
