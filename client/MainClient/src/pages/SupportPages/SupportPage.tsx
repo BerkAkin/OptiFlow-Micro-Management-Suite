@@ -21,7 +21,7 @@ function SupportPage() {
                     <SupportRequests />
 
                 </div>
-                <div className='absolute right-20 bottom-20'>
+                <div className='absolute right-50 bottom-10'>
                     <SupportLiveChatButton />
                 </div>
             </div>
