@@ -91,13 +91,14 @@
         }
       ],
       "UpstreamPathTemplate": "/hr-support",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET", "POST", "OPTIONS" ],
       "UseWebSockets": true,
+      
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
-      },
-      
+      }
+
     }
 
 
