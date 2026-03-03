@@ -1,12 +1,14 @@
 
 import { Doughnut } from "react-chartjs-2";
 import { useCategoricalSupport } from "../../../hooks/SupportHooks/UseSupport";
+import Spinner from "../../Spinner/Spinner";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 function SupportDoughChart() {
 
     const { data, isLoading, error } = useCategoricalSupport();
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return <Spinner />;
+    if (error || !data) return <ErrorMessage />;
 
     const ChartData = {
         labels: data.categories,
