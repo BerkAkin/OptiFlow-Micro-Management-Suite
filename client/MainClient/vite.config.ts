@@ -17,6 +17,12 @@ export default defineConfig({
         changeOrigin: true,
         secure: false,
       },
+      "/hr-support": {
+        target: "http://gateway:8080",
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
     },
   },
 });
