@@ -6,6 +6,7 @@ import { SupportRequestsService } from "../../services/SupportServices/SupportRe
 import { SupportMessagesService } from "../../services/SupportServices/SupportMessagesService";
 import { SendSupportRequestMessageService } from "../../services/SupportServices/SendSupportRequestMessageService";
 import { MarkAsClosedService } from "../../services/SupportServices/MarkAsClosedService";
+import { UserListService } from "../../services/SupportServices/UserListService";
 
 export const useMonthlySupport = () => {
   return useQuery({
@@ -68,5 +69,12 @@ export const useMarkAsClosed = () => {
     onError: (error: any) => {
       console.log("Error", error);
     },
+  });
+};
+
+export const useUserList = () => {
+  return useQuery({
+    queryKey: ["UserList"],
+    queryFn: () => UserListService(),
   });
 };
