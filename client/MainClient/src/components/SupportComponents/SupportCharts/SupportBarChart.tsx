@@ -1,11 +1,13 @@
 import { Chart } from "react-chartjs-2";
 import { useMonthlySupport } from "../../../hooks/SupportHooks/UseSupport";
+import Spinner from "../../Spinner/Spinner";
+import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 
 function SupportBarChart() {
 
     const { data, isLoading, error } = useMonthlySupport();
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    if (isLoading) return <Spinner />;
+    if (error || !data) return <ErrorMessage />;
 
     const ChartData = {
         labels: data.months,
