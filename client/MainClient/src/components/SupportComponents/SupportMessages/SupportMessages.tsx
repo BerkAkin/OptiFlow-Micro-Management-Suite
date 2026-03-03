@@ -23,7 +23,6 @@ function SupportMessages() {
 
     const handleSubmit = (values: any) => {
         if (values.message.trim("") == "") {
-            console.log("boş mesaj")
             return
         }
         const newMessage = {
@@ -48,6 +47,7 @@ function SupportMessages() {
 
     if (isLoading) return <Spinner />;
     if (error || !data) return <ErrorMessage />;
+
     return (
         <div className='border border-gray-200 bg-white rounded-lg shadow-custom h-[460px] w-full'>
             <div className='h-[10%] text-start flex justify-start border-b border-gray-200 pb-2'>
@@ -62,20 +62,19 @@ function SupportMessages() {
                         <div className='flex justify-end'>
                             <div key={index} className='border bg-lime-500 w-[25%] rounded-md border-gray-200 my-2 p-3'>
                                 <p className='text-white'>{item.message}</p>
-                                <p className=' text-end text-xs text-gray-200'>{item.createdAt}</p>
+                                <p className='text-end text-xs text-gray-200'>{item.createdAt}</p>
                             </div>
                         </div>
                         :
                         <div className='flex justify-start'>
                             <div key={index} className='border bg-lime-600 w-[25%] rounded-md border-gray-200 my-2 p-3'>
                                 <p className='text-white'>{item.message}</p>
-                                <p className=' text-end text-xs text-gray-200'>{item.createdAt}</p>
+                                <p className='text-end text-xs text-gray-200'>{item.createdAt}</p>
                             </div>
                         </div>
                 ))}
             </div>
             {isClosed == false ?
-
                 <div className='h-[15%]'>
                     <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                         <Form>
@@ -84,14 +83,11 @@ function SupportMessages() {
                                 <button type="submit" className={`bg-lime-600 text-white w-[5%] py-2 flex items-center justify-center rounded-sm transition-all hover:scale-[1.03] hover:bg-lime-500 active:scale-[0.98]`}>
                                     <img src={send} alt="Send" width={25} />
                                 </button>
-
-
                             </div>
                         </Form>
                     </Formik>
                 </div>
                 :
-
                 <></>}
 
         </div>
