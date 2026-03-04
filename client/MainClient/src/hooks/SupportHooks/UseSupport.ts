@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { MonthlySupportService } from "../../services/SupportServices/MonthlySupportService";
 import { CategoricalSupportService } from "../../services/SupportServices/CategoricalSupportService";
 import { RequestSupportService } from "../../services/SupportServices/RequestSupportService";
@@ -61,13 +61,11 @@ export const useRequestSupport = () => {
 };
 
 export const useMarkAsClosed = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (id: number) => MarkAsClosedService(id),
     onSuccess: (data: any) => {
-      console.log("Support requested marked as closed successfully!", data);
-    },
-    onError: (error: any) => {
-      console.log("Error", error);
+      queryClient.invalidateQueries({ queryKey: ["supportRequests"] });
     },
   });
 };
