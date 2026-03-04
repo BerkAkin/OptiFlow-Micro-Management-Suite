@@ -5,6 +5,9 @@ import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import { Field, Form, Formik } from 'formik';
 import send from '../../../assets/send.svg';
+import { SendMessageValidationScheme } from '../SupportMessages/SupportMessageValidations';
+
+
 
 function SupportMessages() {
 
@@ -54,7 +57,7 @@ function SupportMessages() {
                 <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4 `}>Messages</p>
             </div>
 
-            <div className='overflow-y-auto h-[75%] px-3 py-4  mb-4'>
+            <div className='overflow-y-auto h-[70%] px-3 py-4  mb-4'>
                 {messages.map((item, index) =>
                 (
                     item.isMine
@@ -75,16 +78,28 @@ function SupportMessages() {
                 ))}
             </div>
             {isClosed == false ?
-                <div className='h-[15%]'>
-                    <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-                        <Form>
-                            <div className='flex px-4'>
-                                <Field id="message" name="message" className="border border-gray-200 rounded px-4 mx-2 outline-none w-[95%]" placeholder="Message..." />
-                                <button type="submit" className={`bg-lime-600 text-white w-[5%] py-2 flex items-center justify-center rounded-sm transition-all hover:scale-[1.03] hover:bg-lime-500 active:scale-[0.98]`}>
-                                    <img src={send} alt="Send" width={25} />
-                                </button>
+                <div className='h-[35%]'>
+
+                    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={SendMessageValidationScheme}>
+                        {({ errors }) => (
+                            <div>
+                                <Form>
+                                    <div className='flex px-4'>
+                                        <Field id="message" name="message" className="border border-gray-200 rounded px-4 mx-2 outline-none w-[95%]" placeholder="Message..." />
+                                        <button type="submit" className={`bg-lime-600 text-white w-[5%] py-2 flex items-center justify-center rounded-sm transition-all hover:scale-[1.03] hover:bg-lime-500 active:scale-[0.98]`}>
+                                            <img src={send} alt="Send" width={25} />
+                                        </button>
+                                    </div>
+                                </Form>
+                                {errors && (
+                                    <div className="px-4 text-red-500 text-[12px] font-bold">
+                                        <p className='mx-3'>{errors.message as string}</p>
+                                    </div>
+                                )}
                             </div>
-                        </Form>
+
+                        )}
+
                     </Formik>
                 </div>
                 :
