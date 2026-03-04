@@ -3,15 +3,28 @@ import { useMarkAsClosed, useSupportRequests } from '../../../hooks/SupportHooks
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import { useState } from 'react';
+import { useToatsContext } from '../../../context/ToastContext';
+
 
 
 function SupportRequests() {
 
     const { data, isLoading, error } = useSupportRequests();
     const [outletContext, setOutletContext] = useState<{ id: number, isClosed: boolean } | null>(null);
+    const { showToast } = useToatsContext();
 
     const mutation = useMarkAsClosed();
-    const handleMarkAsClosed = (id: number) => { mutation.mutate(id); }
+    const handleMarkAsClosed = (id: number) => {
+        mutation.mutate(id, {
+            onSuccess: () => {
+                showToast("İstek başarıyla kapatıldı")
+            },
+            onError: (error: any) => {
+                showToast("Bir hata oluştu istek kapatılamadı");
+                console.log(error);
+            }
+        });
+    }
 
 
     if (isLoading) return <Spinner />
