@@ -125,7 +125,28 @@ services:
         command: dotnet watch run --urls "http://+:8080"
         depends_on:
             - support-db
-        
+                
+    mood-module:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: mood-module
+        networks:
+            - project-micro-network
+        ports: 
+            - "5006:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__SupportModuleDb=Server=mood-db;Database=db_support;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./MoodModule/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
+            - mood-module-bin:/app/bin  
+            - mood-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - mood-db
+ 
     auth-db:
         image: mcr.microsoft.com/mssql/server:2022-latest
         container_name: auth-db
@@ -191,10 +212,27 @@ services:
         volumes:
             - support-mssql-db:/var/opt/mssql
         
+    mood-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: mood-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1438:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - mood-mssql-db:/var/opt/mssql
+        
+
 
 
 
 volumes:
+    mood-module-bin:
+    mood-module-obj:
+    mood-mssql-db:
     support-module-bin:
     support-module-obj:
     support-mssql-db:
