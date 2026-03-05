@@ -9,10 +9,6 @@
 
         private readonly List<SupportRequest> _supportRequests = new();
         public IReadOnlyCollection<SupportRequest> SupportRequests => _supportRequests;
-
-        private readonly List<UserComment> _userComments = new();
-        public IReadOnlyCollection<UserComment> UserComments => _userComments;
-
         public MiniUser(string username, string email, int tenantId)
         {
             if (string.IsNullOrWhiteSpace(username))
@@ -25,14 +21,5 @@
             TenantId = tenantId;
         }
 
-        public void AddComment(string comment)
-        {
-            if (string.IsNullOrWhiteSpace(comment))
-                throw new Exception("Comment cannot be empty");
-
-            _userComments.Add(new UserComment(comment, this.Id));
-        }
-
-       
     }
 }
