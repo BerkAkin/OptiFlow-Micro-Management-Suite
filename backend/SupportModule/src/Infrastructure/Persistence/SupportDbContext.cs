@@ -13,7 +13,6 @@ namespace SupportModule.Infrastructure.Persistence
         public DbSet<SupportRequest> SupportRequests { get; set; }
         public DbSet<SupportMessage> SupportMessages { get; set; }
         public DbSet<MiniUser> Users { get; set; }
-        public DbSet<UserComment> UserComments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,11 +29,6 @@ namespace SupportModule.Infrastructure.Persistence
                 .HasForeignKey(sr => sr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<UserComment>()
-                .HasOne<MiniUser>()
-                .WithMany(u => u.UserComments)
-                .HasForeignKey(uc => uc.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
 
 
