@@ -136,7 +136,7 @@ services:
         environment:
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:8080
-            - ConnectionStrings__SupportModuleDb=Server=mood-db;Database=db_support;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+            - ConnectionStrings__MoodModuleDb=Server=mood-db;Database=db_mood;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
         volumes:
             - ./MoodModule/src:/app
             - ./ProjectMicro.Shared:/ProjectMicro.Shared
