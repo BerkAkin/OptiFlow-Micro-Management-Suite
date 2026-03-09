@@ -19,10 +19,6 @@ namespace SupportModule.Infrastructure.Seeders
                 await context.SupportRequests.AddAsync(request1);
                 await context.SaveChangesAsync();
 
-                UserComment comment1 = new UserComment("Hello from berk", user1.Id);
-                await context.UserComments.AddAsync(comment1);
-                await context.SaveChangesAsync();
-
                 request1.AddMessage("İstek 1 için yeni mesaj", user1.Id);
                 await context.SaveChangesAsync();
             }
