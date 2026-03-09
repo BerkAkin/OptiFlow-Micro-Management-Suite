@@ -23,7 +23,7 @@ namespace MoodModule.Application.Queries.GetPreviousMoodsQuery
                 .Select(m => new GetPreviousMoodsDto
                 {
                       CreatedAt = m.CreatedAt,
-                      CurrentMood=m.MoodId
+                      CurrentMood=m.Mood
 
                 }).ToListAsync(cancellationToken);
             return data;
