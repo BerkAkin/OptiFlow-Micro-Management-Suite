@@ -1,6 +1,6 @@
 import MoodRecorder from '../../components/MoodComponents/MoodRecorder/MoodRecorder'
 import PreviousMoods from '../../components/MoodComponents/PreviousMoods/PreviousMoods'
-import TodaysMoods from '../../components/MoodComponents/TodaysMoods/TodaysMoods'
+import AllPreviousMoods from '../../components/MoodComponents/AllPreviousMoods/AllPreviousMoods'
 import UserComments from '../../components/MoodComponents/UserComments/UserComments'
 
 function MoodPage() {
@@ -11,7 +11,7 @@ function MoodPage() {
             </div>
             <div className='grid grid-cols-10 my-6 gap-6'>
                 <div className='bg-white h-[500px] col-span-7 shadow-custom border border-gray-200 rounded-lg'>
-                    <TodaysMoods />
+                    <AllPreviousMoods />
                 </div>
                 <div className='col-span-3'>
                     <div className='bg-white h-[244px] shadow-custom border border-gray-200 rounded-lg '>
