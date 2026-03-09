@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { RecordMoodService } from "../../services/MoodServices/RecordMoodService";
-import { TodaysMoodsService } from "../../services/MoodServices/TodaysMoodsService";
+import { AllPreviousMoodsService } from "../../services/MoodServices/AllPreviousMoodsService";
 import { MoodChartService } from "../../services/MoodServices/MoodChartService";
 
 export const useRecordMood = () => {
@@ -15,10 +15,10 @@ export const useRecordMood = () => {
   });
 };
 
-export const useTodaysMoods = (filters: any, page: number, id?: number) => {
+export const UseAllPreviousMoods = (filters: any, page: number) => {
   return useQuery({
-    queryKey: ["moodsToday", JSON.stringify(filters), page],
-    queryFn: () => TodaysMoodsService(filters, page, id),
+    queryKey: ["allPreviousMoods", JSON.stringify(filters), page],
+    queryFn: () => AllPreviousMoodsService(filters, page),
   });
 };
 
@@ -28,3 +28,22 @@ export const usePreviousMoods = (id: number) => {
     queryFn: () => MoodChartService(id),
   });
 };
+
+/* export const useSupportEmployeeComments = (id: string) => {
+  return useQuery({
+    queryKey: ["supportEmployeeComments", id],
+    queryFn: () => EmployeeCommentsSupportService(id),
+  });
+};
+
+export const useRateOthers = () => {
+  return useMutation({
+    mutationFn: (values: any) => RateOthersService(values),
+    onSuccess: (data: any) => {
+      console.log("Rating submitted successfully!", data);
+    },
+    onError: (error: any) => {
+      console.log("Error", error);
+    },
+  });
+}; */
