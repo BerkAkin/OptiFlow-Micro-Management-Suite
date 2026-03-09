@@ -16,10 +16,13 @@ namespace MoodModule.Application.Commands.AddMoodRecordCommand
         }
 
         public async Task<Unit> Handle(AddMoodRecordCommand command,CancellationToken cancellationToken) {
-            MiniUser user = await _dbContext.Users
-                 .SingleOrDefaultAsync(u => u.Id == command.UserId && u.TenantId == command.TenantId,cancellationToken);
+            var todayUtc = DateTime.UtcNow.Date;
+            MiniUser user = await _dbContext.Users.Include(x=>x.MoodRecords)
+                 .SingleOrDefaultAsync(u => u.UserId == command.UserId && u.TenantId == command.TenantId,cancellationToken);
             if (user == null) 
                 throw new Exception("User is not exists");
+            if (user.MoodRecords.Any(x => x.CreatedAt.Date == todayUtc))
+                throw new Exception("You already recorded mood today");
 
             user.AddMoodRecord(command.mood.MoodId, command.mood.Tags);
             await _dbContext.SaveChangesAsync();
