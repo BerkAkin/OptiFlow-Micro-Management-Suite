@@ -65,6 +65,9 @@ namespace MoodModule.Migrations
                     b.Property<int>("TenantId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,7 +88,7 @@ namespace MoodModule.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MoodId")
+                    b.Property<int>("Mood")
                         .HasColumnType("int");
 
                     b.Property<string>("Tags")
