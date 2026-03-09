@@ -8,6 +8,7 @@ namespace MoodModule.Domain.Entities
     {
         public int Id { get; private set; }
         public int TenantId { get; private set; }
+        public int UserId { get; private set; }
         public string Username { get; private set; }
         public string Email { get; private set; }
 
@@ -17,7 +18,7 @@ namespace MoodModule.Domain.Entities
         private readonly List<Comment> _comments = new();
         public IReadOnlyCollection<Comment> Comments => _comments;
 
-        public MiniUser(string username, string email, int tenantId)
+        public MiniUser(string username, string email, int tenantId,int userId)
         {
             if (string.IsNullOrWhiteSpace(username))
                 throw new ArgumentException("Username cannot be empty");
@@ -27,14 +28,17 @@ namespace MoodModule.Domain.Entities
             Username = username;
             Email = email;
             TenantId = tenantId;
+            UserId = userId;
         }
 
         public void AddMoodRecord(int MoodId,List<int> Tags) {
 
             if (Tags == null || !Tags.Any())
                 throw new Exception("Tags cannot be empty");
+            
             var tagEnums = Tags.Select(t => (TagsEnum)t).ToList();
-            _moodRecords.Add(new MoodRecord(this.Id, this.TenantId, tagEnums, MoodId));
+            var MoodEnum = (MoodEnum)MoodId;
+            _moodRecords.Add(new MoodRecord(this.Id, this.TenantId, tagEnums, MoodEnum));
         }
 
         public void AddComment(string Content)
