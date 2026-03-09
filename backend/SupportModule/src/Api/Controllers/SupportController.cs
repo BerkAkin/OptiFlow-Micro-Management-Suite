@@ -1,10 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using SupportModule.Application.Commands.CreateEmployeeCommentCommand;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
-using SupportModule.Application.Commands.DeleteEmployeeCommentCommand;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Queries.GetEmployeeCommentsQuery;
 using SupportModule.Application.Queries.GetEmployeeListQuery;
 using SupportModule.Application.Queries.GetMonthlyRequestCountsQuery;
 using SupportModule.Application.Queries.GetMyRequestsQuery;
@@ -90,34 +87,7 @@ namespace SupportModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("CreateEmployeeRating")]
-        public async Task<IActionResult> RateEmployee([FromBody] UserCommentDto Comment)
-        {
-            await _mediator.Send(new CreateEmployeeCommentCommand(Comment));
-            return Ok(new { message = "Yorum başarıyla kaydedildi" });
-        }
 
-        [HttpGet("GetEmployeeComments")]
-        public async Task<IActionResult> GetEmployeeComments([FromQuery] int UserId)
-        {
-            var data = await _mediator.Send(new GetEmployeeCommentsQuery(UserId));
-            return Ok(data);
-        }
-
-        [HttpDelete("DeleteEmployeeComment")]
-        public async Task<IActionResult> DeleteEmployeeComment([FromQuery] int commentId)
-        {
-            await _mediator.Send(new DeleteEmployeeCommentCommand(commentId));
-            return Ok(new { message = "Yorum başarıyla silindi" });
-        }
-
-        [HttpGet("GetMyComments")]
-        public async Task<IActionResult> GetMyEmployeeComments()
-        {
-            int currentUser = _currentUserService.User.UserId; 
-            var data = await _mediator.Send(new GetEmployeeCommentsQuery(currentUser));
-            return Ok(data);
-        }
 
         [HttpPost("SendMessage")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageDto msg)
