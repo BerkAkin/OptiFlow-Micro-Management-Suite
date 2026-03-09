@@ -9,10 +9,22 @@ import { useRecordMood } from '../../../hooks/MoodHooks/UseMood'
 
 
 
-
-const MoodReasons = [
-    "Work", "Friends", "Ergonomy", "Workload", "Health", "Sickness", "Psychology", "Family", "Sleep", "Tiredness", "Food", "Time", "Environment", "Weather"
-]
+const Tags = [
+    "Work",
+    "Friends",
+    "Ergonomy",
+    "Workload",
+    "Health",
+    "Sickness",
+    "Psychology",
+    "Family",
+    "Sleep",
+    "Tiredness",
+    "Food",
+    "Time",
+    "Environment",
+    "Weather"
+];
 
 const moods = [
     { name: 1, img: verySad, color: "bg-red-400", hover: "hover:bg-red-400" },
@@ -23,12 +35,12 @@ const moods = [
 ];
 
 interface initialValueTypes {
-    selectedReasons: string[];
-    moodSelect: number
+    tags: number[];
+    moodId: number
 }
 const initialValues: initialValueTypes = {
-    selectedReasons: [],
-    moodSelect: 0
+    tags: [],
+    moodId: 3
 }
 
 
@@ -37,6 +49,7 @@ function MoodRecorder() {
     const mutation = useRecordMood();
 
     const handleMoodRecord = (values: any) => {
+
         mutation.mutate(values);
     }
 
@@ -49,27 +62,27 @@ function MoodRecorder() {
                         <Form className='grid grid-cols-10 '>
                             <div className='col-span-3 flex items-center border-e border-gray-200'>
                                 {(moods).map((item) => (
-                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodSelect) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer ${item.hover} rounded-full p-1`} >
+                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodId) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer ${item.hover} rounded-full p-1`} >
                                         <img width={60} src={item.img}></img>
-                                        <Field className="cursor-pointer" hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodSelect" />
+                                        <Field className="cursor-pointer" hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodId" />
                                     </label>
                                 ))}
                             </div>
 
 
                             <div className='col-span-5 flex items-center border-e border-gray-200'>
-                                <FieldArray name='selectedReasons' render={arrayHelpers => (
+                                <FieldArray name='tags' render={arrayHelpers => (
                                     <div className='grid grid-cols-8 gap-1'>
-                                        {MoodReasons.map((item, key) => {
-                                            const isSelected = values.selectedReasons.includes(item);
+                                        {Tags.map((item, index) => {
+                                            const isSelected = values.tags.includes(index + 1);
                                             return (
                                                 <div className='col-span-1 flex items-center justify-center'>
                                                     <p className={` px-2 w-max border border-gray-200 cursor-pointer hover:text-white hover:bg-indigo-300 rounded-lg ${isSelected ? "bg-indigo-400 text-white" : "text-gray-700 bg-white"}`}
                                                         onClick={() => {
                                                             if (isSelected) {
-                                                                arrayHelpers.remove(values.selectedReasons.indexOf(item));
+                                                                arrayHelpers.remove(values.tags.indexOf(index + 1));
                                                             } else {
-                                                                arrayHelpers.push(item)
+                                                                arrayHelpers.push(index + 1)
                                                             }
                                                         }}>
                                                         {item}
