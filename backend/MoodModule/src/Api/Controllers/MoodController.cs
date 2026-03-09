@@ -9,6 +9,7 @@ using MoodModule.Application.Queries.GetCommentsQuery;
 using MoodModule.Application.Queries.GetMoodsQuery;
 using MoodModule.Application.Queries.GetPreviousMoodsQuery;
 using MoodModule.Application.Queries.GetUsersQuery;
+using MoodModule.Migrations;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Models;
 
@@ -28,14 +29,18 @@ namespace MoodModule.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetMoods() {
+        public async Task<IActionResult> GetMoods([FromQuery] MoodFilterDto filters) {
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetMoodsQuery(currentTenant));
-            return Ok(data);
+            var (data, maxPage) = await _mediator.Send(new GetMoodsQuery(currentTenant,currentUser,filters));
+            return Ok(new
+            {
+                data,
+                maxPage
+            });
         }
 
-        [HttpPost("AddMoodRecord")]
+        [HttpPost]
         public async Task<IActionResult> AddMoodRecord([FromBody] AddMoodRecordDto mood)
         {
             int currentUser = _currentUserService.User.UserId;
