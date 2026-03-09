@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MoodModule.Application.Queries.GetMoodsQuery;
 using MoodModule.Infrastructure.Persistence;
+using MoodModule.Infrastructure.Seeders;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
 
@@ -39,12 +40,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-
-//using (var scope = app.Services.CreateScope())
-//{
-//    var context = scope.ServiceProvider.GetRequiredService<SupportDbContext>();
-//    await DataSeeder.SeedAsync(context);
-//}
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<MoodDbContext>();
+    await DataSeeder.SeedAsync(context);
+}
 
 
 app.Run();
