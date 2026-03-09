@@ -15,6 +15,10 @@
     },
 
 
+
+
+
+
     {
       "DownstreamPathTemplate": "/api/finance/{everything}",
       "DownstreamScheme": "http",
@@ -33,6 +37,11 @@
     },
 
 
+
+
+
+
+
     {
       "DownstreamPathTemplate": "/api/survey/{everything}",
       "DownstreamScheme": "http",
@@ -49,6 +58,11 @@
         "AllowedScopes": []
       }
     },
+
+
+
+
+
     {
       "DownstreamPathTemplate": "/api/suggestions/{everything}",
       "DownstreamScheme": "http",
@@ -65,6 +79,9 @@
         "AllowedScopes": []
       }
     },
+
+
+
     {
       "DownstreamPathTemplate": "/api/support/{everything}",
       "DownstreamScheme": "http",
@@ -93,12 +110,34 @@
       "UpstreamPathTemplate": "/hr-support",
       "UpstreamHttpMethod": [ "GET", "POST", "OPTIONS" ],
       "UseWebSockets": true,
-      
+
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
+    },
 
+
+
+
+
+
+
+    {
+      "DownstreamPathTemplate": "/api/mood/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "mood-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/mood/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
     }
 
 
