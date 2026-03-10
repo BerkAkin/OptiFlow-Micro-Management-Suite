@@ -10,7 +10,6 @@ import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
 import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import SupportPage from './pages/SupportPages/SupportPage';
-import UserComments from './components/MoodComponents/UserComments/UserComments';
 import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
 
 function App() {
