@@ -22,8 +22,8 @@ namespace MoodModule.Application.Queries.GetCommentsQuery
                .OrderByDescending(c => c.CreatedAt)
                .Select(c => new GetCommentsDto
                {
-                   Content = c.Content,
-                   CreatedAt = c.CreatedAt,
+                   Comment = c.Content,
+                   Date = c.CreatedAt.Date,
                })
                .ToListAsync();
         }
