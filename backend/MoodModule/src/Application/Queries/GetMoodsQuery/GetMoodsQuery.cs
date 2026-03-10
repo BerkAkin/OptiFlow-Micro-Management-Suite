@@ -32,7 +32,7 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
             }
 
 
-            int pageSize = 7;
+            int pageSize = 8;
             int page = query.filters.Page <= 0 ? 1 : query.filters.Page;
 
             int totalCount = await qry.CountAsync();
