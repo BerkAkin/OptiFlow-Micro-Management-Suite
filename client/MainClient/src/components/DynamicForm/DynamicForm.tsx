@@ -30,7 +30,7 @@ const inputBaseClass = "text-gray-500 cursor-pointer border border-gray-200 w-fu
 function DynamicForm({ title, validationScheme, colorScheme, hoverScheme, fields, initialValues, onSubmit, children, onCancel }: FormProps) {
     return (
         <div className='p-4'>
-            <p className="text-xl px-4 pt-2 font-semibold text-slate-700 font-rubik">{title}</p>
+            <p className="text-xl font-semibold text-slate-700 font-rubik">{title}</p>
 
             <Formik
                 validationSchema={validationScheme}
@@ -39,7 +39,7 @@ function DynamicForm({ title, validationScheme, colorScheme, hoverScheme, fields
                 validateOnMount={false}
             >
                 {({ errors, touched, setFieldValue, values }) => (
-                    <Form className="p-4">
+                    <Form>
                         {fields && fields.map((item) => (
                             <div key={item.name} className="flex flex-col mb-2">
                                 <div className="flex justify-between items-end h-2 px-1">
@@ -84,11 +84,11 @@ function DynamicForm({ title, validationScheme, colorScheme, hoverScheme, fields
                         {typeof children === 'function' ? children({ setFieldValue, values }) : children}
 
                         <div className="flex justify-center pt-4">
-                            <button type="submit" className={`${colorScheme} ${hoverScheme} text-white w-full py-2 flex items-center justify-center rounded-sm transition-all active:scale-[0.98]`}>
+                            <button type="submit" className={`${colorScheme} ${hoverScheme} cursor-pointer text-white w-full py-2 flex items-center justify-center rounded-sm transition-all active:scale-[0.98]`}>
                                 <img src={send} alt="Send" width={25} />
                             </button>
                             {onCancel && (
-                                <button type='button' onClick={onCancel} className="bg-red-400 hover:bg-red-500 text-white w-[60px] py-2 mx-2 flex items-center justify-center rounded-sm transition-all active:scale-[0.98]">
+                                <button type='button' onClick={onCancel} className="cursor-pointer bg-red-400 hover:bg-red-500 text-white w-[60px] py-2 mx-2 flex items-center justify-center rounded-sm transition-all active:scale-[0.98]">
                                     <img src={cancel} alt="Cancel" width={25} />
                                 </button>
                             )}
