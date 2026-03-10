@@ -1,12 +1,9 @@
 import { fetchMoodChart } from "../../repositories/MoodRepositories/MoodRepository";
 
-export const MoodChartService = async (id: number) => {
+export const MoodChartService = async () => {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-  const data = await fetchMoodChart(id);
-  const values = days.map((day) => {
-    const item = data.find((x) => x.day === day);
-    return item ? item.value : 0;
-  });
+  const data = await fetchMoodChart();
+  const values = data.map((item: any) => item.mood);
   return { values, days };
 };
