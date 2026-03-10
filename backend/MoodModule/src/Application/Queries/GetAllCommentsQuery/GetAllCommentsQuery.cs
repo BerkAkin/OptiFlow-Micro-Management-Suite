@@ -23,7 +23,7 @@ namespace MoodModule.Application.Queries.GetAllCommentsQuery
                 .Select(c => new GetAllCommentsDto { 
                     Id=c.Id,
                     Content=c.Content,
-                    CreatedAt=c.CreatedAt,
+                    Date=c.CreatedAt,
                 })
                 .ToListAsync();
         }
