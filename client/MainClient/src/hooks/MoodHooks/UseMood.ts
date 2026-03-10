@@ -1,13 +1,20 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { RecordMoodService } from "../../services/MoodServices/RecordMoodService";
 import { AllPreviousMoodsService } from "../../services/MoodServices/AllPreviousMoodsService";
 import { MoodChartService } from "../../services/MoodServices/MoodChartService";
+import { MyCommentsService } from "../../services/MoodServices/MyCommentsService";
+import { CommentOnEmployeesService } from "../../services/MoodServices/CommentOnEmployeesService";
+import { UsersService } from "../../services/MoodServices/UsersService";
+import { EmployeeCommentsService } from "../../services/MoodServices/EmployeeCommentsService";
+import { DeleteCommentService } from "../../services/MoodServices/DeleteCommentService";
 
 export const useRecordMood = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (payload: any) => RecordMoodService(payload),
-    onSuccess: (data: any) => {
-      console.log("Mood recorded successfully!", data);
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["allPreviousMoods"] });
+      queryClient.invalidateQueries({ queryKey: ["moodsPrevious"] });
     },
     onError: (error: any) => {
       console.log("Error", error);
@@ -22,28 +29,60 @@ export const UseAllPreviousMoods = (filters: any, page: number) => {
   });
 };
 
-export const usePreviousMoods = (id: number) => {
+export const usePreviousMoods = () => {
   return useQuery({
-    queryKey: ["moodsPrevious", id],
-    queryFn: () => MoodChartService(id),
+    queryKey: ["moodsPrevious"],
+    queryFn: () => MoodChartService(),
   });
 };
 
-/* export const useSupportEmployeeComments = (id: string) => {
+export const useMyComments = () => {
   return useQuery({
-    queryKey: ["supportEmployeeComments", id],
-    queryFn: () => EmployeeCommentsSupportService(id),
+    queryKey: ["myComments"],
+    queryFn: () => MyCommentsService(),
   });
 };
 
-export const useRateOthers = () => {
+export const useEmployeeComments = (userId: any) => {
+  return useQuery({
+    queryKey: ["employeeComments", userId],
+    queryFn: () => EmployeeCommentsService(userId),
+  });
+};
+
+export const useUserList = () => {
+  return useQuery({
+    queryKey: ["moodUsers"],
+    queryFn: () => UsersService(),
+  });
+};
+
+export const useCommentOnEmployees = () => {
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (values: any) => RateOthersService(values),
+    mutationFn: (values: any) => CommentOnEmployeesService(values),
     onSuccess: (data: any) => {
-      console.log("Rating submitted successfully!", data);
+      console.log("Commented successfully!", data);
+      queryClient.invalidateQueries({ queryKey: ["employeeComments"] });
+      queryClient.invalidateQueries({ queryKey: ["myComments"] });
     },
     onError: (error: any) => {
       console.log("Error", error);
     },
   });
-}; */
+};
+
+export const useDeleteComment = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: any) => DeleteCommentService(payload),
+    onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["employeeComments"] });
+      queryClient.invalidateQueries({ queryKey: ["myComments"] });
+      console.log("Comment Deleted successfully!", data);
+    },
+    onError: (error: any) => {
+      console.log("Error", error);
+    },
+  });
+};
