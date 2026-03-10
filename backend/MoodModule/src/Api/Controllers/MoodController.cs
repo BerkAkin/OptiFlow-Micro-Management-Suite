@@ -49,7 +49,7 @@ namespace MoodModule.Api.Controllers
             return Ok("Mood saved succesfully");
         }
 
-        [HttpGet("GetPreviousMoods")]
+        [HttpGet("Previous")]
         public async Task<IActionResult> GetPreviousMoods()
         {
             int currentUser = _currentUserService.User.UserId;
@@ -58,7 +58,7 @@ namespace MoodModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("AddComment")]
+        [HttpPost("Comment")]
         public async Task<IActionResult> AddComment([FromBody] AddCommentDto comment)
         {
             int currentTenant = _currentUserService.User.TenantId;
@@ -66,7 +66,7 @@ namespace MoodModule.Api.Controllers
             return Ok("Comment saved successfully");
         }
 
-        [HttpDelete("DeleteComment")]
+        [HttpDelete("Comment")]
         public async Task<IActionResult> DeleteComment([FromBody] DeleteCommentDto comment)
         {
             int currentTenant = _currentUserService.User.TenantId;
@@ -74,7 +74,7 @@ namespace MoodModule.Api.Controllers
             return Ok("Comment deleted successfully");
         }
 
-        [HttpGet("GetUsers")]
+        [HttpGet("Users")]
         public async Task<IActionResult> GetUsers()
         {
             int currentTenant = _currentUserService.User.TenantId;
@@ -82,21 +82,21 @@ namespace MoodModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("GetAllComments")]
+        [HttpGet("AllComments")]
         public async Task<IActionResult> GetAllComments([FromQuery] int UserId)
         {
             int currentTenant = _currentUserService.User.TenantId;
             var data = await _mediator.Send(new GetAllCommentsQuery(UserId));
-            return Ok("Comment saved successfully");
+            return Ok(data);
 
         }
 
-        [HttpGet("GetComments")]
+        [HttpGet("MyComments")]
         public async Task<IActionResult> GetComments()
         {
             int currentUser = _currentUserService.User.UserId;
             var data = await _mediator.Send(new GetCommentsQuery(currentUser));
-            return Ok("Comment saved successfully");
+            return Ok(data);
 
         }
     }
