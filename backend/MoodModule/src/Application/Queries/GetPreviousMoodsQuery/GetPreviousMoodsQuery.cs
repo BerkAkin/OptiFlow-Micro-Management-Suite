@@ -18,12 +18,12 @@ namespace MoodModule.Application.Queries.GetPreviousMoodsQuery
             List<GetPreviousMoodsDto> data = await _dbContext.Moods
                 .AsNoTracking()
                 .Where(m => m.UserId == query.UserId && m.TenantId == query.TenantId)
-                .OrderByDescending(m => m.CreatedAt)
+                .OrderBy(m => m.CreatedAt)
                 .Take(5)
                 .Select(m => new GetPreviousMoodsDto
                 {
-                      CreatedAt = m.CreatedAt,
-                      CurrentMood=m.Mood
+                      Date = m.CreatedAt,
+                      Mood=m.Mood
 
                 }).ToListAsync(cancellationToken);
             return data;
