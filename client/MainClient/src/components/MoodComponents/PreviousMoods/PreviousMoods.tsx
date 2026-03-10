@@ -1,12 +1,15 @@
 import { Line } from 'react-chartjs-2'
 import { usePreviousMoods } from '../../../hooks/MoodHooks/UseMood';
+import Spinner from '../../Spinner/Spinner';
+import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 
 
 function PreviousMoods() {
 
-    const { data, isLoading, error } = usePreviousMoods(1);
-    if (isLoading) return (<p>Loading...</p>)
-    if (error || !data) return (<p>Error...</p>)
+    const { data, isLoading, error } = usePreviousMoods();
+    if (isLoading) return <Spinner />
+    if (error || !data) return <ErrorMessage />
+
     const { days, values } = data;
 
     const chartData = {
@@ -43,6 +46,7 @@ function PreviousMoods() {
                                 callback: function (value) {
                                     return moodLabels[value] || value;
                                 }
+
                             },
                             border: { display: false },
 
@@ -54,7 +58,7 @@ function PreviousMoods() {
                     maintainAspectRatio: false,
                     responsive: true,
                     borderColor: "#a5b4fc",
-                    plugins: { legend: { display: false } }
+                    plugins: { legend: { display: false }, tooltip: { enabled: false } }
                 }} />
             </div>
 
