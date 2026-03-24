@@ -6,10 +6,10 @@ import { useLogin } from "../../hooks/AuthHooks/useAuth";
 
 
 
-function LoginModal() {
+function LoginContainer() {
 
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const { setIsAuth } = useAuthContext();
+    const { handleLoginState } = useAuthContext();
     const loginMutation = useLogin();
 
 
@@ -22,8 +22,8 @@ function LoginModal() {
             <div className='w-96 h-[500px] flex justify-center items-center pe-2 bg-white border border-gray-200 rounded-lg shadow-custom'>
                 <Formik initialValues={{ email: "", password: "" }} onSubmit={(values) => {
                     loginMutation.mutate(values, {
-                        onSuccess: () => {
-                            setIsAuth(true);
+                        onSuccess: (token: any) => {
+                            handleLoginState(token);
                         },
                     });
                 }}>
@@ -65,4 +65,4 @@ function LoginModal() {
     )
 }
 
-export default LoginModal
+export default LoginContainer
