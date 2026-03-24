@@ -28,7 +28,7 @@ function MyDayOffs() {
     ]
 
     const tempData: any = [
-        { "topic": "Deneme Leave", "description": "Denemeler", "days": "10", "Date": "2025-02-12" },
+        { status: "Ok", topic: "Deneme Leave", description: "Denemeler", days: "10", Date: "2025-02-12" },
     ]
 
     const filterFields = [
@@ -45,7 +45,7 @@ function MyDayOffs() {
             <div className='col-span-7 border border-gray-200 bg-white rounded-lg shadow-custom h-[500px] w-full'>
                 <DynamicTable filterFields={filterFields} handleFilter={handleFilter} data={tempData} title='My Leavings' />
             </div>
-            <div className='col-span-2 border border-gray-200 bg-white rounded-lg shadow-custom h-[320px] '>
+            <div className='col-span-2 border border-gray-200 bg-white rounded-lg shadow-custom h-[340px] '>
                 <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
             </div>
 
