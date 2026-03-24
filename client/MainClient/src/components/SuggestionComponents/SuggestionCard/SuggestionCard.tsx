@@ -41,8 +41,8 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
             <div className='text-center py-4 flex justify-center items-center  w-full'>
                 <p className='text-gray-900'>
                     {title}
-                    <button type='button' onClick={() => handleApproveOrReject(false)} className='cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
-                    <button type='button' onClick={() => handleApproveOrReject(true)} className='cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
+                    <button type='button' onClick={() => handleApproveOrReject(false)} className='transition-all hover:scale-[1.1] cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
+                    <button type='button' onClick={() => handleApproveOrReject(true)} className='transition-all hover:scale-[1.1] cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
                 </p>
             </div>
             <div className='text-center py-4 flex justify-center items-center'>
@@ -53,12 +53,12 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
                     <p className='text-gray-800 grid grid-cols-3 flex items-center'>
 
                         <button type='button' onClick={() => handleVote(-1)} className='cursor-pointer'>
-                            <img className='hover:bg-red-300 rounded-full' src={down} width={20} alt="" />
+                            <img className='hover:bg-red-300 rounded-full transition-all hover:scale-[1.1]' src={down} width={20} alt="" />
                         </button>
                         {votes}
 
                         <button type='button' onClick={() => handleVote(1)} className=' cursor-pointer text-2xl '>
-                            <img className='hover:bg-green-300 rounded-full' src={up} width={20} alt="" />
+                            <img className='hover:bg-green-300 rounded-full transition-all hover:scale-[1.1]' src={up} width={20} alt="" />
                         </button>
 
                     </p>
@@ -78,7 +78,7 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
                     }
                 </div>
                 <div className=' flex items-center justify-end'>
-                    <button className='cursor-pointer' onClick={() => setCommentSection(!commentSection)}>
+                    <button className='cursor-pointer transition-all hover:scale-[1.1]' onClick={() => setCommentSection(!commentSection)}>
                         <img src={list} width={20} alt="" />
                     </button>
                     <p className='text-gray-800 mx-1'> { }</p>
@@ -93,7 +93,7 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
                         <Form>
                             <div className='flex justify-center items-center'>
                                 <Field as="textarea" rows={2} className="resize-none border rounded-md focus:outline-none border-gray-200 w-[70%] mx-3 px-2 my-2" name="text" placeholder="Comment..." />
-                                <button type='submit'><img src={add} width={25} alt="" /></button>
+                                <button className='cursor-pointer transition-all hover:scale-[1.1]' type='submit'><img src={add} width={25} alt="" /></button>
                             </div>
 
                         </Form>
