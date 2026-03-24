@@ -25,9 +25,12 @@ namespace AuthModule.Services
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Email),
                 new Claim("userId",user.Id.ToString()),
-                new Claim("tenantId", user.TenantId.ToString()),
-                new Claim("departmentId",user.DepartmentId.ToString()),
+                new Claim("username",user.Name.ToString()+" "+ user.Surname.ToString()),
                 new Claim("email",user.Email.ToString()),
+                new Claim("company", user.Company.ToString()),
+                new Claim("tenantId", user.TenantId.ToString()),
+                new Claim("department",user.Department.Name.ToString()),
+                new Claim("departmentId",user.DepartmentId.ToString()),
             };
 
             foreach (var module in user.Tenant.TenantModules.Select(m => m.Module.Name))
