@@ -1,3 +1,4 @@
+import MySuggestionList from '../../components/SuggestionComponents/MySuggestionList/MySuggestionList'
 import SuggestionList from '../../components/SuggestionComponents/SuggestionList/SuggestionList'
 import SuggestionShowcase from '../../components/SuggestionComponents/SuggestionShowcase/SuggestionShowcase'
 
@@ -9,8 +10,11 @@ function SuggestIdeas() {
             <div className='col-span-10'>
                 <SuggestionShowcase />
             </div>
-            <div className='col-span-10'>
+            <div className='col-span-7'>
                 <SuggestionList />
+            </div>
+            <div className='col-span-3'>
+                <MySuggestionList />
             </div>
         </div >
     )
