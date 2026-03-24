@@ -14,18 +14,13 @@ function ProfilePage() {
                     <div className='border border-gray-200 rounded-full size-32 flex justify-center items-center'>IMAGE</div>
                 </div>
 
-                <div className='col-span-8 bg-white rounded-lg shadow-custom border border-gray-200 grid grid-cols-4 gap-6'>
-                    <div className='col-span-1  flex-col flex items-center justify-center'>
-                        <p className='text-gray-600 text-5xl capitalize'>{userInfo.username}</p>
+                <div className='col-span-8 bg-white rounded-lg shadow-custom border border-gray-200 grid grid-cols-12 gap-6'>
+                    <div className='col-span-3 flex-col flex items-center justify-center border-e border-gray-100'>
+                        <p className='text-gray-600 text-2xl capitalize'>{userInfo.username}</p>
                         <p className='text-gray-400 text-lg'>{userInfo.email}</p>
                     </div>
-                    <div className='col-span-3 grid'>
-                        <div className='flex items-center capitalize'>
-                            <p className='text-gray-600 text-lg'>Company: <span className='text-gray-400'>{userInfo.company}</span></p>
-                        </div>
-                        <div className='flex items-center capitalize'>
-                            <p className='text-gray-600 text-lg'>Role: <span className='text-gray-400'>{userInfo.department}</span></p>
-                        </div>
+                    <div className='col-span-9 flex-col flex items-center justify-center'>
+                        <p className='text-gray-600 text-4xl tracking-[4px] capitalize'>{userInfo.company}<span className='tracking-tight text-lg align-[20px]'>{userInfo.department}</span></p>
                     </div>
                 </div>
 
