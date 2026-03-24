@@ -11,11 +11,11 @@ function MoodPage() {
                 <MoodRecorder />
             </div>
             <div className='grid grid-cols-10 my-6 gap-6'>
-                <div className='bg-white  col-span-7 shadow-custom border border-gray-200 rounded-lg'>
+                <div className='bg-white h-[700px] col-span-7 shadow-custom border border-gray-200 rounded-lg'>
                     <AllPreviousMoods />
                 </div>
                 <div className='col-span-3 '>
-                    <div className='bg-white  shadow-custom border border-gray-200 rounded-lg '>
+                    <div className='bg-white shadow-custom border border-gray-200 rounded-lg '>
                         <PreviousMoods />
                     </div>
                     <div className='bg-white h-[250px] my-2 shadow-custom border border-gray-200 rounded-lg '>
