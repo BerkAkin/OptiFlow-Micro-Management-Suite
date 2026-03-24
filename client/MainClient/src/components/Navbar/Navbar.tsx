@@ -17,7 +17,7 @@ import icon from '../../assets/icon.png'
 
 function Navbar() {
 
-  const { isAuth, setIsAuth } = useAuthContext();
+  const { isAuth, handleLogoutState } = useAuthContext();
 
   const [isSuggestion, setIsSuggestion] = useState<boolean>(false);
   const [isHelp, setIsHelp] = useState<boolean>(false);
@@ -134,7 +134,7 @@ function Navbar() {
                       </div>
 
                       <div className="flex justify-center">
-                        <button className="text-xl text-red-500 hover:text-red-700" onClick={() => { setIsAuth(false); localStorage.removeItem("AccessToken"); }}> Logout</button>
+                        <button className="text-xl text-red-500 hover:text-red-700" onClick={() => handleLogoutState()}> Logout</button>
                       </div>
                     </div>
                   }
