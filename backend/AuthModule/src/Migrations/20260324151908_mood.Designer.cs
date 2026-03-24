@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthModule.Migrations
 {
     [DbContext(typeof(AuthDBContext))]
-    [Migration("20251209165832_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260324151908_mood")]
+    partial class mood
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,6 +142,10 @@ namespace AuthModule.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Company")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreate")
                         .HasColumnType("datetime2");

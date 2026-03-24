@@ -140,6 +140,10 @@ namespace AuthModule.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Company")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateCreate")
                         .HasColumnType("datetime2");
 

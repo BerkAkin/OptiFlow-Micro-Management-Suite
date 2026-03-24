@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthModule.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class mood : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -87,7 +87,7 @@ namespace AuthModule.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApartmentNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -95,10 +95,11 @@ namespace AuthModule.Migrations
                     Province = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     District = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FullAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    TenantId = table.Column<int>(type: "int", nullable: false),
+                    Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TenantId = table.Column<int>(type: "int", nullable: false)
+                    DateUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
