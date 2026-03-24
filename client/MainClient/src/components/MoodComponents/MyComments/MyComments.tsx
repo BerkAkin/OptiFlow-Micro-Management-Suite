@@ -27,11 +27,10 @@ function MyComments() {
                                     {item.comment}
                                 </p>
                             </div>
-                            <div className="h-[15%] px-4 ">
-                                <div className="flex justify-start">
-                                    <p className="text-gray-400 text-sm">{item.date}</p>
-                                </div>
+                            <div className="h-[15%] bg-gray-50 p-2 border-t border-gray-100">
+                                <p className="text-gray-400 text-[10px] text-right">{item.date}</p>
                             </div>
+
                         </div>
                     ))}
                 </div>
