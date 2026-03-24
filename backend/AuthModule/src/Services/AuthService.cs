@@ -2,7 +2,6 @@
 using AuthModule.DTO;
 using AuthModule.Models;
 using AutoMapper;
-using Azure;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -56,10 +55,14 @@ namespace AuthModule.Services
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(registerDTO.Password),
                 PhoneNum = registerDTO.PhoneNum,
                 BirthDate = registerDTO.BirthDate,
+
                 TenantId = tenant.Id,
+                Company= registerDTO.Tenant,
+                DepartmentId=4, //Başlangıç kullanıcısı manager olarak üretilir daha sonrakiler farklı bir fonksiyon ile istenen departmanlarda olur.
+
                 DateCreate = DateTime.UtcNow,
                 DateUpdate = DateTime.UtcNow,
-                DepartmentId = 4,
+
                 Street = registerDTO.Street, 
                 Street2 = registerDTO.Street2,
                 ApartmentNum = registerDTO.ApartmentNum,
@@ -68,7 +71,7 @@ namespace AuthModule.Services
                 District = registerDTO.District,
                 FullAddress = registerDTO.FullAddress,
 
-    };
+            };
 
 
             await _context.Users.AddAsync(user);
@@ -82,7 +85,7 @@ namespace AuthModule.Services
 
         public async Task<string> Login(LoginDTO loginDTO)
         {
-            var user = await _context.Users.Include(u=>u.RefreshToken)
+            var user = await _context.Users.Include(u=>u.RefreshToken).Include(u => u.Department)
                 .Include(u=>u.Tenant).ThenInclude(t=>t.TenantModules).ThenInclude(tm=>tm.Module)
                 .FirstOrDefaultAsync(u => u.Email == loginDTO.Email);
 
