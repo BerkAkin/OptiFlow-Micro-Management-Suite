@@ -39,6 +39,31 @@ namespace SuggestionModule.Infrastructure.Repositories
 
             return data;
         }
+        public async Task<List<SuggestionDto>> GetMySuggestions(int tenantId,int userId)
+        {
+            var data = await _context.Suggestions
+                .AsNoTracking()
+                .Where(x => x.TenantId == tenantId && x.UserId== userId)
+                .Select(suggestion => new SuggestionDto
+                {
+                    Id = suggestion.Id,
+                    Description = suggestion.Description,
+                    Title = suggestion.Title,
+                    Status = suggestion.Status,
+                    Date = suggestion.Date,
+                    Votes = suggestion.Votes.Sum(v => (int)v.VoteType),
+                    Comments = suggestion.Comments
+                        .Select(comment => new CommentDto
+                        {
+                            Id = comment.Id,
+                            Text = comment.Text,
+                        })
+                        .ToList(),
+                })
+                .ToListAsync();
+
+            return data;
+        }
 
         public async Task<MostSuggestionsDto> GetBestSuggestions(int tenantId) {
 
