@@ -7,7 +7,7 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Queries.GetMoodsQuery
 {
-    public record GetMoodsQuery(int TenantId,int UserId, MoodFilterDto filters) : IRequest<(List<GetMoodsDto>,int maxPage)>;
+    public record GetMoodsQuery(int TenantId,int UserId,int DepartmentId, MoodFilterDto filters) : IRequest<(List<GetMoodsDto>,int maxPage)>;
     public class GetMoodsQueryHandler : IRequestHandler<GetMoodsQuery, (List<GetMoodsDto>,int maxPage)>
     {
         private readonly MoodDbContext _dbContext;
@@ -18,7 +18,12 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
 
         public async Task<(List<GetMoodsDto>, int maxPage)> Handle(GetMoodsQuery query, CancellationToken cancellationToken)
         {
-            var qry = _dbContext.Moods.AsNoTracking().Where(m => m.TenantId == query.TenantId && m.UserId == query.UserId);
+            var qry = _dbContext.Moods.AsNoTracking().Where(m => m.TenantId == query.TenantId);
+
+            if(query.DepartmentId != (int)DepartmentsEnum.HR)
+            {
+                qry=qry.Where(m=>m.UserId == query.UserId);
+            }
 
             if (Enum.TryParse<MoodEnum>(query.filters.Mood, out var moodEnum))
             {
@@ -35,7 +40,7 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
             int pageSize = 8;
             int page = query.filters.Page <= 0 ? 1 : query.filters.Page;
 
-            int totalCount = await qry.CountAsync();
+            int totalCount = await qry.CountAsync(cancellationToken);
             int maxPage = (int)Math.Ceiling((double)totalCount / pageSize);
             if (maxPage == 0) maxPage = 1;
 
