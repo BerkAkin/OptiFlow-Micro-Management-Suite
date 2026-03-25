@@ -4,6 +4,7 @@ import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import { useState } from 'react';
 import { useToatsContext } from '../../../context/ToastContext';
+import RoleBasedGuard from '../../RoleBasedGuard/RoleBasedGuard';
 
 
 
@@ -49,8 +50,13 @@ function SupportRequests() {
 
                                         </div>
                                         <div className='flex items-center justify-end text-start flex items-center '>
-                                            {item.isClosed ? "" : <button onClick={() => handleMarkAsClosed(item.id)} className='border-none outline-none bg-red-500 hover:bg-red-400 transition-all cursor-pointer text-xs mx-2 p-1 rounded text-white'>Close</button>}
-
+                                            {item.isClosed ? "" :
+                                                <RoleBasedGuard allowedDepartments={["HR"]}>
+                                                    <button onClick={() => handleMarkAsClosed(item.id)} className='border-none outline-none bg-red-500 hover:bg-red-400 transition-all cursor-pointer text-xs mx-2 p-1 rounded text-white'>
+                                                        Close
+                                                    </button>
+                                                </RoleBasedGuard>
+                                            }
                                         </div>
                                     </div>
                                     <div className='col-span-8 flex items-center justify-between px-2 text-start flex items-center'>
