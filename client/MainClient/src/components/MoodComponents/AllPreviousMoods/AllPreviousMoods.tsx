@@ -31,7 +31,7 @@ function AllPreviousMoods() {
 
     return (
         <div className='h-full '>
-            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Previous Moods' />
+            <DynamicTable onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Moods' />
         </div>
     )
 }
