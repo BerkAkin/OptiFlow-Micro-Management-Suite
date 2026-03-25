@@ -5,6 +5,7 @@ import add from '../../../assets/add.svg'
 import list from '../../../assets/list.svg'
 import { Field, Form, Formik } from 'formik'
 import { useApprove, useComment, useVote } from '../../../hooks/SuggestionHooks/useSuggestion'
+import RoleBasedGuard from '../../RoleBasedGuard/RoleBasedGuard'
 
 interface SuggestionCardProps {
     id: number,
@@ -41,8 +42,10 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
             <div className='text-center py-4 flex justify-center items-center  w-full'>
                 <p className='text-gray-900'>
                     {title}
-                    <button type='button' onClick={() => handleApproveOrReject(false)} className='transition-all hover:scale-[1.1] cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
-                    <button type='button' onClick={() => handleApproveOrReject(true)} className='transition-all hover:scale-[1.1] cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
+                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                        <button type='button' onClick={() => handleApproveOrReject(false)} className='transition-all hover:scale-[1.1] cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
+                        <button type='button' onClick={() => handleApproveOrReject(true)} className='transition-all hover:scale-[1.1] cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
+                    </RoleBasedGuard>
                 </p>
             </div>
             <div className='text-center py-4 flex justify-center items-center'>
