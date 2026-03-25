@@ -40,7 +40,7 @@ function RateEmployees() {
     return (
         <div>
             <div className='p-4'>
-                <p className="text-xl font-semibold text-slate-700 font-rubik">Comment on User</p>
+                <p className="text-xl font-semibold text-slate-700 font-rubik">Comment on Employee</p>
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
                     {({ setFieldValue }) => (
                         <Form className='mt-4'>
@@ -54,7 +54,7 @@ function RateEmployees() {
                                     setSelectedUser(value);
                                 }}
                             >
-                                <option value="">Select User...</option>
+                                <option value="">Select Employee...</option>
                                 {data?.map((item: any) => (
                                     <option key={item.value} value={item.value}>{item.label}</option>
                                 ))}
@@ -71,7 +71,7 @@ function RateEmployees() {
             {selectedUser && (
                 <div className="mt-4 border-t border-gray-100">
                     <div className='text-start flex justify-start'>
-                        <p className="text-xl font-semibold text-slate-800 font-rubik ps-4 py-4">Comments of User</p>
+                        <p className="text-xl font-semibold text-slate-800 font-rubik ps-4 py-4">Comments of Employee</p>
                     </div>
                     {commentIsLoading ? (
                         <div className="flex justify-center py-10"><Spinner /></div>
