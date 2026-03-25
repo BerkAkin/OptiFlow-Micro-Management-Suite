@@ -31,6 +31,15 @@ namespace SuggestionModule.Api.Controllers
             return Ok(data);
         }
 
+        [HttpGet("MySuggestions")]
+        public async Task<IActionResult> GetMySuggestions()
+        {
+            int tenantId = _currentUserService.User.TenantId;
+            int userId = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new GetMySuggestionsQuery(tenantId,userId));
+            return Ok(data);
+        }
+
         [HttpGet("GetBest")]
         public async Task<IActionResult> GetBest()
         {
