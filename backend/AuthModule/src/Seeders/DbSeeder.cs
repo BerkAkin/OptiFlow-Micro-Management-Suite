@@ -15,7 +15,7 @@ public static class DbSeeder
         var moodsModule = new Module { Name = "MOO" };
 
         var financeAccountant = new Department { Name = "Finance Accountant" };
-        var humanResources = new Department { Name = "Human Resources" };
+        var humanResources = new Department { Name = "HR" };
         var manager = new Department { Name = "Manager" };
         var employee = new Department { Name = "Employee" };
 
