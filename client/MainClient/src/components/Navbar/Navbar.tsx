@@ -12,12 +12,13 @@ import helpRequest from '../../assets/helpRequest.svg'
 import makeSuggestion from '../../assets/makeSuggestion.svg'
 import SupportRequestCard from "../SupportComponents/SupportRequestCard/SupportRequestCard";
 import icon from '../../assets/icon.png'
+import RoleBasedGuard from "../RoleBasedGuard/RoleBasedGuard";
 
 
 
 function Navbar() {
 
-  const { isAuth, handleLogoutState } = useAuthContext();
+  const { isAuth, handleLogoutState, userInfo } = useAuthContext();
 
   const [isSuggestion, setIsSuggestion] = useState<boolean>(false);
   const [isHelp, setIsHelp] = useState<boolean>(false);
@@ -60,11 +61,18 @@ function Navbar() {
             </svg>
           </button>
 
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={finance} alt="" /></Link>
-            </ul>
-          </div>
+
+          <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
+            <div className="hidden w-full md:block md:w-auto">
+              <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+                <Link to={`/finance/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={finance} alt="" /></Link>
+              </ul>
+            </div>
+          </RoleBasedGuard>
+
+
+
+
           <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <li onClick={() => setIsOpen(!isOpen)} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200 relative" ref={(el) => { elementsRef.current[0] = el }} >
@@ -72,22 +80,33 @@ function Navbar() {
                 {isOpen && (
                   <div className="absolute border-x border-b border-gray-200 right-0 translate-x-[30%] text-center mt-4 w-40 bg-white text-black rounded-b-lg shadow-lg z-10">
                     <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/dashboard`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
-                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/builder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
+                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                      <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/builder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
+                    </RoleBasedGuard>
                   </div>
                 )}
               </li>
             </ul>
           </div>
+
+
+
+
           <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <Link to={`/suggest/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={suggestion} alt="" /></Link>
             </ul>
           </div>
+
+
+
           <div className="hidden w-full md:block md:w-auto">
             <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
               <Link to={`/support/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={help} alt="" /></Link>
             </ul>
           </div>
+
+
 
         </div>
 
@@ -101,12 +120,13 @@ function Navbar() {
               {isHelp && <SupportRequestCard />}
             </div>
           </div>
-
-          <div className="hidden w-full md:block md:w-auto ">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
-            </ul>
-          </div>
+          <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
+            <div className="hidden w-full md:block md:w-auto ">
+              <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
+                <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
+              </ul>
+            </div>
+          </RoleBasedGuard>
           <div className="hidden w-full md:block md:w-auto ">
             <div ref={(el) => { elementsRef.current[1] = el }} className="relative inline-block flex flex-col">
               <button onClick={() => setIsSuggestion(!isSuggestion)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={makeSuggestion} alt="" /></button>
