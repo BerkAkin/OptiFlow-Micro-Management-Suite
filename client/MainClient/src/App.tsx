@@ -11,6 +11,8 @@ import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import SupportPage from './pages/SupportPages/SupportPage';
 import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
+import UnauthorizedPage from './pages/UnauthorizedPage';
+import RoleBasedRoute from './components/RoleBasedRoute/RoleBasedRoute';
 
 function App() {
   return (
@@ -18,15 +20,20 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<MainPage />} >
-            <Route index element={<FinanceDashboardPage />} />
+            <Route index element={<ProfilePage />} />
 
-            <Route path='finance/dashboard' element={<FinanceDashboardPage />} />
+            <Route element={<RoleBasedRoute allowedDepartments={['Finance Accountant', 'Manager']} />}>
+              <Route path='finance/dashboard' element={<FinanceDashboardPage />} />
+              <Route path='finance/bill' element={<FinanceBillsPage />} />
+            </Route>
 
-            <Route path='finance/bill' element={<FinanceBillsPage />} />
-            <Route path='survey/builder' element={<SurveyBuilder />} />
-            <Route path='survey/dashboard' element={<Surveys />} ></Route>
+            <Route element={<RoleBasedRoute allowedDepartments={['HR', 'Manager']} />}>
+              <Route path='survey/builder' element={<SurveyBuilder />} />
+              <Route path='survey/result/:id' element={<SurveyResults />} />
+            </Route>
+
+            <Route path='survey/dashboard' element={<Surveys />} />
             <Route path='survey/details/:id' element={<SurveyDetails />} />
-            <Route path='survey/result/:id' element={<SurveyResults />} />
 
             <Route path='suggest/dashboard' element={<SuggestionsPage />} />
 
@@ -37,7 +44,7 @@ function App() {
               <Route path='request/:id/messages' element={<SupportMessages />} />
             </Route>
 
-
+            <Route path='unauthorized' element={<UnauthorizedPage />} />
 
 
 
