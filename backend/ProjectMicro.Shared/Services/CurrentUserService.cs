@@ -25,6 +25,7 @@ public class CurrentUserService : ICurrentUserService
             {
                 TenantId = int.Parse(context.Request.Headers["X-Tenant-Id"]),
                 UserId = int.Parse(context.Request.Headers["X-User-Id"]),
+                DepartmentId = int.Parse(context.Request.Headers["X-Department-Id"])
             };
         }
     }
