@@ -1,18 +1,16 @@
+import LoginContainer from '../components/LoginContainer/LoginContainer';
 import Navbar from '../components/Navbar/Navbar'
-import LoginModal from '../components/LoginContainer/LoginContainer'
-import { useAuthContext } from '../context/AuthContext'
 import { Outlet } from 'react-router'
-import { useState, useEffect } from 'react';
+import { useAuthContext } from '../context/AuthContext';
 
 function MainPage() {
 
     const { isAuth } = useAuthContext();
 
-
     if (!isAuth) {
         return (
             <div className="flex items-center justify-center h-screen">
-                <LoginModal />
+                <LoginContainer />
             </div>
         );
     }
