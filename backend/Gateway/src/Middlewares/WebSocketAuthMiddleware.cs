@@ -34,12 +34,16 @@ namespace Gateway.Middlewares
 
                     var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
                     var tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == "tenantId")?.Value;
+                    var departmentId = jwtToken.Claims.FirstOrDefault(c => c.Type == "departmentId")?.Value;
 
                     if (!string.IsNullOrEmpty(userId))
                         context.Request.Headers["X-User-Id"] = userId;
 
                     if (!string.IsNullOrEmpty(tenantId))
                         context.Request.Headers["X-Tenant-Id"] = tenantId;
+
+                    if (!string.IsNullOrEmpty(departmentId))
+                        context.Request.Headers["X-Department-Id"] = departmentId;
                 }
             }
 
