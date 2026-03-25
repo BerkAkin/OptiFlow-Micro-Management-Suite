@@ -6,6 +6,7 @@ import { useSurveys } from '../../hooks/SurveyHooks/useSurvey';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Spinner from '../../components/Spinner/Spinner';
 import SurveySatisfactionPopUp from '../../components/SurveyComponents/SurveySatisfactionPopUp';
+import RoleBasedGuard from '../../components/RoleBasedGuard/RoleBasedGuard';
 
 
 
@@ -29,9 +30,11 @@ function SurveyResults() {
                                             {item.title}
                                             {item.status === 2 ?
                                                 (
-                                                    <span className='h-[10%] absolute bottom-0 right-0 z-10 pt-2 text-sm text-sky-500'>
-                                                        <Link to={`/survey/result/${item.id}`}>Go to Result {">"}</Link>
-                                                    </span>
+                                                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                                                        <span className='h-[10%] absolute bottom-0 right-0 z-10 pt-2 text-sm text-sky-500'>
+                                                            <Link to={`/survey/result/${item.id}`}>Go to Result {">"}</Link>
+                                                        </span>
+                                                    </RoleBasedGuard>
                                                 ) : ""
                                             }
 
