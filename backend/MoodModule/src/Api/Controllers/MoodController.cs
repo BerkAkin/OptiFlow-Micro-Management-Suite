@@ -9,9 +9,7 @@ using MoodModule.Application.Queries.GetCommentsQuery;
 using MoodModule.Application.Queries.GetMoodsQuery;
 using MoodModule.Application.Queries.GetPreviousMoodsQuery;
 using MoodModule.Application.Queries.GetUsersQuery;
-using MoodModule.Migrations;
 using ProjectMicro.Shared.Interfaces;
-using ProjectMicro.Shared.Models;
 
 namespace MoodModule.Api.Controllers
 {
@@ -32,7 +30,8 @@ namespace MoodModule.Api.Controllers
         public async Task<IActionResult> GetMoods([FromQuery] MoodFilterDto filters) {
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
-            var (data, maxPage) = await _mediator.Send(new GetMoodsQuery(currentTenant,currentUser,filters));
+            int currentDepartment = _currentUserService.User.DepartmentId;
+            var (data, maxPage) = await _mediator.Send(new GetMoodsQuery(currentTenant,currentUser,currentDepartment,filters));
             return Ok(new
             {
                 data,
