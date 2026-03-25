@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SupportModule.Migrations
 {
     /// <inheritdoc />
-    public partial class support : Migration
+    public partial class mood : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,6 +19,7 @@ namespace SupportModule.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TenantId = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartmentId = table.Column<int>(type: "int", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -50,33 +51,12 @@ namespace SupportModule.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserComments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserComments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserComments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SupportMessages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SenderId = table.Column<int>(type: "int", nullable: false),
                     SupportRequestId = table.Column<int>(type: "int", nullable: false)
@@ -101,11 +81,6 @@ namespace SupportModule.Migrations
                 name: "IX_SupportRequests_UserId",
                 table: "SupportRequests",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserComments_UserId",
-                table: "UserComments",
-                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -113,9 +88,6 @@ namespace SupportModule.Migrations
         {
             migrationBuilder.DropTable(
                 name: "SupportMessages");
-
-            migrationBuilder.DropTable(
-                name: "UserComments");
 
             migrationBuilder.DropTable(
                 name: "SupportRequests");

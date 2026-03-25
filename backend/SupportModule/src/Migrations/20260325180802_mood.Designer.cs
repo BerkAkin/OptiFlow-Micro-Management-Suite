@@ -12,8 +12,8 @@ using SupportModule.Infrastructure.Persistence;
 namespace SupportModule.Migrations
 {
     [DbContext(typeof(SupportDbContext))]
-    [Migration("20260224193058_support")]
-    partial class support
+    [Migration("20260325180802_mood")]
+    partial class mood
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,9 @@ namespace SupportModule.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -57,12 +60,12 @@ namespace SupportModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SenderId")
                         .HasColumnType("int");
@@ -107,31 +110,6 @@ namespace SupportModule.Migrations
                     b.ToTable("SupportRequests");
                 });
 
-            modelBuilder.Entity("SupportModule.Domain.Entities.UserComment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comment")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserComments");
-                });
-
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportMessage", b =>
                 {
                     b.HasOne("SupportModule.Domain.Entities.SupportRequest", "SupportRequest")
@@ -154,20 +132,9 @@ namespace SupportModule.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SupportModule.Domain.Entities.UserComment", b =>
-                {
-                    b.HasOne("SupportModule.Domain.Entities.MiniUser", null)
-                        .WithMany("UserComments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
                 {
                     b.Navigation("SupportRequests");
-
-                    b.Navigation("UserComments");
                 });
 
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportRequest", b =>
