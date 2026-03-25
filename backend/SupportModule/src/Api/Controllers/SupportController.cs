@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
 using SupportModule.Application.DTOs;
-using SupportModule.Application.Queries.GetEmployeeListQuery;
 using SupportModule.Application.Queries.GetMonthlyRequestCountsQuery;
-using SupportModule.Application.Queries.GetMyRequestsQuery;
 using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
 using ProjectMicro.Shared.Interfaces;
@@ -51,15 +49,9 @@ namespace SupportModule.Api.Controllers
         public async Task<IActionResult> GetSupportRequest()
         {
             int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetSupportRequestsQuery(currentTenant));
-            return Ok(data);
-        }
-
-        [HttpGet("GetMyRequests")]
-        public async Task<IActionResult> GetMyRequests()
-        {
-            int currentUser = _currentUserService.User.UserId; 
-            var data = await _mediator.Send(new GetMyRequestsQuery(currentUser));
+            int currentDepartment = _currentUserService.User.DepartmentId;
+            int currentUser = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new GetSupportRequestsQuery(currentTenant,currentDepartment,currentUser));
             return Ok(data);
         }
 
@@ -78,16 +70,6 @@ namespace SupportModule.Api.Controllers
             var data = await _mediator.Send(new GetMonthlyRequestCountsQuery(currentTenant));
             return Ok(data);
         }
-
-        [HttpGet("GetEmployeeList")]
-        public async Task<IActionResult> GetEmployeeList()
-        {
-            int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetEmployeeListQuery(currentTenant));
-            return Ok(data);
-        }
-
-
 
         [HttpPost("SendMessage")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageDto msg)
@@ -110,7 +92,8 @@ namespace SupportModule.Api.Controllers
         {
             int currentUser = _currentUserService.User.UserId;
             var tenantId = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetUserListQuery(tenantId, currentUser));
+            int currentDepartment = _currentUserService.User.DepartmentId;
+            var data = await _mediator.Send(new GetUserListQuery(tenantId,currentDepartment, currentUser));
             return Ok(data);
         }
     }
