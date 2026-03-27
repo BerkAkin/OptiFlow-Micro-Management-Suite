@@ -1,3 +1,4 @@
+import { useRequestDayOff } from '../../../hooks/SupportHooks/UseSupport'
 import DynamicForm from '../../DynamicForm/DynamicForm'
 import DynamicTable from '../../DynamicTable/DynamicTable'
 
@@ -9,26 +10,41 @@ interface filterValues {
 
 function MyDayOffs() {
 
-    const handleSubmit = (values: any) => {
-        console.log(values)
+    const mutation = useRequestDayOff();
+    const handleSubmit = (payload: any) => {
+        mutation.mutate({ payload: payload });
     }
 
     const initialValues = {
         topic: "",
         description: "",
         days: 10,
-        datesBetween: new Date().toISOString().split("T")[0]
+        startingDate: new Date().toISOString().split("T")[0]
     }
 
     const fields = [
-        { name: "datesBetween", id: "datesBetween", type: "date" as const, label: "Date", placeholder: "" },
-        { name: "days", id: "days", type: "number" as const, label: "Days", placeholder: "" },
-        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Description..." },
         { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Topic..." },
+        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Description..." },
+        { name: "startingDate", id: "startingDate", type: "date" as const, label: "Date", placeholder: "" },
+        { name: "days", id: "days", type: "number" as const, label: "Days", placeholder: "" },
     ]
 
     const tempData: any = [
-        { status: "Ok", topic: "Deneme Leave", description: "Denemeler", days: "10", Date: "2025-02-12" },
+        { topic: "Deneme Leave", description: "Denemeler", days: "10", Date: "2025-02-12", status: "Ok", },
+    ]
+
+
+    const tempData2: any = [
+        {
+            topic: "Deneme İstek",
+            description: "Deneme İsteklerden Birincisi",
+            days: "10",
+            Date: "2025.02.12",
+            "": <div className='flex items-center justify-center gap-2'>
+                <button type='button' onClick={() => alert(false)} className='transition-all hover:scale-[1.1] cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
+                <button type='button' onClick={() => alert(true)} className='transition-all hover:scale-[1.1] cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
+            </div>
+        },
     ]
 
     const filterFields = [
@@ -40,16 +56,14 @@ function MyDayOffs() {
     }
 
     return (
-        <div className='grid grid-cols-9 gap-6 w-full h-[500px]'>
+        <div className='grid grid-cols-12 gap-6 w-full h-[500px]'>
 
-            <div className='col-span-7 border border-gray-200 bg-white rounded-lg shadow-custom h-[500px] w-full'>
-                <DynamicTable filterFields={filterFields} handleFilter={handleFilter} data={tempData} title='My Leavings' />
+            <div className='col-span-10 border border-gray-200 bg-white rounded-lg shadow-custom h-[500px] w-full'>
+                <DynamicTable filterFields={filterFields} handleFilter={handleFilter} data={tempData} title='My Off Days' />
             </div>
             <div className='col-span-2 border border-gray-200 bg-white rounded-lg shadow-custom h-[340px] '>
                 <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' fields={fields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
             </div>
-
-
         </div >
     )
 }
