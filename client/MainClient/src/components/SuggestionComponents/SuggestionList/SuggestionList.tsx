@@ -13,7 +13,7 @@ function SuggestionList() {
     return (
 
         <div className='h-[650px] bg-white rounded-lg shadow-custom border border-gray-200'>
-            <div className='h-[10%] text-start flex justify-start'>
+            <div className='h-[10%] text-start flex justify-start border-b border-slate-100'>
                 <p className={`text-xl font-semibold text-slate-800 font-rubik ps-6 py-4`}>Suggestions</p>
             </div>
 
