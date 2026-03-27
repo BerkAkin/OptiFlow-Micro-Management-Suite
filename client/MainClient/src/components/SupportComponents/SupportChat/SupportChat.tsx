@@ -86,7 +86,7 @@ function SupportChat({ CurrentUserOnChat, closeChatWindow }: { CurrentUserOnChat
                 <div className='col-span-10'>
                     <textarea rows={2} placeholder='Message...' className='resize-none w-full px-4 outline-none bg-white rounded-bl' value={text} onChange={e => setText(e.target.value)} />
                 </div>
-                <div className='col-span-2 flex items-center justify-center bg-green-600 hover:bg-green-500 transition-all rounded-br'>
+                <div className='col-span-2 flex items-center justify-center bg-sky-600 hover:bg-sky-500 transition-all rounded-br'>
                     <button className='w-full' onClick={() => sendMessage(CurrentUserOnChat.userId.toString())}>
                         <img src={send} className='px-4' />
                     </button>
