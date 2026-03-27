@@ -9,9 +9,9 @@ function ProfilePage() {
 
     return (
         <div className='container mx-auto my-10'>
-            <div className='mx-auto grid gap-6 grid-cols-10 flex justify-center h-[130px] '>
-                <div className=' col-span-1 bg-white rounded-full shadow-custom flex justify-center items-center border border-gray-200 '>
-                    <div className='border border-gray-200 rounded-full size-32 flex justify-center items-center'>IMAGE</div>
+            <div className='mx-auto grid gap-6 grid-cols-10 flex justify-center h-[90px]'>
+                <div className='col-span-1 flex justify-center items-center'>
+                    <div className='bg-white rounded-full shadow-custom flex justify-center items-center border border-gray-200 size-20 '>IMAGE</div>
                 </div>
 
                 <div className='col-span-8 bg-white rounded-lg shadow-custom border border-gray-200 grid grid-cols-12 gap-6'>
