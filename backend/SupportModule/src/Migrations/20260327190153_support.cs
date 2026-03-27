@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SupportModule.Migrations
 {
     /// <inheritdoc />
-    public partial class mood : Migration
+    public partial class support : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,31 @@ namespace SupportModule.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DayOffs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenantId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Topic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Days = table.Column<int>(type: "int", nullable: false),
+                    StartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DayOffs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DayOffs_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,6 +98,11 @@ namespace SupportModule.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_DayOffs_UserId",
+                table: "DayOffs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SupportMessages_SupportRequestId",
                 table: "SupportMessages",
                 column: "SupportRequestId");
@@ -86,6 +116,9 @@ namespace SupportModule.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DayOffs");
+
             migrationBuilder.DropTable(
                 name: "SupportMessages");
 

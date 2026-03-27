@@ -12,8 +12,8 @@ using SupportModule.Infrastructure.Persistence;
 namespace SupportModule.Migrations
 {
     [DbContext(typeof(SupportDbContext))]
-    [Migration("20260325180802_mood")]
-    partial class mood
+    [Migration("20260327190153_support")]
+    partial class support
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,44 @@ namespace SupportModule.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("SupportModule.Domain.Entities.DayOff", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Days")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartingDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Topic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DayOffs");
+                });
 
             modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
                 {
@@ -110,6 +148,17 @@ namespace SupportModule.Migrations
                     b.ToTable("SupportRequests");
                 });
 
+            modelBuilder.Entity("SupportModule.Domain.Entities.DayOff", b =>
+                {
+                    b.HasOne("SupportModule.Domain.Entities.MiniUser", "User")
+                        .WithMany("DayOffs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportMessage", b =>
                 {
                     b.HasOne("SupportModule.Domain.Entities.SupportRequest", "SupportRequest")
@@ -134,6 +183,8 @@ namespace SupportModule.Migrations
 
             modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
                 {
+                    b.Navigation("DayOffs");
+
                     b.Navigation("SupportRequests");
                 });
 
