@@ -5,11 +5,19 @@ import { CommentSuggestionService } from "../../services/SuggestionServices/Comm
 import { ApproveOrRejectSuggestionService } from "../../services/SuggestionServices/ApproveOrRejectSuggestionService";
 import { SuggestionShowcaseService } from "../../services/SuggestionServices/SuggestionShowcaseService";
 import { MakeSuggestionService } from "../../services/SuggestionServices/MakeSuggestionService";
+import { GetMySuggestionsService } from "../../services/SuggestionServices/GetMySuggestionsService";
 
 export const useSuggestions = () => {
   return useQuery({
     queryKey: ["suggestionList"],
     queryFn: GetSuggestionsService,
+  });
+};
+
+export const useMySuggestions = () => {
+  return useQuery({
+    queryKey: ["mySuggestionList"],
+    queryFn: GetMySuggestionsService,
   });
 };
 
