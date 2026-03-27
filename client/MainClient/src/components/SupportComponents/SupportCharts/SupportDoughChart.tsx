@@ -16,7 +16,7 @@ function SupportDoughChart() {
             {
                 label: "İşlem Sayısı",
                 data: data.values,
-                backgroundColor: ["#65a30d", "#84cc16", "#4d7c0f", "#3f6212", "#365314", "#a3e635"],
+                backgroundColor: ["#0ea5e9", "#0891b2", "#38bdf8", "#06b6d4", "#7dd3fc", "#06b6d4"],
             },
         ],
     };
