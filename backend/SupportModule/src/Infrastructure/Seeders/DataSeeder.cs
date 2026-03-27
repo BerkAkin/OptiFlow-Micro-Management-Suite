@@ -13,6 +13,7 @@ namespace SupportModule.Infrastructure.Seeders
             {
                 MiniUser user1 = new MiniUser("berk", "berk@mail.com", tenantId: 1,departmentId:4);
                 await context.Users.AddAsync(user1);
+                user1.AddDayOff("DenemeTopic","Deneme Açıklamalar", 10,DateTime.Now);
                 await context.SaveChangesAsync();
 
                 SupportRequest request1 = new SupportRequest(user1.Id, tenantId: 1,SupportCategories.General);
