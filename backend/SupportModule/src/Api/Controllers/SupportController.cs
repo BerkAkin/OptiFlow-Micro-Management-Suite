@@ -1,14 +1,19 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Models;
+using SupportModule.Application.Commands.ApproveOrRejectDayOffRequestCommand;
+using SupportModule.Application.Commands.CreateDayOffCommand;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
+using SupportModule.Application.Commands.MarkAsClosedCommand;
+using SupportModule.Application.Commands.SendMessageCommand;
 using SupportModule.Application.DTOs;
+using SupportModule.Application.Queries.GetDayOffListQuery;
 using SupportModule.Application.Queries.GetMonthlyRequestCountsQuery;
+using SupportModule.Application.Queries.GetMyDayOffListQuery;
+using SupportModule.Application.Queries.GetRequestsCategorical;
 using SupportModule.Application.Queries.GetSupportMessagesQuery;
 using SupportModule.Application.Queries.GetSupportRequestsQuery;
-using ProjectMicro.Shared.Interfaces;
-using SupportModule.Application.Queries.GetRequestsCategorical;
-using SupportModule.Application.Commands.SendMessageCommand;
-using SupportModule.Application.Commands.MarkAsClosedCommand;
 using SupportModule.Application.Queries.GetUserListQuery;
 
 namespace SupportModule.Api.Controllers
@@ -95,6 +100,43 @@ namespace SupportModule.Api.Controllers
             int currentDepartment = _currentUserService.User.DepartmentId;
             var data = await _mediator.Send(new GetUserListQuery(tenantId,currentDepartment, currentUser));
             return Ok(data);
+        }
+
+        [HttpGet("DayOffs")]
+        public async Task<IActionResult> GetDayOffs() 
+        {
+            var tenantId = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new GetDayOffListQuery(tenantId));
+            return Ok(data);
+
+        }
+
+        [HttpGet("MyDayOffs")]
+        public async Task<IActionResult> GetMyDayOffs()
+        {
+            var tenantId = _currentUserService.User.TenantId;
+            var userId = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new GetMyDayOffListQuery(tenantId,userId));
+            return Ok(data);
+
+        }
+
+        [HttpPost("DayOff")]
+        public async Task<IActionResult> RequestDayOff([FromBody] CreateDayOffDto dto)
+        {
+            var tenantId = _currentUserService.User.TenantId;
+            var userId = _currentUserService.User.UserId;
+            var data = await _mediator.Send(new CreateDayOffCommand(tenantId,userId,dto));
+            return Ok("Day Off Request Sent Succesfully");
+
+        }
+
+        [HttpPut("ApproveOrRejectDayOff")]
+        public async Task<IActionResult> ApproveOrRejectDayOff([FromBody] ApproveOrRejectDto dto)
+        {
+            var tenantId = _currentUserService.User.TenantId;
+            var data = await _mediator.Send(new ApproveOrRejectDayOffRequestCommand(dto,tenantId));
+            return Ok("Request Status Updated Succesfully");
         }
     }
 }
