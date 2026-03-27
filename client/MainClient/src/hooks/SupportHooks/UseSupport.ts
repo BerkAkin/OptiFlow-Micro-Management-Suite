@@ -7,6 +7,10 @@ import { SupportMessagesService } from "../../services/SupportServices/SupportMe
 import { SendSupportRequestMessageService } from "../../services/SupportServices/SendSupportRequestMessageService";
 import { MarkAsClosedService } from "../../services/SupportServices/MarkAsClosedService";
 import { UserListService } from "../../services/SupportServices/UserListService";
+import { SupportMyDayOffsService } from "../../services/SupportServices/SupportMyDayOffsService";
+import { SupportDayOffsService } from "../../services/SupportServices/SupportDayOffsService";
+import { ApproveOrRejectDayOffRequestService } from "../../services/SupportServices/ApproveOrRejectDayOffRequestService";
+import { RequestDayOffService } from "../../services/SupportServices/RequestDayOffService";
 
 export const useMonthlySupport = () => {
   return useQuery({
@@ -74,5 +78,49 @@ export const useUserList = () => {
   return useQuery({
     queryKey: ["UserList"],
     queryFn: () => UserListService(),
+  });
+};
+
+export const useMyDayOffs = () => {
+  return useQuery({
+    queryKey: ["MyDayOffs"],
+    queryFn: () => SupportMyDayOffsService(),
+  });
+};
+
+export const useDayOffs = () => {
+  return useQuery({
+    queryKey: ["DayOffs"],
+    queryFn: () => SupportDayOffsService(),
+  });
+};
+
+export const useApproveOrRejectDayOff = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ payload }: any) =>
+      ApproveOrRejectDayOffRequestService(payload),
+    onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["DayOffs"] });
+      console.log(data);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
+  });
+};
+
+export const useRequestDayOff = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ payload }: any) => RequestDayOffService(payload),
+    onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["MyDayOffs"] });
+      console.log(data);
+    },
+    onError: (error: any) => {
+      console.log(error);
+    },
   });
 };
