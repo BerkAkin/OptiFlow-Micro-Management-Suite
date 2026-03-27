@@ -38,7 +38,7 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
     const [commentSection, setCommentSection] = useState<boolean>(false);
 
     return (
-        <div className='border border-gray-200 rounded-lg '>
+        <div className='border border-gray-200 rounded-lg shadow-sm transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
             <div className='text-center py-4 flex justify-center items-center  w-full'>
                 <p className='text-gray-900'>
                     {title}
@@ -91,11 +91,11 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
                 <p className='text-sm text-gray-400'>{date.split("T")[0]}</p>
             </div>
             {commentSection &&
-                <div className='border-t border-gray-200 h-[200px] w-full overflow-y-auto'>
+                <div className='border-t border-gray-200 bg-gray-50 h-[200px] w-full overflow-y-auto'>
                     <Formik initialValues={{ text: "" }} onSubmit={handleComment}>
                         <Form>
                             <div className='flex justify-center items-center'>
-                                <Field as="textarea" rows={2} className="resize-none border rounded-md focus:outline-none border-gray-200 w-[70%] mx-3 px-2 my-2" name="text" placeholder="Comment..." />
+                                <Field as="textarea" rows={2} className="bg-white resize-none border rounded-md focus:outline-none border-gray-200 w-[70%] mx-3 px-2 my-2" name="text" placeholder="Comment..." />
                                 <button className='cursor-pointer transition-all hover:scale-[1.1]' type='submit'><img src={add} width={25} alt="" /></button>
                             </div>
 
