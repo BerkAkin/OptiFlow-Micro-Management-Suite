@@ -13,6 +13,7 @@ namespace SupportModule.Infrastructure.Persistence
         public DbSet<SupportRequest> SupportRequests { get; set; }
         public DbSet<SupportMessage> SupportMessages { get; set; }
         public DbSet<MiniUser> Users { get; set; }
+        public DbSet<DayOff> DayOffs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,6 +29,12 @@ namespace SupportModule.Infrastructure.Persistence
                 .WithMany(u => u.SupportRequests)
                 .HasForeignKey(sr => sr.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<DayOff>()
+                .HasOne(dao=>dao.User) 
+                .WithMany(u => u.DayOffs)
+                .HasForeignKey(d => d.UserId) 
+                .OnDelete(DeleteBehavior.Restrict); 
 
         }
 
