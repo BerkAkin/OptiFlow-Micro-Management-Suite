@@ -5,6 +5,11 @@ export const fetchSuggestions = async () => {
   return res.data;
 };
 
+export const fetchMySuggestions = async () => {
+  const res = await api.get("/suggestions/MySuggestions");
+  return res.data;
+};
+
 export const suggestionSendVote = async (payload: any) => {
   console.log(payload);
   const res = await api.post("/suggestions/vote", payload);
