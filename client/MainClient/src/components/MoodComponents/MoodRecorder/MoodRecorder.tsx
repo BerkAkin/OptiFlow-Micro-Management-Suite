@@ -62,7 +62,7 @@ function MoodRecorder() {
                         <Form className='grid grid-cols-10 '>
                             <div className='col-span-3 flex items-center border-e border-gray-200'>
                                 {(moods).map((item) => (
-                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodId) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer ${item.hover} rounded-full p-1`} >
+                                    <label key={item.name} htmlFor={`mood${item.name}`} className={`${Number(values.moodId) === item.name ? `${item.color}` : ""} mx-2 cursor-pointer transition-all duration-200 ease-out hover:scale-110 ${item.hover} rounded-full p-1`} >
                                         <img width={60} src={item.img}></img>
                                         <Field className="cursor-pointer" hidden value={item.name} type="radio" id={`mood${item.name}`} name="moodId" />
                                     </label>
@@ -77,7 +77,7 @@ function MoodRecorder() {
                                             const isSelected = values.tags.includes(index + 1);
                                             return (
                                                 <div className='col-span-1 flex items-center justify-center'>
-                                                    <p className={` px-2 w-max border border-gray-200 cursor-pointer hover:text-white hover:bg-indigo-300 rounded-lg ${isSelected ? "bg-indigo-400 text-white" : "text-gray-700 bg-white"}`}
+                                                    <p className={` px-2 w-max border border-gray-200 cursor-pointer hover:text-white transition-all duration-200 ease-out hover:scale-110 hover:bg-indigo-300 rounded-lg ${isSelected ? "bg-indigo-400 text-white" : "text-gray-700 bg-white"}`}
                                                         onClick={() => {
                                                             if (isSelected) {
                                                                 arrayHelpers.remove(values.tags.indexOf(index + 1));
@@ -95,7 +95,7 @@ function MoodRecorder() {
                                 )} />
                             </div>
                             <div className='col-span-2 flex items-center justify-center'>
-                                <button type='submit' className='cursor-pointer'><img src={save} alt="" width={50} /></button>
+                                <button type='submit' className='cursor-pointer transition-all duration-200 ease-out hover:scale-110'><img src={save} alt="" width={50} /></button>
                             </div>
                         </Form>
                     )}
