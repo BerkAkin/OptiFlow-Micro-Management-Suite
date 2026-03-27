@@ -14,7 +14,7 @@ function SupportBarChart() {
         datasets: [
             {
                 type: 'bar' as const,
-                backgroundColor: "#65a30d",
+                backgroundColor: "#0ea5e9",
                 data: data.newData,
                 barPercentage: 0.7,
             },
