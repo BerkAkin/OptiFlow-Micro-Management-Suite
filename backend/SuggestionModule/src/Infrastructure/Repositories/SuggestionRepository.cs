@@ -2,7 +2,6 @@
 using SuggestionModule.Application.DTOs;
 using SuggestionModule.Application.Interfaces;
 using SuggestionModule.Domain.Entities;
-using SuggestionModule.Domain.Enums;
 using SuggestionModule.Infrastructure.Persistence;
 
 namespace SuggestionModule.Infrastructure.Repositories
