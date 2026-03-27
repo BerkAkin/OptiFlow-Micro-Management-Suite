@@ -78,10 +78,8 @@ function SupportRequests() {
 
 
             </div>
-            <div className='col-span-9'>
-                <div className='col-span-4'>
-                    <Outlet context={{ isClosed: outletContext?.isClosed }} />
-                </div>
+            <div className='col-span-9 border border-gray-200 bg-white rounded-lg shadow-custom h-[460px]'>
+                <Outlet context={{ isClosed: outletContext?.isClosed }} />
             </div>
 
         </div>
