@@ -10,10 +10,10 @@ function SuggestIdeas() {
             <div className='col-span-10'>
                 <SuggestionShowcase />
             </div>
-            <div className='col-span-7'>
+            <div className='col-span-8 '>
                 <SuggestionList />
             </div>
-            <div className='col-span-3'>
+            <div className='col-span-2'>
                 <MySuggestionList />
             </div>
         </div >
