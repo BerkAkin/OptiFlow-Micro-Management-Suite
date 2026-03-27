@@ -43,3 +43,23 @@ export const fetchUserList = async () => {
   const res = await api.get("support/GetUserList");
   return res.data;
 };
+
+export const fetchDayOffs = async () => {
+  const res = await api.get("support/DayOffs");
+  return res.data;
+};
+
+export const fetchMyDayOffs = async () => {
+  const res = await api.get("support/MyDayOffs");
+  return res.data;
+};
+
+export const requestDayOff = async (payload: any) => {
+  const res = await api.post("support/DayOff", payload);
+  return res.data;
+};
+
+export const approveOrRejectDayOffRequest = async (payload: any) => {
+  const res = await api.put("support/ApproveOrRejectDayOff", payload);
+  return res.data;
+};
