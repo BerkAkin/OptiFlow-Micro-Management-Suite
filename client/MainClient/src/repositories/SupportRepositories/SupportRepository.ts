@@ -49,8 +49,10 @@ export const fetchDayOffs = async () => {
   return res.data;
 };
 
-export const fetchMyDayOffs = async () => {
-  const res = await api.get("support/MyDayOffs");
+export const fetchMyDayOffs = async (filters: any, page: number) => {
+  const res = await api.get("support/MyDayOffs", {
+    params: { ...filters, page },
+  });
   return res.data;
 };
 
