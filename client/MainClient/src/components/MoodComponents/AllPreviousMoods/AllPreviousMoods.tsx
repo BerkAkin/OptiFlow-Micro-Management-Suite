@@ -10,11 +10,9 @@ function AllPreviousMoods() {
     const [page, setPage] = useState(1);
     const [filters, setFilters] = useState({});
     const { data, isLoading, error } = UseAllPreviousMoods(filters, page);
-
     if (isLoading) return <Spinner />
     if (error || !data) return <ErrorMessage />
 
-    console.log(data);
     const onPrev = () => {
         if (page > 1) setPage(page - 1)
     }
