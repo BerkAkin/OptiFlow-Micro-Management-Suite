@@ -1,10 +1,8 @@
-import { useState } from 'react'
 import MyDayOffs from '../../components/ProfileComponents/MyDayOffs/MyDayOffs'
-import Settings from '../../components/ProfileComponents/Settings/Settings'
+import Settings from '../../components/ProfileComponents/Settings/Settings';
 import { useAuthContext } from '../../context/AuthContext'
 
 function ProfilePage() {
-    const [activeTab, setActiveTab] = useState(0)
     const { userInfo } = useAuthContext();
 
     return (
@@ -31,18 +29,11 @@ function ProfilePage() {
             </div>
 
             <div className='mx-auto my-6 flex justify-center grid grid-cols-10 gap-6'>
-                <div className='col-span-1 grid bg-white rounded-lg shadow-custom border border-gray-200 h-[150px]'>
-                    <div>
-                        <button className={`cursor-pointer p-1 text-gray-700 text-lg rounded-t-lg h-full w-full ${activeTab === 0 ? "bg-sky-400 text-white" : "hover:bg-gray-200"}`} onClick={() => setActiveTab(0)} >Days Off</button>
-                    </div>
-                    <div>
-                        <button className={`cursor-pointer p-1 text-gray-700 text-lg h-full rounded-b-lg w-full ${activeTab === 2 ? "bg-orange-400 text-white" : "hover:bg-gray-200"}`} onClick={() => setActiveTab(2)} >Settings</button>
-                    </div>
+                <div className=' h-[500px] col-span-1'>
+                    <Settings />
                 </div>
                 <div className=' h-[500px] col-span-9'>
-                    {activeTab === 0 && <div> <MyDayOffs /></div>}
-                    {activeTab === 2 && <div><Settings /></div>}
-
+                    <MyDayOffs />
                 </div>
             </div>
 
