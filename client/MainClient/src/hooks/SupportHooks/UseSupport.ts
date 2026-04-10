@@ -22,7 +22,7 @@ export const useMonthlySupport = () => {
 export const useCategoricalSupport = () => {
   return useQuery({
     queryKey: ["supportCategorical"],
-    queryFn: CategoricalSupportService,
+    queryFn: () => CategoricalSupportService(),
   });
 };
 
@@ -81,10 +81,10 @@ export const useUserList = () => {
   });
 };
 
-export const useMyDayOffs = () => {
+export const useMyDayOffs = (filters: any, page: number) => {
   return useQuery({
-    queryKey: ["MyDayOffs"],
-    queryFn: () => SupportMyDayOffsService(),
+    queryKey: ["MyDayOffs", filters, page],
+    queryFn: () => SupportMyDayOffsService(filters, page),
   });
 };
 
