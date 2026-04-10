@@ -146,6 +146,28 @@ services:
         command: dotnet watch run --urls "http://+:8080"
         depends_on:
             - mood-db
+                 
+                 
+    notification-service:
+        image: mcr.microsoft.com/dotnet/sdk:8.0
+        container_name: notification-service
+        networks:
+            - project-micro-network
+        ports: 
+            - "5007:8080"
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:8080
+            - ConnectionStrings__NotificationServiceDb=Server=notification-db;Database=db_notification;User Id=sa;Password=MicroUser123!;TrustServerCertificate=True;
+        volumes:
+            - ./NotificationService/src:/app
+            - ./ProjectMicro.Shared:/ProjectMicro.Shared
+            - notification-module-bin:/app/bin  
+            - notification-module-obj:/app/obj
+        working_dir: /app
+        command: dotnet watch run --urls "http://+:8080"
+        depends_on:
+            - notification-db
  
     auth-db:
         image: mcr.microsoft.com/mssql/server:2022-latest
@@ -225,11 +247,30 @@ services:
         volumes:
             - mood-mssql-db:/var/opt/mssql
         
+        
+    notification-db:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        container_name: notification-db
+        environment:
+            - ACCEPT_EULA=Y
+            - MSSQL_SA_PASSWORD=MicroUser123!
+        ports:
+            - "1439:1433"
+        networks:
+            - project-micro-network
+        volumes:
+            - notification-mssql-db:/var/opt/mssql
+        
+
+
 
 
 
 
 volumes:
+    notification-module-bin:
+    notification-module-obj:
+    notification-mssql-db:
     mood-module-bin:
     mood-module-obj:
     mood-mssql-db:
