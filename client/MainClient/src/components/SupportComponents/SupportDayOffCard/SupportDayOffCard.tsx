@@ -54,10 +54,10 @@ function SupportDayOffCard({ item }: SupportDayOffCardProps) {
             {item.status != 0 ? <></> :
 
                 <div className='flex gap-2'>
-                    <button onClick={() => handleApproveOrReject(1)} className='cursor-pointer flex-1 rounded-lg bg-slate-50 text-slate-600 text-sm font-semibold hover:bg-red-50 hover:text-red-600 transition-colors border border-slate-200'>
+                    <button onClick={() => handleApproveOrReject(2)} className='cursor-pointer flex-1 rounded-lg bg-slate-50 text-slate-600 text-sm font-semibold hover:bg-red-50 hover:text-red-600 transition-colors border border-slate-200'>
                         Reject
                     </button>
-                    <button onClick={() => handleApproveOrReject(2)} className='cursor-pointer flex-1 rounded-lg bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 shadow-sm transition-colors'>
+                    <button onClick={() => handleApproveOrReject(1)} className='cursor-pointer flex-1 rounded-lg bg-sky-600 text-white text-sm font-semibold hover:bg-sky-700 shadow-sm transition-colors'>
                         Approve
                     </button>
                 </div>
