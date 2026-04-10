@@ -83,7 +83,7 @@ export const useUserList = () => {
 
 export const useMyDayOffs = (filters: any, page: number) => {
   return useQuery({
-    queryKey: ["MyDayOffs", filters, page],
+    queryKey: ["MyDayOffs", JSON.stringify(filters), page],
     queryFn: () => SupportMyDayOffsService(filters, page),
   });
 };
