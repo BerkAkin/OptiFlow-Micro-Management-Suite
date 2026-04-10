@@ -112,12 +112,13 @@ namespace SupportModule.Api.Controllers
         }
 
         [HttpGet("MyDayOffs")]
-        public async Task<IActionResult> GetMyDayOffs()
+        public async Task<IActionResult> GetMyDayOffs([FromQuery] MyDaysOffFilterDto filters)
         {
             var tenantId = _currentUserService.User.TenantId;
             var userId = _currentUserService.User.UserId;
-            var data = await _mediator.Send(new GetMyDayOffListQuery(tenantId,userId));
-            return Ok(data);
+            var data = await _mediator.Send(new GetMyDayOffListQuery(tenantId,userId,filters));
+            return Ok(new { values = data.data, data.maxPage });
+
 
         }
 
