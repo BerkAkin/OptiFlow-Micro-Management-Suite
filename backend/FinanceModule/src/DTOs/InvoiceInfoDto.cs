@@ -8,7 +8,8 @@
         public string PhoneNum { get; set; }
         public string PersonSerialNum { get; set; }
         public string Email { get; set; }
-        public string InvoiceDate { get; set; }
+        public DateTime InvoiceDate { get; set; }
+        public string OrderDate { get; set; }
         public List<InvoiceProductDto> Products { get; set; }
         public decimal SubTotal => Products.Sum(p => p.Price * p.Quantity);
         public decimal TaxRate { get; set; } = 10;
