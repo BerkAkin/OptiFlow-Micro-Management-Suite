@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\src\Gateway.csproj", "{38F20DB7-9036-2404-9873-15AE7A95308B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceModule", "FinanceModule\src\FinanceModule.csproj", "{205729A1-5C9F-4645-B264-4A6B460A83E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{178B87D0-27AC-4881-BF5D-0AAD27E3A726} = {178B87D0-27AC-4881-BF5D-0AAD27E3A726}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyModule", "SurveyModule\src\SurveyModule.csproj", "{9BCEA4BF-E1F9-4ECD-AFE1-5FE06B8A520C}"
 EndProject
@@ -142,10 +145,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{30993AEE-98A1-529F-B564-95C3EB406259} = {0BAE62A9-2200-0262-2CB5-8EE825167370}
-		{C1A4A9C0-CFC7-4E92-A8F2-5DD4DD43607B} = {30993AEE-98A1-529F-B564-95C3EB406259}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {09CD8C15-DD7E-4421-943E-86AEC83BFE95}
