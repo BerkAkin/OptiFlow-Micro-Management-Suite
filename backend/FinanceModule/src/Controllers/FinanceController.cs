@@ -1,9 +1,11 @@
-﻿using FinanceModule.DTOs;
+﻿using FinanceModule.Commands.CreateInvoiceCommand;
+using FinanceModule.DTOs;
 using FinanceModule.Queries.Dashboard;
 using FinanceModule.Services;
-using MediatR;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectMicro.Shared.Interfaces;
 
 namespace FinanceModule.Controllers
 {
@@ -13,11 +15,13 @@ namespace FinanceModule.Controllers
     {
         private readonly TransactionService _service;
         private readonly IMediator _mediator;
+        private readonly ICurrentUserService _currentUserService;
 
-        public FinanceController(IMediator mediator, TransactionService service)
+        public FinanceController(IMediator mediator, TransactionService service, ICurrentUserService currentUserService)
         {
             _mediator = mediator;  
             _service = service;
+            _currentUserService = currentUserService;
         }
 
 
@@ -85,6 +89,18 @@ namespace FinanceModule.Controllers
         {
             var result = await _mediator.Send(new RecurrentsQuery(filters));
             return Ok(new {values = result.data, result.maxPage});
+        }
+
+        [HttpPost("CreateInvoice")]
+        public async Task<IActionResult> CreateInvoice([FromBody] InvoiceDto dto)
+        {
+            int currentTenant = _currentUserService.User.TenantId;
+
+            var pdfBytes = await _mediator.Send(new CreateInvoiceCommand(dto,currentTenant));
+
+            string fileName = $"Fatura_{dto.Firstname}_{dto.Lastname}_{DateTime.Now:yyyyMMdd}.pdf";
+
+            return File(pdfBytes, "application/pdf", fileName);
         }
     }
 }
