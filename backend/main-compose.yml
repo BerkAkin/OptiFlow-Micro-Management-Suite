@@ -37,7 +37,9 @@ services:
             - finance-module-bin:/app/bin  
             - finance-module-obj:/app/obj
         working_dir: /app
-        command: dotnet watch run --urls "http://+:8080" --non-interactive --restart-on-rude-edit
+        command: >
+            sh -c "apt-get update && apt-get install -y libnss3 libatk-bridge2.0-0 libcups2 libgbm1 libasound2 libpangocairo-1.0-0 libxss1 libgtk-3-0 && 
+            dotnet watch run --urls 'http://+:8080' --non-interactive"
         depends_on:
             - finance-db
             
