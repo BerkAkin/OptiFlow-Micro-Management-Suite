@@ -19,6 +19,8 @@ interface invoiceFinal {
     phoneNum: string,
     email: string,
     personSerialNum: string,
+    orderdate: string,
+    invoicedate: string,
     products: productShape[],
 }
 
@@ -34,6 +36,8 @@ function FinanceBillsPage() {
         phoneNum: "",
         email: "",
         personSerialNum: "",
+        orderdate: "",
+        invoicedate: "",
         products: [],
     }
 
@@ -87,7 +91,7 @@ function FinanceBillsPage() {
                 quantity: Number(p.quantity),
                 price: Number(p.price)
             })),
-            invoiceDate: new Date().toISOString()
+            invoicedate: new Date().toISOString(),
         };
 
         mutation.mutate(newJsonObject);
@@ -130,7 +134,10 @@ function FinanceBillsPage() {
                             <div className='col-span-5'><p></p></div>
                             <div className='col-span-5 text-end'>
                                 <p className='text-gray-500'><span className='text-black'>Fatura Tarihi ve Saati: </span>{getCurrentDateTime()}</p>
-                                <p className='text-gray-500'><span className='text-black'>Sipariş Tarihi ve Saati: </span>{getCurrentDateTime()}</p>
+                                <p className='text-gray-500'>
+                                    <span className='text-black'>Sipariş Tarihi ve Saati: </span>
+                                    <Field name="orderdate" type="datetime-local" className='cursor-pointer border border-gray-200 rounded-sm focus:outline-none' />
+                                </p>
 
                             </div>
                         </div>
