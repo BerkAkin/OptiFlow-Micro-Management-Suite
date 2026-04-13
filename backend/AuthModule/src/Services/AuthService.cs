@@ -35,7 +35,18 @@ namespace AuthModule.Services
 
             if (tenant is null)
             {
-                tenant = new Tenant{ Name = registerDTO.Tenant};
+                tenant = new Tenant{ 
+                    Name = registerDTO.Tenant,
+                    Address = registerDTO.Address,
+                    FaxNum = registerDTO.FaxNum,
+                    MailAddress = registerDTO.TenantEmail,
+                    MersisNum = registerDTO.MersisNum,
+                    PhoneNum = registerDTO.TenantPhoneNum,
+                    TaxNumber= registerDTO.TaxNumber,
+                    TradeRegistryNum = registerDTO.TradeRegistryNum,
+                    TaxOffice = registerDTO.TaxOffice,
+                };
+
                 tenant.TenantModules = new List<TenantModule>();
                  foreach (var moduleId in registerDTO.SelectedModuleIds)
                 {
