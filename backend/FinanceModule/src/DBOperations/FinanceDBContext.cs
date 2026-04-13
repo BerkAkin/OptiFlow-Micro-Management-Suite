@@ -8,5 +8,6 @@ namespace FinanceModule.DBOperations
         public FinanceDBContext(DbContextOptions<FinanceDBContext> options): base(options) { }
 
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<MiniTenantInfo> Tenants { get; set; }
     }
 }
