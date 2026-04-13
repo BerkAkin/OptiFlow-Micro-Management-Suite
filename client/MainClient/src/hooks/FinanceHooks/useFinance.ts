@@ -1,9 +1,4 @@
-import {
-  useQuery,
-  useMutation,
-  QueryClient,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { MonthlyService } from "../../services/FinanceServices/MonthlyService";
 import { CategoricalService } from "../../services/FinanceServices/CategoricalService";
 import { MostService } from "../../services/FinanceServices/MostService";
@@ -11,6 +6,7 @@ import { LatestActivityService } from "../../services/FinanceServices/LatestActi
 import { InstallmentService } from "../../services/FinanceServices/InstallmentService";
 import { RecurrentService } from "../../services/FinanceServices/RecurrentService";
 import { CreateTransaction } from "../../services/FinanceServices/AddTransactionService";
+import { createInvoiceService } from "../../services/FinanceServices/CreateInvoiceService";
 
 export const useMonthly = () => {
   return useQuery({
@@ -66,6 +62,30 @@ export const useCreateTransaction = () => {
       queryClient.invalidateQueries({ queryKey: ["financeLatestActivity"] });
       queryClient.invalidateQueries({ queryKey: ["financeInstallment"] });
       queryClient.invalidateQueries({ queryKey: ["financeRemainings"] });
+    },
+  });
+};
+
+export const useInvoice = () => {
+  return useMutation({
+    mutationFn: (payload: any) => createInvoiceService(payload),
+    onSuccess: (data) => {
+      const blob = new Blob([data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.setAttribute("download", `Fatura_${new Date().getTime()}.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(url);
+
+      console.log("Fatura başarıyla oluşturuldu ve indirildi.");
+    },
+    onError: (error: any) => {
+      console.log("Fatura Oluşturma Başarısız");
+      console.error(error);
     },
   });
 };
