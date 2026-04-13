@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("FinanceModuleDb");
 builder.Services.AddDbContext<FinanceDBContext>(options => { options.UseSqlServer(connectionString); });
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-builder.Services.AddScoped<IPdfService, PdfService>();
+builder.Services.AddScoped<PdfService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<TransactionService>();
 builder.Services.AddHttpContextAccessor();
