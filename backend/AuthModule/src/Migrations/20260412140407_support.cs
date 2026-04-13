@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthModule.Migrations
 {
     /// <inheritdoc />
-    public partial class mood : Migration
+    public partial class support : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -43,7 +43,15 @@ namespace AuthModule.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FaxNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxOffice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MersisNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TradeRegistryNum = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -6,11 +6,33 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FinanceModule.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class support : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Tenants",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenantId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FaxNum = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxOffice = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaxNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MersisNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TradeRegistryNum = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tenants", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
@@ -38,6 +60,9 @@ namespace FinanceModule.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Tenants");
+
             migrationBuilder.DropTable(
                 name: "Transactions");
         }
