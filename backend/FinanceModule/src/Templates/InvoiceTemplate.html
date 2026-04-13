@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Helvetica', Arial, sans-serif;
+            color: #4b5563;
+            margin: 0;
+            padding: 0;
+        }
+
+        .invoice-wrapper {
+            width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            background: #fff;
+        }
+
+        .grid-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .border-b {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .invoice-header {
+            font-size: 40px;
+            color: #4b5563;
+            font-weight: 300;
+            text-align: right;
+        }
+        .invoice-tenant {
+            font-size: 60px;
+            color: #4b5563;
+            font-weight: 300;
+            text-align: left;
+        }
+
+        .info-cell {
+            width: 50%;
+            vertical-align: top;
+            padding: 10px;
+            border-top: 2px solid #374151;
+            border-bottom: 2px solid #374151;
+            font-size: 13px;
+        }
+
+        .label-bold {
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 60px;
+            border: 1px solid #e5e7eb;
+        }
+
+            .products-table th {
+                background-color: #d1d5db;
+                padding: 12px;
+                font-size: 14px;
+                text-align: center;
+            }
+
+            .products-table td {
+                padding: 12px;
+                border-bottom: 1px solid #e5e7eb;
+                text-align: center;
+                font-size: 14px;
+            }
+
+        .footer-grid {
+            margin-top: 20px;
+        }
+
+        .stamp-area {
+            width: 80%;
+            padding: 80px 40px;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        .totals-area {
+            width: 20%;
+            text-align: right;
+            font-size: 14px;
+        }
+
+        .total-row {
+            margin-bottom: 15px;
+            color: #6b7280;
+        }
+
+            .total-row span {
+                color: #000;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+    <div class="invoice-wrapper">
+        <table class="grid-table border-b">
+            <tr>
+                <td class="invoice-tenant" style="padding: 20px 0;">{{Tenant}}</td>
+                <td class="invoice-header" style="padding: 16px 0;">FATURA</td>
+            </tr>
+        </table>
+
+        <table class="grid-table" style="margin-top: 10px;">
+            <tr>
+                <td style="width: 50%;"></td>
+                <td style="text-align: right; font-size: 14px; color: #6b7280;">
+                    <p><span>Fatura Tarihi ve Saati: </span> {{InvoiceDate}}</p>
+                    <p><span>Sipariş Tarihi ve Saati: </span> {{InvoiceDate}}</p>
+                </td>
+            </tr>
+        </table>
+
+        <table class="grid-table" style="margin-top: 40px;">
+            <tr>
+                <td class="info-cell" style="padding-right: 20px;">
+                    <p class="label-bold">{{Tenant}}</p>
+                    <p><span class="label-bold">Merkez:</span>{{TenantAddress}}</p>
+                    <p>Tel: {{TenantPhoneNum}} | Fax: {{TenantFax}}</p>
+                    <p>E-Posta: {{TenantEmail}}</p>
+                    <p>Vergi Dairesi: {{TenantTaxBuilding}} | VKN: {{TenantTaxNumber}}</p>
+                    <p>Mersis: {{TenantMersisNum}}</p>
+                </td>
+                <td class="info-cell">
+                    <p class="label-bold">SAYIN</p>
+                    <p>{{firstname}} {{lastname}}</p>
+                    <p>{{address}}</p>
+                    <p>TC/Seri No: {{personserialnum}}</p>
+                    <p>Tel: {{phoneNum}} | E-Posta: {{email}}</p>
+                </td>
+            </tr>
+        </table>
+
+        <table class="products-table">
+            <thead>
+                <tr>
+                    <th>Kategori</th>
+                    <th>Açıklama</th>
+                    <th>Miktar</th>
+                    <th>Fiyat</th>
+                    <th>Tutar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td>{{category}}</td>
+                    <td>{{description}}</td>
+                    <td>{{quantity}}</td>
+                    <td>{{price}} ₺</td>
+                    <td>{{lineTotal}} ₺</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+
+        <table class="grid-table footer-grid">
+            <tr>
+                <td class="stamp-area">KAŞE İMZA</td>
+                <td class="totals-area">
+                    <div class="total-row"><span>Toplam: </span> {{subTotal}} ₺</div>
+                    <div class="total-row"><span>KDV % : </span> {{taxRate}}</div>
+                    <div class="total-row" style="font-size: 16px;"><span>Genel Toplam: </span> {{grandTotal}} ₺</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
