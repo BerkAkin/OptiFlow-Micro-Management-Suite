@@ -48,3 +48,12 @@ export const createTransaction = async (payload: any) => {
   const res = await api.post("/finance/", payload);
   return res.data;
 };
+
+// FinanceRepository.ts
+export const createInvoice = async (payload: any) => {
+  console.log("Gönderilen Veri:", payload);
+  const res = await api.post("/finance/CreateInvoice", payload, {
+    responseType: "blob",
+  });
+  return res.data;
+};
