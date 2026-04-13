@@ -1,9 +1,10 @@
 ﻿using Azure.Core;
 using FinanceModule.DBOperations;
 using FinanceModule.DTOs;
+using FinanceModule.Entities;
 using FinanceModule.Services;
-using HandlebarsDotNet;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Commands.CreateInvoiceCommand
@@ -13,8 +14,8 @@ namespace FinanceModule.Commands.CreateInvoiceCommand
     {
 
         private readonly FinanceDBContext _context;
-        private readonly IPdfService _pdfService;
-        public CreateInvoiceCommandHandler(FinanceDBContext context, IPdfService pdfService)
+        private readonly PdfService _pdfService;
+        public CreateInvoiceCommandHandler(FinanceDBContext context, PdfService pdfService)
         {
             _context = context;
             _pdfService = pdfService;
@@ -38,12 +39,11 @@ namespace FinanceModule.Commands.CreateInvoiceCommand
 
                 }).FirstOrDefaultAsync(cancellationToken);
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "InvoiceTemplate.html");
-            var source = await File.ReadAllTextAsync(filePath, cancellationToken);
 
-            var template = Handlebars.Compile(source);
+            if (tenantInfo == null)
+                throw new Exception("Şirket bilgileri bulunamadı.");
 
-            var templateData = new
+            var templateData = new InvoicePrintModel
             {
                 Tenant = tenantInfo.Tenant,
                 TenantAddress = tenantInfo.TenantAddress,
@@ -55,30 +55,23 @@ namespace FinanceModule.Commands.CreateInvoiceCommand
                 TenantMersisNum = tenantInfo.TenantMersisNum,
 
 
-                firstname = command.dto.Firstname,
-                lastname = command.dto.Lastname,
-                address = command.dto.Address,
-                personserialnum = command.dto.PersonSerialNum,
-                phoneNum = command.dto.PhoneNum,
-                email = command.dto.Email,
+                Firstname = command.dto.Firstname,
+                Lastname = command.dto.Lastname,
+                Address = command.dto.Address,
+                PersonSerialNum = command.dto.PersonSerialNum,
+                PhoneNum = command.dto.PhoneNum,
+                Email = command.dto.Email,
+                OrderDate = DateTime.TryParse(command.dto.OrderDate, out DateTime result) ? result:DateTime.UtcNow,
+                InvoiceDate = command.dto.InvoiceDate,
+                
 
-                InvoiceDate = DateTime.Now.ToString("dd.MM.yyyy HH:mm"),
-                OrderDate = command.dto.InvoiceDate, 
+                Products = command.dto.Products,
 
-                products = command.dto.Products.Select(p => new {
-                    category = p.Category,
-                    description = p.Description,
-                    quantity = p.Quantity,
-                    price = p.Price.ToString("N2"), 
-                    lineTotal = p.LineTotal.ToString("N2")
-                }),
-
-                subTotal = command.dto.SubTotal.ToString("N2"),
-                taxRate = command.dto.TaxRate,
-                grandTotal = command.dto.GrandTotal.ToString("N2")
+                SubTotal = command.dto.SubTotal,
+                TaxRate = command.dto.TaxRate,
+                GrandTotal = command.dto.GrandTotal,
             };
-            var finalHtml = template(templateData);
-            return await _pdfService.CreatePdf(finalHtml);
+            return _pdfService.CreatePdf(templateData);
 
         }
     }
