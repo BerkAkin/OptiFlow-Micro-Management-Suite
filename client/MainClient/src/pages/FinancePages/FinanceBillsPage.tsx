@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 import DynamicForm from '../../components/DynamicForm/DynamicForm';
 import add from '../../assets/add.svg'
 import print from '../../assets/print.svg'
+import { useInvoice } from '../../hooks/FinanceHooks/useFinance';
 
 interface productShape {
     category: string,
@@ -16,15 +17,13 @@ interface invoiceFinal {
     lastname: string,
     address: string,
     phoneNum: string,
-    fax: string,
     email: string,
-    taxoffice: string,
-    personserialnum: string,
+    personSerialNum: string,
     products: productShape[],
 }
 
 function FinanceBillsPage() {
-
+    const mutation = useInvoice();
     const [products, setProducts] = useState<productShape[]>([])
     const [isAdd, setIsAdd] = useState<boolean>(false);
 
@@ -33,10 +32,8 @@ function FinanceBillsPage() {
         lastname: "",
         address: "",
         phoneNum: "",
-        fax: "",
         email: "",
-        taxoffice: "",
-        personserialnum: "",
+        personSerialNum: "",
         products: [],
     }
 
@@ -53,7 +50,9 @@ function FinanceBillsPage() {
         setIsAdd(!isAdd);
     }
 
-
+    const removeProduct = (index: number) => {
+        setProducts(products.filter((_, i) => i !== index));
+    }
     const calculateSubTotal = (products: productShape[]) => {
         return products.reduce((sum, item) => {
             const price = Number(item.price) || 0
@@ -80,20 +79,19 @@ function FinanceBillsPage() {
         })
     }
 
-    const onSubmitHandler = (values: invoiceFinal) => {
+    const onSubmitHandler = async (values: invoiceFinal) => {
         const newJsonObject = {
-            firstname: values.firstname,
-            lastname: values.lastname,
-            address: values.address,
-            phoneNum: values.phoneNum,
-            fax: values.fax,
-            email: values.email,
-            taxoffice: values.taxoffice,
-            personserialnum: values.personserialnum,
-            products: products
-        }
-        console.log(newJsonObject);
-    }
+            ...values,
+            products: products.map(p => ({
+                ...p,
+                quantity: Number(p.quantity),
+                price: Number(p.price)
+            })),
+            invoiceDate: new Date().toISOString()
+        };
+
+        mutation.mutate(newJsonObject);
+    };
 
     const fields = [
         { name: "category", id: "category", type: "text" as const, label: "Category", placeholder: "Category" },
@@ -120,10 +118,11 @@ function FinanceBillsPage() {
             <Formik initialValues={initialValues} onSubmit={onSubmitHandler}>
                 <Form>
                     <div className='w-[900px] mx-auto my-10 bg-white shadow-custom border border-gray-200 p-10'>
-                        <div className='grid grid-cols-10 mt-10'>
-                            <div className='col-span-7 flex border-b border-gray-200 justify-start'><p>*LOGO GELECEK*</p></div>
+                        <div className='grid grid-cols-12 mt-10'>
+                            <div className='col-span-9 flex border-b border-gray-200 justify-start'>
+                            </div>
                             <div className='col-span-3 border-b border-gray-200'>
-                                <p className='text-6xl text-gray-600 py-5 font-rubik' >INVOICE</p>
+                                <p className='text-5xl text-gray-600 py-6 font-rubik' >FATURA</p>
                             </div>
                         </div>
 
@@ -136,38 +135,23 @@ function FinanceBillsPage() {
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-2 gap-10 mt-10 '>
-                            <div className='text-gray-600 border-y py-2 border-gray-700 text-sm'>
-                                <p>BERK AKIN BİLİŞİM HİZMETLERİ ANONİM ŞİRKETİ</p>
-                                <p><span className='font-bold'>Merkez: </span> Mimar Sinan mah, Kocatepe Sok, No:24, Daire:32</p>
-                                <p>Tel: 247184592234</p>
-                                <p>Fax: 247184592234</p>
-                                <p>E-Posta: biris@gmail.com</p>
-                                <p>Vergi Dairesi: Kocaeli Körfez</p>
-                                <p>VKN: 946214234</p>
-                                <p>Mersis No: 4729-5122-4525-5325</p>
-                                <p>Ticaret Sicil No: 472923-5</p>
-                            </div>
-                            <div className='text-gray-600 border-y py-2 border-gray-700  text-sm'>
-                                <p className='font-bold text-gray-700'>SAYIN</p>
-                                <div className='space-x-5 space-y-2'>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="First Name" name="firstname"></Field>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Last Name" name="lastname"></Field>
+                        <div className='mt-10'>
+                            <div className='text-gray-600 py-2 text-sm'>
+                                <div>
+                                    <p className='font-bold text-gray-700'>SAYIN</p>
                                 </div>
-                                <div className='space-x-5 space-y-2'>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Addres" name="address"></Field>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Tax Office" name="taxoffice"></Field>
-
+                                <div className='flex space-x-4'>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="First Name" name="firstname"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="Last Name" name="lastname"></Field>
                                 </div>
-                                <div className='space-x-5 space-y-2'>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Phone Number" name="phoneNum"></Field>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Fax Number" name="fax"></Field>
+                                <div className='flex space-x-4 '>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="Phone Number" name="phoneNum"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="E-Mail" name="email"></Field>
                                 </div>
-                                <div className='space-x-5 space-y-2'>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="E-Mail" name="email"></Field>
-                                    <Field className="cursor-pointer border border-gray-200 rounded-sm px-2 py-1 focus:outline-none" placeholder="Serial Number (Person)" name="personserialnum"></Field>
+                                <div className='flex space-x-4 '>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="Serial Number (Person)" name="personSerialNum"></Field>
+                                    <Field className="cursor-pointer border border-gray-200 w-[50%] my-2 rounded-sm px-2 py-1 focus:outline-none" placeholder="Addres" name="address"></Field>
                                 </div>
-
 
                             </div>
                         </div>
@@ -194,11 +178,13 @@ function FinanceBillsPage() {
                                         <th scope="col" className="px-6 ">
                                             Tutar
                                         </th>
+                                        <th scope="col" className="px-6 ">
 
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {products.map((item) => (
+                                    {products.map((item, index) => (
                                         <tr className="bg-white border-b border-gray-200 text-sm text-gray-600">
                                             <th scope="row" className="px-6">
                                                 {item.category}
@@ -215,6 +201,7 @@ function FinanceBillsPage() {
                                             <td className="px-6 text-center">
                                                 {Number(item.price) * Number(item.quantity)}
                                             </td>
+                                            <td onClick={() => removeProduct(index)} className="cursor-pointer text-red-500">X</td>
                                         </tr>
                                     ))}
 
@@ -224,14 +211,14 @@ function FinanceBillsPage() {
                             </table>
 
                             <div className='flex justify-end my-5'>
-                                <button onClick={() => setIsAdd(!isAdd)} className='cursor-pointer text-white px-2 '>
+                                <button type='button' onClick={() => setIsAdd(!isAdd)} className='cursor-pointer text-white px-2 '>
                                     <img src={add} width={30} alt='Add new product' />
                                 </button>
                             </div>
                         </div>
-                        <div className='mt-5 grid grid-cols-10'>
-                            <div className='col-span-8 my-20 mx-10'>KAŞE İMZA</div>
-                            <div className='col-span-2'>
+                        <div className='mt-5 grid grid-cols-12'>
+                            <div className='col-span-9 my-20 mx-10'>KAŞE İMZA</div>
+                            <div className='col-span-3'>
                                 <div className='my-5'>
                                     <p className='text-gray-500'><span className='text-black'>Toplam: </span>{subTotal} ₺</p>
                                 </div>
@@ -244,7 +231,7 @@ function FinanceBillsPage() {
                             </div>
                         </div>
                         <div className='flex justify-end'>
-                            <button onClick={() => onSubmitHandler} className='cursor-pointer text-white px-1'>
+                            <button type='submit' className='cursor-pointer text-white px-1'>
                                 <img src={print} alt='Create invoice' width={35} />
                             </button>
                         </div>
