@@ -1,11 +1,11 @@
 using FinanceModule.DBOperations;
 using FinanceModule.Mappings;
-using FinanceModule.Queries.Dashboard;
 using FinanceModule.Repositories;
 using FinanceModule.Services;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Services;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("FinanceModuleDb");
 builder.Services.AddDbContext<FinanceDBContext>(options => { options.UseSqlServer(connectionString); });
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-
+builder.Services.AddScoped<IPdfService, PdfService>();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<TransactionService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<TransactionRepository>();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
