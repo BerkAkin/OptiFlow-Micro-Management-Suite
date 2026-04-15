@@ -113,7 +113,7 @@ function FinanceBillsPage() {
             {
                 isAdd &&
                 <div className='fixed inset-0 bg-gray-900/30 flex justify-center items-center'>
-                    <div className='bg-white rounded-lg shadow-custom border border-gray-200 h-[300px] w-72'>
+                    <div className='bg-white rounded-lg shadow-custom border border-gray-200 h-[320px] w-72'>
                         <DynamicForm colorScheme='bg-gray-400' hoverScheme='hover:bg-gray-500' fields={fields} initialValues={initalProductValues} onCancel={() => setIsAdd(!isAdd)} onSubmit={onAddApproveHandler} title='Add Product' />
                     </div>
                 </div>
