@@ -36,6 +36,9 @@ namespace NotificationService.Migrations
                     b.Property<bool>("NotificationPreference")
                         .HasColumnType("bit");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

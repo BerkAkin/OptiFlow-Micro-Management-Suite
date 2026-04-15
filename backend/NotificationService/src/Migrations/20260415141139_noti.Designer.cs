@@ -11,8 +11,8 @@ using NotificationService.Data;
 namespace NotificationService.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260410153724_support")]
-    partial class support
+    [Migration("20260415141139_noti")]
+    partial class noti
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace NotificationService.Migrations
 
                     b.Property<bool>("NotificationPreference")
                         .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .IsRequired()
