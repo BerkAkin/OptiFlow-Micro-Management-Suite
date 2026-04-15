@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using NotificationService.Services;
+using ProjectMicro.Shared.Interfaces;
 
 namespace NotificationService.Controllers
 {
@@ -9,10 +11,15 @@ namespace NotificationService.Controllers
     {
 
         private readonly NotificationManager _notificationManager;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMediator _mediator;
 
-        public NotificationController(NotificationManager notificationManager)
+        public NotificationController(NotificationManager notificationManager, ICurrentUserService currentUserService,IMediator mediator)
         {
+
             _notificationManager = notificationManager;
+            _currentUserService = currentUserService;
+            _mediator = mediator;
         }
 
         [HttpPost("send-bulk-survey-create")]
@@ -85,6 +92,22 @@ namespace NotificationService.Controllers
 
             await _notificationManager.SupportRequestNewMessageNotificationsAsync();
             return Accepted();
+        }
+
+        [HttpPost("emailPreference")]
+        public async Task<IActionResult> ChangeEmailPreference()
+        {
+            int currentUser = _currentUserService.User.UserId;
+            await _mediator.Send(new UpdatePreferenceCommand(currentUser));
+            return Ok("Kullanıcı Bildirim İzni Başarıyla Değiştirildi");
+        }
+
+        [HttpGet("emailPreference")]
+        public async Task<IActionResult> GetEmailPreferenceStatus(int userId)
+        {
+            int currentUser = _currentUserService.User.UserId;
+            var isEnabled = await _mediator.Send(new GetPreferenceQuery(currentUser));
+            return Ok(isEnabled);
         }
     }
 }
