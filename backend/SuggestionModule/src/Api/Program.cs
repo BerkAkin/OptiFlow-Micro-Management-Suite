@@ -13,6 +13,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+
+builder.Services.AddDbContext<SuggestionDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SuggestionModuleDb")));
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
@@ -20,21 +23,14 @@ builder.Services.AddCors(options =>
         policy.WithOrigins("http://localhost:5173").AllowAnyHeader().AllowAnyMethod().AllowCredentials();
     });
 });
-
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-
-builder.Services.AddDbContext<SuggestionDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("SuggestionModuleDb")));
-
-
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetSuggestionsQuery).Assembly));
-
 builder.Services.AddScoped<ISuggestionRepository, SuggestionRepository>();
 
 
 
 var app = builder.Build();
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -44,9 +40,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
