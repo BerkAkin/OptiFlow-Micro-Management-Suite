@@ -6,6 +6,7 @@ interface UserInfoShape {
     email: string,
     company: string,
     department: string,
+    profilePicture: string,
     permissions: string[]
 }
 
@@ -19,7 +20,7 @@ export const AuthContextProvider = ({ children }: any) => {
     const handleLoginState = (token: string) => {
         try {
             const decoded = jwtDecode<UserInfoShape>(token);
-            setUserInfo({ username: decoded.username, email: decoded.email, company: decoded.company, department: decoded.department, permissions: decoded.permissions });
+            setUserInfo({ profilePicture: decoded.profilePicture, username: decoded.username, email: decoded.email, company: decoded.company, department: decoded.department, permissions: decoded.permissions });
             setIsAuth(true);
             localStorage.setItem("AccessToken", token);
         } catch (error) {
