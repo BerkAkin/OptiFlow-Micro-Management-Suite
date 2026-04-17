@@ -1,8 +1,12 @@
 using AuthModule.Data;
+using AuthModule.Interfaces;
 using AuthModule.Mappings;
 using AuthModule.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Minio;
+using ProjectMicro.Shared.Interfaces;
+using ProjectMicro.Shared.Services;
 using System.Text;
 
 
@@ -22,6 +26,9 @@ builder.Services.AddDbContext<AuthDBContext>(options => options.UseSqlServer(bui
 builder.Services.AddScoped<AuthService>();
 
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSingleton<TokenCreateService>(provider =>
 {
@@ -31,7 +38,13 @@ builder.Services.AddSingleton<TokenCreateService>(provider =>
     return new TokenCreateService(secretKey, expiryMinutes);
 });
 
+builder.Services.AddMinio(configureSource => configureSource
+    .WithEndpoint("minio:9000")
+    .WithCredentials("admin", "MicroUser123!")
+    .WithSSL(false)
+    .Build());
 
+builder.Services.AddScoped<IStorageService, MinioStorageService>();
 
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
