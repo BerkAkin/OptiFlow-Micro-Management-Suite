@@ -16,6 +16,23 @@ services:
             - gateway-obj:/app/obj
         working_dir: /app
         command: dotnet watch run --urls "http://+:8080"
+        
+        
+    minio:
+        image: minio/minio
+        container_name: minio_storage
+        networks:
+          - project-micro-network
+        ports:
+          - "9000:9000"    
+          - "9001:9001"    
+        environment:
+          - MINIO_ROOT_USER=admin
+          - MINIO_ROOT_PASSWORD=MicroUser123! 
+        volumes:
+          - minio-data:/data
+        command: server /data --console-address ":9001"
+
 
     finance-module:
         image: mcr.microsoft.com/dotnet/sdk:8.0
@@ -288,6 +305,7 @@ volumes:
     auth-mssql-db:
     gateway-bin:
     gateway-obj:
+    minio-data:
     
 networks:
     project-micro-network:
