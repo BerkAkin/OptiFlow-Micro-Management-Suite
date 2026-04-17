@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthModule.Migrations
 {
     /// <inheritdoc />
-    public partial class support : Migration
+    public partial class auth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -96,6 +96,7 @@ namespace AuthModule.Migrations
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Street = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Street2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApartmentNum = table.Column<string>(type: "nvarchar(max)", nullable: false),
