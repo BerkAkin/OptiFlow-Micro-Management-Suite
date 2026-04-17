@@ -139,16 +139,13 @@ function Navbar() {
             </ul>
           </div>
 
-          <div className="hidden w-full md:block md:w-auto mx-3 pt-3">
+          <div className="hidden w-full md:block md:w-auto mx-3 pt-2">
             {
               isAuth === true ? (
                 <div ref={(el) => { elementsRef.current[2] = el }} className="relative ">
-                  <button className="cursor-pointer border border-gray-300 rounded-full size-8" onClick={() => setIsProfile(!isProfile)}></button>
+                  <button className="cursor-pointer text-2xl hover:scale-[1.2] transition" onClick={() => setIsProfile(!isProfile)}>⌄</button>
                   {isProfile &&
-                    <div className='absolute border border-gray-200 h-56 w-48 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-14'>
-                      <div className="flex justify-center mt-4">
-                        <p className="border border-gray-200 rounded-full size-24"></p>
-                      </div>
+                    <div className='absolute border border-gray-200 h-28 w-48 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-14'>
                       <div className="flex justify-center my-4">
                         <Link to={'profile'} className="text-xl text-gray-500 hover:text-gray-700">My Profile</Link>
                       </div>
