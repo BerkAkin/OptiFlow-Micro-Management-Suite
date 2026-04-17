@@ -13,6 +13,8 @@ namespace AuthModule.Models
         public string PhoneNum { get; set; }
         public DateTime BirthDate { get; set; }
 
+        public string ?ProfilePicture { get; set; } = null;
+
         public string Street { get; set; }
         public string Street2 { get; set; }
         public string ApartmentNum { get; set; }
