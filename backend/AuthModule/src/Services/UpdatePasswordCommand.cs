@@ -20,16 +20,17 @@ namespace AuthModule.Services
                 throw new Exception("User does not exist"); 
             }
 
-            string oldPassword = BCrypt.Net.BCrypt.HashPassword(command.dto.OldPassword);
-            if (user.PasswordHash != oldPassword) {
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(command.dto.CurrentPassword, user.PasswordHash);
+            if (!isPasswordValid)
+            {
                 throw new Exception("Current Password Doesn't Match With Old Password");
             }
-            if(command.dto.Password != command.dto.PasswordAgain)
+            if (command.dto.NewPassword != command.dto.NewPasswordAgain)
             {
                 throw new Exception("New Password Doesn't Match With Set Again Password");
             }
 
-            string newPassword = BCrypt.Net.BCrypt.HashPassword(command.dto.Password);
+            string newPassword = BCrypt.Net.BCrypt.HashPassword(command.dto.NewPassword);
             user.PasswordHash = newPassword;
             await _context.SaveChangesAsync();
             return Unit.Value;
