@@ -33,6 +33,7 @@ namespace AuthModule.Models
         public DateTime DateUpdate { get; set; }
 
         public RefreshToken RefreshToken { get; set; }
+        public PasswordToken PasswordToken { get; set; }
 
     }
 }
