@@ -31,7 +31,7 @@ namespace AuthModule.Services
                 new Claim("tenantId", user.TenantId.ToString()),
                 new Claim("department",user.Department.Name.ToString()),
                 new Claim("departmentId",user.DepartmentId.ToString()),
-                new Claim("profilePicture",user.ProfilePicture.ToString()),
+                new Claim("profilePicture",user.ProfilePicture ?? ""),
             };
 
             foreach (var module in user.Tenant.TenantModules.Select(m => m.Module.Name))
