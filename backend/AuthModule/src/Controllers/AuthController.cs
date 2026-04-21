@@ -93,5 +93,36 @@ namespace AuthModule.Controllers
             catch { return NotFound(); }
         }
 
+
+
+
+        [HttpPost("PasswordUpdate")]
+
+        public async Task<IActionResult> PasswordUpdate([FromBody] PasswordUpdateDto passwordUpdate)
+        {
+            var currenUser = _currentUserService.User.UserId;
+            await _mediator.Send(new UpdatePasswordCommand(currenUser,passwordUpdate));
+
+            return Ok("Password Updated Successfully");
+        }
+
+
+
+        [HttpPost("PasswordResetRequester")]
+
+        public async Task<IActionResult> PasswordResetRequester([FromBody] PasswordResetRequestDto passwordResetRequest)
+        {
+            await _mediator.Send(new PasswordRequestResetCommand(passwordResetRequest));
+            return Ok("Password Renew Email Will Be Sent If Any Matching Email Has Been Found");
+        }
+
+
+        [HttpPost("PasswordReset")]
+
+        public async Task<IActionResult> PasswordReset([FromBody] PasswordResetDto passwordReset)
+        {
+            await _mediator.Send(new PasswordResetCommand(passwordReset));
+            return Ok("Your password has been successfully reset.");
+        }
     }
 }
