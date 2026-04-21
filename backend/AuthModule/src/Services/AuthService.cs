@@ -69,7 +69,7 @@ namespace AuthModule.Services
 
                 TenantId = tenant.Id,
                 Company= registerDTO.Tenant,
-                DepartmentId=4, //Başlangıç kullanıcısı manager olarak üretilir daha sonrakiler farklı bir fonksiyon ile istenen departmanlarda olur.
+                DepartmentId=4,
 
                 DateCreate = DateTime.UtcNow,
                 DateUpdate = DateTime.UtcNow,
