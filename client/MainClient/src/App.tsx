@@ -13,6 +13,7 @@ import SupportPage from './pages/SupportPages/SupportPage';
 import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
 import UnauthorizedPage from './pages/UnauthorizedPage';
 import RoleBasedRoute from './components/RoleBasedRoute/RoleBasedRoute';
+import ResetPassword from './pages/ProfilePages/ResetPassword';
 
 function App() {
   return (
@@ -47,8 +48,8 @@ function App() {
             <Route path='unauthorized' element={<UnauthorizedPage />} />
 
 
-
           </Route>
+          <Route path='passwordreset/:token/:email' element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
     </div>
