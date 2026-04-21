@@ -7,7 +7,7 @@ interface Fields {
     label: string;
     name: string;
     id: string;
-    type: "text" | "number" | "checkbox" | "date" | "file";
+    type: "text" | "number" | "checkbox" | "date" | "file" | "password";
     as?: "textarea" | "select";
     placeholder?: string;
     options?: { value: string | number, label: string }[];
