@@ -7,13 +7,13 @@ import Surveys from './pages/SurveyAndInsightsPages/Surveys';
 import SurveyDetails from './pages/SurveyAndInsightsPages/SurveyDetails';
 import SurveyResults from './pages/SurveyAndInsightsPages/SurveyResults';
 import SuggestionsPage from './pages/SuggestionPages/SuggestionsPage';
-import ProfilePage from './pages/ProfilePages/ProfilePage';
 import MoodPage from './pages/MoodPages/MoodPage';
 import SupportPage from './pages/SupportPages/SupportPage';
 import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
-import UnauthorizedPage from './pages/UnauthorizedPage';
 import RoleBasedRoute from './components/RoleBasedRoute/RoleBasedRoute';
-import ResetPassword from './pages/ProfilePages/ResetPassword';
+import UnauthorizedPage from './pages/UnauthorizedPage';
+import ProfilePage from './pages/UserComponents/ProfilePage';
+import ResetPassword from './pages/UserComponents/ResetPassword';
 
 function App() {
   return (
