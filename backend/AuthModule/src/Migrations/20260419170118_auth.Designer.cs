@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthModule.Migrations
 {
     [DbContext(typeof(AuthDBContext))]
-    [Migration("20260417185635_auth")]
+    [Migration("20260419170118_auth")]
     partial class auth
     {
         /// <inheritdoc />
@@ -57,6 +57,33 @@ namespace AuthModule.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Modules");
+                });
+
+            modelBuilder.Entity("AuthModule.Models.PasswordToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ExpireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResetToken")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ResetToken");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("PasswordTokens");
                 });
 
             modelBuilder.Entity("AuthModule.Models.RefreshToken", b =>
@@ -197,7 +224,8 @@ namespace AuthModule.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("FullAddress")
                         .IsRequired()
@@ -241,9 +269,23 @@ namespace AuthModule.Migrations
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.HasIndex("TenantId");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("AuthModule.Models.PasswordToken", b =>
+                {
+                    b.HasOne("AuthModule.Models.User", "User")
+                        .WithOne("PasswordToken")
+                        .HasForeignKey("AuthModule.Models.PasswordToken", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("AuthModule.Models.RefreshToken", b =>
@@ -302,6 +344,9 @@ namespace AuthModule.Migrations
 
             modelBuilder.Entity("AuthModule.Models.User", b =>
                 {
+                    b.Navigation("PasswordToken")
+                        .IsRequired();
+
                     b.Navigation("RefreshToken")
                         .IsRequired();
                 });
