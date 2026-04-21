@@ -11,7 +11,11 @@ export const resetPassword = async (payload: any) => {
 };
 
 export const resetPasswordRequest = async (payload: any) => {
-  console.log("latest", payload);
   const res = await api.post("/auth/PasswordResetRequester", payload);
+  return res.data;
+};
+
+export const changePassword = async (payload: any) => {
+  const res = await api.post("/auth/passwordUpdate", payload);
   return res.data;
 };
