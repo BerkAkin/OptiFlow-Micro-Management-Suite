@@ -2,59 +2,76 @@ import { Doughnut } from "react-chartjs-2";
 import { useCategorical } from '../../../hooks/FinanceHooks/useFinance';
 import Spinner from "../../Spinner/Spinner";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DoughChart() {
-
     const { data, isLoading, error } = useCategorical();
-    if (isLoading) return (<Spinner />);
-    if (error || !data) return (<ErrorMessage />);
-    const { categories, values } = data;
 
-    const ChartData = {
+    if (isLoading) return <div className="h-[420px] flex items-center justify-center"><Spinner /></div>;
+    if (error || !data) return <div className="h-[420px] flex items-center justify-center"><ErrorMessage /></div>;
+
+    const { categories, values } = data;
+    const totalTransactions = values.reduce((a: number, b: number) => a + b, 0);
+
+    const chartData = {
         labels: categories,
         datasets: [
             {
-                label: "İşlem Sayısı",
                 data: values,
-                backgroundColor: ['#f87171', '#ef4444', '#dc2626', '#be123c', '#f43f5e', '#fb7185'],
+                backgroundColor: [
+                    '#6366f1',
+                    '#8b5cf6',
+                    '#ec4899',
+                    '#f43f5e',
+                    '#f59e0b',
+                    '#10b981',
+                ],
+                borderWidth: 2,
+                borderColor: '#ffffff',
+                hoverOffset: 15,
+                cutout: '75%',
             },
         ],
     };
 
+    const options = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: '#1e293b',
+                padding: 12,
+                cornerRadius: 8,
+            }
+        },
+
+    };
 
     return (
-        <div className="h-[420px]">
-            <div className='h-[90%] p-6'>
-                <p className={`text-xl p-2 font-semibold font-rubik text-slate-800`}>
+        <div className="h-[230px] bg-white rounded-xl shadow-custom border border-gray-200 hover:-translate-y-1 transition p-6 flex flex-col ">
+            <div className="mb-2">
+                <h3 className="text-lg font-bold text-slate-800 font-rubik text-center md:text-left">
                     Categorical
-                </p>
-                <Doughnut
-                    data={ChartData}
-                    options={{
-                        cutout: '60%',
-                        maintainAspectRatio: false,
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                display: true,
-                                labels: {
-                                    usePointStyle: true,
-                                    pointStyle: 'circle',
-                                },
-                                align: "center",
-                                position: "bottom"
-                            }
-                        },
-
-
-                    }}
-                />
+                </h3>
             </div>
 
+            <div className="flex-1 min-h-0 relative mt-4">
+                <Doughnut data={chartData} options={options} />
 
+                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none ">
+                    <span className="text-3xl font-bold text-slate-800 leading-none">
+                        {totalTransactions}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-1">
+                        Total
+                    </span>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default DoughChart
+export default DoughChart;
