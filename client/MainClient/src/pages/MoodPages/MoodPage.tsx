@@ -14,22 +14,22 @@ function MoodPage() {
                 </div>
             </RoleBasedGuard>
             <div className='grid grid-cols-10 my-6 gap-6 '>
-                <div className='bg-white h-[700px] col-span-7 shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className='h-[700px] col-span-7'>
                     <AllPreviousMoods />
                 </div>
                 <div className='col-span-3 '>
                     <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
-                        <div className='bg-white mb-2 shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                        <div className=' mb-2'>
                             <PreviousMoods />
                         </div>
                     </RoleBasedGuard>
                     <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
-                        <div className='bg-white h-[250px] shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                        <div className='h-[250px]'>
                             <MyComments />
                         </div>
                     </RoleBasedGuard>
                     <RoleBasedGuard allowedDepartments={["HR"]}>
-                        <div className='bg-white h-[480px] shadow-custom border border-gray-200 rounded-lg transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                        <div className='h-[480px]'>
                             <CommentOnEmployees />
                         </div>
                     </RoleBasedGuard>
