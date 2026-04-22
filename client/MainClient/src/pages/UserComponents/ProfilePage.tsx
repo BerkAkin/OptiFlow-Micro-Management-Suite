@@ -24,64 +24,76 @@ function ProfilePage() {
     };
 
     return (
-        <div className='container mx-auto my-10'>
+        <div className='container mx-auto px-4 py-10'>
             <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
 
-            <div className='mx-auto grid gap-6 grid-cols-10 flex justify-center h-[90px]'>
-                <div className='col-span-1 flex justify-center items-center'>
+            <div className='bg-white rounded-xl shadow-custom border border-gray-200 p-6 flex items-center gap-8'>
+
+                <div className="relative">
                     <div
                         onClick={handleImageClick}
-                        className={`bg-white rounded-full shadow-custom flex justify-center items-center border border-gray-200 size-20 cursor-pointer overflow-hidden relative hover:border-sky-400 transition-all ${isPendingPicture ? 'opacity-50 pointer-events-none' : ''}`}
+                        className={`size-28 rounded-lg shadow-lg flex justify-center items-center border-4 border-white overflow-hidden relative cursor-pointer transition hover:scale-105 ${isPendingPicture ? 'opacity-50 pointer-events-none' : ''}`}
                     >
-                        <div className={`...`}>
-                            {isLoading ? (
-                                <div></div>
-                            ) : (
-                                <img
-                                    src={profileImgUrl || "/default-avatar.png"}
-                                    alt="Profile"
-                                    className="size-full object-cover"
-                                />
-                            )}
-                        </div>
+                        {isLoading ? (
+                            <div className="size-full bg-slate-50 animate-pulse" />
+                        ) : (
+                            <img
+                                src={profileImgUrl || "/default-avatar.png"}
+                                alt="Profile"
+                                className="size-full object-cover"
+                            />
+                        )}
+
+
                         {isPendingPicture && (
-                            <div className="absolute inset-0 flex items-center justify-center bg-white/50">
-                                <div className="size-4 border-2 border-sky-500 border-t-transparent animate-spin rounded-full"></div>
+                            <div className="absolute inset-0 flex items-center justify-center bg-white/70 backdrop-blur-sm">
+                                <div className="w-6 h-6 border-3 border-blue-500 border-t-transparent animate-spin rounded-full"></div>
                             </div>
                         )}
                     </div>
                 </div>
 
-                <div className='col-span-8 bg-white rounded-lg shadow-custom border border-gray-200 grid grid-cols-12 gap-6'>
-                    <div className='col-span-3 flex-col flex items-center justify-center border-e border-gray-100'>
-                        <p className='text-gray-600 text-2xl capitalize'>{userInfo.username}</p>
-                        <p className='text-gray-400 text-lg'>{userInfo.email}</p>
+                <div className='flex-1 flex flex-col md:flex-row justify-between items-center w-full gap-6'>
+                    <div className="text-center md:text-left">
+                        <h1 className='text-2xl font-bold text-slate-800 capitalize'>{userInfo.username}</h1>
+                        <p className='text-slate-400 font-medium'>{userInfo.email}</p>
                     </div>
-                    <div className='col-span-9 flex-col flex items-center justify-center'>
-                        <p className='text-gray-600 text-4xl tracking-[4px] capitalize'>
+
+                    <div className='h-px w-12 bg-gray-100 md:h-12 md:w-px hidden md:block' />
+
+                    <div className="text-center md:text-left flex-1">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 border-gray-200 border rounded-full mb-2">
+                            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{userInfo.department}</span>
+                        </div>
+                        <p className='text-3xl font-extrabold text-slate-800 tracking-tight capitalize leading-none'>
                             {userInfo.company}
-                            <span className='tracking-tight text-lg align-[20px] ml-2'>{userInfo.department}</span>
                         </p>
                     </div>
-                </div>
 
-                <div className='col-span-1 bg-white rounded-lg shadow-custom border border-gray-200 hover:scale-[105%] hover:border-sky-400 transition-all '>
-                    <button type='button' onClick={handleChangePassword} className='text-gray-600 text-lg size-full cursor-pointer'>Change Password</button>
+                    <button
+                        type='button'
+                        onClick={handleChangePassword}
+                        className='px-5 py-2.5 bg-white border border-gray-200 text-slate-700 text-sm font-bold rounded-xl transition active:scale-95 cursor-pointer'
+                    >
+                        Change Password
+                    </button>
                 </div>
             </div>
 
-            <div className='mx-auto my-6 flex justify-center grid grid-cols-10 gap-6'>
-                <div className=' h-[500px] col-span-1'>
+            <div className='mt-8 grid grid-cols-12 gap-8'>
+                <div className='col-span-2'>
                     <Settings />
                 </div>
-                <div className=' h-[500px] col-span-9'>
+                <div className='col-span-10'>
                     <MyDayOffs />
                 </div>
             </div>
 
-            {
-                isChange && <UpdatePasswordPopUp handleChange={handleChangePassword} />
-            }
+            {isChange && (
+                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/10 backdrop-blur-xs">
+                    <UpdatePasswordPopUp handleChange={handleChangePassword} />
+                </div>
+            )}
         </div>
     );
 }
