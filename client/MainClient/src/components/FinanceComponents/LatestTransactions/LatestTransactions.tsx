@@ -29,7 +29,7 @@ function LatestTransactions() {
 
     return (
 
-        <div className='h-full'>
+        <div className='h-[630px]'>
             <DynamicTable
                 onRefresh={() => refetch({ cancelRefetch: false, throwOnError: true })}
                 isRefreshing={isFetching}
