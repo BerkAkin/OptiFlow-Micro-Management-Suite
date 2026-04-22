@@ -2,44 +2,56 @@ import { useMyComments } from "../../../hooks/MoodHooks/UseMood";
 import ErrorMessage from "../../ErrorMessage/ErrorMessage";
 import Spinner from "../../Spinner/Spinner";
 
-
 function MyComments() {
-
     const { data, isLoading, error } = useMyComments();
+
     if (isLoading) return <Spinner />
     if (error || !data) return <ErrorMessage />
 
     return (
+        <div className="h-full flex flex-col bg-white rounded-xl border border-gray-200 overflow-hidden shadow-custom">
 
+            <div className='px-6 py-5 border-b border-gray-50 flex justify-between items-center bg-white'>
+                <h2 className='text-xl font-bold text-slate-700 tracking-tight font-rubik'>
+                    My Comments
+                </h2>
+            </div>
 
-        <div className="h-full">
-
-
-            <div className="">
-                <div className='h-[10%] text-start flex justify-start'>
-                    <p className={`text-xl font-semibold text-slate-800 font-rubik ps-4 py-4`}>Comments</p>
-                </div>
-                <div className="h-[160px] overflow-y-auto grid grid-cols-12 gap-2 px-4">
-                    {data.map((item: any) => (
-                        <div className="border col-span-6 rounded-md shadow-sm border-gray-200 h-[160px]">
-                            <div className="h-[85%] overflow-hidden p-4">
-                                <p className="text-gray-500 text-sm">
-                                    {item.comment}
-                                </p>
+            <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {data.map((item: any, index: number) => (
+                        <div
+                            key={index}
+                            className="flex flex-col bg-white border border-gray-200 rounded-lg transition overflow-hidden"
+                        >
+                            <div className="p-5 flex-1">
+                                <div className="flex items-start gap-3">
+                                    <span className="text-2xl text-slate-300 leading-none select-none font-serif">“</span>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        {item.comment}
+                                    </p>
+                                </div>
                             </div>
-                            <div className="h-[15%] bg-gray-50 p-2 border-t border-gray-100">
-                                <p className="text-gray-400 text-[10px] text-right">{item.date}</p>
-                            </div>
 
+                            <div className="px-5 py-3 bg-slate-50 border-t border-gray-100 flex justify-end items-center">
+                                <div className="flex items-center gap-1.5 text-slate-400">
+                                    <span className="text-[10px] font-medium tracking-wide">
+                                        {new Date(item.date).toLocaleDateString('tr-TR')}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
                     ))}
                 </div>
 
+                {data.length === 0 && (
+                    <div className="h-40 flex flex-col items-center justify-center text-slate-400 italic">
+                        <p className="text-sm">You have no comments.</p>
+                    </div>
+                )}
             </div>
-
         </div>
-
-    )
+    );
 }
 
-export default MyComments
+export default MyComments;
