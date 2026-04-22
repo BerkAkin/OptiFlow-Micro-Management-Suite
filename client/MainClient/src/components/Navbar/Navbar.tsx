@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../context/AuthContext";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import MakeSuggestionCard from "../SuggestionComponents/MakeSuggestionCard/MakeSuggestionCard";
+import SupportRequestCard from "../SupportComponents/SupportRequestCard/SupportRequestCard";
+import RoleBasedGuard from "../RoleBasedGuard/RoleBasedGuard";
 import happy from '../../assets/happy.svg'
 import suggestion from '../../assets/suggestion.svg'
 import bill from '../../assets/bill.svg'
@@ -10,161 +12,141 @@ import finance from '../../assets/finance.svg'
 import survey from '../../assets/survey.svg'
 import helpRequest from '../../assets/helpRequest.svg'
 import makeSuggestion from '../../assets/makeSuggestion.svg'
-import SupportRequestCard from "../SupportComponents/SupportRequestCard/SupportRequestCard";
 import icon from '../../assets/icon.png'
-import RoleBasedGuard from "../RoleBasedGuard/RoleBasedGuard";
-
-
 
 function Navbar() {
-
   const { isAuth, handleLogoutState, userInfo } = useAuthContext();
+  const location = useLocation();
 
-  const [isSuggestion, setIsSuggestion] = useState<boolean>(false);
-  const [isHelp, setIsHelp] = useState<boolean>(false);
-  const [isProfile, setIsProfile] = useState<boolean>(false);
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const elementsRef = useRef<(HTMLElement | null)[]>([]);
+
+  const toggleMenu = (menuName: string) => {
+    setActiveMenu(prev => prev === menuName ? null : menuName);
+  };
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      const clickedInside = elementsRef.current.some((el) => el && el.contains(event.target as Node))
-      if (!clickedInside) {
-        setIsOpen(false)
-        setIsSuggestion(false)
-        setIsProfile(false)
-        setIsHelp(false)
-      }
+      const clickedInside = elementsRef.current.some((el) => el && el.contains(event.target as Node));
+      if (!clickedInside) setActiveMenu(null);
     }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const navLinkStyle = (path: string) =>
+    `p-2 rounded-xl transition-all duration-200 hover:bg-indigo-50 group ${location.pathname.includes(path) ? 'bg-indigo-50 ring-1 ring-indigo-100' : ''}`;
+
   return (
+    <nav className="h-[80px] w-full bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-[50]">
+      <div className="container mx-auto h-full flex items-center justify-between px-4">
 
-    <nav className="h-[80px] w-[100%] mx-auto">
-      <div className="grid h-[100%]  h-[80px] container mx-auto grid-cols-12 gap-0">
+        <Link to="/" className="flex items-center gap-2 group">
+          <div>
+            <img src={icon} width={32} alt="OptiFlow" />
+          </div>
+          <span className="text-2xl font-bold text-slate-800 tracking-tight hidden lg:block">
+            OptiFlow <span className="text-blue-600">Suite</span>
+          </span>
+        </Link>
 
-        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-start ">
-          <span className="text-2xl font-semibold ">OptiFlow Management Suite<img className="inline ps-1" src={icon} width={45}></img></span>
-        </div>
-
-        <div className="col-span-6 space-x-6 w-[100%] flex flex-wrap items-center justify-center p-4">
-
-          <button data-collapse-toggle="navbar-default" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-            <span className="sr-only">Seçenekler</span>
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-          </button>
-
-
+        <div className="flex items-center gap-2 md:gap-4 p-1.5">
           <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
-            <div className="hidden w-full md:block md:w-auto">
-              <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-                <Link to={`/finance/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={finance} alt="" /></Link>
-              </ul>
-            </div>
+            <Link to="/finance/dashboard" className={navLinkStyle('/finance')}>
+              <img width={24} src={finance} alt="Finance" title="Finance" />
+            </Link>
           </RoleBasedGuard>
 
-
-
-
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="text-xl flex flex-col md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <li onClick={() => setIsOpen(!isOpen)} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200 relative" ref={(el) => { elementsRef.current[0] = el }} >
-                <img width={30} src={survey} alt="" />
-                {isOpen && (
-                  <div className="absolute border-x border-b border-gray-200 right-0 translate-x-[30%] text-center mt-4 w-40 bg-white text-black rounded-b-lg shadow-lg z-10">
-                    <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/dashboard`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Surveys</Link>
-                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
-                      <Link onClick={() => setIsOpen(!isOpen)} to={`/survey/builder`} className="block px-1 py-2 text-gray-900 hover:bg-gray-200 focus:bg-indigo-200">Builder</Link>
-                    </RoleBasedGuard>
-                  </div>
-                )}
-              </li>
-            </ul>
+          <div className="relative" ref={(el) => { elementsRef.current[0] = el }}>
+            <button onClick={() => toggleMenu('survey')} className={navLinkStyle('/survey')}>
+              <img width={24} src={survey} alt="Survey" />
+            </button>
+            {activeMenu === 'survey' && (
+              <div
+                className="absolute mt-3 right-0 w-48 bg-white border border-gray-200 shadow-custom rounded-xl overflow-hidden p-1 animate-in fade-in slide-in-from-top-2">
+                <Link to="/survey/dashboard" onClick={() => setActiveMenu(null)}
+                  className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Surveys</Link>
+                <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                  <Link to="/survey/builder" onClick={() => setActiveMenu(null)}
+                    className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Create Survey</Link>
+                </RoleBasedGuard>
+              </div>
+            )}
           </div>
 
+          <Link to="/suggest/dashboard" className={navLinkStyle('/suggest')}>
+            <img width={24} src={suggestion} alt="Suggestions" />
+          </Link>
 
-
-
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/suggest/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={suggestion} alt="" /></Link>
-            </ul>
-          </div>
-
-
-
-          <div className="hidden w-full md:block md:w-auto">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`/support/dashboard`} className="block px-4 py-2 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={help} alt="" /></Link>
-            </ul>
-          </div>
-
-
-
+          <Link to="/support/dashboard" className={navLinkStyle('/support')}>
+            <img width={24} src={help} alt="Support" />
+          </Link>
         </div>
 
+        <div className="flex items-center gap-1 md:gap-3">
 
-
-        <div className="col-span-3 w-[100%] flex flex-wrap items-center justify-end ">
-
-          <div className="hidden w-full md:block md:w-auto ">
-            <div ref={(el) => { elementsRef.current[3] = el }} className="relative inline-block flex flex-col">
-              <button onClick={() => setIsHelp(!isHelp)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={helpRequest} alt="" /></button>
-              {isHelp && <SupportRequestCard />}
+          <div className="flex items-center border-r border-gray-100 pr-2 md:pr-4 gap-1">
+            <div ref={(el) => { elementsRef.current[3] = el }} className="relative">
+              <button onClick={() => toggleMenu('help')} className="p-2 hover:bg-orange-50 rounded-xl transition-colors">
+                <img width={24} src={helpRequest} alt="Help Request" />
+              </button>
+              {activeMenu === 'help' && <SupportRequestCard />}
             </div>
-          </div>
-          <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
-            <div className="hidden w-full md:block md:w-auto ">
-              <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-                <Link to={`/finance/bill`} className="block px-4 mt-2 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={bill} alt="" /></Link>
-              </ul>
+
+            <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
+              <Link to="/finance/bill" className="p-2 hover:bg-emerald-50 rounded-xl transition-colors">
+                <img width={24} src={bill} alt="Bills" />
+              </Link>
+            </RoleBasedGuard>
+
+            <div ref={(el) => { elementsRef.current[1] = el }} className="relative">
+              <button onClick={() => toggleMenu('suggestion')} className="p-2 hover:bg-amber-50 rounded-xl transition-colors">
+                <img width={24} src={makeSuggestion} alt="Make Suggestion" />
+              </button>
+              {activeMenu === 'suggestion' && <MakeSuggestionCard />}
             </div>
-          </RoleBasedGuard>
-          <div className="hidden w-full md:block md:w-auto ">
-            <div ref={(el) => { elementsRef.current[1] = el }} className="relative inline-block flex flex-col">
-              <button onClick={() => setIsSuggestion(!isSuggestion)} className="block px-4 mt-4 text-md text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={makeSuggestion} alt="" /></button>
-              {isSuggestion && <MakeSuggestionCard />}
-            </div>
-          </div>
-          <div className="hidden w-full md:block md:w-auto ">
-            <ul className="text-xl flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0">
-              <Link to={`mood/dashboard`} className="block px-4  mt-2 text-xl text-gray-900 bg-transparent rounded-sm hover:bg-gray-200 focus:bg-indigo-200"><img width={30} src={happy} alt="" /></Link>
-            </ul>
+
+            <Link to="/mood/dashboard" className="p-2 hover:bg-pink-50 rounded-xl transition-colors">
+              <img width={24} src={happy} alt="Mood" />
+            </Link>
           </div>
 
-          <div className="hidden w-full md:block md:w-auto mx-3 pt-2">
-            {
-              isAuth === true ? (
-                <div ref={(el) => { elementsRef.current[2] = el }} className="relative ">
-                  <button className="cursor-pointer text-2xl hover:scale-[1.2] transition" onClick={() => setIsProfile(!isProfile)}>⌄</button>
-                  {isProfile &&
-                    <div className='absolute border border-gray-200 h-28 w-48 bg-white shadow-lg rounded-lg z-20 left-1/2 -translate-x-1/2 transform top-14'>
-                      <div className="flex justify-center my-4">
-                        <Link to={'profile'} className="text-xl text-gray-500 hover:text-gray-700">My Profile</Link>
-                      </div>
-
-                      <div className="flex justify-center">
-                        <button className="text-xl text-red-500 hover:text-red-700" onClick={() => handleLogoutState()}> Logout</button>
-                      </div>
-                    </div>
-                  }
+          {isAuth && (
+            <div className="relative pl-2" ref={(el) => { elementsRef.current[2] = el }}>
+              <button
+                onClick={() => toggleMenu('profile')}
+                className="flex items-center gap-2 p-1 cursor-pointer rounded-full hover:bg-gray-200 transition-all"
+              >
+                <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+                  {userInfo?.username?.charAt(0).toUpperCase()}
                 </div>
-              ) : ("")
+              </button>
 
-            }
-          </div>
+              {activeMenu === 'profile' && (
+                <div
+                  className="absolute top-full mt-3 right-0 w-56 bg-white border border-gray-200 shadow-custom rounded-xl p-2 animate-in fade-in slide-in-from-top-2">
+                  <div className="px-4 py-3 border-b border-gray-50 mb-2">
+                    <p className="text-sm font-bold text-slate-800">{userInfo?.username}</p>
+                    <p className="text-[10px] text-slate-400 truncate">{userInfo?.email}</p>
+                  </div>
+                  <Link to="/profile" onClick={() => setActiveMenu(null)}
+                    className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                    <span>My Profile</span>
+                  </Link>
+                  <button
+                    onClick={() => { handleLogoutState(); setActiveMenu(null); }}
+                    className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-red-500 hover:bg-red-100 rounded-lg transition-colors mt-1"
+                  >
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-
       </div>
-    </nav >
-  )
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;
