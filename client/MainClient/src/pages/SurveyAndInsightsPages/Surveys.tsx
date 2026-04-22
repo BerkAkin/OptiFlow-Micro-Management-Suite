@@ -1,97 +1,115 @@
 import { Link } from 'react-router'
-import { Doughnut, } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import happy from '../../assets/happyWhite.svg'
 import sad from '../../assets/sadWhite.svg'
 import { useSurveys } from '../../hooks/SurveyHooks/useSurvey';
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import Spinner from '../../components/Spinner/Spinner';
-import SurveySatisfactionPopUp from '../../components/SurveyComponents/SurveySatisfactionPopUp';
 import RoleBasedGuard from '../../components/RoleBasedGuard/RoleBasedGuard';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 
-
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function SurveyResults() {
     const { data, isLoading, error } = useSurveys();
 
-    if (isLoading) return (<Spinner />)
-    if (error || !data) return (<ErrorMessage />)
+    if (isLoading) return <div className="h-screen flex items-center justify-center"><Spinner /></div>;
+    if (error || !data) return <div className="p-10"><ErrorMessage /></div>;
 
     return (
-        <div className='container my-10 mx-auto'>
-
-            <div className='mx-auto grid grid-cols-2 gap-6' >
-                {data.map((item: any, index: number) => (
-                    <div key={index} className={`bg-white shadow-custom h-[200px] grid grid-cols-10 border border-gray-200 rounded-lg hover:scale-102 transition `}>
-                        <div className='col-span-4'>
-                            <Link to={`${item.status === 1 ? `/survey/details/${item.id}` : ""} `} className={`${item.status === 2 ? "cursor-default" : " cursor-pointer"}`}>
-                                <div className={`${item.status === 2 ? "bg-gray-50" : "hover:bg-indigo-50 transition"} w-full h-full border-gray-200 border-e rounded-s-lg`}>
-                                    <div className='h-[40%] flex items-center justify-center'>
-                                        <p className='font-rubik text-center text-2xl text-gray-600 mx-2 relative '>
-                                            {item.title}
-                                            {item.status === 2 ?
-                                                (
-                                                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
-                                                        <span className='h-[10%] absolute bottom-0 right-0 z-10 pt-2 text-sm text-sky-500'>
-                                                            <Link to={`/survey/result/${item.id}`}>Go to Result {">"}</Link>
-                                                        </span>
-                                                    </RoleBasedGuard>
-                                                ) : ""
-                                            }
-
-                                        </p>
-
-                                    </div>
-                                    <div className='h-[20%]'>
-
-                                    </div>
-                                    <div className='h-[40%] grid grid-cols-3'>
-                                        <div>
-                                            <div className='flex items-end justify-center'><img className='bg-orange-400 rounded-full' src={happy} alt="" width={40} /></div>
-                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.dissatisfactionCount}  </p></div>
-                                        </div>
-                                        <div className=''>
-                                            <div className='flex justify-center'>
-                                                <p className={item.status === 1 ? "font-rubik text-green-600 text-xl " : "font-rubik text-red-500 text-xl"}>{item.status == 1 ? "Active" : "Timeout"}</p>
-                                            </div>
-                                            <div className='flex justify-center'>
-                                                <p className='text-gray-600 font-rubik text-md'>{item.date.split("T")[0].split("-").reverse().join(".")}</p>
-
-                                            </div>
-                                        </div>
-                                        <div >
-                                            <div className='flex items-end justify-center'> <img className='bg-sky-400 rounded-full' src={sad} alt="" width={40} /></div>
-                                            <div className='flex justify-center pt-2'><p className='text-gray-500 text-xl'>{item.satisfactionCount} </p></div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </Link>
-                        </div>
-                        <div className='col-span-6 grid h-full p-6'>
-
-                            <Doughnut
-                                data={{
-                                    labels: ['Respondents'],
-                                    datasets: [{
-                                        data: [item.satisfactionCount + item.dissatisfactionCount],
-                                        backgroundColor: ['#34d399', '#22c55e',],
-                                    }],
-
-                                }}
-                                options={{ plugins: { legend: { display: true, position: "right", labels: { usePointStyle: true, pointStyle: "circle" } } }, animation: true, maintainAspectRatio: false }} />
-
-
-
-
-                        </div>
-                    </div>
-
-                ))}
+        <div className='container py-12 mx-auto px-4'>
+            <div className='flex justify-between items-end mb-8 border-b border-gray-200 pb-4'>
+                <div>
+                    <h1 className='text-3xl font-bold text-slate-700 font-rubik'>Surveys</h1>
+                    <p className='text-slate-500 mt-1'>Monitor participation and satisfaction rates.</p>
+                </div>
             </div>
 
+            <div className='grid grid-cols-3 gap-8'>
+                {data.map((item: any, index: number) => {
+                    const totalRespondents = item.satisfactionCount + item.dissatisfactionCount;
+                    const isActive = item.status === 1;
 
-        </div >
+                    return (
+                        <div key={index} className="bg-white rounded-xl border border-gray-200 shadow-custom transition-all hover:-translate-y-1 overflow-hidden flex h-[240px]">
+
+                            <div className={`flex-1 p-6 flex flex-col justify-between border-e border-gray-100 ${!isActive ? 'bg-slate-100/70' : 'bg-white'}`}>
+                                <div>
+                                    <div className="flex justify-between items-start mb-2">
+                                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${isActive ? 'bg-emerald-100 text-emerald-600' : 'bg-red-200 text-red-500'}`}>
+                                            {isActive ? "Active" : "Timeout"}
+                                        </span>
+                                        <span className='text-xs font-medium text-slate-400'>
+                                            {item.date.split("T")[0].split("-").reverse().join(".")}
+                                        </span>
+                                    </div>
+                                    <h3 className='text-xl font-bold text-slate-700 font-rubik line-clamp-2 leading-tight'>
+                                        {item.title}
+                                    </h3>
+                                </div>
+
+                                <div className='flex items-center gap-6 mt-4'>
+                                    <div className="text-center">
+                                        <div className='w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center mb-1'>
+                                            <img src={happy} alt="Dissatisfied" width={24} />
+                                        </div>
+                                        <p className='text-sm font-bold text-slate-600'>{item.dissatisfactionCount}</p>
+                                    </div>
+                                    <div className="text-center">
+                                        <div className='w-10 h-10 bg-sky-400 rounded-xl flex items-center justify-center mb-1'>
+                                            <img src={sad} alt="Satisfied" width={24} />
+                                        </div>
+                                        <p className='text-sm font-bold text-slate-600'>{item.satisfactionCount}</p>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 flex items-center justify-between">
+                                    <Link
+                                        to={isActive ? `/survey/details/${item.id}` : "#"}
+                                        className={`text-sm font-semibold transition-colors ${isActive ? 'text-blue-600 hover:text-blue-800' : 'text-slate-400 cursor-not-allowed'}`}
+                                    >
+                                        Details →
+                                    </Link>
+
+                                    {!isActive && (
+                                        <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                                            <Link to={`/survey/result/${item.id}`} className='text-[11px] font-bold text-blue-500 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition-colors'>
+                                                RESULTS
+                                            </Link>
+                                        </RoleBasedGuard>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className='w-[40%] p-6 flex flex-col items-center justify-center relative'>
+                                <div className="h-full w-full">
+                                    <Doughnut
+                                        data={{
+                                            labels: ['Participant'],
+                                            datasets: [{
+                                                data: [totalRespondents, 100 - totalRespondents],
+                                                backgroundColor: [isActive ? '#6366f1' : '#94a3b8', '#f1f5f9'],
+                                                borderWidth: 0,
+                                            }],
+                                        }}
+                                        options={{
+                                            plugins: { legend: { display: false } },
+                                            maintainAspectRatio: false,
+                                            events: []
+                                        }}
+                                    />
+                                </div>
+                                <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                                    <span className="text-xl font-bold text-slate-700">{totalRespondents}</span>
+                                    <span className="text-[10px] text-slate-400 font-bold uppercase">People</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
     )
 }
 
