@@ -1,10 +1,7 @@
 import { useMakeSuggestion } from '../../../hooks/SuggestionHooks/useSuggestion';
 import DynamicForm from '../../DynamicForm/DynamicForm';
 
-
-
 function MakeSuggestionCard() {
-
     const mutation = useMakeSuggestion();
 
     const handleSubmit = (values: any) => {
@@ -17,13 +14,30 @@ function MakeSuggestionCard() {
     }
 
     const fields = [
-        { name: "topic", label: "Topic", id: "topic", placeholder: "Topic...", type: "text" as const },
-        { name: "description", label: "Description", id: "description", placeholder: "Description...", type: "text" as const, as: "textarea" as const }
+        { name: "topic", label: "Topic", id: "topic", placeholder: "Example: climate management", type: "text" as const },
+        {
+            name: "description",
+            label: "Description",
+            id: "description",
+            placeholder: "Detailed suggestion...",
+            type: "text" as const,
+            as: "textarea" as const
+        }
     ]
 
     return (
-        <div className='absolute h-60 w-64 bg-white rounded-lg border border-gray-200 shadow-custom z-20 left-1/2 transform -translate-x-1/2 top-16'>
-            <DynamicForm colorScheme='bg-amber-400' hoverScheme='hover:bg-amber-500' initialValues={initialValues} onSubmit={handleSubmit} title='Make Suggestion' fields={fields} />
+        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-50 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
+
+            <div className='p-1'>
+                <DynamicForm
+                    colorScheme='bg-yellow-400'
+                    hoverScheme='hover:bg-yellow-500 text-white'
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                    title='Send Suggestion'
+                    fields={fields}
+                />
+            </div>
         </div>
     )
 }
