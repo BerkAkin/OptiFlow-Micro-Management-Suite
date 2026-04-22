@@ -2,7 +2,6 @@ import { useRequestSupport } from '../../../hooks/SupportHooks/UseSupport'
 import DynamicForm from '../../DynamicForm/DynamicForm'
 
 function SupportRequestCard() {
-
     const mutation = useRequestSupport();
 
     const handleSubmit = (values: any) => {
@@ -12,13 +11,15 @@ function SupportRequestCard() {
         }
         mutation.mutate(newValues)
     }
+
     const initialValues = {
-        message: ""
+        message: "",
+        category: 6
     }
 
     const fields = [
         {
-            name: "category", label: "Category", id: "category", placeholder: "Category...", type: "text" as const, as: "select" as const,
+            name: "category", label: "Category", id: "category", placeholder: "Select category...", type: "text" as const, as: "select" as const,
             options: [
                 { label: "Environment", value: 1 },
                 { label: "Colleagues", value: 2 },
@@ -28,12 +29,35 @@ function SupportRequestCard() {
                 { label: "General", value: 6 },
             ],
         },
-        { name: "message", label: "Message", id: "message", placeholder: "Message...", type: "text" as const, as: "textarea" as const },
+        {
+            name: "message",
+            label: "Your Message",
+            id: "message",
+            placeholder: "Describe your situation...",
+            type: "text" as const,
+            as: "textarea" as const
+        },
     ]
 
     return (
-        <div className='absolute h-60 w-64 bg-white rounded-lg border border-gray-200 shadow-custom z-20 left-1/2 transform -translate-x-1/2 top-16'>
-            <DynamicForm colorScheme='bg-lime-600' hoverScheme='hover:bg-lime-700' initialValues={initialValues} onSubmit={handleSubmit} title='Request Support' fields={fields} />
+
+        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-50 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
+            <div className='p-1'>
+                <DynamicForm
+                    colorScheme='bg-blue-600'
+                    hoverScheme='hover:bg-blue-700'
+                    initialValues={initialValues}
+                    onSubmit={handleSubmit}
+                    title='New Support Request'
+                    fields={fields}
+                />
+            </div>
+
+            <div className='bg-slate-50 px-6 py-3 border-t border-slate-100'>
+                <p className='text-[10px] text-slate-400 text-center font-medium'>
+                    Your request will be handled by the HR department.
+                </p>
+            </div>
         </div>
     )
 }
