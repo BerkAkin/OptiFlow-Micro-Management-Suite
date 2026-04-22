@@ -38,79 +38,109 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
     const [commentSection, setCommentSection] = useState<boolean>(false);
 
     return (
-        <div className='border border-gray-200 rounded-lg shadow-sm transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
-            <div className='text-center py-4 flex justify-center items-center  w-full'>
-                <p className='text-gray-900'>
-                    {title}
+        <div className='bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 ease-in-out overflow-hidden'>
+
+            <div className='p-5'>
+                <div className='flex justify-between items-start mb-3'>
+                    <h3 className='text-lg font-semibold text-gray-800 leading-tight flex-1'>
+                        {title}
+                    </h3>
                     <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
-                        <button type='button' onClick={() => handleApproveOrReject(false)} className='transition-all hover:scale-[1.1] cursor-pointer ms-2 bg-red-500 rounded-full shadow-custom w-6 text-xs text-white'>✘</button>
-                        <button type='button' onClick={() => handleApproveOrReject(true)} className='transition-all hover:scale-[1.1] cursor-pointer bg-green-500 rounded-full shadow-custom w-6 text-xs text-white mx-1 '>✔</button>
+                        <div className='flex gap-2 ml-4'>
+                            <button
+                                type='button'
+                                onClick={() => handleApproveOrReject(true)}
+                                className='flex items-center justify-center w-6 h-6 bg-green-50 text-green-600 rounded-full hover:bg-green-500 hover:text-white transition-colors cursor-pointer border border-green-100'
+                            >
+                                ✔
+                            </button>
+                            <button
+                                type='button'
+                                onClick={() => handleApproveOrReject(false)}
+                                className='flex items-center justify-center w-6 h-6 bg-red-50 text-red-600 rounded-full hover:bg-red-500 hover:text-white transition-colors cursor-pointer border border-red-100'
+                            >
+                                ✘
+                            </button>
+                        </div>
                     </RoleBasedGuard>
+                </div>
+
+                <p className='text-gray-600 text-sm leading-relaxed mb-6'>
+                    {description}
                 </p>
-            </div>
-            <div className='text-center py-4 flex justify-center items-center'>
-                <p className='text-sm text-gray-700 px-6'>{description}</p>
-            </div>
-            <div className='text-center px-6 py-4 flex justify-center items-center   w-full grid grid-cols-3'>
-                <div className=' flex items-center justify-start'>
-                    <p className='text-gray-800 grid grid-cols-3 flex items-center'>
 
-                        <button type='button' onClick={() => handleVote(-1)} className='cursor-pointer'>
-                            <img className='hover:bg-red-300 rounded-full transition-all hover:scale-[1.1]' src={down} width={20} alt="" />
+                <div className='flex items-center justify-between pt-4 border-t border-gray-100'>
+
+                    <div className='flex items-center space-x-3 px-3 py-1.5 rounded-full'>
+                        <button type='button' onClick={() => handleVote(1)} className='hover:scale-110 transition-transform cursor-pointer'>
+                            <img src={up} width={18} alt="up" className="opacity-70 hover:opacity-100" />
                         </button>
-                        {votes}
-
-                        <button type='button' onClick={() => handleVote(1)} className=' cursor-pointer text-2xl '>
-                            <img className='hover:bg-green-300 rounded-full transition-all hover:scale-[1.1]' src={up} width={20} alt="" />
+                        <span className={`font-bold text-sm ${votes >= 0 ? 'text-green-600' : 'text-red-500'}`}>
+                            {votes}
+                        </span>
+                        <button type='button' onClick={() => handleVote(-1)} className='hover:scale-110 transition-transform cursor-pointer'>
+                            <img src={down} width={18} alt="down" className="opacity-70 hover:opacity-100" />
                         </button>
+                    </div>
 
-                    </p>
-                </div>
-                <div className=' flex justify-center items-center'>
-                    {
-                        status === 1 ?
-                            (
-                                <p className={`text-green-600`}>Approved</p>
+                    <div>
+                        {status === 1 ? (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Approved</span>
+                        ) : (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">Rejected</span>
+                        )}
+                    </div>
 
-                            )
-                            :
-                            (
-                                <p className={`text-red-500`}>Rejected</p>
-
-                            )
-                    }
-                </div>
-                <div className=' flex items-center justify-end'>
-                    <button className='cursor-pointer transition-all hover:scale-[1.1]' onClick={() => setCommentSection(!commentSection)}>
-                        <img src={list} width={20} alt="" />
-                    </button>
-                    <p className='text-gray-800 mx-1'> { }</p>
+                    <div className='flex items-center space-x-4'>
+                        <span className='text-[12px] text-gray-400 font-medium'>
+                            {date.split("T")[0]}
+                        </span>
+                        <button
+                            className={`p-2 rounded-lg transition-colors cursor-pointer text-gray-400`}
+                            onClick={() => setCommentSection(!commentSection)}
+                        >
+                            <img src={list} width={20} alt="comments" className={commentSection ? 'brightness-75' : 'opacity-60'} />
+                        </button>
+                    </div>
                 </div>
             </div>
-            <div className='flex items-center  py-1 justify-center'>
-                <p className='text-sm text-gray-400'>{date.split("T")[0]}</p>
-            </div>
-            {commentSection &&
-                <div className='border-t border-gray-200 bg-gray-50 h-[200px] w-full overflow-y-auto'>
+
+            {commentSection && (
+                <div className='bg-gray-50 border-t border-gray-100'>
                     <Formik initialValues={{ text: "" }} onSubmit={handleComment}>
-                        <Form>
-                            <div className='flex justify-center items-center'>
-                                <Field as="textarea" rows={2} className="bg-white resize-none border rounded-md focus:outline-none border-gray-200 w-[70%] mx-3 px-2 my-2" name="text" placeholder="Comment..." />
-                                <button className='cursor-pointer transition-all hover:scale-[1.1]' type='submit'><img src={add} width={25} alt="" /></button>
+                        <Form className='p-4'>
+                            <div className='flex items-center gap-2'>
+                                <Field
+                                    as="textarea"
+                                    rows={1}
+                                    className="flex-1 bg-white resize-none border border-gray-200 rounded-lg outline-none p-2.5 text-sm transition-all"
+                                    name="text"
+                                    placeholder="Comment..."
+                                />
+                                <button className='p-2 bg-blue-600 hover:bg-blue-700 rounded-xl transition-all cursor-pointer' type='submit'>
+                                    <img src={add} width={20} alt="add" className="invert brightness-0" />
+                                </button>
                             </div>
-
                         </Form>
                     </Formik>
-                    {comments.map((item, index) => (
-                        <div key={index} className="border-b border-gray-200 last:border-none py-2 px-5 text-sm text-gray-600 text-center">
-                            {index + 1}{")"} {item.text}
-                            <span className="text-sm text-gray-400 ps-1"></span>
-                        </div>
-                    ))}
 
+                    <div className='max-h-[250px] overflow-y-auto px-4 pb-4 space-y-2'>
+                        {comments.length > 0 ? (
+                            comments.map((item, index) => (
+                                <div key={index} className="bg-white p-3 rounded-lg border border-gray-200 text-sm text-gray-700">
+                                    <div className="flex gap-2">
+                                        <span className="text-blue-600 font-bold">{index + 1}.</span>
+                                        <p>{item.text}</p>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-center text-xs text-gray-400 py-2">No Comments...</p>
+                        )}
+                    </div>
                 </div>
-            }
-        </div >
+            )}
+        </div>
     )
 }
 
