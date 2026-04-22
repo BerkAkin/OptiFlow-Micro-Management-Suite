@@ -18,13 +18,13 @@ function SupportPage() {
             </div>
             <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
                 <div className='grid grid-cols-12 my-6 gap-6'>
-                    <div className='bg-white h-[400px] col-span-3 shadow-custom border border-gray-200 rounded-lg'>
+                    <div className=' col-span-3 h-[400px]'>
                         <SupportDoughChart />
                     </div>
-                    <div className='bg-white h-[400px] col-span-4 shadow-custom border border-gray-200 rounded-lg '>
+                    <div className=' col-span-4 h-[400px]'>
                         <SupportBarChart />
                     </div>
-                    <div className='bg-white h-[400px] col-span-5 shadow-custom border border-gray-200 rounded-lg '>
+                    <div className='col-span-5 h-[400px]'>
                         <SupportDayOffs />
                     </div>
                 </div>
