@@ -1,15 +1,13 @@
-
 import { useEffect, useState } from 'react';
 import icon from '../../assets/icon.png'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 
 interface popUpProps {
     message: string,
 }
 
 function InfoPopUp({ message }: popUpProps) {
-
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
         if (message) {
@@ -21,22 +19,45 @@ function InfoPopUp({ message }: popUpProps) {
         }
     }, [message]);
 
-    if (!isVisible) return null;
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className={`grid grid-cols-10 fixed bottom-10 right-5 z-10 w-96 h-20 bg-white shadow-2xl rounded-lg border border-gray-300`}>
+        <AnimatePresence>
+            {isVisible && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 20, scale: 0.95, transition: { duration: 0.2 } }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    className="fixed bottom-8 right-8 z-[100] flex items-center w-full max-w-[350px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] rounded-2xl border border-gray-100 p-4 overflow-hidden"
+                >
+                    <div className='flex-shrink-0 w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mr-4'>
+                        <img width={32} height={32} src={icon} alt="Notification Icon" className="object-contain" />
+                    </div>
 
-            <div className='col-span-2 flex items-center justify-center'>
-                <img width={50} src={icon}></img>
-            </div>
-            <div className='col-span-8 w-[90%] flex justify-start items-center truncate'>
-                <p className='text-sm text-slate-600'>{message}</p>
-            </div>
-        </motion.div>
+                    <div className='flex-1 min-w-0'>
+                        <p className='text-sm text-slate-600 font-medium leading-tight line-clamp-2'>
+                            {message}
+                        </p>
+                    </div>
+
+                    <button
+                        onClick={() => setIsVisible(false)}
+                        className="ml-2 p-1 text-gray-300 hover:text-gray-500 transition-colors"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <motion.div
+                        initial={{ width: "100%" }}
+                        animate={{ width: "0%" }}
+                        transition={{ duration: 3, ease: "linear" }}
+                        className="absolute bottom-0 left-0 h-1 bg-blue-500/20"
+                    />
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }
 
-export default InfoPopUp
+export default InfoPopUp;
