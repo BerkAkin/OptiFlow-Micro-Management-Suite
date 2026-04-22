@@ -47,7 +47,7 @@ function LoginContainer() {
                                         type="text"
                                         name="email"
                                         placeholder="E-Mail"
-                                        className="w-full px-4 py-2 text-gray-700 border border-gray-200 rounded-sm focus:outline-none focus:border-indigo-500 transition-colors bg-transparent"
+                                        className="w-full px-4 py-2 text-gray-700 border border-gray-200 rounded-sm focus:outline-none focus:border-blue-500 transition-colors bg-transparent"
                                     />
                                     <ErrorMessage name="email" component="div" className="text-red-500 text-xs mt-1 px-1" />
                                 </div>
@@ -57,7 +57,7 @@ function LoginContainer() {
                                         type={showPassword ? "text" : "password"}
                                         name="password"
                                         placeholder="Password"
-                                        className="w-full px-4 py-2 text-gray-700 border border-gray-200 rounded-sm focus:outline-none focus:border-indigo-500 transition-colors bg-transparent"
+                                        className="w-full px-4 py-2 text-gray-700 border border-gray-200 rounded-sm focus:outline-none focus:border-blue-500 transition-colors bg-transparent"
                                     />
                                     <ErrorMessage name="password" component="div" className="text-red-500 text-xs mt-1 px-1" />
                                 </div>
@@ -68,14 +68,14 @@ function LoginContainer() {
                                             type="checkbox"
                                             checked={showPassword}
                                             onChange={(e: any) => setShowPassword(e.target.checked)}
-                                            className="accent-indigo-600 h-4 w-4"
+                                            className="accent-blue-600 h-4 w-4"
                                         />
                                         <span>Show Password</span>
                                     </label>
 
                                     <button
                                         type="button"
-                                        className="hover:cursor-pointer hover:bg-indigo-500 hover:text-white transition border-indigo-500 text-indigo-500 border rounded-sm h-8 px-2"
+                                        className="hover:cursor-pointer hover:bg-blue-500 hover:text-white transition border-blue-500 text-blue-500 border rounded-sm h-8 px-2"
                                         onClick={handleForget}>
                                         Forgot Password?
                                     </button>
@@ -84,7 +84,7 @@ function LoginContainer() {
                                 <div className="pt-4 border-t border-gray-50 flex justify-center">
                                     <button
                                         disabled={loginMutation.isPending}
-                                        className="w-full max-w-xs h-11 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-sm transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed"
+                                        className="cursor-pointer w-full max-w-xs h-11 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-sm transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed"
                                         type="submit"
                                     >
                                         {loginMutation.isPending ? 'Logging in...' : 'Login'}
