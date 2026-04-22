@@ -18,7 +18,6 @@ interface EventType {
 function Calendar() {
     const [events, setEvents] = useState<EventType[]>([])
 
-    // buraya backend olayları eklenecek 
 
     const handleDateSelect = (selectInfo: any) => {
         const title = prompt('Etkinlik adı girin:')
