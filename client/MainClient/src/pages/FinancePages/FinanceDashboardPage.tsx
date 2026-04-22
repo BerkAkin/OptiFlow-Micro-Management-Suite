@@ -11,41 +11,39 @@ import RecurrentPayments from '../../components/FinanceComponents/RecurrentPayme
 ChartJS.register(ArcElement, CategoryScale, Tooltip, Legend, LinearScale, BarElement, PointElement, LineElement)
 
 function FinanceDashboardPage() {
+
     return (
-        <div className='container mx-auto mt-6'>
-            <div className='grid grid-cols-10 gap-6'>
-                <div className='col-span-4 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+        <div className='h-[1800px] container mx-auto my-10'>
+
+            <div className='grid grid-cols-12 gap-6'>
+                <div className={`col-span-6`}>
                     <BarChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className={`col-span-3 flex flex-col justify-between`}>
                     <DoughChart />
-                </div>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
-
                     <VerticalChart />
                 </div>
-                <div className='col-span-2 bg-white shadow-custom rounded-lg border border-gray-200 overflow-y-auto transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className={`col-span-3 bg-white rounded-xl border border-gray-200 shadow-custom overflow-hidden`}>
                     <Calendar />
                 </div>
             </div>
-            <div className='grid grid-cols-10 gap-6 my-6'>
-                <div className='col-span-8 h-[700px] border bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+
+            <div className='grid grid-cols-12 gap-6 my-8'>
+                <div className={`col-span-9`}>
                     <LatestTransactions />
+                    <div className='grid grid-cols-12 my-10 gap-6'>
+                        <div className={`col-span-6`}>
+                            <InstallmentPayments />
+                        </div>
+                        <div className={`col-span-6`}>
+                            <RecurrentPayments />
+                        </div>
+                    </div>
                 </div>
-                <div className='col-span-2 h-[700px] bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
+                <div className={`col-span-3`}>
                     <AddTransaction />
                 </div>
             </div>
-            <div className='grid grid-cols-10 gap-6 mb-10'>
-                <div className='col-span-5 h-[500px] bg-white shadow-custom rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
-                    <InstallmentPayments />
-                </div>
-                <div className='col-span-5 h-[500px] bg-white shadow-custom  rounded-lg border border-gray-200 transition-all duration-200 ease-out hover:scale-101 hover:-translate-y-1'>
-                    <RecurrentPayments />
-                </div>
-            </div>
-
-
 
         </div>
     )
