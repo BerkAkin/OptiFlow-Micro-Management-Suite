@@ -6,8 +6,6 @@ import send from '../../assets/send.svg'
 import { useSendSurvey } from '../../hooks/SurveyHooks/useSurvey';
 import { useToatsContext } from '../../context/ToastContext';
 
-
-
 const initialSurvey = {
     title: "",
     questions: [
@@ -19,7 +17,6 @@ const initialSurvey = {
         },
     ]
 }
-
 
 function SurveyBuilder() {
     const mutation = useSendSurvey();
@@ -46,6 +43,7 @@ function SurveyBuilder() {
     }
 
     const handleSurveyName = (text: string) => {
+        if (!text.trim()) return;
         setSurvey(produce(survey, draft => {
             draft.title = text;
         }))
@@ -66,73 +64,107 @@ function SurveyBuilder() {
 
     const handleFinishSurvey = async () => {
         if (!survey.title.trim()) return;
-        console.log(survey)
         mutation.mutate(survey, {
-            onSuccess: () => {
-                showToast("Survey saved successfully")
-            },
-            onError: () => {
-                showToast("An error has occured")
-            }
+            onSuccess: () => showToast("Survey saved successfully"),
+            onError: () => showToast("An error has occured")
         });
     };
 
-
-
     return (
-        <div className='container m-10 bg-white mx-auto border border-gray-200 shadow-custom rounded-lg'>
-            <div className='text-center'>
-                <p className='text-5xl text-gray-600 p-6 font-rubik'>Build New Survey</p>
+        <div className='container my-10 mx-auto border border-gray-200 shadow-custom rounded-xl overflow-hidden'>
+            <div className='bg-white border-b border-gray-200 p-8 text-center'>
+                <h1 className='text-4xl font-bold text-gray-800 font-rubik tracking-tight'>Build New Survey</h1>
+                <p className='text-gray-400 mt-2 italic'>Start by giving a name to your survey...</p>
             </div>
 
-            <div className='flex justify-end m-6 pe-1'>
-                <input value={surveyName} onChange={(e) => setSurveyName(e.target.value)} className='cursor-pointer ps-6 w-[25%] border border-gray-200 rounded-sm outline-none focus:outline-none' placeholder='Survey Name...'></input>
-                <button onClick={() => handleSurveyName(surveyName)} className='transition-all hover:scale-102 active:scale-[0.95] cursor-pointer rounded-sm text-white p-2 text-lg'><img src={add} alt="" width={40} /></button>
-            </div>
-            {survey.title && (<div>
-                <div className='m-6 grid grid-cols-10'>
-                    <div className='col-span-6 flex items-center'>
-                        <p className='ps-6 text-3xl text-gray-600'>{survey.title}</p>
-                    </div>
-                    <div className='col-span-4 flex items-center'>
-                        <input value={question} onChange={(e) => setQuestion(e.target.value)} className='w-[90%] h-full cursor-pointer ps-6 border border-gray-200 rounded-sm outline-none focus:outline-none' placeholder='New Question...'></input>
-                        <button onClick={() => handleAddQuestion(question)} className='transition-all hover:scale-102 active:scale-[0.95] cursor-pointer rounded-sm text-white p-2 text-lg'><img src={add} alt="" width={40} /></button>
-                    </div>
-
+            <div className='p-8'>
+                <div className='flex gap-3 bg-white p-4 rounded-xl border border-gray-200 mb-8'>
+                    <input
+                        value={surveyName}
+                        onChange={(e) => setSurveyName(e.target.value)}
+                        className='flex-1 ps-4 py-3 text-lg border-b-2 border-transparent transition-all outline-none text-gray-700'
+                        placeholder='Type survey title here...'
+                    />
+                    <button
+                        onClick={() => handleSurveyName(surveyName)}
+                        className='bg-blue-600 hover:bg-blue-700 p-3 rounded-lg transition-all transform active:scale-95 cursor-pointer'
+                    >
+                        <img src={add} alt="Add" className="brightness-0 invert w-6 h-6" />
+                    </button>
                 </div>
-                <div>
-                    {survey.questions.map((question, qIndex) => (
-                        <div key={qIndex} className='rounded-lg p-6 m-6 border border-gray-200'>
-                            <div className='grid grid-cols-10'>
-                                <div className='col-span-9'><p className='ps-4 text-2xl text-gray-600 pt-2'>{qIndex + 1}) {question.title}</p></div>
-                                <div className='col-span-1 flex justify-end'><button onClick={() => deleteQuestion(qIndex)} className='cursor-pointer transition-all hover:scale-102 active:scale-[0.95]'><img src={trash} alt="" width={40} /></button></div>
-                            </div>
 
-                            <div className='mt-2'>
-                                {question.answers.map((answer, aIndex) => (
-                                    <div key={aIndex} className='ps-6 flex justify-start items-center'>
-                                        <p className=" block w-[35%] text-lg text-gray-700 py-1">-{answer.title}</p>
-                                        <button onClick={() => deleteAnswer(qIndex, aIndex)} className='cursor-pointer ps-2 transition-all hover:scale-102 active:scale-[0.95]'><img src={trash} alt="" width={25} /></button>
-                                    </div>
-                                ))}
+                {survey.title && (
+                    <div className="space-y-6">
+                        <div className='bg-white flex flex-col flex-row items-center justify-between gap-4 p-6 rounded-xl border border-gray-200'>
+                            <h2 className='text-2xl font-semibold text-slate-700 ps-4'>
+                                {survey.title} Survey
+                            </h2>
+                            <div className='flex flex-1 max-w-md gap-2'>
+                                <input
+                                    value={question}
+                                    onChange={(e) => setQuestion(e.target.value)}
+                                    className='flex-1 ps-4 py-2 rounded-lg border border-gray-200 outline-none'
+                                    placeholder='New Question Text...'
+                                />
+                                <button
+                                    onClick={() => handleAddQuestion(question)}
+                                    className='bg-green-500 hover:bg-green-600 p-2 rounded-lg transition-all transform active:scale-95 cursor-pointer'
+                                >
+                                    <img src={add} alt="Add" className="brightness-0 invert w-6 h-6" />
+                                </button>
                             </div>
-                            <div className='flex justify-start'>
-                                <input value={answer} onChange={(e) => setAnswer(e.target.value)} className='cursor-pointer w-[30%] ps-6 ms-4 border border-gray-200 outline-none focus:outline-none rounded-sm' placeholder='New Answer...'></input>
-                                <button onClick={() => handleAddAnswer(answer, qIndex)} className='cursor-pointer p-2 transition-all hover:scale-102 active:scale-[0.95]'><img src={add} alt="" width={40} /></button>
-                            </div>
-
                         </div>
 
-                    ))}
-                </div>
+                        <div className='space-y-6'>
+                            {survey.questions.map((question, qIndex) => (
+                                <div key={qIndex} className='bg-white rounded-xl p-6 border border-gray-200 transition-all'>
+                                    <div className='flex justify-between items-start mb-4'>
+                                        <h3 className='text-xl font-medium text-gray-800 flex items-center'>
+                                            <span className='text-slate-700  px-2 mr-3'>{qIndex + 1})</span>
+                                            {question.title}
+                                        </h3>
+                                        <button onClick={() => deleteQuestion(qIndex)} className='p-2 hover:bg-red-200 rounded-full transition-colors cursor-pointer'>
+                                            <img src={trash} alt="Delete" className="w-5 h-5 transition-opacity" />
+                                        </button>
+                                    </div>
 
-                <div className='flex justify-end'>
-                    <button onClick={handleFinishSurvey} className='cursor-pointer m-6 bg-gray-700 hover:bg-gray-900 rounded-sm text-white p-2 text-lg transition-all active:scale-[0.95]'><img src={send} alt="" /></button>
-                </div>
+                                    <div className='space-y-2 mb-6 ml-10'>
+                                        {question.answers.map((answer, aIndex) => (
+                                            <div key={aIndex} className='flex items-center border border-gray-200 rounded-lg px-4 py-2 w-fit min-w-[200px]'>
+                                                <p className="flex-1 text-gray-600">{answer.title}</p>
+                                                <button onClick={() => deleteAnswer(qIndex, aIndex)} className='ml-4 transition-opacity p-1 hover:bg-red-200 rounded-full cursor-pointer'>
+                                                    <img src={trash} alt="Delete" className="w-4 h-4" />
+                                                </button>
+                                            </div>
+                                        ))}
+                                    </div>
 
-            </div>)}
+                                    <div className='flex items-center gap-2 ml-10'>
+                                        <input
+                                            value={answer}
+                                            onChange={(e) => setAnswer(e.target.value)}
+                                            className='text-sm border-b border-gray-200 outline-none py-1 w-48 transition-colors'
+                                            placeholder='Add an option...'
+                                        />
+                                        <button onClick={() => handleAddAnswer(answer, qIndex)} className='hover:bg-green-100 rounded-full transition-colors cursor-pointer'>
+                                            <img src={add} alt="Add" className="w-5 h-5" />
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
-
+                        <div className='flex justify-center pt-10'>
+                            <button onClick={handleFinishSurvey}
+                                className='flex items-center gap-3 bg-blue-600 text-white px-10 py-4 rounded-full cursor-pointer font-semibold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50'
+                                disabled={survey.questions.length === 0}>
+                                <span>Finish & Create Survey</span>
+                                <img src={send} alt="Send" className="w-5 h-5 brightness-0 invert" />
+                            </button>
+                        </div>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
