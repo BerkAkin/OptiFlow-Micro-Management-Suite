@@ -2,11 +2,28 @@ import styles from './styles.module.css';
 
 function Spinner() {
     return (
-        <div className='h-full w-full p-6 flex justify-center items-center flex-col'>
-            <div className={`${styles.loader} rounded-full border-3 border-gray-200 border-t-gray-400 size-32`}></div>
-            <p className={`my-4 text-gray-400`}>Loading</p>
+        <div className='h-full w-full p-10 flex flex-col justify-center items-center'>
+            <div className="relative">
+                {/* Arka plan halkası (Opsiyonel: Daha derinlikli bir görünüm için) */}
+                <div className="absolute inset-0 rounded-full border-4 border-gray-100 size-24"></div>
+
+                {/* Hareketli halka */}
+                <div className={`
+                    ${styles.loader} 
+                    rounded-full 
+                    border-4 
+                    border-transparent 
+                    border-t-indigo-500 
+                    border-r-indigo-500/30 
+                    size-24
+                `}></div>
+            </div>
+
+            <p className="mt-6 text-sm font-medium text-gray-400 tracking-widest uppercase animate-pulse">
+                Yükleniyor
+            </p>
         </div>
-    )
+    );
 }
 
-export default Spinner
+export default Spinner;
