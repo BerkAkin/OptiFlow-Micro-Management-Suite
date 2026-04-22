@@ -5,11 +5,6 @@ import DynamicTable from '../../DynamicTable/DynamicTable'
 import ErrorMessage from '../../ErrorMessage/ErrorMessage';
 import Spinner from '../../Spinner/Spinner';
 
-interface filterValues {
-    date: string,
-    description: string
-}
-
 
 function MyDayOffs() {
     const [page, setPage] = useState(1);
@@ -17,9 +12,9 @@ function MyDayOffs() {
 
     const mutation = useRequestDayOff();
     const { isLoading, error, data } = useMyDayOffs(filters, page);
-    if (isLoading) return <Spinner />;
-    if (error || !data) return <ErrorMessage />;
 
+    if (isLoading) return <div className="h-[500px] flex items-center justify-center"><Spinner /></div>;
+    if (error || !data) return <div className="h-[500px] flex items-center justify-center"><ErrorMessage /></div>;
 
     const previousPage = () => {
         if (page > 1) setPage(page - 1);
@@ -29,7 +24,6 @@ function MyDayOffs() {
         if (page < data.maxPage) setPage(page + 1)
     }
 
-
     const handleSubmit = (payload: any) => {
         mutation.mutate({ payload: payload });
     }
@@ -37,32 +31,57 @@ function MyDayOffs() {
     const initialValues = {
         topic: "",
         description: "",
-        days: 10,
+        days: 1,
         startingDate: new Date().toISOString().split("T")[0]
     }
 
     const inputFields = [
-        { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Topic..." },
-        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Description..." },
-        { name: "startingDate", id: "startingDate", type: "date" as const, label: "Date", placeholder: "" },
-        { name: "days", id: "days", type: "number" as const, label: "Days", placeholder: "" },
+        { name: "topic", id: "topic", type: "text" as const, label: "Topic", placeholder: "Reason for leave..." },
+        { name: "startingDate", id: "startingDate", type: "date" as const, label: "Start Date", placeholder: "" },
+        { name: "days", id: "days", type: "number" as const, label: "Number of Days", placeholder: "" },
+        { name: "description", as: "textarea" as const, id: "description", type: "text" as const, label: "Description", placeholder: "Additional notes..." },
     ]
 
-    const filterFunction = (values: any) => {
+    const handleFilterUpdate = (values: any) => {
         setPage(1);
         setFilters(values);
     };
-    return (
-        <div className='grid grid-cols-12 gap-6 w-full h-[500px]'>
 
-            <div className='col-span-10 border border-gray-200 bg-white rounded-lg shadow-custom h-[500px] w-full'>
-                <DynamicTable onNext={nextPage} onPrev={previousPage} filterFields={data.filterFields} handleFilter={filterFunction} data={data.data} title='My Off Days' />
+    return (
+        <div className='flex gap-6 w-full min-h-[550px] grid grid-cols-12'>
+
+            <div className="col-span-9">
+                <DynamicTable
+                    onNext={nextPage}
+                    onPrev={previousPage}
+                    filterFields={data.filterFields}
+                    handleFilter={handleFilterUpdate}
+                    data={data.data}
+                    title='My Leave Requests'
+                />
             </div>
-            <div className='col-span-2 border border-gray-200 bg-white rounded-lg shadow-custom h-[340px] '>
-                <DynamicForm colorScheme='bg-sky-400' hoverScheme='hover:bg-sky-500' fields={inputFields} initialValues={initialValues} onSubmit={handleSubmit} title='Take A Day Off' />
+
+            <div className='flex-1 flex flex-col gap-4 col-span-3'>
+                <div className='bg-white border border-gray-200 rounded-xl shadow-custom p-2 flex flex-col'>
+                    <div className="px-4 pt-4 pb-2">
+                        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">New Request</h3>
+                        <p className="text-[11px] text-slate-400">Fill out the form to submit your leave for approval.</p>
+                    </div>
+
+                    <div className="flex-1">
+                        <DynamicForm
+                            colorScheme='bg-blue-600'
+                            hoverScheme='hover:bg-blue-700'
+                            fields={inputFields}
+                            initialValues={initialValues}
+                            onSubmit={handleSubmit}
+                            title=''
+                        />
+                    </div>
+                </div>
             </div>
         </div >
     )
 }
 
-export default MyDayOffs
+export default MyDayOffs;
