@@ -23,96 +23,92 @@ interface TableProps {
     isRefreshing?: any
 }
 
-
-
-
-
-function DynamicTable({ title, data, children, handleFilter, filterFields, onNext, onPrev, onRefresh, isRefreshing }: TableProps) {
-
+function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev, onRefresh, isRefreshing }: TableProps) {
     const columns = data.length > 0 ? Object.keys(data[0]) : [];
-    const gridTemplate = columns.map(col => (col === 'description' ? '4fr' : '1fr')).join(' ')
+    const gridTemplate = columns.map(col => (col === 'description' ? '3fr' : '1fr')).join(' ')
     const filterInitials = filterFields ? Object.fromEntries(filterFields.map((item) => [item.name, ""])) : {}
 
     return (
-        <div className='h-full'>
-            <div className='h-[10%] text-start flex justify-between'>
-                <p className={`text-xl font-semibold text-slate-800 ps-4 py-4`}>{title}</p>
-                <button onClick={onRefresh} type="button" className={`flex items-center justify-center cursor-pointer transition-all duration-200 mx-4 hover:opacity-100 opacity-70
-                        ${isRefreshing ? 'animate-spin opacity-100' : 'text-slate-400'}`}>
-                    <img src={icon} width={30} />
+        <div className="flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-custom">
+            <div className="h-[12%] flex justify-between items-center px-5 border-b border-gray-100 bg-white">
+                <p className="text-lg font-bold text-slate-800 uppercase tracking-tight font-rubik">{title}</p>
+                <button onClick={onRefresh} type="button" className="p-2 hover:bg-gray-50 rounded-full transition-all">
+                    <img src={icon} className={`w-6 h-6 ${isRefreshing ? 'animate-spin' : 'opacity-50'}`} alt="refresh" />
                 </button>
             </div>
 
-            <div className={`h-[8%]  p-2 text-slate-600 tracking-wide font-semibold border-b border-gray-200 text-md grid `} style={{ gridTemplateColumns: gridTemplate }} >
+            <div className="h-[10%] grid items-center bg-slate-50 border-b border-gray-200 px-4 text-[11px] font-bold text-slate-500 uppercase tracking-widest" style={{ gridTemplateColumns: gridTemplate }}>
                 {columns.map((item, index) => (
-                    <div key={index} className={`${item === "description" ? "text-start ps-2" : "text-center ps-3"} text-sm uppercase`}>
+                    <div key={index} className={item === "description" ? "text-start" : "text-center"}>
                         {item}
                     </div>
                 ))}
-
-
             </div>
-            <div className="h-[72%] overflow-y-auto border-b border-gray-200">
-                {data?.map((row, index) => (
-                    <div key={index} className={`text-slate-500 font-normal p-2 bg-gray-50 hover:bg-slate-100 text-md grid`} style={{ gridTemplateColumns: gridTemplate }} >
+
+            <div className="h-[63%] overflow-y-auto">
+                {data.map((row, index) => (
+                    <div
+                        key={index}
+                        className="grid items-center px-4 py-3 border-b border-gray-50 hover:bg-blue-50/20 transition-colors text-slate-600 text-sm"
+                        style={{ gridTemplateColumns: gridTemplate }}
+                    >
                         {columns.map((col) => (
-                            <div key={col} className={`${col === "description" ? "text-start ps-2" : "text-center ps-1  break-all"} text-sm`}>
-
-                                {col === "date" && row[col] ? row[col].split("T")[0].split("-").reverse().join(".") : row[col]}
-
+                            <div key={col} className={col === "description" ? "text-start" : "text-center break-all px-1"}>
+                                {col === "date" && row[col]
+                                    ? row[col].split("T")[0].split("-").reverse().join(".")
+                                    : row[col]}
                             </div>
                         ))}
                     </div>
                 ))}
             </div>
-            <div className='h-[10%] flex items-center'>
+
+            <div className="h-[15%] border-t border-gray-200 bg-gray-50 px-4 flex items-center">
                 {handleFilter && filterFields && (
-
                     <Formik onSubmit={handleFilter} initialValues={filterInitials}>
-                        <Form>
-                            <div className='grid grid-cols-12 pe-10 ps-2 flex items-center'>
-                                <div className=" col-span-10 grid grid-cols-12">
-                                    {filterFields.map((item, index) => (
-                                        <div key={index} className='col-span-4'>
+                        <Form className="w-full grid grid-cols-12 gap-3 items-center">
+                            <div className="col-span-9 grid grid-cols-3 gap-2">
+                                {filterFields.map((item, index) => (
+                                    <div key={index}>
+                                        {item.type === 'select' ? (
+                                            <Field
+                                                as="select"
+                                                name={item.name}
+                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                                            >
+                                                <option value="">{item.placeholder || 'Seç'}</option>
+                                                {item.options?.map((opt, i) => (
+                                                    <option key={i} value={opt.value}>{opt.label}</option>
+                                                ))}
+                                            </Field>
+                                        ) : (
+                                            <Field
+                                                type={item.type}
+                                                name={item.name}
+                                                placeholder={item.placeholder}
+                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                                            />
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
 
-                                            {item.type === 'select' ? (
-                                                <Field className="rounded-sm cursor-pointer px-6 py-1 w-[90%] border border-gray-200 text-gray-600 focus:outline-none" as={item.type} type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} >
-                                                    <option value="">Select</option>
-                                                    {item.options?.map((opt, index) => (
-                                                        <option key={index} value={opt.value}>{opt.label}</option>
-                                                    ))}
-                                                </Field>
-
-                                            ) : (
-                                                <Field className="rounded-sm cursor-pointer w-[90%] px-6 py-1 border border-gray-200 text-gray-600 focus:outline-none" type={item.type} name={item.name} id={item.name} placeholder={item.placeholder} />
-                                            )}
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className=' col-span-1 flex justify-start items-center'>
-                                    <button type="submit" className='cursor-pointer'>
-                                        <img src={magnify} alt="" width={25} />
-
-                                    </button>
-                                </div>
-                                <div className=' flex col-span-1 min-w-[80px] items-center'>
-                                    <button type="button" onClick={onPrev} className="cursor-pointer w-full h-full p-2">
-                                        <img src={left} alt="" width={35} />
-                                    </button>
-                                    <button type="button" onClick={onNext} className="cursor-pointer w-full h-full p-2">
-                                        <img src={right} alt="" width={35} />
-                                    </button>
-                                </div>
-
+                            <div className="col-span-3 flex justify-end items-center gap-2">
+                                <button type="submit" className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
+                                    <img src={magnify} width={20} alt="search" />
+                                </button>
+                                <div className="h-6 w-[1px] bg-gray-300 mx-1"></div>
+                                <button type="button" onClick={onPrev} className="hover:scale-110 transition-transform">
+                                    <img src={left} width={28} alt="prev" />
+                                </button>
+                                <button type="button" onClick={onNext} className="hover:scale-110 transition-transform">
+                                    <img src={right} width={28} alt="next" />
+                                </button>
                             </div>
                         </Form>
                     </Formik>
-
-
                 )}
-
             </div>
-
         </div>
     )
 }
