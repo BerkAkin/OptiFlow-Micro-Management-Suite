@@ -36,7 +36,7 @@ function InstallmentPayments() {
 
 
     return (
-        <div className='w-full h-full'>
+        <div className='w-full h-[480px]'>
             <DynamicTable isRefreshing={isFetching} onRefresh={() => refetch({ cancelRefetch: false })} onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Installments' />
         </div>
 
