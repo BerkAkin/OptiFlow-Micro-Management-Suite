@@ -11,7 +11,7 @@ function Settings() {
         <div className='mx-auto'>
             <div className='bg-white rounded-xl shadow-custom border border-gray-200 overflow-hidden'>
                 <div className='px-6 py-4 border-b border-gray-50 bg-gray-50/30'>
-                    <h2 className='text-lg font-bold text-slate-800 tracking-tight'>Preferences</h2>
+                    <h2 className='text-lg font-rubik font-bold text-slate-800 tracking-tight'>Preferences</h2>
                     <p className='text-xs text-slate-400'>You can manage application notifications and email settings here.</p>
                 </div>
 
