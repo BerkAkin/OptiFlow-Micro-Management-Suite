@@ -1,13 +1,15 @@
 .fc-button {
-  background-color: #9ca3af !important;
+  background-color: #2563eb !important;
   color: white !important;
   border:none !important;
-  border-radius: 2px !important;
+  border-radius: 12px !important;
+  margin-left: 10px !important;
   
 }
 
 .fc-button:hover {
-  background-color: #6b7280 !important;
+  background-color: #1d4ed8 !important;
+  border-radius: 12px;
 }
 
 .fc-header-toolbar{
@@ -16,7 +18,10 @@
 }
 
 .fc-toolbar-title {
-  font-size: 18px !important;   
+  font-size: 18px !important; 
+  color: #1e293b;
+  letter-spacing: -0.025;  
+  font-weight: 600;
 }
 
 .fc-scrollgrid,
