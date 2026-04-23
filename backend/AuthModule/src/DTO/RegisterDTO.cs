@@ -16,6 +16,8 @@
         public string Province { get; set; }
         public string District { get; set; }
         public string FullAddress { get; set; }
+        public int? DepartmentId { get; set; }
+
 
 
         //TENANT BİLGİLERİ
