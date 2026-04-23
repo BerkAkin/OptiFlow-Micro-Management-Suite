@@ -84,8 +84,8 @@ function MoodRecorder() {
                                                     className={`
                                                         px-3 py-1 text-sm font-medium rounded-full border transition cursor-pointer
                                                         ${isSelected
-                                                            ? "bg-yellow-500 border-yellow-500 text-white scale-105"
-                                                            : "bg-white border-gray-200 text-gray-500 hover:border-yellow-300 hover:text-yellow-500"}
+                                                            ? "bg-blue-500 border-blue-500 text-white scale-105"
+                                                            : "bg-white border-gray-200 text-gray-500 hover:border-blue-300 hover:text-blue-500"}
                                                     `}
                                                 >
                                                     {item}
@@ -100,7 +100,7 @@ function MoodRecorder() {
                                 <button
                                     type='submit'
                                     disabled={isSubmitting}
-                                    className=' relative p-3 bg-yellow-600 rounded-xl hover:bg-yellow-700 transition active:scale-90 disabled:opacity-50'
+                                    className=' relative p-3 bg-blue-600 rounded-xl hover:bg-blue-700 transition active:scale-90 disabled:opacity-50'
                                 >
                                     <img src={save} alt="Save" className="w-8 h-8 brightness-0 invert transition-transform cursor-pointer" />
                                 </button>
