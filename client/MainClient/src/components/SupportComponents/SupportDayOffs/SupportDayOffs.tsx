@@ -25,10 +25,10 @@ function SupportDayOffs() {
             <div className='px-8 py-6 border-b border-slate-100'>
                 <div className='flex items-center justify-between'>
                     <div>
-                        <h2 className='text-2xl font-bold font-rubik text-slate-800 tracking-tight'>
+                        <h2 className='text-lg font-bold font-rubik text-slate-800 tracking-tight'>
                             Day Off Requests
                         </h2>
-                        <p className='text-sm text-slate-500 mt-1 font-medium'>
+                        <p className='text-sm text-slate-500 mt-1'>
                             Manage and review employee absence applications
                         </p>
                     </div>
