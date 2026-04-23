@@ -1,5 +1,4 @@
 .loader {
-  /* linear: duraksama yapmadan sabit hızla döner */
   animation: spin 0.8s linear infinite;
 }
 
