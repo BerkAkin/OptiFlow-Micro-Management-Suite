@@ -31,9 +31,9 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
     return (
         <div className="flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-custom">
             <div className="h-[12%] flex justify-between items-center px-5 border-b border-gray-100 bg-white">
-                <p className="text-lg font-bold text-slate-800 uppercase tracking-tight font-rubik">{title}</p>
+                <p className="text-lg font-bold text-slate-800 tracking-tight font-rubik">{title}</p>
                 <button onClick={onRefresh} type="button" className="p-2 hover:bg-gray-50 rounded-full transition-all">
-                    <img src={icon} className={`w-6 h-6 ${isRefreshing ? 'animate-spin' : 'opacity-50'}`} alt="refresh" />
+                    <img src={icon} className={`w-6 h-6 cursor-pointer ${isRefreshing ? 'animate-spin' : ''}`} alt="refresh" />
                 </button>
             </div>
 
@@ -49,7 +49,7 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
                 {data.map((row, index) => (
                     <div
                         key={index}
-                        className="grid items-center px-4 py-3 border-b border-gray-50 hover:bg-blue-50/20 transition-colors text-slate-600 text-sm"
+                        className="grid items-center px-4 py-3 border-b border-gray-50 hover:bg-gray-100 transition-colors text-slate-600 text-sm"
                         style={{ gridTemplateColumns: gridTemplate }}
                     >
                         {columns.map((col) => (
@@ -74,7 +74,7 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
                                             <Field
                                                 as="select"
                                                 name={item.name}
-                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none"
                                             >
                                                 <option value="">{item.placeholder || 'Seç'}</option>
                                                 {item.options?.map((opt, i) => (
@@ -86,7 +86,7 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
                                                 type={item.type}
                                                 name={item.name}
                                                 placeholder={item.placeholder}
-                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                                                className="w-full bg-white border border-gray-300 rounded-md py-1.5 px-3 text-xs outline-none"
                                             />
                                         )}
                                     </div>
@@ -94,14 +94,14 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
                             </div>
 
                             <div className="col-span-3 flex justify-end items-center gap-2">
-                                <button type="submit" className="p-2 hover:bg-gray-200 rounded-lg transition-colors">
+                                <button type="submit" className="cursor-pointer p-2 hover:bg-gray-200 rounded-lg transition-colors">
                                     <img src={magnify} width={20} alt="search" />
                                 </button>
                                 <div className="h-6 w-[1px] bg-gray-300 mx-1"></div>
-                                <button type="button" onClick={onPrev} className="hover:scale-110 transition-transform">
+                                <button type="button" onClick={onPrev} className="cursor-pointer hover:scale-110 transition-transform">
                                     <img src={left} width={28} alt="prev" />
                                 </button>
-                                <button type="button" onClick={onNext} className="hover:scale-110 transition-transform">
+                                <button type="button" onClick={onNext} className="cursor-pointer hover:scale-110 transition-transform">
                                     <img src={right} width={28} alt="next" />
                                 </button>
                             </div>
