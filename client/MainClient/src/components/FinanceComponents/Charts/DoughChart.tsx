@@ -53,7 +53,7 @@ function DoughChart() {
     return (
         <div className="h-[230px] bg-white rounded-xl shadow-custom border border-gray-200 hover:-translate-y-1 transition p-6 flex flex-col ">
             <div className="mb-2">
-                <h3 className="text-lg font-bold text-slate-800 font-rubik text-center md:text-left">
+                <h3 className="text-lg font-bold text-slate-800 font-rubik">
                     Categorical
                 </h3>
             </div>
@@ -62,10 +62,10 @@ function DoughChart() {
                 <Doughnut data={chartData} options={options} />
 
                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none ">
-                    <span className="text-3xl font-bold text-slate-800 leading-none">
+                    <span className="text-3xl font-bold text-slate-800">
                         {totalTransactions}
                     </span>
-                    <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold mt-1">
+                    <span className="text-[10px] uppercase tracking-widest text-slate-400 font-bold">
                         Total
                     </span>
                 </div>
