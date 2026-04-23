@@ -49,17 +49,14 @@ function AddTransaction() {
 
     return (
         <div className="w-full bg-white rounded-xl shadow-custom border border-gray-200 overflow-hidden transition-all">
-            <div className="bg-blue-600 p-4">
-                <h2 className="text-xl font-semibold text-white">Add New Transaction</h2>
-            </div>
 
-            <div className="p-6">
+            <div className="p-7">
                 <DynamicForm
                     validationScheme={addTransactionValidationScheme}
                     colorScheme="bg-blue-600"
                     hoverScheme="hover:bg-blue-700"
                     initialValues={initialValues}
-                    title=""
+                    title="Add New Transaction"
                     onSubmit={handleSubmit}
                     fields={fields}
                 />
