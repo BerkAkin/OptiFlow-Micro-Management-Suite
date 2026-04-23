@@ -20,17 +20,17 @@ function SuggestionShowcaseCard({ isStar, Description, VoteCount }: suggestionSh
             </div>
 
             <div className='flex-1 px-5 flex flex-col justify-center '>
-                <p className={`text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-1`}>
+                <p className={`text-md font-bold font-rubik tracking-tight text-amber-600 mb-1`}>
                     {isStar ? "This Month's Best" : "All Time Best"}
                 </p>
-                <p className='text-slate-700 text-sm font-medium line-clamp-2 leading-snug'>
+                <p className='text-slate-700 text-sm font-rubik'>
                     {Description}
                 </p>
             </div>
 
             <div className='w-24 h-full flex flex-col items-center justify-center border-s border-gray-50 bg-white'>
-                <span className='text-[10px] font-semibold text-gray-400 uppercase tracking-tighter mb-1'>Votes</span>
-                <span className='text-3xl font-black text-slate-800 leading-none'>
+                <span className='text-xs font-semibold text-gray-400 tracking-tight mb-1'>Votes</span>
+                <span className='text-3xl font-black text-slate-800 tracking-tight'>
                     {VoteCount}
                 </span>
             </div>
