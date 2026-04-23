@@ -94,19 +94,14 @@ function VerticalChart() {
     return (
         <div className="h-[230px] bg-white rounded-xl shadow-custom border border-gray-200 hover:-translate-y-1 transition p-6 flex flex-col ">
             <div className="mb-4">
-                <h3 className="text-lg font-bold text-slate-800 font-rubik uppercase tracking-tight">
+                <h3 className="text-lg font-bold text-slate-800 font-rubik tracking-tight">
                     Most Expenses
                 </h3>
-                <p className="text-xs text-slate-500">Categorical</p>
+                <p className="text-sm text-slate-500">Categorical</p>
             </div>
 
             <div className="flex-1 min-h-0">
                 <Bar data={chartData} options={options} />
-            </div>
-
-            <div className="mt-4 pt-4 border-t border-gray-50 flex justify-between items-center text-sm">
-                <span className="text-slate-500 italic">Most: {categories[0]}</span>
-                <span className="font-bold text-blue-600">{values[0]}₺</span>
             </div>
         </div>
     );
