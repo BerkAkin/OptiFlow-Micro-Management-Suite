@@ -33,7 +33,7 @@ function Calendar() {
     }
 
     return (
-        <div className="fc-toolbar fc-header-toolbar p-3 h-[420px]">
+        <div className="fc-toolbar fc-header-toolbar p-3 h-[420px] font-rubik">
             <FullCalendar
                 height={400}
                 plugins={[dayGridPlugin, interactionPlugin]}
