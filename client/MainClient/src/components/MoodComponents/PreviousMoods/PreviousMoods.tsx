@@ -45,14 +45,14 @@ function PreviousMoods() {
         labels: days,
         datasets: [
             {
-                label: "Ruh Hali",
+                label: "Mood",
                 data: values,
                 fill: true,
                 backgroundColor: "#ffffff",
-                borderColor: "#eab308",
+                borderColor: "#2563eb",
                 borderWidth: 3,
                 pointBackgroundColor: "#ffffff",
-                pointBorderColor: "#eab308",
+                pointBorderColor: "#2563eb",
                 pointBorderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 6,
@@ -111,14 +111,14 @@ function PreviousMoods() {
         <div className="w-full bg-white rounded-xl border border-gray-200 shadow-custom p-6 flex flex-col">
             <div className='flex items-center justify-between mb-6 px-2'>
                 <div>
-                    <h2 className="text-xl font-bold text-slate-700 tracking-tight font-rubik">
+                    <h2 className="text-lg font-bold text-slate-800 font-rubik tracking-tight">
                         Mood History
                     </h2>
                 </div>
 
             </div>
 
-            <div className='flex-1 w-full min-h-[250px]'>
+            <div className='w-full min-h-[200px]'>
                 <Line data={chartData} options={options} />
             </div>
         </div>
