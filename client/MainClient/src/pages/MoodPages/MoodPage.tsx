@@ -7,29 +7,34 @@ import RoleBasedGuard from '../../components/RoleBasedGuard/RoleBasedGuard'
 
 function MoodPage() {
     return (
-        <div className='container my-10 mx-auto '>
+        <div className='container my-10 mx-auto'>
             <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
                 <div>
                     <MoodRecorder />
                 </div>
             </RoleBasedGuard>
-            <div className='grid grid-cols-10 my-6 gap-6 '>
-                <div className='h-[700px] col-span-7'>
-                    <AllPreviousMoods />
+
+            <div className='grid grid-cols-12 my-6 gap-6'>
+                <div className='col-span-8'>
+                    <div className='h-[600px]'>
+                        <AllPreviousMoods />
+                    </div>
                 </div>
-                <div className='col-span-3 '>
+
+                <div className='col-span-4 '>
                     <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
-                        <div className=' mb-2'>
+                        <div className='mb-6'>
                             <PreviousMoods />
                         </div>
-                    </RoleBasedGuard>
-                    <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
-                        <div className='h-[250px]'>
+                        <div className='h-[275px]'>
                             <MyComments />
                         </div>
                     </RoleBasedGuard>
-                    <RoleBasedGuard allowedDepartments={["HR"]}>
-                        <div className='h-[480px]'>
+                </div>
+
+                <div className='col-span-12'>
+                    <RoleBasedGuard allowedDepartments={["HR", "Manager"]}>
+                        <div>
                             <CommentOnEmployees />
                         </div>
                     </RoleBasedGuard>
