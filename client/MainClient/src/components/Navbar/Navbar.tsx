@@ -38,7 +38,7 @@ function Navbar() {
     `p-2 rounded-xl transition-all duration-200 hover:bg-indigo-50 group ${location.pathname.includes(path) ? 'bg-indigo-50 ring-1 ring-indigo-100' : ''}`;
 
   return (
-    <nav className="h-[80px] w-full bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-[50]">
+    <nav className="h-[80px] w-full bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-100">
       <div className="container mx-auto h-full flex items-center justify-between px-4">
 
         <Link to="/" className="flex items-center gap-2 group">
