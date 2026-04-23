@@ -32,7 +32,7 @@ function DynamicForm({ title, validationScheme, colorScheme, hoverScheme, fields
     return (
         <div className='p-6'>
             {title && (
-                <p className="text-xl font-bold text-slate-800 font-rubik mb-6 tracking-tight">
+                <p className="text-lg font-bold text-slate-800 font-rubik mb-6 tracking-tight">
                     {title}
                 </p>
             )}
