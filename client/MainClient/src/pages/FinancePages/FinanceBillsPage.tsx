@@ -114,7 +114,7 @@ function FinanceBillsPage() {
     return (
         <div className="min-h-screen bg-gray-50 py-10 px-4 ">
             {isAdd && (
-                <div className='fixed inset-0 bg-black/40 backdrop-blur-xs flex justify-center items-center z-50 transition-all'>
+                <div className='fixed inset-0 bg-black/20 backdrop-blur-xs flex justify-center items-center z-100 transition'>
                     <div className='bg-white rounded-xl shadow-custom border border-gray-200 overflow-hidden w-96 transform transition'>
                         <div className="p-2">
                             <DynamicForm
@@ -142,7 +142,7 @@ function FinanceBillsPage() {
                                 <p className="text-sm text-gray-400 mt-1">Operation Number: #INV-{Math.floor(Math.random() * 10000)}</p>
                             </div>
                             <div className='text-right'>
-                                <p className='text-5xl font-black text-gray-300 tracking-tighter font-rubik relative z-10 uppercase'>INVOICE</p>
+                                <p className='text-5xl font-black text-gray-300 tracking-tighter font-rubik relative'>INVOICE</p>
                             </div>
                         </div>
 
