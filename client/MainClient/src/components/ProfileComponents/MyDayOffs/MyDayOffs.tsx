@@ -64,8 +64,8 @@ function MyDayOffs() {
             <div className='flex-1 flex flex-col gap-4 col-span-3'>
                 <div className='bg-white border border-gray-200 rounded-xl shadow-custom p-2 flex flex-col'>
                     <div className="px-4 pt-4 pb-2">
-                        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider">New Request</h3>
-                        <p className="text-[11px] text-slate-400">Fill out the form to submit your leave for approval.</p>
+                        <h3 className="text-lg font-rubik font-bold text-slate-800 tracking-tight">New Request</h3>
+                        <p className="text-sm text-slate-500">Fill out the form to submit your leave for approval.</p>
                     </div>
 
                     <div className="flex-1">
