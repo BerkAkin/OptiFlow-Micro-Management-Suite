@@ -90,7 +90,7 @@ function ProfilePage() {
             </div>
 
             {isChange && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/10 backdrop-blur-xs">
+                <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/10 backdrop-blur-xs">
                     <UpdatePasswordPopUp handleChange={handleChangePassword} />
                 </div>
             )}
