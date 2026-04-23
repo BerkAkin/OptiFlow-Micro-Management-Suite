@@ -26,7 +26,7 @@ function MakeSuggestionCard() {
     ]
 
     return (
-        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-50 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
+        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-90 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
 
             <div className='p-1'>
                 <DynamicForm
