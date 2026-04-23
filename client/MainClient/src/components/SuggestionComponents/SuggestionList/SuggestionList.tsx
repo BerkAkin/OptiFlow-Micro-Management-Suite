@@ -13,7 +13,7 @@ function SuggestionList() {
         <div className='h-[650px] bg-white rounded-xl shadow-custom border border-gray-200 flex flex-col'>
 
             <div className='h-[12%] flex items-center border-b border-gray-50 px-8'>
-                <p className='text-xl font-bold text-gray-800 font-rubik'>Suggestions</p>
+                <p className='text-lg tracking-tight font-bold text-gray-800 font-rubik'>Suggestions</p>
             </div>
 
             <div className='flex-1 overflow-y-auto p-6'>
