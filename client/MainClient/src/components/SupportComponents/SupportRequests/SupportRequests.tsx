@@ -28,8 +28,8 @@ function SupportRequests() {
         <div className='grid grid-cols-12 gap-6 h-[calc(50vh-50px)]'>
             <div className='col-span-3 border border-gray-200 bg-white rounded-xl shadow-custom flex flex-col overflow-hidden'>
                 <div className='p-5 border-b border-slate-50'>
-                    <h2 className='text-xl font-bold text-slate-800 font-rubik tracking-tight'>Support Requests</h2>
-                    <p className='text-xs text-slate-500 font-medium mt-1'>Manage your tickets</p>
+                    <h2 className='text-lg font-bold text-slate-800 font-rubik tracking-tight'>Support Requests</h2>
+                    <p className='text-sm text-slate-500 mt-1'>Manage your tickets</p>
                 </div>
 
                 <div className='overflow-y-auto flex-grow p-3 space-y-3 bg-slate-50/30'>
@@ -37,15 +37,9 @@ function SupportRequests() {
                         const isActive = params.id === item.id.toString();
                         return (
                             <Link onClick={() => setOutletContext({ id: item.id, isClosed: item.isClosed })} key={item.id} to={`request/${item.id}/messages`}>
-                                <div className={`relative p-4 rounded-lg border transition hover:-translate-y-1 ${isActive ? 'bg-white border-gray-200 shadow-sm'
-                                    : 'bg-white border-gray-200'}`}>
-                                    <div className='flex justify-between items-start mb-3'>
-                                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider border ${item.isClosed
-                                            ? 'bg-slate-100 text-slate-500 border-slate-200'
-                                            : 'bg-emerald-50 text-emerald-600 border-emerald-100'
-                                            }`}>
-                                            {item.isClosed ? "Closed" : "Open"}
-                                        </span>
+                                <div className={`mb-4 relative px-4 py-2 rounded-lg border transition hover:-translate-y-1 ${isActive ? 'bg-blue-600 border-blue-200 text-white' : 'bg-white border-gray-200'}`}>
+                                    <div className='mb-3'>
+
 
                                         {!item.isClosed && (
                                             <RoleBasedGuard allowedDepartments={["HR"]}>
@@ -58,16 +52,24 @@ function SupportRequests() {
                                             </RoleBasedGuard>
                                         )}
                                     </div>
-
-                                    <div className='space-y-1'>
-                                        <p className='text-sm font-bold text-slate-700 leading-tight'>Category:<span className='text-xs text-slate-400 font-medium'> {item.category}</span></p>
+                                    <div>
+                                        <p className={`text-sm font-bold uppercase leading-tight ${isActive ? 'text-white' : ' text-slate-700'}`}>{item.userName}</p>
+                                    </div>
+                                    <div>
+                                        <p className={`text-sm font-semibold leading-tight ${isActive ? 'text-white' : ' text-slate-600'}`}>Category:
+                                            <span className={`text-xs font-medium ${isActive ? 'text-white' : ' text-slate-400'}`}> {item.category}</span>
+                                        </p>
                                     </div>
 
-                                    <div className='mt-4 flex items-center justify-between border-t border-slate-50 pt-3'>
-                                        <div className='flex items-center gap-2'>
-                                            <p className='text-xs font-semibold text-slate-600'>{item.userName}</p>
-                                        </div>
-                                        <p className='text-[10px] text-slate-400 font-medium'>{item.createdAt}</p>
+                                    <div className='mt-4 flex items-center justify-between border-t border-slate-50 pt-2'>
+                                        <span className={`px-2 py-0.5 rounded-full text-[11px] font-bold tracking-tight border ${item.isClosed
+                                            ? 'bg-slate-50 text-slate-600 border-slate-100'
+                                            : 'bg-green-50 text-green-600 border-green-100'
+                                            }`}>
+                                            {item.isClosed ? "Closed" : "Open"}
+                                        </span>
+
+                                        <p className={`text-xs font-medium ${isActive ? 'text-white' : ' text-slate-400'}`}>{item.createdAt}</p>
                                     </div>
                                 </div>
                             </Link>
