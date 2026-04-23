@@ -63,7 +63,7 @@ function SupportChat({ CurrentUserOnChat, closeChatWindow }: { CurrentUserOnChat
 
     return (
         <div className='flex flex-col h-full bg-slate-100 overflow-hidden'>
-            <div className='h-[60px] px-5 flex items-center justify-between bg-white border-b border-gray-100  z-10'>
+            <div className='h-[60px] px-5 flex items-center justify-between bg-white border-b border-gray-100'>
                 <div className='flex items-center gap-3'>
                     <div className='w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold uppercase'>
                         {CurrentUserOnChat.username}
