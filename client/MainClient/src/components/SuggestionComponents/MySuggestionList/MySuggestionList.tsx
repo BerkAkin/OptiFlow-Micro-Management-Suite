@@ -13,7 +13,7 @@ function MySuggestionList() {
         <div className='h-[650px] bg-white rounded-xl shadow-custom border border-gray-200 flex flex-col'>
 
             <div className='h-[12%] flex items-center border-b border-gray-100 px-8'>
-                <p className='text-xl font-bold text-gray-800 font-rubik tracking-tight'>My Suggestions</p>
+                <p className='text-lg font-bold text-gray-800 font-rubik tracking-tight'>My Suggestions</p>
             </div>
 
             <div className='flex-1 overflow-y-auto p-6 scrollbar-thin scrollbar-thumb-gray-100'>
@@ -27,7 +27,7 @@ function MySuggestionList() {
 
                 {data.length === 0 && (
                     <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-2">
-                        <p className="text-sm italic">You haven't made any suggestions yet.</p>
+                        <p className="text-sm">You haven't made any suggestions yet.</p>
                     </div>
                 )}
             </div>
