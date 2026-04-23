@@ -55,8 +55,8 @@ function SupportMessages() {
                     <h2 className='text-lg font-bold text-slate-800 font-rubik tracking-tight'>Messages</h2>
                 </div>
                 {isClosed && (
-                    <span className='bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-[10px] font-bold border border-slate-200'>
-                        ARCHIVED
+                    <span className='bg-slate-100 text-slate-500 px-3 py-1 rounded-full text-xs font-bold border border-slate-200'>
+                        Archived
                     </span>
                 )}
             </div>
