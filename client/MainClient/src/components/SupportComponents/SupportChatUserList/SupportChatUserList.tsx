@@ -24,7 +24,7 @@ function SupportChatUserList() {
                     <h2 className='font-bold font-rubik text-slate-800 text-lg tracking-tight'>
                         Live Support
                     </h2>
-                    <p className="text-[11px] text-slate-500 font-medium uppercase tracking-wider">Active Conversations</p>
+                    <p className="text-sm text-slate-500 tracking-tight">Active Conversations</p>
                 </div>
 
                 <div className='flex-grow overflow-y-auto p-3 space-y-2'>
