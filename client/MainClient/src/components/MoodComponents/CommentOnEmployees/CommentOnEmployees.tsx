@@ -39,10 +39,10 @@ function RateEmployees() {
     const inputStyle = "w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-sm text-gray-700 outline-none transition";
 
     return (
-        <div className="flex flex-col gap-6 max-w-4xl mx-auto p-2">
-            <div className='bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8'>
+        <div className="flex gap-6 mx-auto grid grid-cols-12">
+            <div className='col-span-2 bg-white rounded-xl shadow-custom border border-gray-200 p-6'>
                 <div className="mb-6">
-                    <h2 className="text-xl font-bold text-slate-800 tracking-tight">Employee Rating</h2>
+                    <h2 className="text-lg font-bold text-slate-800 font-rubik tracking-tight">Employee Rating</h2>
                 </div>
 
                 <Formik initialValues={initialValues} onSubmit={handleSubmit}>
@@ -94,56 +94,61 @@ function RateEmployees() {
                     )}
                 </Formik>
             </div>
-
-            {selectedUser && (
-                <div className="bg-white rounded-xl shadow-custom border border-gray-200 flex flex-col overflow-hidden transition">
-                    <div className='px-6 py-5 border-b border-gray-50 flex justify-between items-center'>
-                        <h3 className="text-lg font-bold text-slate-800">Employee Comments</h3>
-                        <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse"></div>
-                    </div>
-
-                    {commentIsLoading ? (
-                        <div className="flex justify-center py-20"><Spinner /></div>
-                    ) : commentIsError ? (
-                        <div className="p-10"><ErrorMessage /></div>
-                    ) : (
-                        <div className="max-h-[400px] overflow-y-auto p-6 custom-scrollbar">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {commentData?.length > 0 ? (
-                                    commentData.map((item: any) => (
-                                        <div key={item.id} className="group relative bg-slate-50 hover:bg-white border border-transparent hover:border-gray-200 rounded-lg p-5 transition flex flex-col min-h-[140px] shadow-sm">
-                                            <button
-                                                type="button"
-                                                onClick={() => handleDelete(item.id)}
-                                                className='absolute top-3 right-3 w-7 h-7 flex items-center justify-center bg-red-50 text-red-500 rounded-full opacity-0 hover:bg-red-500 hover:text-white transition'
-                                                title="Delete Comment"
-                                            >
-                                                ✕
-                                            </button>
-
-                                            <div className="flex-1">
-                                                <p className="text-gray-600 text-sm leading-relaxed italic">
-                                                    "{item.content}"
-                                                </p>
-                                            </div>
-
-                                            <div className="mt-4 pt-3 border-t border-gray-100/50 flex justify-end">
-                                                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-tighter bg-gray-100 px-2 py-0.5 rounded">
-                                                    {item.date}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))
-                                ) : (
-                                    <div className="col-span-full py-10 text-center text-gray-400 italic text-sm">
-                                        No comment for this employee...
-                                    </div>
-                                )}
-                            </div>
+            <div className='col-span-10'>
+                {selectedUser ? (
+                    <div className="bg-white rounded-xl shadow-custom border border-gray-200 flex flex-col overflow-hidden transition">
+                        <div className='px-6 py-5 border-b border-gray-50 flex justify-between items-center'>
+                            <h3 className="text-lg font-bold text-slate-800 font-rubik tracking-tight">Employee Comments</h3>
                         </div>
-                    )}
-                </div>
-            )}
+
+                        {commentIsLoading ? (
+                            <div className="flex justify-center py-20"><Spinner /></div>
+                        ) : commentIsError ? (
+                            <div className="p-10"><ErrorMessage /></div>
+                        ) : (
+                            <div className="max-h-[260px] h-[260px] overflow-y-auto p-6 custom-scrollbar">
+                                <div className="grid grid-cols-12 gap-4">
+                                    {commentData?.length > 0 ? (
+                                        commentData.map((item: any) => (
+                                            <div key={item.id} className="col-span-2 relative bg-white border border-gray-200 rounded-lg p-5 transition flex flex-col min-h-[140px] shadow-sm">
+                                                <button
+                                                    type="button"
+                                                    onClick={() => handleDelete(item.id)}
+                                                    className='absolute top-3 right-3 w-5 h-5 flex items-center justify-center bg-red-200 text-red-500 rounded-full cursor-pointer'
+                                                    title="Delete Comment"
+                                                >
+                                                    ✕
+                                                </button>
+
+                                                <div className="flex-1">
+                                                    <p className="text-gray-600 text-sm leading-relaxed">
+                                                        {item.content}
+                                                    </p>
+                                                </div>
+
+                                                <div className="mt-4 pt-3 flex justify-end">
+                                                    <span className="text-[10px] font-bold text-slate-400 px-2 py-0.5 rounded">
+                                                        {item.date}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="col-span-full py-10 text-center text-gray-400 italic text-sm">
+                                            No comment for this employee...
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="h-full min-h-[300px] bg-white rounded-xl shadow-custom border  border-gray-200 flex flex-col items-center justify-center text-gray-400 p-10 text-center">
+                        <p className="text-lg font-medium text-gray-500">No Employee Selected</p>
+                        <p className="text-sm">Please select an employee from the list to see their comments.</p>
+                    </div>
+                )}
+            </div>
 
         </div>
     );
