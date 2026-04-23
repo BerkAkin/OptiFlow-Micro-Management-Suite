@@ -41,7 +41,7 @@ function SupportRequestCard() {
 
     return (
 
-        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-50 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
+        <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-90 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
             <div className='p-1'>
                 <DynamicForm
                     colorScheme='bg-blue-600'
@@ -54,7 +54,7 @@ function SupportRequestCard() {
             </div>
 
             <div className='bg-slate-50 px-6 py-3 border-t border-slate-100'>
-                <p className='text-[10px] text-slate-400 text-center font-medium'>
+                <p className='text-sm text-slate-500 text-center'>
                     Your request will be handled by the HR department.
                 </p>
             </div>
