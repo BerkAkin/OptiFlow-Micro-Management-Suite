@@ -16,7 +16,7 @@ function MainPage() {
     }
     return (
         <div className="h-screen flex flex-col bg-pale-600">
-            <div className="z-40">
+            <div>
                 <Navbar />
             </div>
 
