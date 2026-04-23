@@ -37,7 +37,7 @@ function SupportDoughChart() {
                     <p className="text-lg font-bold font-rubik text-slate-800 tracking-tight px-1">
                         Most Support Categories
                     </p>
-                    <p className="text-xs text-slate-500 px-1 font-medium">Categorical distribution</p>
+                    <p className="text-sm text-slate-500 px-1">Categorical distribution</p>
                 </div>
 
                 <div className="flex-grow pt-2">
