@@ -29,7 +29,7 @@ function UpdatePasswordPopUp({ handleChange }: PasswordChangeProps) {
     }
 
     return (
-        <div className='fixed inset-0 z-50 bg-black/40 backdrop-blur-[2px] flex items-center justify-center p-4'>
+        <div className='fixed inset-0 z-100 bg-black/20 backdrop-blur-xs flex items-center justify-center p-4'>
             <div className="border border-gray-100 shadow-custom rounded-lg bg-white w-full max-w-md overflow-hidden">
                 <div className="px-8 py-6 border-b border-gray-100">
                     <h1 className="text-2xl font-bold text-gray-800 tracking-tight">Change Password</h1>
