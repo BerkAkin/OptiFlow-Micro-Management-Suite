@@ -38,11 +38,11 @@ function SuggestionCard({ id, status, title, description, votes, comments, date 
     const [commentSection, setCommentSection] = useState<boolean>(false);
 
     return (
-        <div className='bg-white border border-gray-200 rounded-xl shadow-sm transition-all duration-300 ease-in-out overflow-hidden'>
+        <div className='bg-white border border-gray-200 rounded-xl shadow-sm transition overflow-hidden'>
 
             <div className='p-5'>
                 <div className='flex justify-between items-start mb-3'>
-                    <h3 className='text-lg font-semibold text-gray-800 leading-tight flex-1'>
+                    <h3 className='text-lg font-semibold text-slate-800 leading-tight'>
                         {title}
                     </h3>
                     <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
