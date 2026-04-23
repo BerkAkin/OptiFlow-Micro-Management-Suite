@@ -67,7 +67,7 @@ function SupportBarChart() {
                         <h3 className="text-lg font-bold font-rubik text-slate-800 tracking-tight">
                             Monthly Support Counts
                         </h3>
-                        <p className="text-xs text-slate-500 font-medium">Performance overview</p>
+                        <p className="text-sm text-slate-500">Performance overview</p>
                     </div>
                 </div>
 
