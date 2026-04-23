@@ -17,23 +17,23 @@ function SurveyResults() {
                     <h1 className='font-rubik text-3xl font-bold text-white tracking-tight'>
                         {data.name}
                     </h1>
-                    <p className="text-gray-100 mt-2 italic">Survey Results</p>
+                    <p className="text-gray-100 mt-2">Survey Results</p>
                 </div>
             </div>
 
             <div className="col-span-10 bg-white rounded-xl shadow-custom border border-gray-200 h-[650px] flex flex-col">
                 <div className="p-6 border-b border-gray-100">
-                    <h2 className="text-xl font-semibold text-gray-800">Answers</h2>
+                    <h2 className="text-lg font-bold text-slate-800">Answers</h2>
                 </div>
 
                 <div className="overflow-y-auto p-6 space-y-8 custom-scrollbar">
                     {data.questions.map((question: any, questionIndex: number) => (
                         <div key={questionIndex} className="group">
                             <div className="flex items-start mb-4">
-                                <span className="w-8 h-8 text-blue-600 flex items-center justify-center font-bold mr-3">
-                                    {questionIndex + 1})
+                                <span className='flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm mx-2'>
+                                    {questionIndex + 1}
                                 </span>
-                                <p className="text-lg font-medium text-gray-900 pt-0.5">
+                                <p className="text-md font-medium text-gray-900 pt-0.5">
                                     {question.title}
                                 </p>
                             </div>
@@ -41,12 +41,12 @@ function SurveyResults() {
                             <div className="grid gap-3 ml-11">
                                 {question.answers.map((answer: any, answerIndex: number) => (
                                     <div key={answerIndex} className="relative">
-                                        <div className="flex items-center justify-between p-3 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-white transition-all ">
-                                            <span className="text-gray-600 group-hover/item:text-gray-900 transition-colors">
+                                        <div className="flex items-center justify-between p-2 rounded-lg border border-gray-200 hover:bg-gray-100 transition ">
+                                            <span className="text-slate-600 transition text-sm">
                                                 {answer.title}
                                             </span>
                                             <div className="flex items-center space-x-2">
-                                                <span className="inline-block bg-blue-500 text-white text-sm font-semibold py-1 px-3 rounded-full shadow-sm">
+                                                <span className="inline-block bg-blue-500 text-white text-xs font-semibold py-1 px-3 rounded-full shadow-sm">
                                                     {answer.count} People
                                                 </span>
                                             </div>
