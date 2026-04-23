@@ -20,8 +20,8 @@ function SurveyResults() {
         <div className='container py-12 mx-auto px-4'>
             <div className='flex justify-between items-end mb-8 border-b border-gray-200 pb-4'>
                 <div>
-                    <h1 className='text-3xl font-bold text-slate-700 font-rubik'>Surveys</h1>
-                    <p className='text-slate-500 mt-1'>Monitor participation and satisfaction rates.</p>
+                    <h1 className='text-3xl font-bold text-slate-800 tracking-tight font-rubik'>Surveys</h1>
+                    <p className='text-slate-500 text-sm mt-1'>Monitor participation and satisfaction rates.</p>
                 </div>
             </div>
 
@@ -36,14 +36,14 @@ function SurveyResults() {
                             <div className={`flex-1 p-6 flex flex-col justify-between border-e border-gray-100 ${!isActive ? 'bg-slate-100/70' : 'bg-white'}`}>
                                 <div>
                                     <div className="flex justify-between items-start mb-2">
-                                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${isActive ? 'bg-emerald-100 text-emerald-600' : 'bg-red-200 text-red-500'}`}>
+                                        <span className={`px-3 py-1 rounded-full text-xs font-bold tracking-tight ${isActive ? 'bg-emerald-100 text-emerald-600' : 'bg-red-200 text-red-500'}`}>
                                             {isActive ? "Active" : "Timeout"}
                                         </span>
                                         <span className='text-xs font-medium text-slate-400'>
                                             {item.date.split("T")[0].split("-").reverse().join(".")}
                                         </span>
                                     </div>
-                                    <h3 className='text-xl font-bold text-slate-700 font-rubik line-clamp-2 leading-tight'>
+                                    <h3 className='text-lg font-bold text-slate-800 font-rubik leading-tight'>
                                         {item.title}
                                     </h3>
                                 </div>
@@ -88,7 +88,7 @@ function SurveyResults() {
                                             labels: ['Participant'],
                                             datasets: [{
                                                 data: [totalRespondents, 100 - totalRespondents],
-                                                backgroundColor: [isActive ? '#6366f1' : '#94a3b8', '#f1f5f9'],
+                                                backgroundColor: [isActive ? '#2563eb' : '#94a3b8', '#f1f5f9'],
                                                 borderWidth: 0,
                                             }],
                                         }}
