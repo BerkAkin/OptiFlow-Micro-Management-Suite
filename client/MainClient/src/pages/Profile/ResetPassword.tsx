@@ -1,5 +1,5 @@
 import { DynamicForm } from '../../components/Common';
-import icon from '../../assets/icon.png'
+import icon from '../../assets/images/icon.png'
 import { useParams } from 'react-router';
 import { useResetPassword } from '../../hooks';
 

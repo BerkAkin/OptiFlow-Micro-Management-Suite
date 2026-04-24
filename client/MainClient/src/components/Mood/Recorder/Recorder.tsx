@@ -1,9 +1,4 @@
-import happy from '../../../../src/assets/happy.svg'
-import sad from '../../../../src/assets/sad.svg'
-import verySad from '../../../../src/assets/verySad.svg'
-import veryHappy from '../../../../src/assets/veryHappy.svg'
-import neutral from '../../../../src/assets/neutral.svg'
-import save from '../../../assets/save.svg'
+import { save, neutral, veryHappy, verySad, sad, happy } from '../../../assets/icons'
 import { Field, FieldArray, Form, Formik } from 'formik'
 import { useAddMood } from '../../../hooks'
 

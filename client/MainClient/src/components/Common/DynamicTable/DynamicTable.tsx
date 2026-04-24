@@ -1,8 +1,6 @@
 import { Field, Form, Formik } from "formik";
-import left from '../../assets/left.svg'
-import right from '../../assets/right.svg'
-import magnify from '../../assets/magnify.svg'
-import icon from '../../assets/icon.png'
+import { right, left, magnify } from '../../../assets/icons';
+import icon from '../../../assets/images/icon.png';
 import { Link, useLocation } from "react-router";
 
 interface filterFields {

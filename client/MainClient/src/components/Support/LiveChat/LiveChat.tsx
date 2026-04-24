@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import * as signalR from '@microsoft/signalr';
-import send from "../../../assets/send.svg";
+import send from "../../../assets/icons/send.svg";
 
 export function LiveChat({ CurrentUserOnChat, closeChatWindow }: { CurrentUserOnChat: { username: string, userId: string }, closeChatWindow: () => any }) {
     const [connection, setConnection] = useState<signalR.HubConnection | null>(null);

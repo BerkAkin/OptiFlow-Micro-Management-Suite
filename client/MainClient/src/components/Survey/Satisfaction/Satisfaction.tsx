@@ -1,6 +1,5 @@
 import { Form, Formik } from 'formik'
-import happy from '../../assets/happyWhite.svg';
-import sad from '../../assets/sadWhite.svg';
+import { happy, sad } from '../../../assets/icons';
 import { useSatisfaction } from '../../../hooks';
 import { useToatsContext } from '../../../context/ToastContext';
 

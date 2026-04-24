@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react'
 import { useOutletContext, useParams } from 'react-router'
 import { Spinner, ErrorMessage } from '../../Common';
 import { Field, Form, Formik } from 'formik';
-import send from '../../../assets/send.svg';
+import { send } from '../../../assets/icons';
 import { MessageValidationScheme } from './MessageValidations';
 import { useMessages, useSendMessage } from '../../../hooks';
 

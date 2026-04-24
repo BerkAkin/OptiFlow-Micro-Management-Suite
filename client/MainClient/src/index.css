@@ -27,23 +27,23 @@ body {
 
 @font-face {
     font-family: 'cadmium';
-     src: local('cadmium'), url(./fonts/Cadmium.ttf) format('truetype');
+     src: local('cadmium'), url(./assets/fonts/Cadmium.ttf) format('truetype');
 }
 
 @font-face {
     font-family: 'roobert';
-    src: local('roobert'), url(./fonts/Roobert.ttf) format('truetype');
+    src: local('roobert'), url(./assets/fonts/Roobert.ttf) format('truetype');
 }
 
 
 @font-face {
     font-family:'rubik';
-   src: local('rubik'), url(./fonts/RubikRegular.ttf) format('truetype');
+   src: local('rubik'), url(./assets/fonts/RubikRegular.ttf) format('truetype');
 }
 
 @font-face {
     font-family:'inter';
-   src: local('inter'), url(./fonts/Inter.ttf) format('truetype');
+   src: local('inter'), url(./assets/fonts/Inter.ttf) format('truetype');
 }
 
 ::-webkit-scrollbar {

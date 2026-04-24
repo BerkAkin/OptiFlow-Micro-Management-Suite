@@ -1,6 +1,6 @@
 import { Form, Formik } from 'formik';
 import { useParams } from 'react-router';
-import send from '../../assets/send.svg';
+import { send } from '../../assets/icons';
 import { useState } from 'react';
 import { useToatsContext } from '../../context/ToastContext';
 import { ErrorMessage, Spinner } from '../../components/Common';

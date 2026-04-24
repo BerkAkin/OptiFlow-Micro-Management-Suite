@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useState } from "react";
-import icon from '../../assets/icon.png'
+import icon from '../../../assets/images/icon.png'
 import { useAuthContext } from "../../../context/AuthContext";
 import { useLogin } from "../../../hooks";
 import { PasswordRefresh } from "../PasswordRefresh/PasswordRefresh";

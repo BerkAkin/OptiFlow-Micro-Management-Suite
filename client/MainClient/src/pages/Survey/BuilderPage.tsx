@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { produce } from 'immer';
-import add from '../../assets/add.svg'
-import trash from '../../assets/trash.svg'
-import send from '../../assets/send.svg'
+import add from '../../assets/icons/add.svg'
+import trash from '../../assets/icons/trash.svg'
+import send from '../../assets/icons/send.svg'
 import { useToatsContext } from '../../context/ToastContext';
 import { useAddSurvey } from '../../hooks';
 

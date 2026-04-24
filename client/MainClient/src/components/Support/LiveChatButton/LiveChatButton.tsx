@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import help from '../../../assets/helpRequest.svg'
+import { helpRequest } from '../../../assets/icons'
 import { LiveChatList } from '../LiveChatList/LiveChatList';
 
 export function LiveChatButton() {
@@ -15,7 +15,7 @@ export function LiveChatButton() {
             </div>
             <div className='flex justify-end mt-2'>
                 <button onClick={toggleList} className='bg-white size-12 bottom-2 right-2 shadow-custom border border-gray-200 rounded-full hover:scale-[104%] transition-all cursor-pointer'>
-                    <img src={help} />
+                    <img src={helpRequest} />
                 </button>
             </div>
 

@@ -1,5 +1,4 @@
-import star from '../../../assets/star.svg'
-import crown from '../../../assets/crown.svg'
+import { star, crown } from '../../../assets/icons'
 
 interface suggestionShowcaseProps {
     isStar: boolean

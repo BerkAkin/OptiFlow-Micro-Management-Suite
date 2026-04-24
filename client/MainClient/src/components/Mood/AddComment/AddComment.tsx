@@ -1,6 +1,6 @@
 import { Spinner, ErrorMessage } from '../../Common';
 import { Field, Form, Formik } from 'formik';
-import send from '../../../assets/send.svg';
+import { send } from '../../../assets/icons';
 import { useState } from 'react';
 import { useAddComment, useDeleteComment, useEmployeeComments, useMoodUserList } from '../../../hooks';
 

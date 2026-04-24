@@ -1,7 +1,6 @@
 import { Field, Form, Formik } from 'formik';
 import React from 'react';
-import send from '../../assets/send.svg';
-import cancel from '../../assets/cancel.svg';
+import { send, cancel } from '../../../assets/icons';
 
 interface FormField {
     label: string;

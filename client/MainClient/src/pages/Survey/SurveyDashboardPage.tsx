@@ -1,7 +1,6 @@
 import { Link } from 'react-router'
 import { Doughnut } from "react-chartjs-2";
-import happy from '../../assets/happyWhite.svg'
-import sad from '../../assets/sadWhite.svg'
+import { happyWhite, sadWhite } from '../../assets/icons';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useListSurvey } from '../../hooks';
 import { ErrorMessage, RoleBasedGuard, Spinner } from '../../components/Common';
@@ -53,13 +52,13 @@ export function SurveyDashboardPage() {
                                 <div className='flex items-center gap-6 mt-4'>
                                     <div className="text-center">
                                         <div className='w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center mb-1'>
-                                            <img src={happy} alt="Dissatisfied" width={24} />
+                                            <img src={happyWhite} alt="Dissatisfied" width={24} />
                                         </div>
                                         <p className='text-sm font-bold text-slate-600'>{item.dissatisfactionCount}</p>
                                     </div>
                                     <div className="text-center">
                                         <div className='w-10 h-10 bg-sky-400 rounded-xl flex items-center justify-center mb-1'>
-                                            <img src={sad} alt="Satisfied" width={24} />
+                                            <img src={sadWhite} alt="Satisfied" width={24} />
                                         </div>
                                         <p className='text-sm font-bold text-slate-600'>{item.satisfactionCount}</p>
                                     </div>

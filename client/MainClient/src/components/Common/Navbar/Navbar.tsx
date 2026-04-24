@@ -4,15 +4,8 @@ import { Link, useLocation } from "react-router";
 import { Add } from "../../Suggestion";
 import { AddSupport } from "../../Support";
 import { RoleBasedGuard } from "../RoleBasedGuard/RoleBasedGuard";
-import happy from '../../assets/happy.svg'
-import suggestion from '../../assets/suggestion.svg'
-import bill from '../../assets/bill.svg'
-import help from '../../assets/help.svg'
-import finance from '../../assets/finance.svg'
-import survey from '../../assets/survey.svg'
-import helpRequest from '../../assets/helpRequest.svg'
-import makeSuggestion from '../../assets/makeSuggestion.svg'
-import icon from '../../assets/icon.png'
+import { happy, suggestion, bill, help, finance, survey, helpRequest, makeSuggestion } from '../../../assets/icons';
+import icon from '../../../assets/images/icon.png'
 
 export function Navbar() {
   const { isAuth, handleLogoutState, userInfo } = useAuthContext();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import icon from '../../assets/icon.png'
+import icon from '../../../assets/images/icon.png'
 import { motion, AnimatePresence } from 'framer-motion'
 
 interface popUpProps {

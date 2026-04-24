@@ -2,8 +2,7 @@ import { Field, Form, Formik } from 'formik'
 import { useMemo, useState } from 'react'
 import { DynamicForm } from '../../components/Common';
 import { useInvoice } from '../../hooks';
-import add from '../../assets/add.svg'
-import print from '../../assets/print.svg'
+import { add, print } from '../../assets/icons'
 
 interface productShape {
     category: string,

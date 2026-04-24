@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import InfoPopUp from "../components/InfoPopUp/InfoPopUp";
+import { InfoPopUp } from "../components/Common";
 
 const ToastContext = createContext<any>(null);
 
