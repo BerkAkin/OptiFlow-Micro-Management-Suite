@@ -28,7 +28,7 @@ export function Navbar() {
   }, []);
 
   const navLinkStyle = (path: string) =>
-    `p-2 rounded-xl transition-all duration-200 hover:bg-indigo-50 group ${location.pathname.includes(path) ? 'bg-indigo-50 ring-1 ring-indigo-100' : ''}`;
+    `p-2 rounded-xl transition-all duration-200 hover:bg-blue-50 group ${location.pathname.includes(path) ? 'bg-blue-50 ring-1 ring-blue-100' : ''}`;
 
   return (
     <nav className="h-[80px] w-full bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-100">

@@ -36,7 +36,7 @@ function PackCard({ Header, HeaderBg, ButtonText, Price, SingleItems, Text, Heig
                     })}
                 </div>
                 <div className='flex items-center justify-center' style={{ height: (Height * 15 / 100) }}>
-                    <button className={`block bg-${HeaderBg} w-48 h-10 text-xl text-white py-2 px-3 md:p-0 rounded-sm hover:bg-indigo-600`}>{ButtonText}</button>
+                    <button className={`block bg-${HeaderBg} w-48 h-10 text-xl text-white py-2 px-3 md:p-0 rounded-sm hover:bg-blue-600`}>{ButtonText}</button>
                 </div>
             </div>
 

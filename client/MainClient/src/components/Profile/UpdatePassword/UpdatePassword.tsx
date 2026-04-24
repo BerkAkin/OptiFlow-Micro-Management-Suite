@@ -39,15 +39,15 @@ export function UpdatePassword({ handleChange }: PasswordChangeProps) {
                         title=''
                         fields={fields}
                         onSubmit={onSubmit}
-                        colorScheme='bg-indigo-500'
-                        hoverScheme='hover:bg-indigo-600'
+                        colorScheme='bg-blue-500'
+                        hoverScheme='hover:bg-blue-600'
                         initialValues={initialValues}
                     />
                     <div className='mt-6 flex justify-center border-t border-gray-50 pt-4'>
                         <button
                             onClick={handleChange}
                             type="button"
-                            className="hover:cursor-pointer hover:bg-indigo-500 hover:text-white transition border-indigo-500 text-indigo-500 border rounded-sm h-8 px-2"
+                            className="hover:cursor-pointer hover:bg-blue-500 hover:text-white transition border-blue-500 text-blue-500 border rounded-sm h-8 px-2"
                         >
                             Exit
                         </button>

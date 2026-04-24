@@ -78,7 +78,7 @@ export function DynamicForm({ title, validationScheme, colorScheme, hoverScheme,
                                         </Field>
                                     ) : item.type === "checkbox" ? (
                                         <div className='flex items-center space-x-3 py-2 px-1 group cursor-pointer'>
-                                            <Field type="checkbox" name={item.name} id={item.id} className="cursor-pointer accent-indigo-600 w-5 h-5 rounded-lg border-slate-300 transition-all" />
+                                            <Field type="checkbox" name={item.name} id={item.id} className="cursor-pointer accent-blue-600 w-5 h-5 rounded-lg border-slate-300 transition-all" />
                                             <label className="text-slate-600 text-sm font-medium cursor-pointer select-none" htmlFor={item.id}>
                                                 {item.label}
                                             </label>

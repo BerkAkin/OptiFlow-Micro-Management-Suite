@@ -24,7 +24,7 @@ function Footer() {
 
           <div className="relative pt-5">
             <div className="absolute top-60 w-[100%]">
-              <div className=" border-indigo-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
+              <div className=" border-blue-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
                 <div className="flex items-center text-start">
                   <h1 className="text-white text-4xl font-rubik">TideFlow Management Suite</h1>
                 </div>
@@ -46,13 +46,13 @@ function Footer() {
 
                   </div>
                   <div className="flex justify-start ps-5 pb-10 items-center h-[25%]">
-                    <div className="rounded-md hover:bg-indigo-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-indigo-400 size-10 ">
+                    <div className="rounded-md hover:bg-blue-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-blue-400 size-10 ">
                       <img src={ins}></img>
                     </div>
-                    <div className="rounded-md hover:bg-indigo-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-indigo-400 size-10 mx-4">
+                    <div className="rounded-md hover:bg-blue-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-blue-400 size-10 mx-4">
                       <img src={link}></img>
                     </div>
-                    <div className="rounded-md hover:bg-indigo-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-indigo-400 size-10 ">
+                    <div className="rounded-md hover:bg-blue-600 hover:scale-105 hover:ease-in transition duration-150 cursor-pointer p-2 bg-blue-400 size-10 ">
                       <img src={git}></img>
                     </div>
                   </div>
@@ -61,7 +61,7 @@ function Footer() {
                 <div className="grid grid-cols-3">
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-indigo-500" >Plat</span>form</h1>
+                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-blue-500" >Plat</span>form</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Features </h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Privacy</h1></div>
@@ -73,7 +73,7 @@ function Footer() {
                   </div>
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-indigo-500 font-rubik">Mod</span>ules</h1>
+                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-blue-500 font-rubik">Mod</span>ules</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Finance </h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Survey & Insights</h1></div>
@@ -86,7 +86,7 @@ function Footer() {
 
                   <div>
                     <div>
-                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-indigo-500 font-rubik">Indus</span>tries</h1>
+                      <h1 className="text-white text-xl ps-5 font-rubik"><span className="border-b-2 border-blue-500 font-rubik">Indus</span>tries</h1>
                     </div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Corporate</h1></div>
                     <div className="h-[40px] py-5 ps-5"><h1 className="text-white">Enterprise</h1></div>
@@ -101,7 +101,7 @@ function Footer() {
 
               </div>
               <div className="text-white flex items-center justify-center pt-8" >
-                <h1 className="text-sm font-rubik"><span className="text-indigo-500 font-rubik">© Copyright 2025 All Rights Reserved to</span> B.A.</h1>
+                <h1 className="text-sm font-rubik"><span className="text-blue-500 font-rubik">© Copyright 2025 All Rights Reserved to</span> B.A.</h1>
               </div>
             </div>
           </div>

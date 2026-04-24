@@ -47,7 +47,7 @@ export function ResetPassword() {
                 <div className='w-96 h-[250px] bg-white border border-gray-200 rounded-lg shadow-custom'>
                     <p className="mt-4 text-gray-700 text-2xl text-center">Password Reset</p>
                     <div className='w-full'>
-                        <DynamicForm colorScheme='bg-indigo-500' hoverScheme='hover:bg-indigo-600' fields={formFields} initialValues={formInitials} onSubmit={handleResetPassword} title='' />
+                        <DynamicForm colorScheme='bg-blue-500' hoverScheme='hover:bg-blue-600' fields={formFields} initialValues={formInitials} onSubmit={handleResetPassword} title='' />
                     </div>
                 </div>
             </div>

@@ -11,7 +11,7 @@ function HorizontalCard({ item }: HorizontalCardProps) {
             </div>
             <div className="h-44 text-gray-700" >
                 <p className="p-5 w-[100%] text-2xl font-bold  font-rubik">
-                    <span className="border-indigo-400 border-b-2 font-rubik">{item.header}</span>
+                    <span className="border-blue-400 border-b-2 font-rubik">{item.header}</span>
                 </p>
                 <p className="p-5 w-[100%]  text-gray-600">
                     {item.text}

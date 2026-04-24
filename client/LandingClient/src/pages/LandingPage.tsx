@@ -29,15 +29,15 @@ function LandingLayout() {
 
         <div style={{ textShadow: "0px 1px 1px rgb(0 0 0 / 0.2)", backgroundImage: `url(${dotBg})`, backgroundPosition: 'center', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }} className="grid w-[100%] h-[700px]">
           <div className="flex items-end justify-center">
-            <p data-aos="fade-top" className="font-rubik text-5xl text-gray-700 font-bold text-shadow-xl">Manage Your Corporation As It <span className="border-b-2 border- border-indigo-400">Deserves</span> </p>
+            <p data-aos="fade-top" className="font-rubik text-5xl text-gray-700 font-bold text-shadow-xl">Manage Your Corporation As It <span className="border-b-2 border- border-blue-400">Deserves</span> </p>
           </div>
           <div className="grid justify-center">
             <div className="flex items-center">
               <h1 data-aos="fade-top" className="text-2xl text-gray-700 font-light" >Review - Subscribe - Manage !</h1>
             </div>
             <div className="flex items-start justify-evenly">
-              <button className="border rounded-sm border-gray-700 bg-white w-24 block py-2 px-3 md:p-0 text-gray-700 md:dark:hover:text-indigo-500 text-lg w-36 me-5">Review Packs</button>
-              <button className="block rounded-sm bg-indigo-500 w-36 text-lg text-white py-2 px-3 md:p-0 hover:bg-indigo-700">Purchase</button>
+              <button className="border rounded-sm border-gray-700 bg-white w-24 block py-2 px-3 md:p-0 text-gray-700 md:dark:hover:text-blue-500 text-lg w-36 me-5">Review Packs</button>
+              <button className="block rounded-sm bg-blue-500 w-36 text-lg text-white py-2 px-3 md:p-0 hover:bg-blue-700">Purchase</button>
             </div>
           </div>
         </div>
@@ -61,7 +61,7 @@ function LandingLayout() {
           <div className="flex items-center justify-center col-span-5">
             <div>
               <div className="text-center mb-10 " >
-                <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is TideFlow Management Suite?</h1>
+                <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-blue-400">What</span> is TideFlow Management Suite?</h1>
               </div>
               <p className={`ps-2 text-center leading-9 text-gray-600 text-xl`} >
                 TideFlow is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
@@ -94,11 +94,11 @@ function LandingLayout() {
           <div className="h-[100%] flex items-start pt-10 justify-center" style={{ backgroundColor: "#1f1f1f" }}>
             <div data-aos="fade-top" className="w-[600px] h-[400px]">
               <div>
-                <p className="text-indigo-400 text-lg">Manage Your Corporation !</p>
+                <p className="text-blue-400 text-lg">Manage Your Corporation !</p>
               </div>
 
               <div className="my-6">
-                <p className="font-rubik text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose TideFlow Management Suite?</p>
+                <p className="font-rubik text-3xl text-white font-bold"><span className="border-b-2 border-blue-400">Why</span> Choose TideFlow Management Suite?</p>
               </div>
 
               <div >
@@ -127,9 +127,9 @@ function LandingLayout() {
             <h1 className='text-5xl mb-2'><span className="border-b border-gray-200 font-rubik">Available Plans</span></h1>
           </div>
           <div data-aos="fade-top" className="flex items-center my-5  justify-center " >
-            <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Micro Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MicroPlan} />
-            <PackCard Text="Temp Text2" ButtonText="Details" Price={1000} Header="Macro Plan" HeaderBg="indigo-500" Height={620} Width={96} IsHover={true} SingleItems={MacroPlan} />
-            <PackCard Text="Temp Text3" ButtonText="Details" Price={900} Header="Midi Plan" HeaderBg="indigo-400" Height={560} Width={96} IsHover={true} SingleItems={MidiPlan} />
+            <PackCard Text="Temp Text1" ButtonText="Details" Price={700} Header="Micro Plan" HeaderBg="blue-400" Height={560} Width={96} IsHover={true} SingleItems={MicroPlan} />
+            <PackCard Text="Temp Text2" ButtonText="Details" Price={1000} Header="Macro Plan" HeaderBg="blue-500" Height={620} Width={96} IsHover={true} SingleItems={MacroPlan} />
+            <PackCard Text="Temp Text3" ButtonText="Details" Price={900} Header="Midi Plan" HeaderBg="blue-400" Height={560} Width={96} IsHover={true} SingleItems={MidiPlan} />
           </div>
 
           <div className="text-center mt-8  mx-auto flex justify-center">
