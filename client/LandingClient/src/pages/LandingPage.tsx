@@ -61,12 +61,12 @@ function LandingLayout() {
           <div className="flex items-center justify-center col-span-5">
             <div>
               <div className="text-center mb-10 " >
-                <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is OptiFlow Management Suite?</h1>
+                <h1 className="font-rubik text-4xl text-gray-700 font-bold"><span className="border-b-2 border-indigo-400">What</span> is TideFlow Management Suite?</h1>
               </div>
               <p className={`ps-2 text-center leading-9 text-gray-600 text-xl`} >
-                OptiFlow is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
+                TideFlow is a comprehensive management platform developed for organizations seeking to adapt to the rapidly changing dynamics of the modern business world.
                 One of the biggest challenges for companies today is managing many different processes, such as finance, human resources, communication, innovation, and employee satisfaction, through disjointed systems.
-                OptiFlow eliminates this complexity and centralizes all these areas.
+                TideFlow eliminates this complexity and centralizes all these areas.
               </p>
             </div>
           </div>
@@ -98,13 +98,13 @@ function LandingLayout() {
               </div>
 
               <div className="my-6">
-                <p className="font-rubik text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose OptiFlow Management Suite?</p>
+                <p className="font-rubik text-3xl text-white font-bold"><span className="border-b-2 border-indigo-400">Why</span> Choose TideFlow Management Suite?</p>
               </div>
 
               <div >
                 <p className="text-white my-10">
                   In today’s fast-paced business environment, organizations need more than just isolated tools — they need a unified ecosystem that connects every department, streamlines communication, and empowers employees.
-                  OptiFlow Management Suite was built precisely for that purpose. It brings together all the critical aspects of internal operations — from finance and HR to innovation and employee engagement — under one intelligent, interconnected platform.
+                  TideFlow Management Suite was built precisely for that purpose. It brings together all the critical aspects of internal operations — from finance and HR to innovation and employee engagement — under one intelligent, interconnected platform.
                 </p>
               </div>
               <div>
@@ -137,7 +137,7 @@ function LandingLayout() {
           </div>
           <div className="text-center  pt-4 mx-auto flex justify-center text-gray-500">
             <p className="w-[60%]">
-              OptiFlow Management Suite is designed to adapt to your organization’s unique needs.
+              TideFlow Management Suite is designed to adapt to your organization’s unique needs.
               If you’re interested in a tailored plan or want to explore specific module configurations, our team is ready to help.
               Get in touch with us today to discuss your requirements and create a solution that fits your business perfectly.</p>
           </div>
