@@ -12,8 +12,10 @@ import SupportPage from './pages/SupportPages/SupportPage';
 import SupportMessages from './components/SupportComponents/SupportMessages/SupportMessages';
 import RoleBasedRoute from './components/RoleBasedRoute/RoleBasedRoute';
 import UnauthorizedPage from './pages/UnauthorizedPage';
-import ProfilePage from './pages/UserComponents/ProfilePage';
-import ResetPassword from './pages/UserComponents/ResetPassword';
+import ProfilePage from './pages/UserPages/ProfilePage';
+import ResetPassword from './pages/UserPages/ResetPassword';
+import AddNewEmployeePage from './pages/EmployeePages/AddNewEmployeePage';
+import EditEmployee from './components/EmployeeComponents/EditEmployee/EditEmployee';
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} >
             <Route index element={<ProfilePage />} />
+            <Route path='addnewemployee' element={<AddNewEmployeePage />} >
+              <Route path=':email/edit' element={<EditEmployee />} />
+            </Route>
 
             <Route element={<RoleBasedRoute allowedDepartments={['Finance Accountant', 'Manager']} />}>
               <Route path='finance/dashboard' element={<FinanceDashboardPage />} />
@@ -46,9 +51,8 @@ function App() {
             </Route>
 
             <Route path='unauthorized' element={<UnauthorizedPage />} />
-
-
           </Route>
+
           <Route path='passwordreset/:token/:email' element={<ResetPassword />} />
         </Routes>
       </BrowserRouter>
