@@ -13,8 +13,16 @@ ChartJS.register(ArcElement, CategoryScale, Tooltip, Legend, LinearScale, BarEle
 function FinanceDashboardPage() {
 
     return (
-        <div className='h-[1800px] container mx-auto my-10'>
-
+        <div className='py-8 px-4 container mx-auto'>
+            <div className='flex justify-between mb-6 mx-2 border-b border-gray-200 pb-2'>
+                <div>
+                    <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
+                        Cash
+                        <span className='text-blue-600'> Flow</span>
+                        <span className='text-slate-400 text-sm ms-3 font-normal'>Monitor the ebb and flow of your corporate capital</span>
+                    </h6>
+                </div>
+            </div>
             <div className='grid grid-cols-12 gap-6'>
                 <div className={`col-span-6`}>
                     <BarChart />
