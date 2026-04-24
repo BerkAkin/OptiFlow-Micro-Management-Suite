@@ -35,6 +35,7 @@ namespace Gateway.Middlewares
                     var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
                     var tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == "tenantId")?.Value;
                     var departmentId = jwtToken.Claims.FirstOrDefault(c => c.Type == "departmentId")?.Value;
+                    var companyName = jwtToken.Claims.FirstOrDefault(c => c.Type == "company")?.Value;
 
                     if (!string.IsNullOrEmpty(userId))
                         context.Request.Headers["X-User-Id"] = userId;
@@ -44,6 +45,9 @@ namespace Gateway.Middlewares
 
                     if (!string.IsNullOrEmpty(departmentId))
                         context.Request.Headers["X-Department-Id"] = departmentId;
+
+                    if (!string.IsNullOrEmpty(companyName))
+                        context.Request.Headers["X-Company-Name"] = companyName;
                 }
             }
 
