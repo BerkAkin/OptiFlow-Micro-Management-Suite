@@ -49,7 +49,6 @@ export const createTransaction = async (payload: any) => {
   return res.data;
 };
 
-// FinanceRepository.ts
 export const createInvoice = async (payload: any) => {
   console.log("Gönderilen Veri:", payload);
   const res = await api.post("/finance/CreateInvoice", payload, {
