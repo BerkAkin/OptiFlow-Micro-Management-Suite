@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using AuthModule.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthModule.Models
 {
@@ -35,5 +36,6 @@ namespace AuthModule.Models
         public RefreshToken RefreshToken { get; set; }
         public PasswordToken PasswordToken { get; set; }
 
+        public IsActiveEnum IsActive { get; set; }
     }
 }
