@@ -1,5 +1,6 @@
 ﻿using AuthModule.Data;
 using AuthModule.DTO;
+using AuthModule.Enums;
 using AuthModule.Models;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
@@ -81,6 +82,7 @@ namespace AuthModule.Services
                 Province = registerDTO.Province,
                 District = registerDTO.District,
                 FullAddress = registerDTO.FullAddress,
+                IsActive=IsActiveEnum.Active,
 
             };
 
