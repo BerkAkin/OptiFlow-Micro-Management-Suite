@@ -50,7 +50,7 @@ function MyDayOffs() {
     return (
         <div className='flex gap-6 w-full min-h-[550px] grid grid-cols-12'>
 
-            <div className="col-span-9">
+            <div className="col-span-8">
                 <DynamicTable
                     onNext={nextPage}
                     onPrev={previousPage}
@@ -61,7 +61,7 @@ function MyDayOffs() {
                 />
             </div>
 
-            <div className='flex-1 flex flex-col gap-4 col-span-3'>
+            <div className='flex-1 flex flex-col gap-4 col-span-4'>
                 <div className='bg-white border border-gray-200 rounded-xl shadow-custom p-2 flex flex-col'>
                     <div className="px-4 pt-4 pb-2">
                         <h3 className="text-lg font-rubik font-bold text-slate-800 tracking-tight">New Request</h3>
