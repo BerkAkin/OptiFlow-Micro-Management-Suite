@@ -108,7 +108,8 @@ namespace AuthModule.Migrations
                     TenantId = table.Column<int>(type: "int", nullable: false),
                     Company = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateCreate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateUpdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsActive = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

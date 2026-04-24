@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthModule.Migrations
 {
     [DbContext(typeof(AuthDBContext))]
-    [Migration("20260419170118_auth")]
+    [Migration("20260424160157_auth")]
     partial class auth
     {
         /// <inheritdoc />
@@ -230,6 +230,9 @@ namespace AuthModule.Migrations
                     b.Property<string>("FullAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
