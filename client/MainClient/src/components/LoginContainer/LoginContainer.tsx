@@ -20,7 +20,7 @@ function LoginContainer() {
             <div className="border border-gray-200 shadow-custom mb-6 rounded-lg bg-white w-full max-w-md overflow-hidden">
                 <div className="px-8 py-10 flex items-center justify-center gap-3">
                     <h1 className="text-2xl font-bold text-gray-800 tracking-tight text-center">
-                        Optiflow Management Suite
+                        TideFlow Management Suite
                     </h1>
                     <img className="inline-block" width={40} src={icon} alt="icon" />
                 </div>
