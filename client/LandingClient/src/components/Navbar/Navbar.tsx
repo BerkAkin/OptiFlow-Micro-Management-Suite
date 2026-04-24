@@ -18,7 +18,7 @@ function Navbar() {
     <nav className="bg-white h-[120px] border border-gray-200">
       <div className="grid h-[100%] grid-cols-3 gap-0">
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
-          <span className="text-3xl font-semibold ">OptiFlow Management Suite</span>
+          <span className="text-3xl font-semibold ">TideFlow Management Suite</span>
         </div>
 
         <div className="w-[100%] flex flex-wrap items-center justify-center mx-auto p-4">
