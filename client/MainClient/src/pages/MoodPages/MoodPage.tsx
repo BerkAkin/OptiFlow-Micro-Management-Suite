@@ -7,7 +7,16 @@ import RoleBasedGuard from '../../components/RoleBasedGuard/RoleBasedGuard'
 
 function MoodPage() {
     return (
-        <div className='container my-10 mx-auto'>
+        <div className='container py-8 mx-auto px-4'>
+            <div className='flex justify-between mb-6 mx-2 border-b border-gray-200 pb-2'>
+                <div>
+                    <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
+                        Tider
+                        <span className='text-blue-600'> Spirit</span>
+                        <span className='text-slate-400 text-sm ms-3 font-normal'>Reflect on your inner stream and energy flow</span>
+                    </h6>
+                </div>
+            </div>
             <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
                 <div>
                     <MoodRecorder />
