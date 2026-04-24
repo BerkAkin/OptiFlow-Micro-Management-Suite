@@ -17,11 +17,15 @@ function SurveyResults() {
     if (error || !data) return <div className="p-10"><ErrorMessage /></div>;
 
     return (
-        <div className='container py-12 mx-auto px-4'>
-            <div className='flex justify-between items-end mb-8 border-b border-gray-200 pb-4'>
+        <div className='container py-8 mx-auto px-4'>
+
+            <div className='flex justify-between mb-6 mx-2 border-b border-gray-200 pb-2'>
                 <div>
-                    <h1 className='text-3xl font-bold text-slate-800 tracking-tight font-rubik'>Surveys</h1>
-                    <p className='text-slate-500 text-sm mt-1'>Monitor participation and satisfaction rates.</p>
+                    <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
+                        Tider
+                        <span className='text-blue-600'> Insights</span>
+                        <span className='text-slate-400 text-sm ms-3 font-normal'>Collect valuable feedback to direct your future flow</span>
+                    </h6>
                 </div>
             </div>
 
