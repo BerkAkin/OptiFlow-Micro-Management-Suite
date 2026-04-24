@@ -24,7 +24,16 @@ function ProfilePage() {
     };
 
     return (
-        <div className='container mx-auto px-4 py-10'>
+        <div className='container mx-auto px-4 py-8'>
+            <div className='flex justify-between mb-6 mx-2 border-b border-gray-200 pb-2'>
+                <div>
+                    <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
+                        Tider
+                        <span className='text-blue-600'> Core</span>
+                        <span className='text-slate-400 text-sm ms-3 font-normal'>Manage your personal details and system preferences</span>
+                    </h6>
+                </div>
+            </div>
             <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
 
             <div className='bg-white rounded-xl shadow-custom border border-gray-200 p-6 flex items-center gap-8'>
