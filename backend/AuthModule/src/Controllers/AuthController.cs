@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Mvc;
+using Minio.DataModel.Notification;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
 
@@ -123,6 +124,40 @@ namespace AuthModule.Controllers
         {
             await _mediator.Send(new PasswordResetCommand(passwordReset));
             return Ok("Your password has been successfully reset.");
+        }
+
+
+        [HttpPost("AddNewUser")]
+        public async Task<IActionResult> AddNewEmployee([FromBody] AddNewEmployeeDto newEmployee)
+        {
+            int currentTenant = _currentUserService.User.TenantId;
+            string currentCompany = _currentUserService.User.Company;
+            await _mediator.Send(new AddNewEmployeeCommand(newEmployee, currentTenant,currentCompany));
+            return Ok("Employee Added Succesfully");
+        }
+
+
+        [HttpGet("AllUsers")]
+        public async Task<IActionResult> GetAllUsers([FromQuery] FilterEmployeesDto filters)
+        {
+            int currentTenant = _currentUserService.User.TenantId;
+            var result = await _mediator.Send(new GetEmployeesQuery(filters,currentTenant));
+            return Ok(new{data = result.data, maxPage=result.maxPage});
+        }
+
+        [HttpGet("GetEmployeeDetails")]
+        public async Task<IActionResult> GetEmployeeDetails([FromQuery] string email) 
+        {
+            int currentTenant = _currentUserService.User.TenantId;
+            var result = await _mediator.Send(new GetEmployeeDetailsQuery(email, currentTenant));
+            return Ok(result);
+        }
+
+        [HttpPut("UpdateEmployeeDetails")]
+        public async Task<IActionResult> UpdateEmployeeDetails([FromBody] UpdateEmployeeDetailsDto dto)
+        {
+            var result = await _mediator.Send(new UpdateEmployeeCommand(dto));
+            return Ok(result);
         }
     }
 }
