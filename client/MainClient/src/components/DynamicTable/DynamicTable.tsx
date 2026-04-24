@@ -3,6 +3,7 @@ import left from '../../assets/left.svg'
 import right from '../../assets/right.svg'
 import magnify from '../../assets/magnify.svg'
 import icon from '../../assets/icon.png'
+import { Link, useLocation } from "react-router";
 
 interface filterFields {
     name: string,
@@ -15,18 +16,23 @@ interface TableProps {
     title: string,
     data: Record<string, any>[],
     filterFields?: filterFields[],
-    handleFilter?: (values: any) => void,
     children?: React.ReactNode,
+    handleFilter?: (values: any) => void,
     onNext?: () => void
     onPrev?: () => void,
     onRefresh?: () => void,
-    isRefreshing?: any
+    isRefreshing?: any,
+    isEditable?: boolean,
+    EditorParam?: string,
 }
 
-function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev, onRefresh, isRefreshing }: TableProps) {
+function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev, onRefresh, isRefreshing, isEditable, EditorParam }: TableProps) {
     const columns = data.length > 0 ? Object.keys(data[0]) : [];
     const gridTemplate = columns.map(col => (col === 'description' ? '3fr' : '1fr')).join(' ')
     const filterInitials = filterFields ? Object.fromEntries(filterFields.map((item) => [item.name, ""])) : {}
+
+    const location = useLocation();
+    const currentPath = `/${location.pathname.split('/')[1]}`;
 
     return (
         <div className="flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-custom">
@@ -46,21 +52,21 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
             </div>
 
             <div className="h-[63%] overflow-y-auto">
-                {data.map((row, index) => (
-                    <div
-                        key={index}
-                        className="grid items-center px-4 py-3 border-b border-gray-50 hover:bg-gray-100 transition-colors text-slate-600 text-sm"
-                        style={{ gridTemplateColumns: gridTemplate }}
-                    >
-                        {columns.map((col) => (
-                            <div key={col} className={col === "description" ? "text-start" : "text-center break-all px-1"}>
-                                {col === "date" && row[col]
-                                    ? row[col].split("T")[0].split("-").reverse().join(".")
-                                    : row[col]}
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                {data.map((row, index) => {
+
+                    const rowContent =
+                        (<div key={index} className="grid items-center px-4 py-3 border-b border-gray-50 hover:bg-gray-100 transition-colors text-slate-600 text-sm" style={{ gridTemplateColumns: gridTemplate }}>
+                            {columns.map((col) => (
+                                <div key={col} className={col === "description" ? "text-start" : "text-center break-all px-1"}>
+                                    {row[col]}
+                                </div>
+                            ))}
+                        </div>);
+
+                    return isEditable ?
+                        (<Link key={index} to={`${currentPath}/${row[EditorParam ? EditorParam : ""]}/edit`}>{rowContent}</Link>)
+                        : (<div key={index} style={{ display: 'contents' }}>{rowContent}</div>);
+                })}
             </div>
 
             <div className="h-[15%] border-t border-gray-200 bg-gray-50 px-4 flex items-center">
@@ -109,7 +115,7 @@ function DynamicTable({ title, data, handleFilter, filterFields, onNext, onPrev,
                     </Formik>
                 )}
             </div>
-        </div>
+        </div >
     )
 }
 
