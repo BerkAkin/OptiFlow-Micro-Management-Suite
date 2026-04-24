@@ -50,7 +50,7 @@ function AddTransaction() {
     return (
         <div className="w-full bg-white rounded-xl shadow-custom border border-gray-200 overflow-hidden transition-all">
 
-            <div className="p-7">
+            <div className="p-3">
                 <DynamicForm
                     validationScheme={addTransactionValidationScheme}
                     colorScheme="bg-blue-600"
