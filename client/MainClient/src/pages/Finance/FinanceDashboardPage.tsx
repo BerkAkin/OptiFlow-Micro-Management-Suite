@@ -11,7 +11,7 @@ export function FinanceDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Cash
-                        <span className='text-blue-600'> Flow</span>
+                        <span className='text-blue-500'> Flow</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Monitor the ebb and flow of your corporate capital</span>
                     </h6>
                 </div>

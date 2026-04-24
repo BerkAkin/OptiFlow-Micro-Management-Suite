@@ -95,7 +95,7 @@ export function Recorder() {
                                 <button
                                     type='submit'
                                     disabled={isSubmitting}
-                                    className=' relative p-3 bg-blue-600 rounded-xl hover:bg-blue-700 transition active:scale-90 disabled:opacity-50'
+                                    className=' relative p-3 bg-blue-500 rounded-xl hover:bg-blue-600 transition active:scale-90 disabled:opacity-50'
                                 >
                                     <img src={save} alt="Save" className="w-8 h-8 brightness-0 invert transition-transform cursor-pointer" />
                                 </button>

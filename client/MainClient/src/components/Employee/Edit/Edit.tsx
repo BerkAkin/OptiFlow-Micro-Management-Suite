@@ -52,7 +52,7 @@ export function Edit() {
 
     return (
         <div className='p-6 container border border-gray-200 shadow-custom h-[100%] w-full bg-white rounded-lg'>
-            <DynamicForm colorScheme='bg-blue-600' fields={fields} hoverScheme='hover:bg-blue-700' initialValues={initialValues} onSubmit={handleSubmit} title='Edit Tider Details' isReinit={true} />
+            <DynamicForm colorScheme='bg-blue-500' fields={fields} hoverScheme='hover:bg-blue-600' initialValues={initialValues} onSubmit={handleSubmit} title='Edit Tider Details' isReinit={true} />
         </div>
     )
 }

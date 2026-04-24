@@ -9,7 +9,7 @@ export function MoodDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Tider
-                        <span className='text-blue-600'> Spirit</span>
+                        <span className='text-blue-500'> Spirit</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Reflect on your inner stream and energy flow</span>
                     </h6>
                 </div>

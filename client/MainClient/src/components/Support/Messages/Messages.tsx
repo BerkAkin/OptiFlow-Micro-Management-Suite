@@ -67,7 +67,7 @@ export function Messages() {
                 {messages.map((item, index) => (
                     <div key={index} className={`flex ${item.isMine ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[75%] px-4 py-3 rounded-xl relative ${item.isMine
-                            ? 'bg-blue-600 text-white rounded-tr-none'
+                            ? 'bg-blue-500 text-white rounded-tr-none'
                             : 'bg-white text-slate-700 border border-slate-100 rounded-tl-none'
                             }`}>
                             <p className='text-sm leading-relaxed break-words'>{item.message}</p>
@@ -99,7 +99,7 @@ export function Messages() {
                                         />
                                         <button
                                             type="submit"
-                                            className='bg-blue-600 text-white p-2.5 rounded-lg transition cursor-pointer hover:bg-blue-700 active:scale-95'
+                                            className='bg-blue-500 text-white p-2.5 rounded-lg transition cursor-pointer hover:bg-blue-600 active:scale-95'
                                         >
                                             <img src={send} alt="Send" className='w-5 h-5 brightness-0 invert' />
                                         </button>

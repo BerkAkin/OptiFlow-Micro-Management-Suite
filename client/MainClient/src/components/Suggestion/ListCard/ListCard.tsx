@@ -114,7 +114,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
                                     name="text"
                                     placeholder="Comment..."
                                 />
-                                <button className='p-2 bg-blue-600 hover:bg-blue-700 rounded-xl transition-all cursor-pointer' type='submit'>
+                                <button className='p-2 bg-blue-500 hover:bg-blue-600 rounded-xl transition-all cursor-pointer' type='submit'>
                                     <img src={add} width={20} alt="add" className="invert brightness-0" />
                                 </button>
                             </div>
@@ -126,7 +126,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
                             comments.map((item, index) => (
                                 <div key={index} className="bg-white p-3 rounded-lg border border-gray-200 text-sm text-gray-700">
                                     <div className="flex gap-2">
-                                        <span className="text-blue-600 font-bold">{index + 1}.</span>
+                                        <span className="text-blue-500 font-bold">{index + 1}.</span>
                                         <p>{item.text}</p>
                                     </div>
                                 </div>

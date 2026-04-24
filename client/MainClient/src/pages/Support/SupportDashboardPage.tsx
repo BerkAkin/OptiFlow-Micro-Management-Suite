@@ -9,7 +9,7 @@ export function SupportDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Beacon
-                        <span className='text-blue-600'> Light</span>
+                        <span className='text-blue-500'> Light</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Connect with the flow and get the assistance you need</span>
                     </h6>
                 </div>

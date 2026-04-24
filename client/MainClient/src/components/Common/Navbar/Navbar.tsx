@@ -39,7 +39,7 @@ export function Navbar() {
             <img src={icon} width={32} alt="TideFlow" />
           </div>
           <span className="text-3xl font-bold text-slate-800 tracking-tight hidden lg:block">
-            TideFlow <span className="text-blue-600">Suite</span>
+            TideFlow <span className="text-blue-500">Suite</span>
           </span>
         </Link>
 
@@ -95,7 +95,7 @@ export function Navbar() {
           {isAuth && (
             <div className="relative pl-2" ref={(el) => { elementsRef.current[2] = el }}>
               <button onClick={() => toggleMenu('profile')} className="flex items-center gap-2 p-1 cursor-pointer rounded-full hover:bg-gray-200 transition-all">
-                <div className="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-bold">
+                <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
                   {userInfo?.username?.charAt(0).toUpperCase()}
                 </div>
               </button>

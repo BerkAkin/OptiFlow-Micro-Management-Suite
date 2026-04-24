@@ -87,7 +87,7 @@ export function BuilderPage() {
                     />
                     <button
                         onClick={() => handleSurveyName(surveyName)}
-                        className='bg-blue-600 hover:bg-blue-700 p-3 rounded-lg transition active:scale-95 cursor-pointer'
+                        className='bg-blue-500 hover:bg-blue-600 p-3 rounded-lg transition active:scale-95 cursor-pointer'
                     >
                         <img src={add} alt="Add" className="brightness-0 invert w-6 h-6" />
                     </button>
@@ -159,7 +159,7 @@ export function BuilderPage() {
 
                         <div className='flex justify-center pt-10'>
                             <button onClick={handleFinishSurvey}
-                                className='flex items-center gap-3 bg-blue-600 text-white px-10 py-4 rounded-full cursor-pointer font-semibold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50'
+                                className='flex items-center gap-3 bg-blue-500 text-white px-10 py-4 rounded-full cursor-pointer font-semibold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-xl disabled:opacity-50'
                                 disabled={survey.questions.length === 0}>
                                 <span>Finish & Create Survey</span>
                                 <img src={send} alt="Send" className="w-5 h-5 brightness-0 invert" />

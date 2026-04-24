@@ -35,7 +35,7 @@ export function List() {
                         const isActive = params.id === item.id.toString();
                         return (
                             <Link onClick={() => setOutletContext({ id: item.id, isClosed: item.isClosed })} key={item.id} to={`request/${item.id}/messages`}>
-                                <div className={`mb-4 relative px-4 py-2 rounded-lg border transition hover:-translate-y-1 ${isActive ? 'bg-blue-600 border-blue-200 text-white' : 'bg-white border-gray-200'}`}>
+                                <div className={`mb-4 relative px-4 py-2 rounded-lg border transition hover:-translate-y-1 ${isActive ? 'bg-blue-500 border-blue-200 text-white' : 'bg-white border-gray-200'}`}>
                                     <div className='mb-3'>
 
 

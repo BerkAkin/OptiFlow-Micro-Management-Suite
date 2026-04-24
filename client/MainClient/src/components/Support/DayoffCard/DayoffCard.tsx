@@ -54,8 +54,8 @@ export function DayoffCard({ item }: SupportDayOffCardProps) {
 
                 <div className='flex items-center justify-between gap-3'>
                     <div className='flex items-center gap-1 py-1.5'>
-                        <span className='text-blue-600 font-bold text-xs'>{item.days}</span>
-                        <span className='text-blue-600 text-xs font-medium'>Days</span>
+                        <span className='text-blue-500 font-bold text-xs'>{item.days}</span>
+                        <span className='text-blue-500 text-xs font-medium'>Days</span>
                     </div>
                     <div className='text-slate-400 font-medium text-xs flex items-center gap-1'>
                         <span>Date:</span>
@@ -74,7 +74,7 @@ export function DayoffCard({ item }: SupportDayOffCardProps) {
                     </button>
                     <button
                         onClick={() => handleApproveOrReject(1)}
-                        className='cursor-pointer flex-1 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 shadow-lg shadow-blue-100 transition-all active:scale-95'
+                        className='cursor-pointer flex-1 py-2.5 rounded-xl bg-blue-500 text-white text-sm font-bold hover:bg-blue-600 shadow-lg shadow-blue-100 transition-all active:scale-95'
                     >
                         Approve
                     </button>

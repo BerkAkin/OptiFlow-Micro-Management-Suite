@@ -75,7 +75,7 @@ export function AddComment() {
                             <button
                                 type="submit"
                                 disabled={commentMutation.isPending}
-                                className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition active:scale-[0.98]"
+                                className="w-full bg-blue-500 hover:bg-blue-600 disabled:bg-blue-300 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition active:scale-[0.98]"
                             >
                                 {commentMutation.isPending ? (
                                     <span className="flex items-center gap-2">

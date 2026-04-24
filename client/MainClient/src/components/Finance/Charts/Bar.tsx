@@ -106,7 +106,7 @@ export function Bar() {
             </div>
 
             <div className="grid grid-cols-3 gap-3 mt-6">
-                <StatCard label="Current" value="2.500₺" color="bg-blue-50 text-blue-600" />
+                <StatCard label="Current" value="2.500₺" color="bg-blue-50 text-blue-500" />
                 <StatCard label="Last Month" value="2.100₺" color="bg-slate-50 text-slate-600" />
                 <StatCard label="Difference" value="+400₺" color="bg-emerald-50 text-emerald-600" />
             </div>

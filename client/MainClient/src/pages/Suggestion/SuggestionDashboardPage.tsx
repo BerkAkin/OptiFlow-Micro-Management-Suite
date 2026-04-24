@@ -8,7 +8,7 @@ export function SuggestionDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Tider
-                        <span className='text-blue-600'> Feedback</span>
+                        <span className='text-blue-500'> Feedback</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Share your thoughts to shape the flow</span>
                     </h6>
                 </div>

@@ -117,8 +117,8 @@ export function InvoicePage() {
                     <div className='bg-white rounded-xl shadow-custom border border-gray-200 overflow-hidden w-96 transform transition'>
                         <div className="p-2">
                             <DynamicForm
-                                colorScheme='bg-blue-600'
-                                hoverScheme='hover:bg-blue-700'
+                                colorScheme='bg-blue-500'
+                                hoverScheme='hover:bg-blue-600'
                                 fields={fields}
                                 initialValues={initalProductValues}
                                 onCancel={() => setIsAdd(!isAdd)}
@@ -159,7 +159,7 @@ export function InvoicePage() {
                         </div>
 
                         <div className='mb-12'>
-                            <h3 className="text-xs font-bold text-blue-600 uppercase tracking-widest mb-4">Customer Details</h3>
+                            <h3 className="text-xs font-bold text-blue-500 uppercase tracking-widest mb-4">Customer Details</h3>
                             <div className='grid grid-cols-2 gap-4'>
                                 <div className="space-y-4">
                                     <div className="flex gap-4">
@@ -223,7 +223,7 @@ export function InvoicePage() {
                                 <button
                                     type='button'
                                     onClick={() => setIsAdd(!isAdd)}
-                                    className='flex items-center gap-2 text-sm font-bold text-blue-600 transition-all px-6 py-2 cursor-pointer'
+                                    className='flex items-center gap-2 text-sm font-bold text-blue-500 transition-all px-6 py-2 cursor-pointer'
                                 >
                                     <img src={add} width={20} alt='Add' />
                                     Add Product
@@ -246,7 +246,7 @@ export function InvoicePage() {
                                 </div>
                                 <div className='flex justify-between items-center pt-4 border-t border-gray-200'>
                                     <span className='text-base font-bold text-gray-900'>General Total:</span>
-                                    <span className='text-2xl font-black text-blue-600'>{grandTotal.toLocaleString('tr-TR')} ₺</span>
+                                    <span className='text-2xl font-black text-blue-500'>{grandTotal.toLocaleString('tr-TR')} ₺</span>
                                 </div>
                             </div>
                         </div>
@@ -254,7 +254,7 @@ export function InvoicePage() {
                         <div className='mt-12 flex justify-end'>
                             <button
                                 type='submit'
-                                className='cursor-pointer bg-blue-600 hover:bg-blue-700 text-white flex items-center gap-3 px-10 py-4 rounded-lg transition active:scale-95'
+                                className='cursor-pointer bg-blue-500 hover:bg-blue-600 text-white flex items-center gap-3 px-10 py-4 rounded-lg transition active:scale-95'
                             >
                                 <img src={print} alt='Yazdır' width={24} className="brightness-0 invert" />
                                 <span className="font-bold tracking-wide">Save & Print</span>

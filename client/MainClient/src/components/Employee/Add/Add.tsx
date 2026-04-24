@@ -64,8 +64,8 @@ export function Add() {
         <div className='w-full h-full bg-white rounded-lg border border-gray-200 shadow-custom'>
 
             <DynamicForm
-                colorScheme="bg-blue-600"
-                hoverScheme="hover:bg-blue-700"
+                colorScheme="bg-blue-500"
+                hoverScheme="hover:bg-blue-600"
                 initialValues={initialValues}
                 title="Launch New Tider"
                 onSubmit={handleSubmit}

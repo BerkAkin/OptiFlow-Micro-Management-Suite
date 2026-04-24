@@ -37,7 +37,7 @@ export function PasswordRefresh({ handleForget }: PasswordRefreshProps) {
                         fields={fields}
                         onSubmit={onSubmit}
                         colorScheme='bg-blue-500'
-                        hoverScheme='hover:bg-blue-600'
+                        hoverScheme='hover:bg-blue-500'
                         initialValues={initialValues}
                     />
 

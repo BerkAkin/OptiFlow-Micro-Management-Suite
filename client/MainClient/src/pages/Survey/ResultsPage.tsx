@@ -12,7 +12,7 @@ export function ResultsPage() {
 
     return (
         <div className='container mx-auto my-10 grid grid-cols-12 gap-8 px-4'>
-            <div className="col-span-2 bg-blue-600 rounded-xl shadow-custom border border-gray-200 p-8 flex items-center justify-center ">
+            <div className="col-span-2 bg-blue-500 rounded-xl shadow-custom border border-gray-200 p-8 flex items-center justify-center ">
                 <div className="text-center">
                     <h1 className='font-rubik text-3xl font-bold text-white tracking-tight'>
                         {data.name}
@@ -30,7 +30,7 @@ export function ResultsPage() {
                     {data.questions.map((question: any, questionIndex: number) => (
                         <div key={questionIndex} className="group">
                             <div className="flex items-start mb-4">
-                                <span className='flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm mx-2'>
+                                <span className='flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold text-sm mx-2'>
                                     {questionIndex + 1}
                                 </span>
                                 <p className="text-md font-medium text-gray-900 pt-0.5">

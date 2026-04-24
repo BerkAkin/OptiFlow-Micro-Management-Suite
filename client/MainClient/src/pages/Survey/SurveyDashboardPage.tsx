@@ -20,7 +20,7 @@ export function SurveyDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Tider
-                        <span className='text-blue-600'> Insights</span>
+                        <span className='text-blue-500'> Insights</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Collect valuable feedback to direct your future flow</span>
                     </h6>
                 </div>
@@ -67,7 +67,7 @@ export function SurveyDashboardPage() {
                                 <div className="mt-4 flex items-center justify-between">
                                     <Link
                                         to={isActive ? `/survey/details/${item.id}` : "#"}
-                                        className={`text-sm font-semibold transition-colors ${isActive ? 'text-blue-600 hover:text-blue-800' : 'text-slate-400 cursor-not-allowed'}`}
+                                        className={`text-sm font-semibold transition-colors ${isActive ? 'text-blue-500 hover:text-blue-800' : 'text-slate-400 cursor-not-allowed'}`}
                                     >
                                         Details →
                                     </Link>

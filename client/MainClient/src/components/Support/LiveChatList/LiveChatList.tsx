@@ -35,13 +35,13 @@ export function LiveChatList() {
                                 onClick={() => { setCurrentUserOnChat({ userId: item.id, username: item.name }) }}
                                 className={`group flex border-gray-200 border items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-200
                                     ${isActive
-                                        ? 'bg-blue-600 '
+                                        ? 'bg-blue-500 '
                                         : 'hover:bg-white'}
                                 `}
                             >
                                 <div className={`
                                     w-10 h-10 rounded-full flex items-center justify-center font-bold text-xs shrink-0
-                                    ${isActive ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600'}
+                                    ${isActive ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-500'}
                                 `}>
                                     {item.name.charAt(0).toUpperCase()}
                                 </div>

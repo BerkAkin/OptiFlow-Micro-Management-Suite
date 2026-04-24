@@ -68,7 +68,7 @@ export function Login() {
                                             type="checkbox"
                                             checked={showPassword}
                                             onChange={(e: any) => setShowPassword(e.target.checked)}
-                                            className="accent-blue-600 h-4 w-4"
+                                            className="accent-blue-500 h-4 w-4"
                                         />
                                         <span>Show Password</span>
                                     </label>
@@ -84,7 +84,7 @@ export function Login() {
                                 <div className="pt-4 border-t border-gray-50 flex justify-center">
                                     <button
                                         disabled={loginMutation.isPending}
-                                        className="cursor-pointer w-full max-w-xs h-11 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-sm transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed"
+                                        className="cursor-pointer w-full max-w-xs h-11 bg-blue-500 hover:bg-blue-500 text-white font-semibold rounded-sm transition-all transform hover:scale-[1.01] active:scale-[0.99] disabled:opacity-70 disabled:cursor-not-allowed"
                                         type="submit"
                                     >
                                         {loginMutation.isPending ? 'Logging in...' : 'Login'}

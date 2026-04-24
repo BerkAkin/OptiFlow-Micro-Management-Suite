@@ -42,7 +42,7 @@ export function DetailsPage() {
                             {data.questions.map((question: any, index: number) => (
                                 <div key={question.id} className='bg-white rounded-xl p-8 border border-gray-200 shadow-custom transition'>
                                     <div className='flex gap-4 items-start mb-6'>
-                                        <span className='flex-shrink-0 w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold text-sm'>
+                                        <span className='flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold text-sm'>
                                             {index + 1}
                                         </span>
                                         <p className='text-xl font-bold text-slate-700 leading-snug'>
@@ -63,7 +63,7 @@ export function DetailsPage() {
                                                 />
                                                 <label
                                                     htmlFor={answer.id.toString()}
-                                                    className="flex items-center justify-between px-5 py-4 bg-gray-100 text-slate-600 font-semibold cursor-pointer rounded-lg border border-gray-200 transition peer-checked:bg-blue-100 peer-checked:text-blue-700"
+                                                    className="flex items-center justify-between px-5 py-4 bg-gray-100 text-slate-600 font-semibold cursor-pointer rounded-lg border border-gray-200 transition peer-checked:bg-blue-100 peer-checked:text-blue-600"
                                                 >
                                                     <span>{answer.title}</span>
                                                 </label>
@@ -85,7 +85,7 @@ export function DetailsPage() {
 
                             <button
                                 type='submit'
-                                className='cursor-pointer w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3 rounded-lg text-white font-bold bg-blue-600 hover:bg-blue-700 transition active:scale-95'
+                                className='cursor-pointer w-full sm:w-auto flex items-center justify-center gap-3 px-10 py-3 rounded-lg text-white font-bold bg-blue-500 hover:bg-blue-600 transition active:scale-95'
                             >
                                 <img src={send} width={20} alt="" className="brightness-0 invert" />
                                 Finish Survey

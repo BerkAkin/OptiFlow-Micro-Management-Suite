@@ -68,8 +68,8 @@ export function Dayoffs() {
 
                     <div className="flex-1">
                         <DynamicForm
-                            colorScheme='bg-blue-600'
-                            hoverScheme='hover:bg-blue-700'
+                            colorScheme='bg-blue-500'
+                            hoverScheme='hover:bg-blue-600'
                             fields={inputFields}
                             initialValues={initialValues}
                             onSubmit={handleSubmit}

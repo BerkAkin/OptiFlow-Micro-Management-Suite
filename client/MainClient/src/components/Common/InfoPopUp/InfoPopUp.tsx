@@ -29,7 +29,7 @@ export function InfoPopUp({ message }: popUpProps) {
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     className="fixed bottom-8 right-8 z-100 flex items-center w-full max-w-[350px] bg-white shadow-custom rounded-xl border border-gray-200 p-4 overflow-hidden"
                 >
-                    <div className='flex-shrink-0 w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center mr-4'>
+                    <div className='flex-shrink-0 w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4'>
                         <img width={32} height={32} src={icon} alt="Notification Icon" className="object-contain invert brightness-0" />
                     </div>
 
@@ -52,7 +52,7 @@ export function InfoPopUp({ message }: popUpProps) {
                         initial={{ width: "100%" }}
                         animate={{ width: "0%" }}
                         transition={{ duration: 3, ease: "linear" }}
-                        className="absolute bottom-0 left-0 h-1 bg-blue-600"
+                        className="absolute bottom-0 left-0 h-1 bg-blue-500"
                     />
                 </motion.div>
             )}

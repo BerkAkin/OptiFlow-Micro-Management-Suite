@@ -51,7 +51,7 @@ export function Settings() {
                                     ${isEnabled ? 'translate-x-6' : 'translate-x-0'}
                                 `}>
                                     {mutation.isPending && (
-                                        <div className="w-2 h-2 border-2 border-blue-200 border-t-blue-600 rounded-full animate-spin" />
+                                        <div className="w-2 h-2 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
                                     )}
                                 </div>
                             </div>

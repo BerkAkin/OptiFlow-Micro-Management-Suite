@@ -53,8 +53,8 @@ export function Add() {
             <div className="p-3">
                 <DynamicForm
                     validationScheme={addValidationScheme}
-                    colorScheme="bg-blue-600"
-                    hoverScheme="hover:bg-blue-700"
+                    colorScheme="bg-blue-500"
+                    hoverScheme="hover:bg-blue-600"
                     initialValues={initialValues}
                     title="Add New Transaction"
                     onSubmit={handleSubmit}

@@ -28,7 +28,7 @@ export function ProfileDashboardPage() {
                 <div>
                     <h6 className='text-2xl font-bold text-slate-800 tracking-tight font-rubik'>
                         Tider
-                        <span className='text-blue-600'> Core</span>
+                        <span className='text-blue-500'> Core</span>
                         <span className='text-slate-400 text-sm ms-3 font-normal'>Manage your personal details and system preferences</span>
                     </h6>
                 </div>
@@ -71,7 +71,7 @@ export function ProfileDashboardPage() {
 
                     <div className="text-center md:text-left flex-1">
                         <div className="inline-flex items-center gap-2 px-3 py-1 border-gray-200 border rounded-full mb-2">
-                            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-widest">{userInfo.department}</span>
+                            <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{userInfo.department}</span>
                         </div>
                         <p className='text-3xl font-extrabold text-slate-800 tracking-tight capitalize leading-none'>
                             {userInfo.company}

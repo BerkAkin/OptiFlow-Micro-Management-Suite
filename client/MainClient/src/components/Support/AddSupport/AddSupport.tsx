@@ -45,8 +45,8 @@ export function AddSupport() {
         <div className='absolute w-80 h-auto bg-white border border-gray-200 rounded-xl shadow-custom z-90 left-1/2 transform -translate-x-1/2 top-20 overflow-hidden'>
             <div className='p-1'>
                 <DynamicForm
-                    colorScheme='bg-blue-600'
-                    hoverScheme='hover:bg-blue-700'
+                    colorScheme='bg-blue-500'
+                    hoverScheme='hover:bg-blue-600'
                     initialValues={initialValues}
                     onSubmit={handleSubmit}
                     title='New Support Request'
