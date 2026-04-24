@@ -26,7 +26,7 @@ function Footer() {
             <div className="absolute top-60 w-[100%]">
               <div className=" border-indigo-500 border-b mx-auto h-[200px] w-[65%] grid grid-cols-[30%_70%]">
                 <div className="flex items-center text-start">
-                  <h1 className="text-white text-4xl font-rubik">OptiFlow Management Suite</h1>
+                  <h1 className="text-white text-4xl font-rubik">TideFlow Management Suite</h1>
                 </div>
                 <div className="flex items-center justify-end text-end">
                   <h1 className="text-white text-2xl w-[70%] pe-5 font-rubik" >Manage Your Corporation As It Deserves <br />Review - Subscribe - Manage !</h1>
@@ -39,10 +39,10 @@ function Footer() {
 
                 <div className="bg-[#141414] rounded-lg">
                   <div className="h-[25%]">
-                    <h1 className="p-5 text-white font-bold text-xl font-rubik">OptiFlow</h1>
+                    <h1 className="p-5 text-white font-bold text-xl font-rubik">TideFlow</h1>
                   </div>
                   <div className="h-[50%]">
-                    <h1 className="p-5 text-[gray] text-white text-sm font-rubik" >OptiFlow Suite is the all-in-one process management platform that helps organizations streamline operations across every department.</h1>
+                    <h1 className="p-5 text-[gray] text-white text-sm font-rubik" >TideFlow Suite is the all-in-one process management platform that helps organizations streamline operations across every department.</h1>
 
                   </div>
                   <div className="flex justify-start ps-5 pb-10 items-center h-[25%]">
