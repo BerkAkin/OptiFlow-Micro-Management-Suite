@@ -6,7 +6,7 @@ using SupportModule.Infrastructure.Persistence;
 
 namespace SupportModule.Application.Commands.SendMessageCommand
 {
-    public record SendMessageCommand(SendMessageDto message, int UserId) : IRequest<Unit>;
+    public record SendMessageCommand(int requestId, SendMessageDto message, int UserId) : IRequest<Unit>;
     public class SendMessageCommandHandler : IRequestHandler<SendMessageCommand,Unit>
     {
         private readonly SupportDbContext _dbContext;
@@ -17,7 +17,7 @@ namespace SupportModule.Application.Commands.SendMessageCommand
         public async Task<Unit> Handle(SendMessageCommand command, CancellationToken cancellationToken) {
 
             SupportRequest request = await _dbContext.SupportRequests
-                .FirstOrDefaultAsync(sr => sr.Id == command.message.RequestId, cancellationToken);
+                .FirstOrDefaultAsync(sr => sr.Id == command.requestId, cancellationToken);
 
             if (request == null)
                 throw new Exception("Request not found");
