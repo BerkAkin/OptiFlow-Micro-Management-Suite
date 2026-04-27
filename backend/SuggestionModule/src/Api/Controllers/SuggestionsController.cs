@@ -12,7 +12,7 @@ using ProjectMicro.Shared.Interfaces;
 
 namespace SuggestionModule.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/suggestions")]
     [ApiController]
     public class SuggestionsController : ControllerBase
     {
@@ -24,15 +24,24 @@ namespace SuggestionModule.Api.Controllers
             _currentUserService = currentUserService;
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateSuggestionDto suggestion)
+        {
+            int userId = _currentUserService.User.UserId;
+            int tenantId = _currentUserService.User.TenantId;
+            await _mediator.Send(new MakeSuggestionCommand(suggestion, tenantId, userId));
+            return Ok();
+        }
+
         [HttpGet]
-        public async Task<IActionResult> GetSuggestions() {
+        public async Task<IActionResult> GetAll() {
             int tenantId = _currentUserService.User.TenantId;
             var data = await _mediator.Send(new GetSuggestionsQuery(tenantId));
             return Ok(data);
         }
 
-        [HttpGet("MySuggestions")]
-        public async Task<IActionResult> GetMySuggestions()
+        [HttpGet("me")]
+        public async Task<IActionResult> GetMe()
         {
             int tenantId = _currentUserService.User.TenantId;
             int userId = _currentUserService.User.UserId;
@@ -40,7 +49,7 @@ namespace SuggestionModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("GetBest")]
+        [HttpGet("best")]
         public async Task<IActionResult> GetBest()
         {
             int tenantId = _currentUserService.User.TenantId;
@@ -48,37 +57,28 @@ namespace SuggestionModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("MakeComment")]
-        public async Task<IActionResult> MakeComment([FromBody] CreateCommentDto comment)
+        [HttpPost("{id}/comments")]
+        public async Task<IActionResult> CreateComment(int id, [FromBody] CreateCommentDto comment)
         {
             int userId = _currentUserService.User.UserId;
-            await _mediator.Send(new MakeCommentCommand(comment,userId));
+            await _mediator.Send(new MakeCommentCommand(id,comment,userId));
             return Ok();
         }
 
-        [HttpPost("Vote")]
-        public async Task<IActionResult> Vote([FromBody] CreateVoteDto vote)
+        [HttpPost("{id}/votes")]
+        public async Task<IActionResult> Vote(int id, [FromBody] CreateVoteDto vote)
         {
             int userId = _currentUserService.User.UserId;
-            await _mediator.Send(new MakeVoteCommand(vote,userId));
+            await _mediator.Send(new MakeVoteCommand(id,vote,userId));
             return Ok();
         }
 
-        [HttpPost("ChangeStatus")]
-        public async Task<IActionResult> ChangeStatus([FromBody] StatusDto status)
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> Update(int id, [FromBody] StatusDto status)
         {
-            await _mediator.Send(new ChangeStatusCommand(status));
+            await _mediator.Send(new ChangeStatusCommand(id,status));
             return Ok("Status Changed Successfully");
         }
 
-
-        [HttpPost("MakeSuggestion")]
-        public async Task<IActionResult> MakeSuggestion([FromBody] CreateSuggestionDto suggestion)
-        {
-            int userId = _currentUserService.User.UserId;
-            int tenantId = _currentUserService.User.TenantId;
-            await _mediator.Send(new MakeSuggestionCommand(suggestion, tenantId, userId));
-            return Ok();
-        }
     }
 }
