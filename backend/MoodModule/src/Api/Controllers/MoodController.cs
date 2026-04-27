@@ -1,19 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using MoodModule.Application.Commands.AddCommentCommand;
 using MoodModule.Application.Commands.AddMoodRecordCommand;
-using MoodModule.Application.Commands.DeleteCommentCommand;
 using MoodModule.Application.DTOs;
-using MoodModule.Application.Queries.GetAllCommentsQuery;
-using MoodModule.Application.Queries.GetCommentsQuery;
 using MoodModule.Application.Queries.GetMoodsQuery;
 using MoodModule.Application.Queries.GetPreviousMoodsQuery;
-using MoodModule.Application.Queries.GetUsersQuery;
 using ProjectMicro.Shared.Interfaces;
 
 namespace MoodModule.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/moods")]
     [ApiController]
     public class MoodController : ControllerBase
     {
@@ -26,8 +21,18 @@ namespace MoodModule.Api.Controllers
             _currentUserService = currentUserService;
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddMoodRecordDto mood)
+        {
+            int currentUser = _currentUserService.User.UserId;
+            int currentTenant = _currentUserService.User.TenantId;
+            await _mediator.Send(new AddMoodRecordCommand(mood,currentUser,currentTenant));
+            return Ok("Mood saved succesfully");
+        }
+
         [HttpGet]
-        public async Task<IActionResult> GetMoods([FromQuery] MoodFilterDto filters) {
+        public async Task<IActionResult> Get([FromQuery] MoodFilterDto filters) {
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
             int currentDepartment = _currentUserService.User.DepartmentId;
@@ -39,17 +44,8 @@ namespace MoodModule.Api.Controllers
             });
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddMoodRecord([FromBody] AddMoodRecordDto mood)
-        {
-            int currentUser = _currentUserService.User.UserId;
-            int currentTenant = _currentUserService.User.TenantId;
-            await _mediator.Send(new AddMoodRecordCommand(mood,currentUser,currentTenant));
-            return Ok("Mood saved succesfully");
-        }
-
-        [HttpGet("Previous")]
-        public async Task<IActionResult> GetPreviousMoods()
+        [HttpGet("latest")]
+        public async Task<IActionResult> GetLatest()
         {
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
@@ -57,46 +53,6 @@ namespace MoodModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("Comment")]
-        public async Task<IActionResult> AddComment([FromBody] AddCommentDto comment)
-        {
-            int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new AddCommentCommand(comment, currentTenant));
-            return Ok("Comment saved successfully");
-        }
 
-        [HttpDelete("Comment")]
-        public async Task<IActionResult> DeleteComment([FromBody] DeleteCommentDto comment)
-        {
-            int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new DeleteCommentCommand(comment, currentTenant));
-            return Ok("Comment deleted successfully");
-        }
-
-        [HttpGet("Users")]
-        public async Task<IActionResult> GetUsers()
-        {
-            int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetUsersQuery(currentTenant));
-            return Ok(data);
-        }
-
-        [HttpGet("AllComments")]
-        public async Task<IActionResult> GetAllComments([FromQuery] int UserId)
-        {
-            int currentTenant = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new GetAllCommentsQuery(UserId));
-            return Ok(data);
-
-        }
-
-        [HttpGet("MyComments")]
-        public async Task<IActionResult> GetComments()
-        {
-            int currentUser = _currentUserService.User.UserId;
-            var data = await _mediator.Send(new GetCommentsQuery(currentUser));
-            return Ok(data);
-
-        }
     }
 }
