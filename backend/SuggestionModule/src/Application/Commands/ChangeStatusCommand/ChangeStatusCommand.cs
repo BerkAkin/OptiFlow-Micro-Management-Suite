@@ -5,7 +5,7 @@ using SuggestionModule.Domain.Entities;
 
 namespace SuggestionModule.Application.Commands.ChangeStatusCommand
 {
-    public record ChangeStatusCommand(StatusDto status) : IRequest<Unit>;
+    public record ChangeStatusCommand(int suggestionId, StatusDto status) : IRequest<Unit>;
     public class ChangeStatusCommandHandler : IRequestHandler<ChangeStatusCommand, Unit>
     {
         private readonly ISuggestionRepository _repository;
@@ -16,7 +16,7 @@ namespace SuggestionModule.Application.Commands.ChangeStatusCommand
 
         public async Task<Unit> Handle(ChangeStatusCommand command, CancellationToken cancellationToken)
         {
-            var suggestion = await _repository.GetByIdAsync(command.status.SuggestionId);
+            var suggestion = await _repository.GetByIdAsync(command.suggestionId);
             suggestion.ChangeStatus(command.status.Status);
             await _repository.SaveAsync();
             return Unit.Value;
