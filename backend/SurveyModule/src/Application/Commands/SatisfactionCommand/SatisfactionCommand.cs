@@ -5,7 +5,7 @@ using SurveyModule.Domain.Entities;
 
 namespace SurveyModule.Application.Commands.SatisfactionCommand
 {
-    public record SatisfactionCommand(SatisfactionRateDto satisfaction,int UserId) : IRequest<Unit>;
+    public record SatisfactionCommand(int surveyId, SatisfactionRateDto satisfaction,int UserId) : IRequest<Unit>;
     public class SatisfactionCommandHandler: IRequestHandler<SatisfactionCommand,Unit>
     {
         private readonly ISurveyRepository _repository;
@@ -20,7 +20,7 @@ namespace SurveyModule.Application.Commands.SatisfactionCommand
             {
                 UserId= command.UserId,
                 Satisfaction = command.satisfaction.Satisfaction,
-                SurveyId = command.satisfaction.SurveyId,
+                SurveyId = command.surveyId,
             };
 
 
