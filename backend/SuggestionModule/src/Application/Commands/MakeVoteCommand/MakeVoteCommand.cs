@@ -5,7 +5,7 @@ using SuggestionModule.Domain.Entities;
 
 namespace SuggestionModule.Application.Commands.MakeVoteCommand
 {
-    public record MakeVoteCommand(CreateVoteDto vote,int userId) : IRequest<Unit>;
+    public record MakeVoteCommand(int suggestionId, CreateVoteDto vote,int userId) : IRequest<Unit>;
 
     public class MakeVoteCommandHandler : IRequestHandler<MakeVoteCommand, Unit>
     {
@@ -19,7 +19,7 @@ namespace SuggestionModule.Application.Commands.MakeVoteCommand
 
             Vote vote = new Vote(
                 command.userId,
-                command.vote.SuggestionId,
+                command.suggestionId,
                 command.vote.VoteType
             );
             await _repository.MakeVote(vote);
