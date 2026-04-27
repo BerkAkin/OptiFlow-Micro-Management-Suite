@@ -8,7 +8,7 @@ namespace SupportModule.Application.Commands.ApproveOrRejectDayOffRequestCommand
 {
 
 
-    public record ApproveOrRejectDayOffRequestCommand(ApproveOrRejectDto dto, int currentTenant) : IRequest<Unit>;
+    public record ApproveOrRejectDayOffRequestCommand(int requestId, ApproveOrRejectDto dto, int currentTenant) : IRequest<Unit>;
     public class ApproveOrRejectDayOffRequestCommandHandler : IRequestHandler<ApproveOrRejectDayOffRequestCommand, Unit>
     {
         private readonly SupportDbContext _dbContext;
@@ -20,7 +20,7 @@ namespace SupportModule.Application.Commands.ApproveOrRejectDayOffRequestCommand
 
         public async Task<Unit> Handle(ApproveOrRejectDayOffRequestCommand command, CancellationToken cancellationToken)
         {
-            DayOff data = await _dbContext.DayOffs.SingleOrDefaultAsync(d=>d.Id == command.dto.requestId && d.TenantId==command.currentTenant, cancellationToken);
+            DayOff data = await _dbContext.DayOffs.SingleOrDefaultAsync(d=>d.Id == command.requestId && d.TenantId==command.currentTenant, cancellationToken);
 
             if (data is null)
             {
