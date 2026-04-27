@@ -1,13 +1,10 @@
-using AuthModule.Data;
-using AuthModule.Interfaces;
-using AuthModule.Mappings;
-using AuthModule.Services;
+using AuthModule.Application.Interfaces;
+using AuthModule.Application.Services;
+using AuthModule.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Minio;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
-using System.Text;
 
 
 
@@ -15,27 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddProfile(new MappingProfile());
-});
-
-
 
 builder.Services.AddDbContext<AuthDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuthModuleDb")));
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<RefreshTokenService>();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSingleton<TokenCreateService>(provider =>
+builder.Services.AddSingleton<TokenService>(provider =>
 {
     var jwtSettings = builder.Configuration.GetSection("JwtSettings");
     string secretKey = jwtSettings["SecretKey"];
     int expiryMinutes = int.Parse(jwtSettings["ExpiryMinutes"]);
-    return new TokenCreateService(secretKey, expiryMinutes);
+    return new TokenService(secretKey, expiryMinutes);
 });
 
 builder.Services.AddMinio(configureSource => configureSource
@@ -58,9 +49,8 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<AuthDBContext>();
-    //dbContext.Database.EnsureDeleted();
-    dbContext.Database.Migrate();
-    DbSeeder.Seed(dbContext);
+    await dbContext.Database.MigrateAsync();
+    await DbSeeder.Seed(dbContext);
 }
 
 
