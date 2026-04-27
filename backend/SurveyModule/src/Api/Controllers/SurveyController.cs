@@ -11,7 +11,7 @@ using ProjectMicro.Shared.Interfaces;
 
 namespace SurveyModule.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/surveys")]
     [ApiController]
     public class SurveyController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace SurveyModule.Api.Controllers
       }
 
         [HttpGet]
-        public async Task<IActionResult> GetSurvey() {
+        public async Task<IActionResult> GetAll() {
 
             var tenantId = _currentUser.User.TenantId;
 
@@ -31,8 +31,8 @@ namespace SurveyModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpGet("SurveyDetail")]
-        public async Task<IActionResult> GetSurveyDetail([FromQuery] int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetDetail(int id)
         {
             var tenantId = _currentUser.User.TenantId;
             var userId = _currentUser.User.UserId;
@@ -42,14 +42,14 @@ namespace SurveyModule.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddSurvey([FromBody] SurveyDto survey)
+        public async Task<IActionResult> Create([FromBody] SurveyDto survey)
         {
             int tenantId = _currentUser.User.TenantId;
             var data = await _mediator.Send(new AddSurveyCommand(survey, tenantId));
             return Ok("Survey Kaydedildi");
         }
 
-        [HttpPost("UserAnswer")]
+        [HttpPost("user-answer")]
         public async Task<IActionResult> UserAnswer([FromBody] UserAnswerDto UserAnswer)
         {
             int userId = _currentUser.User.UserId;
@@ -57,18 +57,18 @@ namespace SurveyModule.Api.Controllers
             return Ok("Cevaplar Kaydedildi");
         }
 
-        [HttpGet("SurveyResult")]
-        public async Task<IActionResult> GetSurveyResult([FromQuery] int id)
+        [HttpGet("{id}/results")]
+        public async Task<IActionResult> GetResults(int id)
         {
             var data = await _mediator.Send(new GetSurveyResultQuery(id));
             return Ok(data);
         }
 
-        [HttpPost("Satisfaction")]
-        public async Task<IActionResult> AddSatisfaction([FromBody] SatisfactionRateDto satisfaction)
+        [HttpPost("{id}/satisfaction")]
+        public async Task<IActionResult> CreateSatisfaction(int id, [FromBody] SatisfactionRateDto satisfaction)
         {
             var userId = _currentUser.User.UserId;
-            var data = await _mediator.Send(new SatisfactionCommand(satisfaction,userId));
+            var data = await _mediator.Send(new SatisfactionCommand(id,satisfaction,userId));
             return Ok(data);
         }
     }
