@@ -1,113 +1,94 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NotificationService.Services;
-using ProjectMicro.Shared.Interfaces;
 
 namespace NotificationService.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/notifications")]
     [ApiController]
     public class NotificationController : ControllerBase
     {
 
         private readonly NotificationManager _notificationManager;
-        private readonly ICurrentUserService _currentUserService;
-        private readonly IMediator _mediator;
 
-        public NotificationController(NotificationManager notificationManager, ICurrentUserService currentUserService,IMediator mediator)
+
+        public NotificationController(NotificationManager notificationManager)
         {
 
             _notificationManager = notificationManager;
-            _currentUserService = currentUserService;
-            _mediator = mediator;
         }
 
-        [HttpPost("send-bulk-survey-create")]
-        public async Task<IActionResult> SendBulkSurveyCreate()
+        [HttpPost("bulk/surveys/create")]
+        public async Task<IActionResult> BulkSurveyCreate()
         {
 
             await _notificationManager.SurveyCreatedNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-survey-timeout")]
-        public async Task<IActionResult> SendBulkSurveyTimeout()
+        [HttpPost("bulk/surveys/timeout")]
+        public async Task<IActionResult> BulkSurveyTimeout()
         {
 
             await _notificationManager.SurveyTimeoutNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-suggestion-create")]
-        public async Task<IActionResult> SendBulkSuggestionCreate()
+        [HttpPost("bulk/suggestions/create")]
+        public async Task<IActionResult> BulkSuggestionCreate()
         {
 
             await _notificationManager.SuggestionCreatedNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-suggestion-status-changed")]
-        public async Task<IActionResult> SendBulkSuggestionStatusUpdate()
+        [HttpPost("bulk/suggestions/status-updated")]
+        public async Task<IActionResult> BulkSuggestionStatusUpdated()
         {
 
             await _notificationManager.SuggestionStatusChangedNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-mood-new-comment")]
-        public async Task<IActionResult> SendBulkMoodNewComment()
+        [HttpPost("bulk/moods/new-comment")]
+        public async Task<IActionResult> BulkMoodNewComment()
         {
 
             await _notificationManager.MoodNewCommentNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-password-changed")]
-        public async Task<IActionResult> SendBulkPasswordChanged()
+        [HttpPost("bulk/password-updated")]
+        public async Task<IActionResult> BulkPasswordUpdated()
         {
 
             await _notificationManager.PasswordChangedNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-support-dayoff-status-changed")]
-        public async Task<IActionResult> SendBulkSupportDayOffStatusChanged()
+        [HttpPost("bulk/supports/dayoff-status-updated")]
+        public async Task<IActionResult> BulkSupportDayOffStatusUpdated()
         {
 
             await _notificationManager.SupportDayOffStatusChangedRequestNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-support-dayoff-created")]
-        public async Task<IActionResult> SendBulkDayOffCreated()
+        [HttpPost("bulk/supports/dayoff-created")]
+        public async Task<IActionResult> BulkDayOffCreated()
         {
 
             await _notificationManager.SupportDayOffRequestNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("send-bulk-support-request-newmessage")]
-        public async Task<IActionResult> SendBulkSupportRequestNewMessage()
+        [HttpPost("bulk/supports/request-newmessage")]
+        public async Task<IActionResult> BulkSupportRequestNewMessage()
         {
 
             await _notificationManager.SupportRequestNewMessageNotificationsAsync();
             return Accepted();
         }
 
-        [HttpPost("emailPreference")]
-        public async Task<IActionResult> ChangeEmailPreference()
-        {
-            int currentUser = _currentUserService.User.UserId;
-            await _mediator.Send(new UpdatePreferenceCommand(currentUser));
-            return Ok("Kullanıcı Bildirim İzni Başarıyla Değiştirildi");
-        }
-
-        [HttpGet("emailPreference")]
-        public async Task<IActionResult> GetEmailPreferenceStatus(int userId)
-        {
-            int currentUser = _currentUserService.User.UserId;
-            var isEnabled = await _mediator.Send(new GetPreferenceQuery(currentUser));
-            return Ok(isEnabled);
-        }
     }
 }
