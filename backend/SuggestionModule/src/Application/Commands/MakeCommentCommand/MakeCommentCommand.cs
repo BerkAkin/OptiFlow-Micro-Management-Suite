@@ -5,7 +5,7 @@ using SuggestionModule.Domain.Entities;
 
 namespace SuggestionModule.Application.Commands.MakeCommentCommand
 {
-    public record MakeCommentCommand(CreateCommentDto comment,int userId): IRequest<Unit>;
+    public record MakeCommentCommand(int suggestionId, CreateCommentDto comment,int userId): IRequest<Unit>;
     public class MakeCommentCommandHandler : IRequestHandler<MakeCommentCommand, Unit>
     {
         private readonly ISuggestionRepository _repository;
@@ -16,7 +16,7 @@ namespace SuggestionModule.Application.Commands.MakeCommentCommand
 
         public async Task<Unit> Handle(MakeCommentCommand command, CancellationToken cancellationToken)
         {
-            var suggestion = await _repository.GetByIdAsync(command.comment.SuggestionId);
+            var suggestion = await _repository.GetByIdAsync(command.suggestionId);
 
             suggestion.AddComment(command.userId, command.comment.Text);
 
