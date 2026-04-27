@@ -1,8 +1,8 @@
 {
   "Routes": [
-
+  //AUTH
     {
-      "DownstreamPathTemplate": "/api/auth/{everything}",
+      "DownstreamPathTemplate": "/api/{everyting}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -10,17 +10,13 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
 
-
-
-
-
-
+  //FINANCE
     {
-      "DownstreamPathTemplate": "/api/finance/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -28,7 +24,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/finance/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -36,14 +32,9 @@
       }
     },
 
-
-
-
-
-
-
+  //SURVEY
     {
-      "DownstreamPathTemplate": "/api/survey/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -51,7 +42,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/survey/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -59,12 +50,9 @@
       }
     },
 
-
-
-
-
+  //SUGGESTION
     {
-      "DownstreamPathTemplate": "/api/suggestions/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -72,7 +60,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/suggestions/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -80,10 +68,9 @@
       }
     },
 
-
-
+  //SUPPORT
     {
-      "DownstreamPathTemplate": "/api/support/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -91,7 +78,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/support/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -117,14 +104,9 @@
       }
     },
 
-
-
-
-
-
-
+    //MOOD
     {
-      "DownstreamPathTemplate": "/api/mood/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -132,7 +114,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/mood/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -140,10 +122,9 @@
       }
     },
 
-
-
+    //NOTIFICATION
     {
-      "DownstreamPathTemplate": "/api/notification/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -151,7 +132,7 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/notification/{everything}",
+      "UpstreamPathTemplate": "/api/{everything}/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
