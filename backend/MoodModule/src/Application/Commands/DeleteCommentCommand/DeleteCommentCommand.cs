@@ -7,7 +7,7 @@ using MoodModule.Infrastructure.Persistence;
 namespace MoodModule.Application.Commands.DeleteCommentCommand
 {
 
-    public record DeleteCommentCommand(DeleteCommentDto Comment, int TenantId) : IRequest<Unit>;
+    public record DeleteCommentCommand(int commentId,int userId, int TenantId) : IRequest<Unit>;
     public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, Unit>
     {
         private readonly MoodDbContext _dbContext;
@@ -21,12 +21,12 @@ namespace MoodModule.Application.Commands.DeleteCommentCommand
 
             MiniUser user = await _dbContext.Users
                 .Include(u => u.Comments)
-                .SingleOrDefaultAsync(u => u.Id == command.Comment.UserId && u.TenantId == command.TenantId, cancellationToken);
+                .SingleOrDefaultAsync(u => u.Id == command.userId && u.TenantId == command.TenantId, cancellationToken);
             if (user is null)
             {
                 throw new Exception("User does not exists");
             }
-            user.RemoveComment(command.Comment.CommentId);
+            user.RemoveComment(command.commentId);
 
             await _dbContext.SaveChangesAsync(cancellationToken);
 
