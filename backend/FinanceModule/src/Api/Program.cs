@@ -1,6 +1,4 @@
 using FinanceModule.DBOperations;
-using FinanceModule.Mappings;
-using FinanceModule.Repositories;
 using FinanceModule.Services;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
@@ -11,20 +9,13 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 
-var connectionString = builder.Configuration.GetConnectionString("FinanceModuleDb");
-builder.Services.AddDbContext<FinanceDBContext>(options => { options.UseSqlServer(connectionString); });
+builder.Services.AddDbContext<FinanceDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("FinanceModuleDb")));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddScoped<PdfService>();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
-builder.Services.AddScoped<TransactionService>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<TransactionRepository>();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
-builder.Services.AddAutoMapper(cfg =>
-{
-    cfg.AddProfile(new MappingProfile());
-});
 
 
 
