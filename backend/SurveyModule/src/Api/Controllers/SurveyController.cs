@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ProjectMicro.Shared.Interfaces;
 using SurveyModule.Application.Commands.AddSurvey;
+using SurveyModule.Application.Commands.UpdateSatisfactionCommand;
 using SurveyModule.Application.DTOs;
 using SurveyModule.Application.Queries.GetSurveyDetailsQuery;
 using SurveyModule.Application.Queries.GetSurveysQuery;
@@ -45,6 +46,14 @@ namespace SurveyModule.Api.Controllers
             int tenantId = _currentUser.User.TenantId;
             var data = await _mediator.Send(new CreateSurveyCommand(survey, tenantId));
             return Ok("Survey saved");
+        }
+
+        [HttpPost("{id}/increase-satisfaction")]
+        public async Task<IActionResult> IncreaseSatisfaction(int id)
+        {
+            int tenantId = _currentUser.User.TenantId;
+            await _mediator.Send(new UpdateSatisfactionCommand(id, tenantId));
+            return Ok("Satisfaction selection saved successfully");
         }
 
 
