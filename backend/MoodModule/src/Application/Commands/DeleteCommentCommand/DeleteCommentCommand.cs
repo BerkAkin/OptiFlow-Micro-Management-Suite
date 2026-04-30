@@ -1,13 +1,12 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using MoodModule.Application.DTOs;
 using MoodModule.Domain.Entities;
 using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Commands.DeleteCommentCommand
 {
 
-    public record DeleteCommentCommand(int commentId,int userId, int TenantId) : IRequest<Unit>;
+    public record DeleteCommentCommand(int commentId, int userId, int TenantId) : IRequest<Unit>;
     public class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand, Unit>
     {
         private readonly MoodDbContext _dbContext;
