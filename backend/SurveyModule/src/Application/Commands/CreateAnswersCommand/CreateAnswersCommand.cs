@@ -24,6 +24,13 @@ namespace SurveyModule.Application.Commands.AnswerSurveyCommand
             if (alreadyAnswered)
                 throw new InvalidOperationException("You've already took the survey");
 
+            var survey = await _context.Surveys.FindAsync(request.userAnswers.SurveyId);
+
+            if (survey is null)
+                throw new InvalidOperationException("No survey has been found");
+
+            survey.IncreaseSatisfaction();
+
             var userAnswers = request.userAnswers.Answers
                 .Select(ans => new UserAnswer(
                 request.currentTenant,
