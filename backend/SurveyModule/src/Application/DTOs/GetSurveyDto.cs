@@ -11,6 +11,6 @@ namespace SurveyModule.Application.DTOs
         public SurveyStatus Status { get; set; }
 
         public int SatisfactionCount { get; set; }
-        public int DissatisfactionCount { get; set; }
+        public int ParticipateCount { get; set; }
     }
 }
