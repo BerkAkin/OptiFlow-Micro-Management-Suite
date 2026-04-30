@@ -23,12 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\Persistance\Configurations\" />
-    <Folder Include="Infrastructure\Security\" />
+    <ProjectReference Include="..\..\ProjectMicro.Shared\ProjectMicro.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ProjectMicro.Shared\ProjectMicro.Shared.csproj" />
+    <Folder Include="Seeder\" />
   </ItemGroup>
 
 </Project>
