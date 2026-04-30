@@ -1,6 +1,4 @@
-﻿using MoodModule.Domain.Entities;
-using MoodModule.Domain.Enums;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+﻿using MoodModule.Domain.Enums;
 
 namespace MoodModule.Domain.Entities
 {
