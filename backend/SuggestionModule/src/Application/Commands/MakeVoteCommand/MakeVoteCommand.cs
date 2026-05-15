@@ -1,28 +1,53 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SuggestionModule.Application.DTOs;
-using SuggestionModule.Application.Interfaces;
 using SuggestionModule.Domain.Entities;
+using SuggestionModule.Infrastructure.Persistence;
 
 namespace SuggestionModule.Application.Commands.MakeVoteCommand
 {
-    public record MakeVoteCommand(int suggestionId, CreateVoteDto vote,int userId) : IRequest<Unit>;
+    public record MakeVoteCommand(int suggestionId, CreateVoteDto vote, int userId) : IRequest<Unit>;
 
     public class MakeVoteCommandHandler : IRequestHandler<MakeVoteCommand, Unit>
     {
-        private readonly ISuggestionRepository _repository;
-        public MakeVoteCommandHandler(ISuggestionRepository repository)
+        private readonly SuggestionDbContext _context;
+        public MakeVoteCommandHandler(SuggestionDbContext context)
         {
-            _repository = repository;
+            _context = context;
         }
 
-        public async Task<Unit> Handle(MakeVoteCommand command, CancellationToken cancellationToken) {
+        public async Task<Unit> Handle(MakeVoteCommand command, CancellationToken cancellationToken)
+        {
 
-            Vote vote = new Vote(
-                command.userId,
-                command.suggestionId,
-                command.vote.VoteType
-            );
-            await _repository.MakeVote(vote);
+
+            Suggestion suggestion = await _context.Suggestions
+                .Where(s => s.Id == command.suggestionId)
+                .FirstOrDefaultAsync(cancellationToken);
+
+            if (suggestion == null)
+                throw new KeyNotFoundException("Suggestion does not exist");
+
+            var existingVote = await _context.Votes
+                .FirstOrDefaultAsync(x => x.UserId == command.userId && x.SuggestionId == suggestion.Id);
+
+
+            if (existingVote == null)
+            {
+                suggestion.AddVote(command.userId, command.vote.VoteType);
+            }
+            else
+            {
+                if (existingVote.VoteType != command.vote.VoteType)
+                {
+                    existingVote.ChangeVote(command.vote.VoteType);
+                }
+                else
+                {
+                    return Unit.Value;
+                }
+            }
+
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }
