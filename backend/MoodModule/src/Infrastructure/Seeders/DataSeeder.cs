@@ -1,21 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodModule.Domain.Entities;
-using MoodModule.Domain.Enums;
 using MoodModule.Infrastructure.Persistence;
 
 
 namespace MoodModule.Infrastructure.Seeders
 {
-    public static class DataSeeder
+    public static class DbSeeder
     {
         public static async Task SeedAsync(MoodDbContext context)
         {
             if (!await context.Users.AnyAsync())
             {
-                MiniUser user1 = new MiniUser("berk", "berk@mail.com", 1,1);
-                user1.AddMoodRecord(4, [1,2,3,4]);
-                user1.AddComment("Kullanıcı 1'e ait deneme yorumu");
-                await context.Users.AddAsync(user1);
+                Tenant tenant = new Tenant(1, "Company 1");
+                User usr = tenant.AddUser(1, "User 1", "user@mail.com");
+                usr.AddMoodRecord(4, new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
+                usr.AddComment("User 1 Comment");
+                await context.Tenants.AddAsync(tenant);
                 await context.SaveChangesAsync();
             }
         }
