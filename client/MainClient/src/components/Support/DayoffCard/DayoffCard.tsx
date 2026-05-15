@@ -22,7 +22,7 @@ export function DayoffCard({ item }: SupportDayOffCardProps) {
             status: status,
             requestId: item.id,
         }
-        mutation.mutate({ payload: payload });
+        mutation.mutate(payload);
     }
 
     const getStatusStyles = (status: number) => {
@@ -38,9 +38,9 @@ export function DayoffCard({ item }: SupportDayOffCardProps) {
             <div>
                 <div className='flex justify-between items-center mb-5'>
                     <div className='flex items-center gap-3'>
-                        <span className='font-bold text-slate-800 tracking-tight uppercase'>{item.username}</span>
+                        <span className='font-bold text-sm text-slate-800 tracking-tight uppercase'>{item.username}</span>
                     </div>
-                    <span className={`px-3 py-1 rounded-full text-[11px] font-bold tracking-tight border ${getStatusStyles(item.status)}`}>
+                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-tight border ${getStatusStyles(item.status)}`}>
                         {item.status === 0 ? "Pending" : item.status === 1 ? "Approved" : "Rejected"}
                     </span>
                 </div>
