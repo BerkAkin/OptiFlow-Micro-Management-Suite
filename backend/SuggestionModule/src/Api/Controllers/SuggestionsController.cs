@@ -1,14 +1,13 @@
 ﻿
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ProjectMicro.Shared.Interfaces;
 using SuggestionModule.Application.Commands.ChangeStatusCommand;
-using SuggestionModule.Application.Commands.MakeCommentCommand;
 using SuggestionModule.Application.Commands.MakeSuggestionCommand;
 using SuggestionModule.Application.Commands.MakeVoteCommand;
 using SuggestionModule.Application.DTOs;
 using SuggestionModule.Application.Queries.GetBestSuggestionsQuery;
 using SuggestionModule.Application.Queries.GetSuggestionsQuery;
-using ProjectMicro.Shared.Interfaces;
 
 namespace SuggestionModule.Api.Controllers
 {
@@ -34,7 +33,8 @@ namespace SuggestionModule.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() {
+        public async Task<IActionResult> GetAll()
+        {
             int tenantId = _currentUserService.User.TenantId;
             var data = await _mediator.Send(new GetSuggestionsQuery(tenantId));
             return Ok(data);
@@ -45,7 +45,7 @@ namespace SuggestionModule.Api.Controllers
         {
             int tenantId = _currentUserService.User.TenantId;
             int userId = _currentUserService.User.UserId;
-            var data = await _mediator.Send(new GetMySuggestionsQuery(tenantId,userId));
+            var data = await _mediator.Send(new GetMySuggestionsQuery(tenantId, userId));
             return Ok(data);
         }
 
@@ -57,26 +57,18 @@ namespace SuggestionModule.Api.Controllers
             return Ok(data);
         }
 
-        [HttpPost("{id}/comments")]
-        public async Task<IActionResult> CreateComment(int id, [FromBody] CreateCommentDto comment)
-        {
-            int userId = _currentUserService.User.UserId;
-            await _mediator.Send(new MakeCommentCommand(id,comment,userId));
-            return Ok();
-        }
-
         [HttpPost("{id}/votes")]
         public async Task<IActionResult> Vote(int id, [FromBody] CreateVoteDto vote)
         {
             int userId = _currentUserService.User.UserId;
-            await _mediator.Send(new MakeVoteCommand(id,vote,userId));
+            await _mediator.Send(new MakeVoteCommand(id, vote, userId));
             return Ok();
         }
 
         [HttpPatch("{id}/status")]
         public async Task<IActionResult> Update(int id, [FromBody] StatusDto status)
         {
-            await _mediator.Send(new ChangeStatusCommand(id,status));
+            await _mediator.Send(new ChangeStatusCommand(id, status));
             return Ok("Status Changed Successfully");
         }
 
