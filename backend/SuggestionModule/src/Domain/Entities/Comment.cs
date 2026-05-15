@@ -2,16 +2,21 @@
 {
     public class Comment
     {
-        protected Comment() { }
         public int Id { get; private set; }
         public string Text { get; private set; }
+
         public int UserId { get; private set; }
-        internal int SuggestionId { get; private set; }
-        internal Suggestion Suggestion { get; private set; }
-        public MiniUser User { get; private set; }
-        internal Comment(int userId, string text) {
-            UserId = userId;
-            Text = text;
+        public User User { get; private set; }
+
+        public int SuggestionId { get; private set; }
+        public Suggestion Suggestion { get; private set; }
+
+        private Comment() { }
+        public Comment(int suggestionId, int userId, string text)
+        {
+            this.UserId = userId;
+            this.Text = text;
+            this.SuggestionId = suggestionId;
         }
     }
 }
