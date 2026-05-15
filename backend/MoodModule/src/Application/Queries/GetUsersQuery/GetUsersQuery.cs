@@ -19,10 +19,10 @@ namespace MoodModule.Application.Queries.GetUsersQuery
             return await _dbContext.Users
                 .AsNoTracking()
                 .Where(u => u.TenantId == query.TenantId)
-                .Select(u=> new GetUsersDto
+                .Select(u => new GetUsersDto
                 {
                     UserId = u.Id,
-                    Employee= u.Username,
+                    Employee = u.Fullname,
                 })
                 .ToListAsync();
         }
