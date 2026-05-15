@@ -12,12 +12,34 @@ namespace SupportModule.Infrastructure.Persistence
 
         public DbSet<SupportRequest> SupportRequests { get; set; }
         public DbSet<SupportMessage> SupportMessages { get; set; }
-        public DbSet<MiniUser> Users { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<DayOff> DayOffs { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Tenant>()
+                .HasMany(t => t.Users)
+                .WithOne(u => u.Tenant)
+                .HasForeignKey(u => u.TenantId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<Tenant>()
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+
+
             modelBuilder.Entity<SupportMessage>()
                 .HasOne(sm => sm.SupportRequest)
                 .WithMany(sr => sr.Messages)
@@ -31,10 +53,10 @@ namespace SupportModule.Infrastructure.Persistence
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<DayOff>()
-                .HasOne(dao=>dao.User) 
+                .HasOne(dao => dao.User)
                 .WithMany(u => u.DayOffs)
-                .HasForeignKey(d => d.UserId) 
-                .OnDelete(DeleteBehavior.Restrict); 
+                .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 
