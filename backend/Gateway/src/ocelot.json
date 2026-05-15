@@ -1,8 +1,10 @@
 {
   "Routes": [
-  //AUTH
+
+
+    //Auth/auth
     {
-      "DownstreamPathTemplate": "/api/{everyting}/{everything}",
+      "DownstreamPathTemplate": "/api/auth/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -10,13 +12,41 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
+      "UpstreamPathTemplate": "/api/auth/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    //Auth/employees
+    {
+      "DownstreamPathTemplate": "/api/employees/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/employees/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
+    },
+    //Auth/users
+    {
+      "DownstreamPathTemplate": "/api/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/users/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ]
     },
 
-  //FINANCE
+
+
+    //Finance/transactions
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/transactions/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -24,7 +54,24 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
+      "UpstreamPathTemplate": "/api/transactions/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Finance/invoices
+    {
+      "DownstreamPathTemplate": "/api/invoices/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finance-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/invoices/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -32,9 +79,11 @@
       }
     },
 
-  //SURVEY
+
+
+    //Survey/answers
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/answers/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -42,7 +91,24 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
+      "UpstreamPathTemplate": "/api/answers/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Survey/surveys
+    {
+      "DownstreamPathTemplate": "/api/surveys/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "survey-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/surveys/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -50,9 +116,11 @@
       }
     },
 
-  //SUGGESTION
+
+
+    //Suggestion/suggestions
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/suggestions/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -60,7 +128,24 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
+      "UpstreamPathTemplate": "/api/suggestions/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE","PATCH" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Suggestion/comments
+    {
+      "DownstreamPathTemplate": "/api/suggestions/comments/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "suggestion-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/suggestions/comments/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -68,9 +153,12 @@
       }
     },
 
-  //SUPPORT
+
+
+
+    //Support/supports
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/supports/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -78,13 +166,15 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/api/supports/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE","PATCH" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
     },
+    //Support/hr-support
+
     {
       "DownstreamPathTemplate": "/hr-support",
       "DownstreamScheme": "ws",
@@ -103,10 +193,29 @@
         "AllowedScopes": []
       }
     },
-
-    //MOOD
+    //Support/leaves
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/leaves/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "support-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/leaves/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE", "PATCH" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+
+
+
+    //Mood/moods
+    {
+      "DownstreamPathTemplate": "/api/moods/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -114,7 +223,24 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
+      "UpstreamPathTemplate": "/api/moods/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      }
+    },
+    //Mood/comments
+    {
+      "DownstreamPathTemplate": "/api/comments/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "mood-module",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/comments/{everything}",
       "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -122,9 +248,11 @@
       }
     },
 
-    //NOTIFICATION
+
+
+    //Notification/preferences
     {
-      "DownstreamPathTemplate": "/api/{everything}/{everything}",
+      "DownstreamPathTemplate": "/api/preferences/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -132,13 +260,14 @@
           "Port": 8080
         }
       ],
-      "UpstreamPathTemplate": "/api/{everything}/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/api/preferences/{everything}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE","PATCH" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       }
     }
+
 
   ],
   "GlobalConfiguration": { "BaseUrl": "http://gateway:8080" }
