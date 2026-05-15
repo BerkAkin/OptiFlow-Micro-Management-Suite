@@ -23,7 +23,7 @@ export function SupportDashboardPage() {
                     <LiveChatButton />
                 </div>
             </div>
-            <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+            <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
                 <div className='grid grid-cols-12 my-6 gap-6'>
                     <div className=' col-span-3 h-[400px]'>
                         <Dough />
