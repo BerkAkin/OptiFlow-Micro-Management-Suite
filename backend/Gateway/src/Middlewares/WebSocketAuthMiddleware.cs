@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 
 namespace Gateway.Middlewares
 {
@@ -32,7 +31,7 @@ namespace Gateway.Middlewares
                 {
                     var jwtToken = handler.ReadJwtToken(token);
 
-                    var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
+                    var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "sub")?.Value;
                     var tenantId = jwtToken.Claims.FirstOrDefault(c => c.Type == "tenantId")?.Value;
                     var departmentId = jwtToken.Claims.FirstOrDefault(c => c.Type == "departmentId")?.Value;
                     var companyName = jwtToken.Claims.FirstOrDefault(c => c.Type == "company")?.Value;
