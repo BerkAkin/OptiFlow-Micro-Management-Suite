@@ -25,7 +25,6 @@
     <Folder Include="Application\Interfaces\" />
     <Folder Include="Infrastructure\Security\" />
     <Folder Include="Infrastructure\Seeders\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
   <ItemGroup>
