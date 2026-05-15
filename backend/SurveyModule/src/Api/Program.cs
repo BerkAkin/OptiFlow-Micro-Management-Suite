@@ -34,6 +34,13 @@ var app = builder.Build();
 
 app.UseCors();
 
+using (var scope = app.Services.CreateScope())
+{
+    var surveyDb = scope.ServiceProvider.GetRequiredService<SurveyDbContext>();
+    await surveyDb.Database.MigrateAsync();
+    await DbSeeder.Seed(surveyDb);
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

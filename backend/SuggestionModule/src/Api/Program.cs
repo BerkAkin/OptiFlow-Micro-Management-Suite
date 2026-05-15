@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using SuggestionModule.Application.Interfaces;
-using SuggestionModule.Application.Queries.GetSuggestionsQuery;
-using SuggestionModule.Infrastructure.Persistence;
-using SuggestionModule.Infrastructure.Repositories;
+using MoodModule.Infrastructure.Seeders;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
+using SuggestionModule.Application.Queries.GetSuggestionsQuery;
+using SuggestionModule.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,11 +25,19 @@ builder.Services.AddCors(options =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(GetSuggestionsQuery).Assembly));
-builder.Services.AddScoped<ISuggestionRepository, SuggestionRepository>();
 
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var suggestionDb = scope.ServiceProvider.GetRequiredService<SuggestionDbContext>();
+    await suggestionDb.Database.MigrateAsync();
+    await DbSeeder.Seed(suggestionDb);
+}
+
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
