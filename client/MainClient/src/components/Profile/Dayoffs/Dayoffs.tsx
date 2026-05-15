@@ -23,7 +23,7 @@ export function Dayoffs() {
     }
 
     const handleSubmit = (payload: any) => {
-        mutation.mutate({ payload: payload });
+        mutation.mutate(payload);
     }
 
     const initialValues = {
