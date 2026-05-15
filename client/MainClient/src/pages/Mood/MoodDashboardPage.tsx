@@ -14,7 +14,7 @@ export function MoodDashboardPage() {
                     </h6>
                 </div>
             </div>
-            <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
+            <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Company Manager']}>
                 <div>
                     <Recorder />
                 </div>
@@ -28,7 +28,7 @@ export function MoodDashboardPage() {
                 </div>
 
                 <div className='col-span-4 '>
-                    <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Manager']}>
+                    <RoleBasedGuard allowedDepartments={['Employee', 'Finance Accountant', 'Company Manager']}>
                         <div className='mb-6'>
                             <Latest />
                         </div>
@@ -39,7 +39,7 @@ export function MoodDashboardPage() {
                 </div>
 
                 <div className='col-span-12'>
-                    <RoleBasedGuard allowedDepartments={["HR", "Manager"]}>
+                    <RoleBasedGuard allowedDepartments={["HR", "Company Manager"]}>
                         <div>
                             <AddComment />
                         </div>
