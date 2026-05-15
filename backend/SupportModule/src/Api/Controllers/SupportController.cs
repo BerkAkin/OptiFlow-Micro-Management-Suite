@@ -32,7 +32,7 @@ namespace SupportModule.Api.Controllers
             int currentUser = _currentUserService.User.UserId;
             int currentTenant = _currentUserService.User.TenantId;
 
-            await _mediator.Send(new CreateSupportRequestCommand(supportRequest, currentUser,currentTenant)); 
+            await _mediator.Send(new CreateSupportRequestCommand(supportRequest, currentUser, currentTenant));
             return Ok(new { message = "İsteğiniz iletilmiştir" });
         }
 
@@ -42,7 +42,7 @@ namespace SupportModule.Api.Controllers
             int currentTenant = _currentUserService.User.TenantId;
             int currentDepartment = _currentUserService.User.DepartmentId;
             int currentUser = _currentUserService.User.UserId;
-            var data = await _mediator.Send(new GetSupportRequestsQuery(currentTenant,currentDepartment,currentUser));
+            var data = await _mediator.Send(new GetSupportRequestsQuery(currentTenant, currentDepartment, currentUser));
             return Ok(data);
         }
 
@@ -58,7 +58,7 @@ namespace SupportModule.Api.Controllers
         public async Task<IActionResult> SendMessage(int requestId, [FromBody] SendMessageDto msg)
         {
             int currentUser = _currentUserService.User.UserId;
-            var data = await _mediator.Send(new SendMessageCommand(requestId, msg,currentUser));
+            var data = await _mediator.Send(new SendMessageCommand(requestId, msg, currentUser));
             return Ok(data);
         }
 
@@ -66,7 +66,7 @@ namespace SupportModule.Api.Controllers
         public async Task<IActionResult> Close(int requestId)
         {
             var tenantId = _currentUserService.User.TenantId;
-            var data = await _mediator.Send(new MarkAsClosedCommand(RequestId, tenantId));
+            var data = await _mediator.Send(new MarkAsClosedCommand(requestId, tenantId));
             return Ok(data);
         }
 
@@ -88,7 +88,7 @@ namespace SupportModule.Api.Controllers
             return Ok(data);
         }
 
-        
+
 
         [HttpGet("available-employees")]
         public async Task<IActionResult> GetEmployees()
@@ -96,10 +96,10 @@ namespace SupportModule.Api.Controllers
             int currentUser = _currentUserService.User.UserId;
             var tenantId = _currentUserService.User.TenantId;
             int currentDepartment = _currentUserService.User.DepartmentId;
-            var data = await _mediator.Send(new GetUserListQuery(tenantId,currentDepartment, currentUser));
+            var data = await _mediator.Send(new GetUserListQuery(tenantId, currentDepartment, currentUser));
             return Ok(data);
         }
 
-       
+
     }
 }
