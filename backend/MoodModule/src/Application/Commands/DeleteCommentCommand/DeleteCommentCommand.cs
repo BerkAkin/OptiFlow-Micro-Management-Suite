@@ -18,7 +18,7 @@ namespace MoodModule.Application.Commands.DeleteCommentCommand
         public async Task<Unit> Handle(DeleteCommentCommand command, CancellationToken cancellationToken)
         {
 
-            MiniUser user = await _dbContext.Users
+            User user = await _dbContext.Users
                 .Include(u => u.Comments)
                 .SingleOrDefaultAsync(u => u.Id == command.userId && u.TenantId == command.TenantId, cancellationToken);
             if (user is null)
