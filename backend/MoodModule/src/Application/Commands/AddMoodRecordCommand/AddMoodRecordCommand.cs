@@ -6,7 +6,7 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Commands.AddMoodRecordCommand
 {
-    public record AddMoodRecordCommand(AddMoodRecordDto mood,int UserId,int TenantId): IRequest<Unit>;
+    public record AddMoodRecordCommand(AddMoodRecordDto mood, int UserId, int TenantId) : IRequest<Unit>;
     public class AddMoodRecordCommandHandler : IRequestHandler<AddMoodRecordCommand, Unit>
     {
         private readonly MoodDbContext _dbContext;
@@ -15,12 +15,15 @@ namespace MoodModule.Application.Commands.AddMoodRecordCommand
             _dbContext = dbContext;
         }
 
-        public async Task<Unit> Handle(AddMoodRecordCommand command,CancellationToken cancellationToken) {
+        public async Task<Unit> Handle(AddMoodRecordCommand command, CancellationToken cancellationToken)
+        {
             var todayUtc = DateTime.UtcNow.Date;
-            MiniUser user = await _dbContext.Users.Include(x=>x.MoodRecords)
-                 .SingleOrDefaultAsync(u => u.UserId == command.UserId && u.TenantId == command.TenantId,cancellationToken);
-            if (user == null) 
-                throw new Exception("User is not exists");
+            User user = await _dbContext.Users
+                .Include(x => x.MoodRecords)
+                .SingleOrDefaultAsync(u => u.Id == command.UserId && u.TenantId == command.TenantId, cancellationToken);
+
+            if (user == null)
+                throw new Exception("User is not exist");
             if (user.MoodRecords.Any(x => x.CreatedAt.Date == todayUtc))
                 throw new Exception("You already recorded mood today");
 
