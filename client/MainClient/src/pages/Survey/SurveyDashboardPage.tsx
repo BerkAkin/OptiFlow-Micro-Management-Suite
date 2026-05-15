@@ -9,6 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export function SurveyDashboardPage() {
     const { data, isLoading, error } = useListSurvey();
+    console.log(data);
 
     if (isLoading) return <div className="h-screen flex items-center justify-center"><Spinner /></div>;
     if (error || !data) return <div className="p-10"><ErrorMessage /></div>;
@@ -52,15 +53,15 @@ export function SurveyDashboardPage() {
                                 <div className='flex items-center gap-6 mt-4'>
                                     <div className="text-center">
                                         <div className='w-10 h-10 bg-orange-400 rounded-xl flex items-center justify-center mb-1'>
-                                            <img src={happyWhite} alt="Dissatisfied" width={24} />
+                                            <img src={happyWhite} alt="Satisfied" width={24} />
                                         </div>
-                                        <p className='text-sm font-bold text-slate-600'>{item.dissatisfactionCount}</p>
+                                        <p className='text-sm font-bold text-slate-600'>{item.satisfactionCount}</p>
                                     </div>
                                     <div className="text-center">
                                         <div className='w-10 h-10 bg-sky-400 rounded-xl flex items-center justify-center mb-1'>
-                                            <img src={sadWhite} alt="Satisfied" width={24} />
+                                            <img src={sadWhite} alt="Dissatisfied" width={24} />
                                         </div>
-                                        <p className='text-sm font-bold text-slate-600'>{item.satisfactionCount}</p>
+                                        <p className='text-sm font-bold text-slate-600'>{item.participateCount - item.satisfactionCount}</p>
                                     </div>
                                 </div>
 
@@ -73,7 +74,7 @@ export function SurveyDashboardPage() {
                                     </Link>
 
                                     {!isActive && (
-                                        <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                                        <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
                                             <Link to={`/survey/result/${item.id}`} className='text-[11px] font-bold text-blue-500 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition-colors'>
                                                 RESULTS
                                             </Link>
@@ -88,7 +89,7 @@ export function SurveyDashboardPage() {
                                         data={{
                                             labels: ['Participant'],
                                             datasets: [{
-                                                data: [totalRespondents, 100 - totalRespondents],
+                                                data: [item.participateCount],
                                                 backgroundColor: [isActive ? '#2563eb' : '#94a3b8', '#f1f5f9'],
                                                 borderWidth: 0,
                                             }],
@@ -101,7 +102,7 @@ export function SurveyDashboardPage() {
                                     />
                                 </div>
                                 <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                                    <span className="text-xl font-bold text-slate-700">{totalRespondents}</span>
+                                    <span className="text-xl font-bold text-slate-700">{item.participateCount}</span>
                                     <span className="text-[10px] text-slate-400 font-bold uppercase">People</span>
                                 </div>
                             </div>
