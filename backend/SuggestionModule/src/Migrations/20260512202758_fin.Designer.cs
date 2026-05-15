@@ -12,8 +12,8 @@ using SuggestionModule.Infrastructure.Persistence;
 namespace SuggestionModule.Migrations
 {
     [DbContext(typeof(SuggestionDbContext))]
-    [Migration("20251229193315_Initial")]
-    partial class Initial
+    [Migration("20260512202758_fin")]
+    partial class fin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,33 +45,11 @@ namespace SuggestionModule.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("SuggestionId");
+
                     b.HasIndex("UserId");
 
-                    b.HasIndex("SuggestionId", "UserId")
-                        .IsUnique();
-
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("SuggestionModule.Domain.Entities.MiniUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SuggestionModule.Domain.Entities.Suggestion", b =>
@@ -104,9 +82,47 @@ namespace SuggestionModule.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TenantId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Suggestions");
+                });
+
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SuggestionModule.Domain.Entities.Vote", b =>
@@ -117,8 +133,14 @@ namespace SuggestionModule.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("SuggestionId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -128,9 +150,9 @@ namespace SuggestionModule.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("SuggestionId");
 
-                    b.HasIndex("SuggestionId", "UserId")
+                    b.HasIndex("UserId", "SuggestionId")
                         .IsUnique();
 
                     b.ToTable("Votes");
@@ -141,13 +163,13 @@ namespace SuggestionModule.Migrations
                     b.HasOne("SuggestionModule.Domain.Entities.Suggestion", "Suggestion")
                         .WithMany("Comments")
                         .HasForeignKey("SuggestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SuggestionModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SuggestionModule.Domain.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Suggestion");
@@ -157,13 +179,32 @@ namespace SuggestionModule.Migrations
 
             modelBuilder.Entity("SuggestionModule.Domain.Entities.Suggestion", b =>
                 {
-                    b.HasOne("SuggestionModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SuggestionModule.Domain.Entities.Tenant", "Tenant")
                         .WithMany("Suggestions")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SuggestionModule.Domain.Entities.User", "User")
+                        .WithMany("Suggestions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Tenant");
+
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.User", b =>
+                {
+                    b.HasOne("SuggestionModule.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("Users")
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("SuggestionModule.Domain.Entities.Vote", b =>
@@ -171,13 +212,13 @@ namespace SuggestionModule.Migrations
                     b.HasOne("SuggestionModule.Domain.Entities.Suggestion", "Suggestion")
                         .WithMany("Votes")
                         .HasForeignKey("SuggestionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SuggestionModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SuggestionModule.Domain.Entities.User", "User")
                         .WithMany("Votes")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Suggestion");
@@ -185,18 +226,25 @@ namespace SuggestionModule.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SuggestionModule.Domain.Entities.MiniUser", b =>
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.Suggestion", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Suggestions");
 
                     b.Navigation("Votes");
                 });
 
-            modelBuilder.Entity("SuggestionModule.Domain.Entities.Suggestion", b =>
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Navigation("Suggestions");
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("SuggestionModule.Domain.Entities.User", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Suggestions");
 
                     b.Navigation("Votes");
                 });

@@ -6,23 +6,41 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SuggestionModule.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class fin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Tenants",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tenants", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    Fullname = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TenantId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Users_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,11 +60,16 @@ namespace SuggestionModule.Migrations
                 {
                     table.PrimaryKey("PK_Suggestions", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Suggestions_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Suggestions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -67,13 +90,12 @@ namespace SuggestionModule.Migrations
                         column: x => x.SuggestionId,
                         principalTable: "Suggestions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comments_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -84,7 +106,9 @@ namespace SuggestionModule.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     SuggestionId = table.Column<int>(type: "int", nullable: false),
-                    VoteType = table.Column<int>(type: "int", nullable: false)
+                    VoteType = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,20 +118,18 @@ namespace SuggestionModule.Migrations
                         column: x => x.SuggestionId,
                         principalTable: "Suggestions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Votes_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_SuggestionId_UserId",
+                name: "IX_Comments_SuggestionId",
                 table: "Comments",
-                columns: new[] { "SuggestionId", "UserId" },
-                unique: true);
+                column: "SuggestionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",
@@ -115,20 +137,30 @@ namespace SuggestionModule.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Suggestions_TenantId",
+                table: "Suggestions",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Suggestions_UserId",
                 table: "Suggestions",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Votes_SuggestionId_UserId",
-                table: "Votes",
-                columns: new[] { "SuggestionId", "UserId" },
-                unique: true);
+                name: "IX_Users_TenantId",
+                table: "Users",
+                column: "TenantId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Votes_UserId",
+                name: "IX_Votes_SuggestionId",
                 table: "Votes",
-                column: "UserId");
+                column: "SuggestionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Votes_UserId_SuggestionId",
+                table: "Votes",
+                columns: new[] { "UserId", "SuggestionId" },
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -145,6 +177,9 @@ namespace SuggestionModule.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Tenants");
         }
     }
 }
