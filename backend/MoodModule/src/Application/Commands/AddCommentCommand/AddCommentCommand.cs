@@ -17,7 +17,8 @@ namespace MoodModule.Application.Commands.AddCommentCommand
 
         public async Task<Unit> Handle(AddCommentCommand command,CancellationToken cancellationToken) {
 
-            MiniUser user = await _dbContext.Users.SingleOrDefaultAsync(u=>u.Id==command.comment.UserId && u.TenantId== command.TenantId, cancellationToken);
+            User user = await _dbContext.Users
+                .SingleOrDefaultAsync(u=>u.Id==command.comment.UserId && u.TenantId== command.TenantId, cancellationToken);
             if (user is null) {
                 throw new Exception("User does not exists");
             }
