@@ -27,9 +27,9 @@
             this.IsActive = !IsActive;
         }
 
-        public void AddUser(int id, string fullname, int tenantId)
+        public void AddUser(int id, string fullname)
         {
-            _users.Add(new User(id, fullname, tenantId));
+            _users.Add(new User(id, fullname, this.Id));
         }
 
         public Survey AddSurvey(string title)
