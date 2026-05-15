@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   addService,
   listService,
@@ -48,9 +53,12 @@ export const useComment = () => {
 };
 
 export const useUpdateStatus = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (values: any) => updateStatusService(values),
     onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["suggestionList"] });
+      queryClient.invalidateQueries({ queryKey: ["mySuggestionList"] });
       console.log("Suggestion decision submitted successfully!", data);
     },
     onError: (error: any) => {
@@ -67,9 +75,12 @@ export const useBests = () => {
 };
 
 export const useAddSuggestion = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (values: any) => addService(values),
     onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["suggestionList"] });
+      queryClient.invalidateQueries({ queryKey: ["mySuggestionList"] });
       console.log("Suggestion submitted successfully!", data);
     },
     onError: (error: any) => {
