@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { up, down, add, list } from '../../../assets/icons'
 import { Field, Form, Formik } from 'formik'
 import { RoleBasedGuard } from '../../Common'
-import { useApproveOrRejectDayoff, useComment, useVote } from '../../../hooks'
+import { useComment, useUpdateStatus, useVote } from '../../../hooks'
 
 interface SuggestionCardProps {
     id: number,
@@ -21,7 +21,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
 
     const voteMutation = useVote();
     const commentMutation = useComment();
-    const approveOrReject = useApproveOrRejectDayoff();
+    const approveOrReject = useUpdateStatus();
 
     const handleVote = (vote: number) => {
         voteMutation.mutate({ suggestionId: id, voteType: vote })
@@ -29,7 +29,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
     const handleComment = (values: any) => {
         commentMutation.mutate({ ...values, suggestionId: id })
     }
-    const handleApproveOrReject = (decision: boolean) => {
+    const handleApproveOrReject = (decision: number) => {
         approveOrReject.mutate({ id, decision })
     }
     const [commentSection, setCommentSection] = useState<boolean>(false);
@@ -42,18 +42,18 @@ export function ListCard({ id, status, title, description, votes, comments, date
                     <h3 className='text-lg font-semibold text-slate-800 leading-tight'>
                         {title}
                     </h3>
-                    <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                    <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
                         <div className='flex gap-2 ml-4'>
                             <button
                                 type='button'
-                                onClick={() => handleApproveOrReject(true)}
+                                onClick={() => handleApproveOrReject(1)}
                                 className='flex items-center justify-center w-6 h-6 bg-green-50 text-green-600 rounded-full hover:bg-green-500 hover:text-white transition-colors cursor-pointer border border-green-100'
                             >
                                 ✔
                             </button>
                             <button
                                 type='button'
-                                onClick={() => handleApproveOrReject(false)}
+                                onClick={() => handleApproveOrReject(2)}
                                 className='flex items-center justify-center w-6 h-6 bg-red-50 text-red-600 rounded-full hover:bg-red-500 hover:text-white transition-colors cursor-pointer border border-red-100'
                             >
                                 ✘
@@ -81,7 +81,9 @@ export function ListCard({ id, status, title, description, votes, comments, date
                     </div>
 
                     <div>
-                        {status === 1 ? (
+                        {status === 0 ? (
+                            <span className="px-3 py-1 rounded-full text-xs font-medium bg-amber-100 text-amber-700">Pending</span>
+                        ) : status === 1 ? (
                             <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Approved</span>
                         ) : (
                             <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">Rejected</span>
