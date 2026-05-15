@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using MoodModule.Application.DTOs;
 using MoodModule.Domain.Enums;
@@ -7,11 +6,11 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Queries.GetMoodsQuery
 {
-    public record GetMoodsQuery(int TenantId,int UserId,int DepartmentId, MoodFilterDto filters) : IRequest<(List<GetMoodsDto>,int maxPage)>;
-    public class GetMoodsQueryHandler : IRequestHandler<GetMoodsQuery, (List<GetMoodsDto>,int maxPage)>
+    public record GetMoodsQuery(int TenantId, int UserId, int DepartmentId, MoodFilterDto filters) : IRequest<(List<GetMoodsDto>, int maxPage)>;
+    public class GetMoodsQueryHandler : IRequestHandler<GetMoodsQuery, (List<GetMoodsDto>, int maxPage)>
     {
         private readonly MoodDbContext _dbContext;
-        public GetMoodsQueryHandler(MoodDbContext dbContext )
+        public GetMoodsQueryHandler(MoodDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -20,9 +19,9 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
         {
             var qry = _dbContext.Moods.AsNoTracking().Where(m => m.TenantId == query.TenantId);
 
-            if(query.DepartmentId != (int)DepartmentsEnum.HR)
+            if (query.DepartmentId != (int)DepartmentsEnum.HR)
             {
-                qry=qry.Where(m=>m.UserId == query.UserId);
+                qry = qry.Where(m => m.UserId == query.UserId);
             }
 
             if (Enum.TryParse<MoodEnum>(query.filters.Mood, out var moodEnum))
@@ -51,10 +50,10 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
             .Select(m => new
             {
                 m.CreatedAt,
-                Username = m.User.Username,
+                Username = m.User.Fullname,
                 m.Mood,
-                m.Tags 
-            }) 
+                m.Tags
+            })
             .ToListAsync(cancellationToken);
 
             var result = rawData.Select(m => new GetMoodsDto
@@ -68,5 +67,5 @@ namespace MoodModule.Application.Queries.GetMoodsQuery
             return (result, maxPage);
         }
     }
-    
+
 }
