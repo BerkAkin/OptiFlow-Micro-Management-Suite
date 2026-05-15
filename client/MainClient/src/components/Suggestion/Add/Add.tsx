@@ -10,12 +10,12 @@ export function Add() {
     }
 
     const initialValues = {
-        topic: "",
+        title: "",
         description: ""
     }
 
     const fields = [
-        { name: "topic", label: "Topic", id: "topic", placeholder: "Example: climate management", type: "text" as const },
+        { name: "title", label: "Title", id: "title", placeholder: "Example: climate management", type: "text" as const },
         {
             name: "description",
             label: "Description",
