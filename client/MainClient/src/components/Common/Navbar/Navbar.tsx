@@ -44,7 +44,7 @@ export function Navbar() {
         </Link>
 
         <div className="flex items-center gap-2 md:gap-4 p-1.5">
-          <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
+          <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Company Manager']}>
             <Link to="/finance/dashboard" className={navLinkStyle('/finance')}><img width={24} src={finance} alt="Finance" title="Finance" /></Link>
           </RoleBasedGuard>
 
@@ -56,7 +56,7 @@ export function Navbar() {
               <div
                 className="absolute mt-3 right-0 w-48 bg-white border border-gray-200 shadow-custom rounded-xl overflow-hidden p-1 animate-in fade-in slide-in-from-top-2">
                 <Link to="/survey/dashboard" onClick={() => setActiveMenu(null)} className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Surveys</Link>
-                <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
                   <Link to="/survey/builder" onClick={() => setActiveMenu(null)} className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Create Survey</Link>
                 </RoleBasedGuard>
               </div>
@@ -78,7 +78,7 @@ export function Navbar() {
               {activeMenu === 'help' && <AddSupport />}
             </div>
 
-            <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Manager']}>
+            <RoleBasedGuard allowedDepartments={["Finance Accountant", 'Company Manager']}>
               <Link to="/finance/invoice" className="p-2 hover:bg-emerald-50 rounded-xl transition-colors"><img width={24} src={bill} alt="Bills" /> </Link>
             </RoleBasedGuard>
 
@@ -95,7 +95,7 @@ export function Navbar() {
           {isAuth && (
             <div className="relative pl-2" ref={(el) => { elementsRef.current[2] = el }}>
               <button onClick={() => toggleMenu('profile')} className="flex items-center gap-2 p-1 cursor-pointer rounded-full hover:bg-gray-200 transition-all">
-                <div className="w-9 h-9 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+                <div className="w-9 h-9 rounded-full  flex items-center justify-center text-white bg-blue-500 text-sm font-bold">
                   {userInfo?.username?.charAt(0).toUpperCase()}
                 </div>
               </button>
@@ -103,11 +103,10 @@ export function Navbar() {
               {activeMenu === 'profile' && (
                 <div className="absolute top-full mt-3 right-0 w-56 bg-white border border-gray-200 shadow-custom rounded-xl p-2 animate-in fade-in slide-in-from-top-2">
                   <div className="px-4 py-3 border-b border-gray-50 mb-2">
-                    <p className="text-sm font-bold text-slate-800">{userInfo?.username}</p>
                     <p className="text-[10px] text-slate-400 truncate">{userInfo?.email}</p>
                   </div>
                   <Link to="/profile" onClick={() => setActiveMenu(null)} className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"><span>My Profile</span></Link>
-                  <RoleBasedGuard allowedDepartments={["HR", 'Manager']}>
+                  <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
                     <Link to="/addnewemployee" className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"><span>Add New Employee</span></Link>
                   </RoleBasedGuard>
                   <button onClick={() => { handleLogoutState(); setActiveMenu(null); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-red-500 hover:bg-red-100 rounded-lg transition-colors mt-1">
