@@ -5,53 +5,73 @@ namespace SuggestionModule.Infrastructure.Persistence
 {
     public class SuggestionDbContext : DbContext
     {
-        public SuggestionDbContext(DbContextOptions options) : base(options)
-        {
+        public SuggestionDbContext(DbContextOptions options) : base(options) { }
 
-        }
-
-        public DbSet<Suggestion> Suggestions  { get; set; }
+        public DbSet<Suggestion> Suggestions { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<MiniUser> Users { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<Tenant> Tenants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Tenant>()
+                .HasMany(t => t.Users)
+                .WithOne(u => u.Tenant)
+                .HasForeignKey(u => u.TenantId);
+
+            modelBuilder.Entity<Tenant>()
+                .HasMany(t => t.Suggestions)
+                .WithOne(s => s.Tenant)
+                .HasForeignKey(s => s.TenantId);
+
+            modelBuilder.Entity<Tenant>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<Tenant>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Suggestions)
+                .WithOne(s => s.User)
+                .HasForeignKey(s => s.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Votes)
+                .WithOne(v => v.User)
+                .HasForeignKey(v => v.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Comments)
+                .WithOne(c => c.User)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<User>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
+
             modelBuilder.Entity<Suggestion>()
                 .HasMany(s => s.Comments)
                 .WithOne(c => c.Suggestion)
-                .HasForeignKey(s => s.SuggestionId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(c => c.SuggestionId);
 
             modelBuilder.Entity<Suggestion>()
-                .HasOne(s=>s.User)
-                .WithMany(u=>u.Suggestions)
-                .HasForeignKey(s=>s.UserId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Comment>()
-                .HasOne(c => c.User)
-                .WithMany(s => s.Comments)
-                .HasForeignKey(c => c.UserId);
+                .HasMany(s => s.Votes)
+                .WithOne(v => v.Suggestion)
+                .HasForeignKey(v => v.SuggestionId);
 
             modelBuilder.Entity<Vote>()
-                .HasOne(v => v.Suggestion)
-                .WithMany(s => s.Votes)
-                .HasForeignKey(v => v.SuggestionId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Vote>()
-                .HasOne(v => v.User)
-                .WithMany(s => s.Votes)
-                .HasForeignKey(v => v.UserId);
-
-            modelBuilder.Entity<Vote>()
-                .HasIndex(v => new { v.SuggestionId, v.UserId })
+                .HasIndex(v => new { v.UserId, v.SuggestionId })
                 .IsUnique();
 
-            modelBuilder.Entity<Comment>()
-                .HasIndex(c => new { c.SuggestionId, c.UserId })
-                .IsUnique();
         }
     }
 }
