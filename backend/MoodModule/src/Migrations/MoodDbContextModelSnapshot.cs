@@ -50,33 +50,6 @@ namespace MoodModule.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("MoodModule.Domain.Entities.MiniUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("MoodModule.Domain.Entities.MoodRecord", b =>
                 {
                     b.Property<int>("Id")
@@ -108,9 +81,49 @@ namespace MoodModule.Migrations
                     b.ToTable("Moods");
                 });
 
+            modelBuilder.Entity("MoodModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("MoodModule.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fullname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MoodModule.Domain.Entities.Comment", b =>
                 {
-                    b.HasOne("MoodModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("MoodModule.Domain.Entities.User", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -121,7 +134,7 @@ namespace MoodModule.Migrations
 
             modelBuilder.Entity("MoodModule.Domain.Entities.MoodRecord", b =>
                 {
-                    b.HasOne("MoodModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("MoodModule.Domain.Entities.User", "User")
                         .WithMany("MoodRecords")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -130,7 +143,23 @@ namespace MoodModule.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MoodModule.Domain.Entities.MiniUser", b =>
+            modelBuilder.Entity("MoodModule.Domain.Entities.User", b =>
+                {
+                    b.HasOne("MoodModule.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("Users")
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Tenant");
+                });
+
+            modelBuilder.Entity("MoodModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MoodModule.Domain.Entities.User", b =>
                 {
                     b.Navigation("Comments");
 
