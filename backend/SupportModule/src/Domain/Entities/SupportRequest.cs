@@ -6,7 +6,7 @@ namespace SupportModule.Domain.Entities
     {
         public int Id { get; private set; }
         public int UserId { get; private set; }
-        public MiniUser User { get; set; }
+        public User User { get; set; }
         public int TenantId { get; private set; }
         public SupportCategories Category { get; private set; }
         public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
@@ -25,12 +25,12 @@ namespace SupportModule.Domain.Entities
         }
         public void AddMessage(string message, int senderId)
         {
-           if (IsClosed)
-              throw new Exception("Cannot add message to closed request");
-           if (string.IsNullOrWhiteSpace(message))
-              throw new Exception("Message cannot be empty");
+            if (IsClosed)
+                throw new Exception("Cannot add message to closed request");
+            if (string.IsNullOrWhiteSpace(message))
+                throw new Exception("Message cannot be empty");
 
-            _messages.Add(new SupportMessage(message,senderId));
+            _messages.Add(new SupportMessage(message, senderId));
 
         }
 
