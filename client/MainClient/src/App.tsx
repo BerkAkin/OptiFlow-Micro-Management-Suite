@@ -30,12 +30,12 @@ function App() {
               <Route path=':email/edit' element={<Edit />} />
             </Route>
 
-            <Route element={<RoleBasedRoute allowedDepartments={['Finance Accountant', 'Manager']} />}>
+            <Route element={<RoleBasedRoute allowedDepartments={['Finance Accountant', 'Company Manager']} />}>
               <Route path='finance/dashboard' element={<FinanceDashboardPage />} />
               <Route path='finance/invoice' element={<InvoicePage />} />
             </Route>
 
-            <Route element={<RoleBasedRoute allowedDepartments={['HR', 'Manager']} />}>
+            <Route element={<RoleBasedRoute allowedDepartments={['HR', 'Company Manager']} />}>
               <Route path='survey/builder' element={<BuilderPage />} />
               <Route path='survey/result/:id' element={<ResultsPage />} />
             </Route>
