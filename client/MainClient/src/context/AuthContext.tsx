@@ -19,8 +19,8 @@ export const AuthContextProvider = ({ children }: any) => {
 
     const handleLoginState = (token: string) => {
         try {
-            const decoded = jwtDecode<UserInfoShape>(token);
-            setUserInfo({ profilePicture: decoded.profilePicture, username: decoded.username, email: decoded.email, company: decoded.company, department: decoded.department, permissions: decoded.permissions });
+            const decoded = jwtDecode<any>(token);
+            setUserInfo({ profilePicture: decoded.profilePicture, username: decoded.fullname, email: decoded.email, company: decoded.company, department: decoded.department, permissions: decoded.permissions });
             setIsAuth(true);
             localStorage.setItem("AccessToken", token);
         } catch (error) {
