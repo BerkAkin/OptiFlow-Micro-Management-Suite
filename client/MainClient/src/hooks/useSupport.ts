@@ -55,9 +55,11 @@ export const useSendMessage = () => {
 };
 
 export const useAddSupportRequest = () => {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (values: any) => addSupportService(values),
     onSuccess: (data: any) => {
+      queryClient.invalidateQueries({ queryKey: ["supportRequests"] });
       console.log("Support requested successfully!", data);
     },
     onError: (error: any) => {
@@ -100,7 +102,7 @@ export const useListDayoffs = () => {
 export const useApproveOrRejectDayoff = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ payload }: any) => updateDayoffService(payload),
+    mutationFn: (payload: any) => updateDayoffService(payload),
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["Dayoffs"] });
       console.log("Updated Successfully");
@@ -115,7 +117,7 @@ export const useAddDayoff = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ payload }: any) => addDayoffService(payload),
+    mutationFn: (payload: any) => addDayoffService(payload),
     onSuccess: (data: any) => {
       queryClient.invalidateQueries({ queryKey: ["MyDayoffs"] });
       console.log(data);
