@@ -60,33 +60,6 @@ namespace SupportModule.Migrations
                     b.ToTable("DayOffs");
                 });
 
-            modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TenantId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportMessage", b =>
                 {
                     b.Property<int>("Id")
@@ -145,9 +118,52 @@ namespace SupportModule.Migrations
                     b.ToTable("SupportRequests");
                 });
 
+            modelBuilder.Entity("SupportModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants");
+                });
+
+            modelBuilder.Entity("SupportModule.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TenantId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TenantId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("SupportModule.Domain.Entities.DayOff", b =>
                 {
-                    b.HasOne("SupportModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SupportModule.Domain.Entities.User", "User")
                         .WithMany("DayOffs")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -169,7 +185,7 @@ namespace SupportModule.Migrations
 
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportRequest", b =>
                 {
-                    b.HasOne("SupportModule.Domain.Entities.MiniUser", "User")
+                    b.HasOne("SupportModule.Domain.Entities.User", "User")
                         .WithMany("SupportRequests")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -178,16 +194,32 @@ namespace SupportModule.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SupportModule.Domain.Entities.MiniUser", b =>
+            modelBuilder.Entity("SupportModule.Domain.Entities.User", b =>
                 {
-                    b.Navigation("DayOffs");
+                    b.HasOne("SupportModule.Domain.Entities.Tenant", "Tenant")
+                        .WithMany("Users")
+                        .HasForeignKey("TenantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("SupportRequests");
+                    b.Navigation("Tenant");
                 });
 
             modelBuilder.Entity("SupportModule.Domain.Entities.SupportRequest", b =>
                 {
                     b.Navigation("Messages");
+                });
+
+            modelBuilder.Entity("SupportModule.Domain.Entities.Tenant", b =>
+                {
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("SupportModule.Domain.Entities.User", b =>
+                {
+                    b.Navigation("DayOffs");
+
+                    b.Navigation("SupportRequests");
                 });
 #pragma warning restore 612, 618
         }
