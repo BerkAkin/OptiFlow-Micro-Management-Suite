@@ -39,6 +39,12 @@ namespace SurveyModule.Infrastructure.Persistance
                 .HasForeignKey(s => s.TenantId);
 
 
+            modelBuilder.Entity<User>()
+                .HasKey(x => x.Id);
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Id)
+                .ValueGeneratedNever();
 
             modelBuilder.Entity<Survey>()
                 .HasMany(s => s.Questions)
@@ -51,6 +57,24 @@ namespace SurveyModule.Infrastructure.Persistance
                 .HasMany(q => q.Answers)
                 .WithOne(a => a.Question)
                 .HasForeignKey(a => a.QuestionId);
+
+
+            modelBuilder.Entity<UserAnswer>().HasKey(x => x.Id);
+            modelBuilder.Entity<UserAnswer>().Property(x => x.Id).ValueGeneratedOnAdd();
+
+
+            modelBuilder.Entity<UserAnswer>()
+                .HasOne(ua => ua.User)
+                .WithMany()
+                .HasForeignKey(ua => ua.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<UserAnswer>()
+                .HasOne(ua => ua.Tenant)
+                .WithMany()
+                .HasForeignKey(ua => ua.TenantId)
+                .OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<UserAnswer>()
                 .HasIndex(x => new { x.UserId, x.SurveyId, x.QuestionId })
