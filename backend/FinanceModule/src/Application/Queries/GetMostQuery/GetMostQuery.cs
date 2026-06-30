@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public record GetMostQuery(int currentTenant):IRequest<List<CategoricalTransactionSummaryDTO>>;
-    public class MostCategorySummaryQueryHandler:IRequestHandler<GetMostQuery, List<CategoricalTransactionSummaryDTO>>
+    public record GetMostQuery(int currentTenant) : IRequest<List<CategoricalTransactionSummaryDTO>>;
+    public class MostCategorySummaryQueryHandler : IRequestHandler<GetMostQuery, List<CategoricalTransactionSummaryDTO>>
     {
         private readonly FinanceDBContext _context;
         public MostCategorySummaryQueryHandler(FinanceDBContext context)
@@ -18,7 +18,10 @@ namespace FinanceModule.Queries.Dashboard
         {
             return await _context.Transactions
                 .AsNoTracking()
-                .Where(x => x.TenantSummaryId == request.currentTenant && x.Date.Month == DateTime.Now.Month && x.Date.Year == DateTime.Now.Year && !x.IsIncome)
+                .Where(x => x.TenantSummaryId == request.currentTenant
+                    && x.Date.Month == DateTime.Now.Month
+                    && x.Date.Year == DateTime.Now.Year
+                    && !x.IsIncome)
                 .GroupBy(group => group.Category)
                 .Select(group => new CategoricalTransactionSummaryDTO
                 {
