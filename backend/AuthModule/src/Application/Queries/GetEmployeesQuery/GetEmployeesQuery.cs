@@ -1,22 +1,22 @@
 ﻿using AuthModule.Application.DTOs;
 using AuthModule.Infrastructure.Persistence;
-using Azure.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthModule.Application.Queries.GetEmployeesQuery
 {
-    public record GetEmployeesQuery(FilterEmployeesDto filters, int currentTenant):IRequest<(List<EmployeesDto> data, int maxPage)>;
+    public record GetEmployeesQuery(FilterEmployeesDto filters, int currentTenant) : IRequest<(List<EmployeesDto> data, int maxPage)>;
     public class GetEmployeesQueryHandler : IRequestHandler<GetEmployeesQuery, (List<EmployeesDto> data, int maxPage)>
     {
         private readonly AuthDBContext _context;
-        public GetEmployeesQueryHandler(AuthDBContext context) { 
+        public GetEmployeesQueryHandler(AuthDBContext context)
+        {
             _context = context;
         }
 
-        public async Task<(List<EmployeesDto> data, int maxPage)> Handle(GetEmployeesQuery query,CancellationToken cancellationToken)
+        public async Task<(List<EmployeesDto> data, int maxPage)> Handle(GetEmployeesQuery query, CancellationToken cancellationToken)
         {
-            var qry = _context.Users.AsNoTracking().Where(x => x.TenantId == query.currentTenant);
+            var qry = _context.Users.AsNoTracking().IgnoreQueryFilters().Where(x => x.TenantId == query.currentTenant);
 
             if (!string.IsNullOrWhiteSpace(query.filters.FirstName))
             {
@@ -38,9 +38,9 @@ namespace AuthModule.Application.Queries.GetEmployeesQuery
             int currentPage = query.filters.Page <= 0 ? 1 : query.filters.Page;
             if (currentPage > maxPage) currentPage = maxPage;
 
-            var data = await 
+            var data = await
                 qry.OrderByDescending(x => x.Firstname)
-                .ThenByDescending(x=>x.Lastname)
+                .ThenByDescending(x => x.Lastname)
                 .Skip((currentPage - 1) * pageSize)
                 .Take(pageSize)
                 .Select(x => new EmployeesDto
@@ -50,7 +50,7 @@ namespace AuthModule.Application.Queries.GetEmployeesQuery
                     Phone = x.PhoneNum,
                     Email = x.Email,
                     BirthDate = x.BirthDate,
-                    Department= x.Department.Name,
+                    Department = x.Department.Name,
                     Address = $"{x.Street}, {x.Street2}, {x.ApartmentNum}, {x.DoorNumber}, {x.Province}, {x.District}",
                     IsActive = x.IsActive,
 
