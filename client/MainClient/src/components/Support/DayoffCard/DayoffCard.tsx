@@ -59,7 +59,7 @@ export function DayoffCard({ item }: SupportDayOffCardProps) {
                     </div>
                     <div className='text-slate-400 font-medium text-xs flex items-center gap-1'>
                         <span>Date:</span>
-                        <span>{new Date(item.startingDate).toLocaleDateString('tr-TR')}</span>
+                        <span>{item.startingDate}</span>
                     </div>
                 </div>
             </div>
