@@ -1,25 +1,33 @@
 ﻿using AuthModule.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using ProjectMicro.Shared.Enums;
 namespace AuthModule.Infrastructure.Persistence
 
 {
     public class AuthDBContext : DbContext
     {
-        public AuthDBContext(DbContextOptions<AuthDBContext> options) :base(options) { 
-            
+        public AuthDBContext(DbContextOptions<AuthDBContext> options) : base(options)
+        {
+
         }
 
+        public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<Module> Modules { get; set; }
+        public DbSet<Department> Departments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Module> Modules { get; set; }
-        public DbSet<Tenant> Tenants { get; set; }
         public DbSet<PasswordToken> PasswordTokens { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Tenant>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<RefreshToken>().HasQueryFilter(rt => rt.User.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<PasswordToken>().HasQueryFilter(rt => rt.User.IsActive == IsActiveEnum.Active);
+
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Department)
@@ -47,7 +55,7 @@ namespace AuthModule.Infrastructure.Persistence
                 .WithOne(tm => tm.Tenant);
 
             modelBuilder.Entity<Module>()
-                .HasMany(m=>m.TenantModules)
+                .HasMany(m => m.TenantModules)
                 .WithOne(tm => tm.Module);
 
             modelBuilder.Entity<User>(entity =>
