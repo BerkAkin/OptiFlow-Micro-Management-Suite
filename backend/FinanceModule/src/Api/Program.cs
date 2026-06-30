@@ -1,6 +1,8 @@
 using FinanceModule.DBOperations;
+using FinanceModule.Infrastructure.Messaging;
 using FinanceModule.Services;
 using FluentValidation;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
@@ -22,6 +24,29 @@ builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+
+var rabbitMqHost = builder.Configuration["RabbitMq:Host"] ?? "localhost";
+var userName = builder.Configuration["RabbitMq:UserName"] ?? "guest";
+var password = builder.Configuration["RabbitMq:Password"] ?? "guest";
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<FinanceUserCreatedConsumer>();
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitMqHost, "/", h =>
+        {
+            h.Username(userName);
+            h.Password(password);
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
+
+
 
 var app = builder.Build();
 
