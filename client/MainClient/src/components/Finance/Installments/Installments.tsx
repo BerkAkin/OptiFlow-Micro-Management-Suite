@@ -29,7 +29,7 @@ export function Installments() {
     }
 
     return (
-        <div className='w-full h-[480px]'>
+        <div className='w-full h-[410px]'>
             <DynamicTable isRefreshing={isFetching} onRefresh={() => refetch({ cancelRefetch: false })} onPrev={onPrev} onNext={onNext} handleFilter={handleFilter} filterFields={data.filterFields} data={data.values} title='Installments' />
         </div>
 
