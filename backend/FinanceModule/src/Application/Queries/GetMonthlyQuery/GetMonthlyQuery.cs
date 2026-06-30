@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public record GetMonthlyQuery(int currentTenant):IRequest<MonthlySummaryDTO>;
-    public class MonthlySummaryQueryHandler: IRequestHandler<GetMonthlyQuery,MonthlySummaryDTO>
+    public record GetMonthlyQuery(int currentTenant) : IRequest<MonthlySummaryDTO>;
+    public class MonthlySummaryQueryHandler : IRequestHandler<GetMonthlyQuery, MonthlySummaryDTO>
     {
         private readonly FinanceDBContext _context;
         public MonthlySummaryQueryHandler(FinanceDBContext context)
         {
-             _context = context;
+            _context = context;
         }
 
         public async Task<MonthlySummaryDTO> Handle(GetMonthlyQuery request, CancellationToken cancellationToken)
@@ -22,7 +22,9 @@ namespace FinanceModule.Queries.Dashboard
 
             var query = await _context.Transactions
                 .AsNoTracking()
-                .Where(x=>x.TenantSummaryId==request.currentTenant && x.Date < endDate && x.Date >= startDate)
+                .Where(x => x.TenantSummaryId == request.currentTenant
+                  && x.Date < endDate && x.Date >= startDate)
+
                 .GroupBy(x => new { x.Date.Year, x.Date.Month })
                 .OrderBy(group => group.Key.Month)
                 .Select(group => new
