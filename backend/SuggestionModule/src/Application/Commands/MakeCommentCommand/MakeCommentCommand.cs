@@ -20,6 +20,7 @@ namespace SuggestionModule.Application.Commands.MakeCommentCommand
                 throw new ArgumentException("Comment cannot be empty");
 
             var suggestion = await _context.Suggestions
+                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(s => s.Id == command.suggestionId, cancellationToken);
 
             if (suggestion == null)

@@ -18,6 +18,7 @@ namespace SuggestionModule.Application.Commands.ChangeStatusCommand
         public async Task<Unit> Handle(ChangeStatusCommand command, CancellationToken cancellationToken)
         {
             var suggestion = await _context.Suggestions
+                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(x => x.Id == command.suggestionId, cancellationToken);
 
             if (suggestion == null)
