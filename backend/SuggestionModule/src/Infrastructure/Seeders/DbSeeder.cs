@@ -4,7 +4,7 @@ using SuggestionModule.Domain.Enums;
 using SuggestionModule.Infrastructure.Persistence;
 
 
-namespace MoodModule.Infrastructure.Seeders
+namespace SuggestionModule.Infrastructure.Seeders
 {
     public static class DbSeeder
     {
