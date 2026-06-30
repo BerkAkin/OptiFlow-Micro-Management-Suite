@@ -1,4 +1,5 @@
-﻿using AuthModule.Domain.Enums;
+﻿
+using ProjectMicro.Shared.Enums;
 
 namespace AuthModule.Application.DTOs
 {
