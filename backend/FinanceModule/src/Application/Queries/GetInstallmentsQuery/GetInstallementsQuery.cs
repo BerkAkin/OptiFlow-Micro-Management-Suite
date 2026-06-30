@@ -6,24 +6,26 @@ using Microsoft.EntityFrameworkCore;
 namespace FinanceModule.Queries.Dashboard
 {
 
-    public record InstallmentsQuery(InstallRecurFilterDTO filters,int currentTenant) : IRequest<(List<InstallmentsDTO> data, int maxPage)>;
+    public record InstallmentsQuery(InstallRecurFilterDTO filters, int currentTenant) : IRequest<(List<InstallmentsDTO> data, int maxPage)>;
 
     public class InstallementsQueryHandler : IRequestHandler<InstallmentsQuery, (List<InstallmentsDTO> data, int maxPage)>
     {
 
         private readonly FinanceDBContext _context;
 
-        public InstallementsQueryHandler(FinanceDBContext context) {
+        public InstallementsQueryHandler(FinanceDBContext context)
+        {
             _context = context;
         }
 
-        public async Task<(List<InstallmentsDTO>data,int maxPage)> Handle(InstallmentsQuery request, CancellationToken cancellationToken)
+        public async Task<(List<InstallmentsDTO> data, int maxPage)> Handle(InstallmentsQuery request, CancellationToken cancellationToken)
         {
-           const int pageSize = 10;
+            const int pageSize = 10;
 
             var query = _context.Transactions
                 .AsNoTracking()
-                .Where(x => x.TenantSummaryId == request.currentTenant && x.IsPartly && !x.IsIncome);
+                .Where(x => x.TenantSummaryId == request.currentTenant
+                && x.IsPartly && !x.IsIncome);
 
             if (!string.IsNullOrEmpty(request.filters.Description))
             {
@@ -37,7 +39,7 @@ namespace FinanceModule.Queries.Dashboard
                 .OrderByDescending(o => o.Date)
                 .Skip((request.filters.Page - 1) * pageSize)
                 .Take(pageSize)
-                .Select(x=> new InstallmentsDTO
+                .Select(x => new InstallmentsDTO
                 {
                     Date = x.Date,
                     Description = x.Description,
@@ -47,7 +49,7 @@ namespace FinanceModule.Queries.Dashboard
                 })
                 .ToListAsync(cancellationToken);
 
-            return (data,maxPage);
+            return (data, maxPage);
         }
     }
 }
