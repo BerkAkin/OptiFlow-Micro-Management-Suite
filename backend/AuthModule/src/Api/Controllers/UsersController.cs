@@ -1,4 +1,5 @@
-﻿using AuthModule.Application.Commands.ChangePasswordCommand;
+﻿using AuthModule.Application.Commands.ChangeAccountStatusCommand;
+using AuthModule.Application.Commands.ChangePasswordCommand;
 using AuthModule.Application.Commands.ChangeProfilePictureCommand;
 using AuthModule.Application.DTOs;
 using AuthModule.Application.Interfaces;
@@ -55,6 +56,15 @@ namespace AuthModule.Api.Controllers
                 return File(stream, "image/jpeg");
             }
             catch { return NotFound(); }
+        }
+
+        [HttpPatch("me/accountDeactivate")]
+        public async Task<IActionResult> ChangeStatus([FromBody] AccountDeactivateDto accountDeactivate)
+        {
+            int currentUser = _currentUserService.User.UserId;
+            int currentTenant = _currentUserService.User.TenantId;
+            await _mediator.Send(new ChangeAccountStatusCommand(currentTenant, currentUser, accountDeactivate));
+            return Ok("Account Deactivated Succesfully");
         }
     }
 }
