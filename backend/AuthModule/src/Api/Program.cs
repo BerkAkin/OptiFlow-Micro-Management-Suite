@@ -1,6 +1,7 @@
 using AuthModule.Application.Interfaces;
 using AuthModule.Application.Services;
 using AuthModule.Infrastructure.Persistence;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Minio;
 using ProjectMicro.Shared.Interfaces;
@@ -15,11 +16,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AuthDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("AuthModuleDb")));
 builder.Services.AddScoped<RefreshTokenService>();
+builder.Services.AddScoped<UserCreatedEventPublisher>();
+builder.Services.AddScoped<UserUpdatedEventPublisher>();
 
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
 builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddSingleton<TokenService>(provider =>
 {
@@ -41,6 +47,24 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+var rabbitMqHost = builder.Configuration["RabbitMq:Host"] ?? "localhost";
+var userName = builder.Configuration["RabbitMq:UserName"] ?? "guest";
+var password = builder.Configuration["RabbitMq:Password"] ?? "guest";
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitMqHost, "/", h =>
+        {
+            h.Username(userName);
+            h.Password(password);
+        });
+
+    });
+});
 
 
 var app = builder.Build();
