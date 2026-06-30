@@ -40,7 +40,7 @@ export function List() {
 
 
                                         {!item.isClosed && (
-                                            <RoleBasedGuard allowedDepartments={["HR", "Company Manager"]}>
+                                            <RoleBasedGuard allowedDepartments={['Human Resources', "Company Manager"]}>
                                                 <button
                                                     onClick={(e) => handleMarkAsClosed(e, item.id)}
                                                     className='group-hover:opacity-100 transition-opacity bg-rose-50 text-rose-600 text-[10px] font-bold px-2 py-1 rounded hover:bg-rose-600 hover:text-white border border-rose-100'

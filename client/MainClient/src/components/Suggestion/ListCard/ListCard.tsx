@@ -42,7 +42,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
                     <h3 className='text-lg font-semibold text-slate-800 leading-tight'>
                         {title}
                     </h3>
-                    <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
+                    <RoleBasedGuard allowedDepartments={['Human Resources', 'Company Manager']}>
                         <div className='flex gap-2 ml-4'>
                             <button
                                 type='button'
@@ -92,7 +92,7 @@ export function ListCard({ id, status, title, description, votes, comments, date
 
                     <div className='flex items-center space-x-4'>
                         <span className='text-[12px] text-gray-400 font-medium'>
-                            {date.split("T")[0]}
+                            {date}
                         </span>
                         <button
                             className={`p-2 rounded-lg transition-colors cursor-pointer text-gray-400`}

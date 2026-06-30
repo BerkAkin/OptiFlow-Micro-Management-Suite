@@ -29,7 +29,6 @@ export function SurveyDashboardPage() {
 
             <div className='grid grid-cols-3 gap-8'>
                 {data.map((item: any, index: number) => {
-                    const totalRespondents = item.satisfactionCount + item.dissatisfactionCount;
                     const isActive = item.status === 1;
 
                     return (
@@ -42,7 +41,7 @@ export function SurveyDashboardPage() {
                                             {isActive ? "Active" : "Timeout"}
                                         </span>
                                         <span className='text-xs font-medium text-slate-400'>
-                                            {item.date.split("T")[0].split("-").reverse().join(".")}
+                                            {item.date}
                                         </span>
                                     </div>
                                     <h3 className='text-lg font-bold text-slate-800 font-rubik leading-tight'>
@@ -74,7 +73,7 @@ export function SurveyDashboardPage() {
                                     </Link>
 
                                     {!isActive && (
-                                        <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
+                                        <RoleBasedGuard allowedDepartments={['Human Resources', 'Company Manager']}>
                                             <Link to={`/survey/result/${item.id}`} className='text-[11px] font-bold text-blue-500 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition-colors'>
                                                 RESULTS
                                             </Link>

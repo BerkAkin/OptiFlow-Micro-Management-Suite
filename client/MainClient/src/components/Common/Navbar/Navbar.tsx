@@ -56,7 +56,7 @@ export function Navbar() {
               <div
                 className="absolute mt-3 right-0 w-48 bg-white border border-gray-200 shadow-custom rounded-xl overflow-hidden p-1 animate-in fade-in slide-in-from-top-2">
                 <Link to="/survey/dashboard" onClick={() => setActiveMenu(null)} className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Surveys</Link>
-                <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
+                <RoleBasedGuard allowedDepartments={['Human Resources', 'Company Manager']}>
                   <Link to="/survey/builder" onClick={() => setActiveMenu(null)} className="block px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-blue-100 rounded-lg">Create Survey</Link>
                 </RoleBasedGuard>
               </div>
@@ -106,8 +106,8 @@ export function Navbar() {
                     <p className="text-[10px] text-slate-400 truncate">{userInfo?.email}</p>
                   </div>
                   <Link to="/profile" onClick={() => setActiveMenu(null)} className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"><span>My Profile</span></Link>
-                  <RoleBasedGuard allowedDepartments={["HR", 'Company Manager']}>
-                    <Link to="/addnewemployee" className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"><span>Add New Employee</span></Link>
+                  <RoleBasedGuard allowedDepartments={['Human Resources', 'Company Manager']}>
+                    <Link to="/addnewemployee" className="flex items-center gap-3 px-4 py-2.5 text-sm font-semibold text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"><span>Employees</span></Link>
                   </RoleBasedGuard>
                   <button onClick={() => { handleLogoutState(); setActiveMenu(null); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-red-500 hover:bg-red-100 rounded-lg transition-colors mt-1">
                     Logout

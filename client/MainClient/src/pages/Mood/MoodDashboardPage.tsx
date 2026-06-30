@@ -39,7 +39,7 @@ export function MoodDashboardPage() {
                 </div>
 
                 <div className='col-span-12'>
-                    <RoleBasedGuard allowedDepartments={["HR", "Company Manager"]}>
+                    <RoleBasedGuard allowedDepartments={['Human Resources', "Company Manager"]}>
                         <div>
                             <AddComment />
                         </div>

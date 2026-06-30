@@ -35,7 +35,7 @@ function App() {
               <Route path='finance/invoice' element={<InvoicePage />} />
             </Route>
 
-            <Route element={<RoleBasedRoute allowedDepartments={['HR', 'Company Manager']} />}>
+            <Route element={<RoleBasedRoute allowedDepartments={['Human Resources', 'Company Manager']} />}>
               <Route path='survey/builder' element={<BuilderPage />} />
               <Route path='survey/result/:id' element={<ResultsPage />} />
             </Route>

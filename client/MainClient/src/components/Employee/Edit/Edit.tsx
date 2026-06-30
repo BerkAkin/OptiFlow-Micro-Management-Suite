@@ -13,11 +13,10 @@ export function Edit() {
     if (error || !data) return (<ErrorMessage />)
 
     const handleSubmit = (data: any) => {
-        console.log(data);
         mutation.mutate(data)
     }
     const initialValues = {
-        department: data.department,
+        departmentId: data.departmentId,
         isActive: data.isActive,
         email: data.email,
     }
@@ -28,12 +27,12 @@ export function Edit() {
             gridSpan: "4"
         },
         {
-            name: "department", label: "Department", id: "department", type: "text" as const, as: "select" as const, placeholder: "Select Department",
+            name: "departmentId", label: "Department", id: "departmentId", type: "text" as const, as: "select" as const, placeholder: "Select Department",
             options: [
-                { label: "Employee", value: "1" },
-                { label: "Finance Accountant", value: "2" },
-                { label: "HR", value: "3" },
-                { label: "Manager", value: "4" },
+                { label: "Employee", value: 1 },
+                { label: "Finance Accountant", value: 2 },
+                { label: 'Human Resources', value: 3 },
+                { label: "Manager", value: 4 },
             ], gridSpan: "4"
         },
         {
