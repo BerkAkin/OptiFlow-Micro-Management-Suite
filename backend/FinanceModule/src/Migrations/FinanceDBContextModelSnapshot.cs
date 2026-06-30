@@ -120,6 +120,9 @@ namespace FinanceModule.Migrations
                     b.Property<string>("FaxNum")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
+
                     b.Property<string>("MailAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
