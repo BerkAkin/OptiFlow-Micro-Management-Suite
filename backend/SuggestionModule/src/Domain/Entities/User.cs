@@ -1,4 +1,6 @@
-﻿namespace SuggestionModule.Domain.Entities
+﻿using ProjectMicro.Shared.Enums;
+
+namespace SuggestionModule.Domain.Entities
 {
     public class User
     {
@@ -8,7 +10,7 @@
         public int TenantId { get; private set; }
         public Tenant Tenant { get; private set; }
 
-
+        public IsActiveEnum IsActive { get; private set; }
 
         private readonly List<Suggestion> _suggestions = new();
         public IReadOnlyCollection<Suggestion> Suggestions => _suggestions;
@@ -25,6 +27,14 @@
             this.Id = id;
             this.Fullname = fullname;
             this.TenantId = tenantId;
+            this.IsActive = IsActiveEnum.Active;
         }
+
+        public void ChangeStatus(string fullname, IsActiveEnum status)
+        {
+            this.IsActive = status;
+            this.Fullname = fullname;
+        }
+
     }
 }
