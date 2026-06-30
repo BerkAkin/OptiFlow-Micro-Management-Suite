@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore;
 namespace FinanceModule.Queries.Dashboard
 {
 
-    public record GetCategoricalQuery(int currentTenant): IRequest<List<CategoricalTransactionSummaryDTO>>;
+    public record GetCategoricalQuery(int currentTenant) : IRequest<List<CategoricalTransactionSummaryDTO>>;
     public class CategoricalSummaryQueryHandler : IRequestHandler<GetCategoricalQuery, List<CategoricalTransactionSummaryDTO>>
     {
         private readonly FinanceDBContext _context;
-        public CategoricalSummaryQueryHandler(FinanceDBContext context) { 
+        public CategoricalSummaryQueryHandler(FinanceDBContext context)
+        {
             _context = context;
         }
 
@@ -22,12 +23,14 @@ namespace FinanceModule.Queries.Dashboard
 
             return await _context.Transactions
             .AsNoTracking()
-            .Where(x => x.TenantSummaryId == request.currentTenant && x.Date >= start && x.Date < end)
+            .Where(x => x.TenantSummaryId == request.currentTenant
+                && x.Date >= start && x.Date < end)
+
             .GroupBy(x => x.Category)
             .Select(group => new CategoricalTransactionSummaryDTO
             {
                 Category = group.Key,
-                Expense = group.Where(x=>!x.IsIncome).Sum(x => x.Price)
+                Expense = group.Where(x => !x.IsIncome).Sum(x => x.Price)
             }).ToListAsync(cancellationToken);
 
         }
