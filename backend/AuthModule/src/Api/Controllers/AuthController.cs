@@ -19,25 +19,29 @@ namespace AuthModule.Api.Controllers
         private readonly IMediator _mediator;
 
 
-        public AuthController(RefreshTokenService authService,IMediator mediator)
+        public AuthController(RefreshTokenService authService, IMediator mediator)
         {
             _authService = authService;
             _mediator = mediator;
+
         }
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO) {
+        public async Task<IActionResult> Register([FromBody] RegisterDTO registerDTO)
+        {
 
             await _mediator.Send(new RegisterCommand(registerDTO));
-            return Ok("Kullanýcý Kaydý Baþarýlý");
+
+            return Ok("User registered successfully");
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO) {
-     
-               var res = await _mediator.Send(new LoginCommand(loginDTO));
-                return Ok(res);
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
+        {
+
+            var res = await _mediator.Send(new LoginCommand(loginDTO));
+            return Ok(res);
         }
 
         [HttpPost("refresh-token")]
