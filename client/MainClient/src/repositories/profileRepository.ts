@@ -23,3 +23,8 @@ export const getProfilePicture = async (fileName: string) => {
   });
   return res.data;
 };
+
+export const deactivateAccount = async (formData: any) => {
+  const res = await api.patch(`/users/me/accountDeactivate`, formData);
+  return res.data;
+};
