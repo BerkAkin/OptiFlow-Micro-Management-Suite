@@ -1,10 +1,19 @@
 import { fetchEmployees } from "../../repositories";
 
 export const employeesService = async (filters: any, page: number) => {
-  const data = await fetchEmployees(filters, page);
+  const res = await fetchEmployees(filters, page);
   return {
-    values: data.data,
-    maxPage: data.maxPage,
+    values: res.data.map((item: any) => ({
+      ...item,
+      birthDate: new Date(item.birthDate).toLocaleDateString("tr-TR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    })),
+    maxPage: res.maxPage,
     filterFields: [
       {
         name: "FirstName",
