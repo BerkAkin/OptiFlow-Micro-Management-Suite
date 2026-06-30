@@ -20,7 +20,8 @@ namespace SupportModule.Application.Commands.ApproveOrRejectDayOffRequestCommand
 
         public async Task<Unit> Handle(ApproveOrRejectDayOffRequestCommand command, CancellationToken cancellationToken)
         {
-            DayOff data = await _dbContext.DayOffs.SingleOrDefaultAsync(d=>d.Id == command.requestId && d.TenantId==command.currentTenant, cancellationToken);
+            DayOff data = await _dbContext.DayOffs
+                .SingleOrDefaultAsync(d=>d.Id == command.requestId && d.TenantId==command.currentTenant, cancellationToken);
 
             if (data is null)
             {
