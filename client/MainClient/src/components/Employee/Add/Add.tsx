@@ -9,6 +9,7 @@ export function Add() {
     const mutation = useAddEmployee();
 
     const handleSubmit = (data: any) => {
+        console.log(data);
         mutation.mutate(data, {
             onSuccess: () => {
                 showToast("Employee Added Succesfully!", "success");
@@ -22,8 +23,8 @@ export function Add() {
 
 
     const initialValues = {
-        name: "",
-        surname: "",
+        firstname: "",
+        lastname: "",
         email: "",
         birthDate: new Date().toISOString().split("T")[0],
         phoneNum: "",
@@ -38,8 +39,8 @@ export function Add() {
     }
 
     const fields = [
-        { name: "name", label: "First Name", id: "name", type: "text" as const, placeholder: "Tider's First Name", gridSpan: "6" },
-        { name: "surname", label: "Last Name", id: "surname", type: "text" as const, placeholder: "Tider's Last Name", gridSpan: "6" },
+        { name: "firstname", label: "First Name", id: "name", type: "text" as const, placeholder: "Tider's First Name", gridSpan: "6" },
+        { name: "lastname", label: "Last Name", id: "surname", type: "text" as const, placeholder: "Tider's Last Name", gridSpan: "6" },
         { name: "email", label: "E-Mail", id: "email", type: "text" as const, placeholder: "Tider's Mail", gridSpan: "6" },
         { name: "phoneNum", label: "Phone Number", id: "phoneNum", type: "text" as const, placeholder: "Tider's Phone Number", gridSpan: "6" },
         { name: "birthDate", label: "Birth Date", id: "birthDate", type: "date" as const, gridSpan: "6" },
@@ -48,7 +49,7 @@ export function Add() {
             options: [
                 { value: 1, label: "Employee" },
                 { value: 2, label: "Finance Accountant" },
-                { value: 3, label: "HR" },
+                { value: 3, label: 'Human Resources' },
                 { value: 4, label: "Manager" },
             ]
         },
