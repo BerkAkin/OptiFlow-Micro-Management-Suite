@@ -1,4 +1,4 @@
-﻿using AuthModule.Domain.Enums;
+﻿using ProjectMicro.Shared.Enums;
 
 namespace AuthModule.Domain.Entities
 {
@@ -14,6 +14,7 @@ namespace AuthModule.Domain.Entities
         public string TaxNumber { get; private set; }
         public string MersisNum { get; private set; }
         public string TradeRegistryNum { get; private set; }
+        public IsActiveEnum IsActive { get; private set; }
 
 
         private readonly List<User> _users = new();
@@ -24,7 +25,7 @@ namespace AuthModule.Domain.Entities
 
         private Tenant() { }
 
-        public Tenant(string name, string address, string phoneNum, string? faxNum, string email, string taxOffice,string taxNumber, string mersisNum, string tradeNum) 
+        public Tenant(string name, string address, string phoneNum, string? faxNum, string email, string taxOffice, string taxNumber, string mersisNum, string tradeNum)
         {
             Name = name;
             Address = address;
@@ -34,29 +35,31 @@ namespace AuthModule.Domain.Entities
             TaxOffice = taxOffice;
             TaxNumber = taxNumber;
             MersisNum = mersisNum;
-            TradeRegistryNum= tradeNum;
+            TradeRegistryNum = tradeNum;
+            IsActive = IsActiveEnum.Active;
         }
 
-        public void AddUser(
+        public User AddUser(
              string firstname, string lastname, string email, string passwordHash, string phoneNum, DateTime birthdate
-            ,string street, string street2, string apartment, string door,
-            string province, string district, string fullAddress,int departmentId
+            , string street, string street2, string apartment, string door,
+            string province, string district, string fullAddress, int departmentId
         )
         {
-           
+
             if (_users.Any(u => u.Email == email))
             {
                 throw new InvalidOperationException("Bu e-posta adresi ile zaten bir kullanıcı mevcut.");
             }
 
             User newUser = new User(
-                firstname, lastname, email, passwordHash, phoneNum,birthdate,
+                firstname, lastname, email, passwordHash, phoneNum, birthdate,
                 null, IsActiveEnum.Active, street, street2, apartment, door,
                 province, district, fullAddress, DateTime.Now, DateTime.Now,
                 this.Id, departmentId
             );
 
             _users.Add(newUser);
+            return newUser;
         }
 
 
