@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoodModule.Domain.Entities;
 using MoodModule.Domain.Enums;
+using ProjectMicro.Shared.Enums;
 
 namespace MoodModule.Infrastructure.Persistence
 {
@@ -16,6 +17,12 @@ namespace MoodModule.Infrastructure.Persistence
         {
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Tenant>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<MoodRecord>().HasQueryFilter(mr => mr.User != null && mr.User.IsActive == IsActiveEnum.Active && mr.User.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Comment>().HasQueryFilter(c => c.User.IsActive == IsActiveEnum.Active);
+
 
             modelBuilder.Entity<Tenant>()
                 .HasMany(t => t.Users)
