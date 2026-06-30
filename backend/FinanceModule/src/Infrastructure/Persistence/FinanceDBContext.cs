@@ -1,21 +1,26 @@
 ﻿using FinanceModule.Domain.Entities;
 using FinanceModule.Entities;
 using Microsoft.EntityFrameworkCore;
+using ProjectMicro.Shared.Enums;
 
 namespace FinanceModule.DBOperations
 {
-    public class FinanceDBContext: DbContext
+    public class FinanceDBContext : DbContext
     {
-        public FinanceDBContext(DbContextOptions<FinanceDBContext> options): base(options) { }
+        public FinanceDBContext(DbContextOptions<FinanceDBContext> options) : base(options) { }
 
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Invoice> Invoices { get; set; } 
+        public DbSet<Invoice> Invoices { get; set; }
         public DbSet<TenantSummary> Tenants { get; set; }
         public DbSet<InvoiceProducts> InvoiceProducts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TenantSummary>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Invoice>().HasQueryFilter(t => t.TenantSummary.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Transaction>().HasQueryFilter(t => t.TenantSummary.IsActive == IsActiveEnum.Active);
 
             modelBuilder.Entity<TenantSummary>()
                 .Property(ts => ts.Id)
