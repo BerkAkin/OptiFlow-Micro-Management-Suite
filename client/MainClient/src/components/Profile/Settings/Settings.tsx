@@ -43,7 +43,7 @@ export function Settings() {
                                 className={`
                                     w-12 h-6 rounded-full cursor-pointer transition-all duration-300 relative
                                     ${isEnabled ? 'bg-blue-500 shadow-inner' : 'bg-gray-200'}
-                                    ${isProcessing ? 'opacity-40 cursor-not-allowed' : 'hover:ring-4 hover:ring-blue-500/10'}
+                                    ${isProcessing ? 'opacity-40 cursor-not-allowed' : 'hover:ring-4 hover:ring-blue-600/10'}
                                 `}
                             >
                                 <div className={`
