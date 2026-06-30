@@ -38,8 +38,9 @@ export const fetchEmployeeComments = async (userId: number) => {
 };
 
 export const DeleteEmployeeComment = async (payload: any) => {
+  console.log(payload);
   const res = await api.delete(`/comments/${payload.commentId}`, {
-    data: payload,
+    params: { userId: payload.userId },
   });
   return res.data;
 };
