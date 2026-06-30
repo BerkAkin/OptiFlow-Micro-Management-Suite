@@ -1,5 +1,5 @@
-﻿using AuthModule.Domain.Enums;
-
+﻿
+using ProjectMicro.Shared.Enums;
 
 namespace AuthModule.Domain.Entities
 {
@@ -13,7 +13,7 @@ namespace AuthModule.Domain.Entities
         public string PhoneNum { get; private set; }
         public DateTime BirthDate { get; private set; }
 
-        public string ?ProfilePicture { get; private set; } = null;
+        public string? ProfilePicture { get; private set; } = null;
         public IsActiveEnum IsActive { get; private set; }
 
         public string Street { get; private set; }
@@ -41,9 +41,9 @@ namespace AuthModule.Domain.Entities
 
         private User() { }
 
-        public User(string firstname,string lastname, string email,string passwordHash,string phoneNum,DateTime birthdate
-            ,string? profilePicture,IsActiveEnum isActive,string street, string street2, string apartment, string door,
-            string province, string district, string fullAddress, DateTime created, DateTime updated, 
+        public User(string firstname, string lastname, string email, string passwordHash, string phoneNum, DateTime birthdate
+            , string? profilePicture, IsActiveEnum isActive, string street, string street2, string apartment, string door,
+            string province, string district, string fullAddress, DateTime created, DateTime updated,
             int tenantId, int departmentId
             )
         {
@@ -126,7 +126,7 @@ namespace AuthModule.Domain.Entities
 
         public void UpdateProfilePicture(string picture)
         {
-            this.ProfilePicture= picture;
+            this.ProfilePicture = picture;
             this.DateUpdate = DateTime.UtcNow;
         }
     }
