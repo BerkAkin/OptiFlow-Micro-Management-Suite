@@ -7,7 +7,7 @@ using MediatR;
 
 namespace FinanceModule.Commands.CreateInvoiceCommand
 {
-    public record CreateInvoiceCommand(InvoiceDto dto,int currentTenant) : IRequest<byte[]>;
+    public record CreateInvoiceCommand(InvoiceDto dto, int currentTenant) : IRequest<byte[]>;
     public class CreateInvoiceCommandHandler : IRequestHandler<CreateInvoiceCommand, byte[]>
     {
 
@@ -22,20 +22,20 @@ namespace FinanceModule.Commands.CreateInvoiceCommand
         public async Task<byte[]> Handle(CreateInvoiceCommand command, CancellationToken cancellationToken)
         {
 
-            var tenant = await _context.Tenants.FindAsync(command.currentTenant,cancellationToken);
+            var tenant = await _context.Tenants.FindAsync(command.currentTenant, cancellationToken);
+
             if (tenant is null)
                 throw new Exception("Company does not exist");
 
-
             Invoice invoice = tenant.AddInvoice(
-                command.dto.Firstname,command.dto.Lastname,
-                command.dto.Address,command.dto.PersonSerialNum,
-                command.dto.PhoneNum,command.dto.Email,command.dto.OrderDate
+                command.dto.Firstname, command.dto.Lastname,
+                command.dto.Address, command.dto.PersonSerialNum,
+                command.dto.PhoneNum, command.dto.Email, command.dto.OrderDate
             );
 
-            foreach(InvoiceProductDto product in command.dto.Products)
+            foreach (InvoiceProductDto product in command.dto.Products)
             {
-                invoice.AddProduct(product.Category,product.Description,product.Quantity,product.Price);
+                invoice.AddProduct(product.Category, product.Description, product.Quantity, product.Price);
             }
 
             await _context.SaveChangesAsync(cancellationToken);
@@ -63,7 +63,7 @@ namespace FinanceModule.Commands.CreateInvoiceCommand
                 Email = command.dto.Email,
                 OrderDate = command.dto.OrderDate,
                 InvoiceDate = DateTime.UtcNow,
-               
+
 
                 Products = command.dto.Products,
 
