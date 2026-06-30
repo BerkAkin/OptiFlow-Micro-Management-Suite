@@ -1,10 +1,12 @@
-﻿namespace SuggestionModule.Domain.Entities
+﻿using ProjectMicro.Shared.Enums;
+
+namespace SuggestionModule.Domain.Entities
 {
     public class Tenant
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public bool IsActive { get; private set; }
+        public IsActiveEnum IsActive { get; private set; }
 
 
         private readonly List<User> _users = new();
@@ -20,7 +22,7 @@
         {
             this.Id = id;
             this.Name = name;
-            this.IsActive = true;
+            this.IsActive = IsActiveEnum.Active;
         }
 
         public void AddUser(int id, string fullname)
