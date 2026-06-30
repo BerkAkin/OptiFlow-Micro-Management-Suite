@@ -1,9 +1,11 @@
+using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using ProjectMicro.Shared.Interfaces;
 using ProjectMicro.Shared.Services;
 using SupportModule.Application.Commands.CreateSupportRequestCommand;
 using SupportModule.Infrastructure.Hubs;
+using SupportModule.Infrastructure.Messaging;
 using SupportModule.Infrastructure.Persistence;
 using SupportModule.Infrastructure.Seeders;
 
@@ -35,6 +37,29 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateSupportRequestCommand).Assembly));
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+
+
+var rabbitMqHost = builder.Configuration["RabbitMq:Host"] ?? "localhost";
+var userName = builder.Configuration["RabbitMq:UserName"] ?? "guest";
+var password = builder.Configuration["RabbitMq:Password"] ?? "guest";
+
+builder.Services.AddMassTransit(x =>
+{
+    x.AddConsumer<SupportUserCreatedConsumer>();
+    x.AddConsumer<SupportUserUpdatedConsumer>();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(rabbitMqHost, "/", h =>
+        {
+            h.Username(userName);
+            h.Password(password);
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 
 
