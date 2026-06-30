@@ -1,4 +1,5 @@
 ﻿using MoodModule.Domain.Enums;
+using ProjectMicro.Shared.Enums;
 
 namespace MoodModule.Domain.Entities
 {
@@ -7,6 +8,7 @@ namespace MoodModule.Domain.Entities
         public int Id { get; private set; }
         public string Fullname { get; private set; }
         public string Email { get; private set; }
+        public IsActiveEnum IsActive { get; private set; }
 
         public int TenantId { get; private set; }
         public Tenant Tenant { get; private set; }
@@ -29,6 +31,14 @@ namespace MoodModule.Domain.Entities
             TenantId = tenantId;
             Fullname = fullname;
             Email = email;
+            IsActive = IsActiveEnum.Active;
+        }
+
+        public void ChangeStatus(string fullname, string email, IsActiveEnum status)
+        {
+            this.IsActive = status;
+            this.Email = email;
+            this.Fullname = fullname;
         }
 
         public void AddMoodRecord(int MoodId, List<int> Tags)
