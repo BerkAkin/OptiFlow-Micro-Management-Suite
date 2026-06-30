@@ -2,10 +2,13 @@ import { useRef, useState } from 'react';
 import { useAuthContext } from '../../context/AuthContext'
 import { useChangeProfilePicture, useProfilePicture } from '../../hooks';
 import { Dayoffs, Settings, UpdatePassword } from '../../components/Profile';
+import DeactiveAccount from './DeactiveAccount';
 
 
 export function ProfileDashboardPage() {
     const [isChange, setIsChange] = useState<boolean>(false);
+    const [isDeactivate, setIsDeactivate] = useState<boolean>(false);
+
     const { userInfo } = useAuthContext();
     const { data: profileImgUrl, isLoading } = useProfilePicture(userInfo.profilePicture);
     const { mutate: changeImage, isPending: isPendingPicture } = useChangeProfilePicture();
@@ -13,6 +16,7 @@ export function ProfileDashboardPage() {
 
     const handleImageClick = () => fileInputRef.current?.click();
     const handleChangePassword = () => setIsChange(prev => !prev);
+    const handleDeactivate = () => setIsDeactivate(prev => !prev);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -69,7 +73,7 @@ export function ProfileDashboardPage() {
 
                     <div className='h-px w-12 bg-gray-100 md:h-12 md:w-px hidden md:block' />
 
-                    <div className="text-center md:text-left flex-1">
+                    <div className="text-center md:text-left flex-1 ">
                         <div className="inline-flex items-center gap-2 px-3 py-1 border-gray-200 border rounded-full mb-2">
                             <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">{userInfo.department}</span>
                         </div>
@@ -77,14 +81,17 @@ export function ProfileDashboardPage() {
                             {userInfo.company}
                         </p>
                     </div>
+                    <div className='flex flex-col space-y-4'>
+                        <button type='button' onClick={handleChangePassword}
+                            className='px-5 py-2.5 bg-white border border-gray-200 text-slate-700 text-sm font-bold rounded-xl transition active:scale-95 cursor-pointer'>
+                            Change Password
+                        </button>
+                        <button type='button' onClick={handleDeactivate}
+                            className='px-5 py-2.5 border border-gray-200 text-red-500 text-sm font-bold hover:bg-red-600 hover:text-white rounded-xl transition active:scale-95 cursor-pointer'>
+                            Deactivate Account
+                        </button>
+                    </div>
 
-                    <button
-                        type='button'
-                        onClick={handleChangePassword}
-                        className='px-5 py-2.5 bg-white border border-gray-200 text-slate-700 text-sm font-bold rounded-xl transition active:scale-95 cursor-pointer'
-                    >
-                        Change Password
-                    </button>
                 </div>
             </div>
 
@@ -100,6 +107,11 @@ export function ProfileDashboardPage() {
             {isChange && (
                 <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/10 backdrop-blur-xs">
                     <UpdatePassword handleChange={handleChangePassword} />
+                </div>
+            )}
+            {isDeactivate && (
+                <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/10 backdrop-blur-xs">
+                    <DeactiveAccount handleDeactivate={handleDeactivate} />
                 </div>
             )}
         </div>
