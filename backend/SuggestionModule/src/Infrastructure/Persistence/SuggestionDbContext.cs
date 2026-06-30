@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectMicro.Shared.Enums;
 using SuggestionModule.Domain.Entities;
 
 namespace SuggestionModule.Infrastructure.Persistence
@@ -15,6 +16,18 @@ namespace SuggestionModule.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Tenant>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+
+            modelBuilder.Entity<Suggestion>().HasQueryFilter(s => s.User != null && s.User.IsActive == IsActiveEnum.Active && s.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Comment>().HasQueryFilter(c => c.User != null && c.User.IsActive == IsActiveEnum.Active && c.User.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Vote>().HasQueryFilter(v => v.User != null && v.User.IsActive == IsActiveEnum.Active && v.User.Tenant.IsActive == IsActiveEnum.Active);
+
+
+
 
             modelBuilder.Entity<Tenant>()
                 .HasMany(t => t.Users)

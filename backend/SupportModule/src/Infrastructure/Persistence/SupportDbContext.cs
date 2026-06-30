@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectMicro.Shared.Enums;
 using SupportModule.Domain.Entities;
 
 namespace SupportModule.Infrastructure.Persistence
@@ -19,6 +20,16 @@ namespace SupportModule.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Tenant>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+
+            modelBuilder.Entity<SupportRequest>().HasQueryFilter(sr => sr.User != null && sr.User.IsActive == IsActiveEnum.Active && sr.User.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<DayOff>().HasQueryFilter(d => d.User != null && d.User.IsActive == IsActiveEnum.Active && d.User.Tenant.IsActive == IsActiveEnum.Active);
+
+
             modelBuilder.Entity<Tenant>()
                 .HasMany(t => t.Users)
                 .WithOne(u => u.Tenant)

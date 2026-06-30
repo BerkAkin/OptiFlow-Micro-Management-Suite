@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProjectMicro.Shared.Enums;
 using SurveyModule.Domain.Entities;
 
 namespace SurveyModule.Infrastructure.Persistance
@@ -20,6 +21,12 @@ namespace SurveyModule.Infrastructure.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Tenant>().HasQueryFilter(t => t.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<User>().HasQueryFilter(u => u.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<Survey>().HasQueryFilter(s => s.Tenant != null && s.Tenant.IsActive == IsActiveEnum.Active);
+            modelBuilder.Entity<UserAnswer>().HasQueryFilter(u => u.User.IsActive == IsActiveEnum.Active && u.Tenant.IsActive == IsActiveEnum.Active);
+
 
             modelBuilder.Entity<Tenant>()
                 .HasMany(t => t.Users)
