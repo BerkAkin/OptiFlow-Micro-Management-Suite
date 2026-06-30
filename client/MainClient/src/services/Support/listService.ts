@@ -20,7 +20,13 @@ export const listService = async () => {
   const newdata = data.map((item: any) => ({
     ...item,
     category: categoricalData[item.category],
-    createdAt: item.createdAt.split("T")[0].split("-").reverse().join("."),
+    createdAt: new Date(item.createdAt).toLocaleDateString("tr-TR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
     userName:
       item.userName.charAt(0).toUpperCase() +
       item.userName.slice(1).toLowerCase(),

@@ -14,7 +14,13 @@ export const mineDayoffsService = async (filters: any, page: any) => {
       ...rest
     }: any) => ({
       ...rest,
-      date: startingDate,
+      date: new Date(startingDate).toLocaleDateString("tr-TR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
       status: status == 1 ? "Accepted" : status == 2 ? "Rejected" : "Pending",
     }),
   );
