@@ -5,6 +5,7 @@ import {
   updateEmailPreferenceService,
   updateProfilePictureService,
 } from "../services/Profile";
+import { deactivateAccountService } from "../services/Profile/deactivateAccountService";
 
 export const useEmailPreference = () => {
   return useQuery({
@@ -18,7 +19,7 @@ export const useChangeEmailPreference = () => {
   return useMutation({
     mutationFn: () => updateEmailPreferenceService(),
     onSuccess: () => {
-      console.log("Email Servisi Tercihi Değiştirme Başarılı");
+      console.log("Email preferences changed successfully");
       queryClient.invalidateQueries({ queryKey: ["emailPreference"] });
     },
     onError: (error: any) => {
@@ -35,7 +36,7 @@ export const useChangeProfilePicture = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["profilePicture"] });
     },
-    onError: (err) => console.log("Hata:", err),
+    onError: (err) => console.log(err),
   });
 };
 
@@ -48,5 +49,20 @@ export const useProfilePicture = (fileName: string | null) => {
       return URL.createObjectURL(blob);
     },
     enabled: !!fileName,
+  });
+};
+
+export const useDeactivateAccount = () => {
+  return useMutation({
+    mutationFn: async (formData: any) => deactivateAccountService(formData),
+
+    onSuccess: (data) => {
+      console.log(data);
+      localStorage.removeItem("AccessToken");
+      window.location.reload();
+    },
+    onError: (error) => {
+      console.error(error);
+    },
   });
 };
