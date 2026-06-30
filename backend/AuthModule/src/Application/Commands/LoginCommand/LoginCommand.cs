@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore;
 namespace AuthModule.Application.Commands.LoginCommand
 {
     public record LoginCommand(LoginDTO dto) : IRequest<string>;
-    public class LoginCommandHandler : IRequestHandler<LoginCommand ,string>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, string>
     {
         private readonly AuthDBContext _context;
         private readonly TokenService _tokenCreateService;
         private IHttpContextAccessor _contextAccessor;
-        public LoginCommandHandler(AuthDBContext context, TokenService tokenCreateService,IHttpContextAccessor contextAccessor)
+        public LoginCommandHandler(AuthDBContext context, TokenService tokenCreateService, IHttpContextAccessor contextAccessor)
         {
             _context = context;
             _tokenCreateService = tokenCreateService;
@@ -26,10 +26,11 @@ namespace AuthModule.Application.Commands.LoginCommand
             .FirstOrDefaultAsync(u => u.Email == command.dto.Email);
 
             if (user is null)
-                throw new Exception("Kullanıcı bulunamadı");
+                throw new Exception("User does not exist");
+
             bool passwordValid = BCrypt.Net.BCrypt.Verify(command.dto.Password, user.PasswordHash);
             if (!passwordValid)
-                throw new Exception("Email veya şifre hatalı");
+                throw new Exception("Wrong email or password");
 
 
             string accessToken = _tokenCreateService.GenerateAccessToken(user);
