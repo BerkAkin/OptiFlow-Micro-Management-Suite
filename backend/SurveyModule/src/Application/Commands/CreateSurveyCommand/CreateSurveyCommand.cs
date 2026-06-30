@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SurveyModule.Application.DTOs;
 using SurveyModule.Infrastructure.Persistance;
 
@@ -16,7 +17,7 @@ namespace SurveyModule.Application.Commands.AddSurvey
         public async Task<Unit> Handle(CreateSurveyCommand command, CancellationToken cancellationToken)
         {
 
-            var tenant = await _context.Tenants.FindAsync(command.tenantId, cancellationToken);
+            var tenant = await _context.Tenants.FirstOrDefaultAsync(t => t.Id == command.tenantId, cancellationToken);
             if (tenant == null)
                 throw new Exception("Company does not exist");
 

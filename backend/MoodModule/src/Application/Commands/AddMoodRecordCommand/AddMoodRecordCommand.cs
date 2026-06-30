@@ -20,7 +20,7 @@ namespace MoodModule.Application.Commands.AddMoodRecordCommand
             var todayUtc = DateTime.UtcNow.Date;
             User user = await _dbContext.Users
                 .Include(x => x.MoodRecords)
-                .SingleOrDefaultAsync(u => u.Id == command.UserId && u.TenantId == command.TenantId, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Id == command.UserId && u.TenantId == command.TenantId, cancellationToken);
 
             if (user == null)
                 throw new Exception("User is not exist");

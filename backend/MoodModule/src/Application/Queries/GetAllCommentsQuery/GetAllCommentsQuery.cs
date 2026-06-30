@@ -5,7 +5,7 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Queries.GetAllCommentsQuery
 {
-    public record GetAllCommentsQuery(int UserId):IRequest<List<GetAllCommentsDto>>;
+    public record GetAllCommentsQuery(int UserId) : IRequest<List<GetAllCommentsDto>>;
     public class GetAllCommentsQueryHandler : IRequestHandler<GetAllCommentsQuery, List<GetAllCommentsDto>>
     {
         private readonly MoodDbContext _dbContext;
@@ -20,10 +20,11 @@ namespace MoodModule.Application.Queries.GetAllCommentsQuery
                 .AsNoTracking()
                 .Where(c => c.UserId == query.UserId)
                 .OrderByDescending(c => c.CreatedAt)
-                .Select(c => new GetAllCommentsDto { 
-                    Id=c.Id,
-                    Content=c.Content,
-                    Date=c.CreatedAt,
+                .Select(c => new GetAllCommentsDto
+                {
+                    Id = c.Id,
+                    Content = c.Content,
+                    Date = c.CreatedAt,
                 })
                 .ToListAsync();
         }

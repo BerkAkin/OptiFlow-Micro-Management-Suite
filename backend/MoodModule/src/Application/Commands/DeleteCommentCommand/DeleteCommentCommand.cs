@@ -20,7 +20,7 @@ namespace MoodModule.Application.Commands.DeleteCommentCommand
 
             User user = await _dbContext.Users
                 .Include(u => u.Comments)
-                .SingleOrDefaultAsync(u => u.Id == command.userId && u.TenantId == command.TenantId, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Id == command.userId && u.TenantId == command.TenantId, cancellationToken);
             if (user is null)
             {
                 throw new Exception("User does not exists");

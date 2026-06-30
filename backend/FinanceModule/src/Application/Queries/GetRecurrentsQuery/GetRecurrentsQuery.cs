@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace FinanceModule.Queries.Dashboard
 {
 
-    public record GetRecurrentsQuery(InstallRecurFilterDTO filters,int currentTenant) : IRequest<(List<RecurrentsDTO> data, int maxPage)>;
-    
-    public class RecurrentsQueryHandler: IRequestHandler<GetRecurrentsQuery,(List<RecurrentsDTO> data, int maxPage)>
+    public record GetRecurrentsQuery(InstallRecurFilterDTO filters, int currentTenant) : IRequest<(List<RecurrentsDTO> data, int maxPage)>;
+
+    public class RecurrentsQueryHandler : IRequestHandler<GetRecurrentsQuery, (List<RecurrentsDTO> data, int maxPage)>
     {
         private readonly FinanceDBContext _context;
         public RecurrentsQueryHandler(FinanceDBContext context)
@@ -25,7 +25,10 @@ namespace FinanceModule.Queries.Dashboard
 
             var query = _context.Transactions
                 .AsNoTracking()
-                .Where(p => p.TenantSummaryId == request.currentTenant && p.Date >= prevMonthStart && p.Date < currMonthStart && !p.IsIncome);
+                .Where(p => p.TenantSummaryId == request.currentTenant
+                    && p.Date >= prevMonthStart
+                    && p.Date < currMonthStart
+                    && !p.IsIncome);
 
             query = query.Where(p => _context.Transactions.Any(c =>
                 c.Date >= currMonthStart &&
@@ -34,7 +37,7 @@ namespace FinanceModule.Queries.Dashboard
                 !c.IsIncome));
 
             int totalCount = await query.CountAsync();
-            int pageSize = 10; 
+            int pageSize = 10;
             int maxPage = (int)Math.Ceiling(totalCount / (double)pageSize);
 
             var data = await query
@@ -43,10 +46,10 @@ namespace FinanceModule.Queries.Dashboard
                 .Take(pageSize)
                 .Select(x => new RecurrentsDTO
                 {
-                   Description = x.Description,
-                   To= x.Who,
-                   Recurs= x.Date.Day,
-                   Price= x.Price,
+                    Description = x.Description,
+                    To = x.Who,
+                    Recurs = x.Date.Day,
+                    Price = x.Price,
                 })
                 .ToListAsync(cancellationToken);
 

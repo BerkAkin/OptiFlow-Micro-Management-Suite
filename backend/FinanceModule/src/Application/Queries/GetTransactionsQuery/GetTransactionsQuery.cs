@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FinanceModule.Queries.Dashboard
 {
-    public record GetTransactionsQuery(FinanceFilterDTO filters,int currentTenant): IRequest<(List<TransactionDTO> data, int maxPage)>;
-    public class TransactionsQueryHandler: IRequestHandler<GetTransactionsQuery, (List<TransactionDTO> data, int maxPage)>
+    public record GetTransactionsQuery(FinanceFilterDTO filters, int currentTenant) : IRequest<(List<TransactionDTO> data, int maxPage)>;
+    public class TransactionsQueryHandler : IRequestHandler<GetTransactionsQuery, (List<TransactionDTO> data, int maxPage)>
     {
         private readonly FinanceDBContext _context;
         public TransactionsQueryHandler(FinanceDBContext context)
@@ -40,20 +40,21 @@ namespace FinanceModule.Queries.Dashboard
             var data = await query.OrderByDescending(x => x.Date)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize).
-                Select(x=>new TransactionDTO{ 
-                Category = x.Category,
-                Date = x.Date,
-                Description = x.Description,
-                Exchange = x.ExchangeType,
-                Invoice= x.InvoicePath,
-                Income = x.IsIncome,
-                Quantity = x.Quantity,
-                Price = x.Price,
-                Who = x.Who,
-                Partly=x.IsPartly,
-                Parts=x.PartCount,
-                
-            }).ToListAsync(cancellationToken);
+                Select(x => new TransactionDTO
+                {
+                    Category = x.Category,
+                    Date = x.Date,
+                    Description = x.Description,
+                    Exchange = x.ExchangeType,
+                    Invoice = x.InvoicePath,
+                    Income = x.IsIncome,
+                    Quantity = x.Quantity,
+                    Price = x.Price,
+                    Who = x.Who,
+                    Partly = x.IsPartly,
+                    Parts = x.PartCount,
+
+                }).ToListAsync(cancellationToken);
 
             return (data, maxPage);
         }

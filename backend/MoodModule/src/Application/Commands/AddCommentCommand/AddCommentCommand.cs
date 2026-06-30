@@ -6,8 +6,8 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Commands.AddCommentCommand
 {
-    public record AddCommentCommand(AddCommentDto comment,int TenantId):IRequest<Unit> ;
-    public class AddCommentCommandHandler: IRequestHandler<AddCommentCommand, Unit>
+    public record AddCommentCommand(AddCommentDto comment, int TenantId) : IRequest<Unit>;
+    public class AddCommentCommandHandler : IRequestHandler<AddCommentCommand, Unit>
     {
         private readonly MoodDbContext _dbContext;
         public AddCommentCommandHandler(MoodDbContext dbContext)
@@ -15,16 +15,18 @@ namespace MoodModule.Application.Commands.AddCommentCommand
             _dbContext = dbContext;
         }
 
-        public async Task<Unit> Handle(AddCommentCommand command,CancellationToken cancellationToken) {
+        public async Task<Unit> Handle(AddCommentCommand command, CancellationToken cancellationToken)
+        {
 
             User user = await _dbContext.Users
-                .SingleOrDefaultAsync(u=>u.Id==command.comment.UserId && u.TenantId== command.TenantId, cancellationToken);
-            if (user is null) {
+                .FirstOrDefaultAsync(u => u.Id == command.comment.UserId && u.TenantId == command.TenantId, cancellationToken);
+            if (user is null)
+            {
                 throw new Exception("User does not exists");
             }
             user.AddComment(command.comment.Content);
 
-            await _dbContext.SaveChangesAsync();
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
         }

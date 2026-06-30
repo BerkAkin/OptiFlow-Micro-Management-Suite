@@ -5,7 +5,7 @@ using MoodModule.Infrastructure.Persistence;
 
 namespace MoodModule.Application.Queries.GetPreviousMoodsQuery
 {
-    public record GetPreviousMoodsQuery(int TenantId,int UserId):IRequest<List<GetPreviousMoodsDto>>;
+    public record GetPreviousMoodsQuery(int TenantId, int UserId) : IRequest<List<GetPreviousMoodsDto>>;
     public class GetPreviousMoodsQueryHandler : IRequestHandler<GetPreviousMoodsQuery, List<GetPreviousMoodsDto>>
     {
         private readonly MoodDbContext _dbContext;
@@ -13,7 +13,7 @@ namespace MoodModule.Application.Queries.GetPreviousMoodsQuery
         {
             _dbContext = dbContext;
         }
-        public async Task<List<GetPreviousMoodsDto>> Handle(GetPreviousMoodsQuery query,CancellationToken cancellationToken)
+        public async Task<List<GetPreviousMoodsDto>> Handle(GetPreviousMoodsQuery query, CancellationToken cancellationToken)
         {
             List<GetPreviousMoodsDto> data = await _dbContext.Moods
                 .AsNoTracking()
@@ -22,8 +22,8 @@ namespace MoodModule.Application.Queries.GetPreviousMoodsQuery
                 .Take(5)
                 .Select(m => new GetPreviousMoodsDto
                 {
-                      Date = m.CreatedAt,
-                      Mood=m.Mood
+                    Date = m.CreatedAt,
+                    Mood = m.Mood
 
                 }).ToListAsync(cancellationToken);
             return data;
